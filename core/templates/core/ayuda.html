@@ -1,0 +1,192 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="es" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Centro de Ayuda | Perseus Technology</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
+        body { font-family: 'Inter', sans-serif; }
+    </style>
+</head>
+<body class="bg-white text-gray-900 antialiased selection:bg-emerald-200 selection:text-emerald-900">
+
+    <div id="page-loader" class="fixed inset-0 z-[9999] bg-black flex flex-col items-center justify-center transition-opacity duration-300 ease-in-out">
+        <img src="{% static 'core/img/logo-3.png' %}" alt="Cargando" class="absolute inset-0 w-full h-full object-cover opacity-80 animate-pulse">
+            <div class="relative z-10 mt-auto mb-10 text-cyan-400 font-bold tracking-[0.3em] uppercase text-sm animate-bounce">
+                Iniciando Sistemas...
+            </div>
+    </div>
+
+    <nav class="fixed w-full z-50 bg-black border-b border-gray-800">
+        <div class="max-w-[1400px] mx-auto px-6 flex justify-between h-20 items-center">
+            <a href="{% url 'home' %}" class="flex items-center">
+                <img src="{% static 'core/img/logo-perseus.png' %}" alt="Perseus Technology" class="h-16 w-auto object-contain">
+            </a>
+            <div class="flex items-center gap-6">
+                <a href="{% url 'home' %}" class="text-gray-400 hover:text-white transition font-medium flex items-center gap-2">
+                    <i class="fa-solid fa-arrow-left"></i> Volver a la web
+                </a>
+                <a href="{% url 'home' %}#contacto" class="hidden md:inline-block bg-white hover:bg-gray-200 text-black px-5 py-2 rounded-full transition duration-300 font-semibold text-sm">
+                    Soporte Técnico
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <header class="pt-40 pb-20 px-6 bg-gradient-to-b from-gray-50 to-white">
+        <div class="max-w-3xl mx-auto text-center">
+            <h1 class="text-4xl md:text-6xl font-extrabold tracking-tight mb-6 text-gray-900">
+                Hola, ¿cómo podemos ayudarte?
+            </h1>
+            
+            <div class="relative mt-10 max-w-2xl mx-auto group">
+                <div class="absolute inset-y-0 left-0 pl-6 flex items-center pointer-events-none text-gray-400 group-focus-within:text-emerald-500 transition-colors">
+                    <i class="fa-solid fa-magnifying-glass text-xl"></i>
+                </div>
+                <input type="text" placeholder="Busca artículos, guías o soluciones..." class="w-full pl-14 pr-6 py-5 rounded-full border border-gray-200 bg-white shadow-lg shadow-gray-200/50 focus:outline-none focus:ring-4 focus:ring-emerald-500/10 focus:border-emerald-500 transition-all font-medium text-lg placeholder-gray-400">
+                <button class="absolute inset-y-2 right-2 bg-gray-900 hover:bg-black text-white px-6 rounded-full font-bold transition">
+                    Buscar
+                </button>
+            </div>
+            
+            <div class="mt-6 flex flex-wrap justify-center gap-3 text-sm text-gray-500 font-medium">
+                <span>Búsquedas comunes:</span>
+                <a href="#" class="text-emerald-600 hover:underline">Configurar Huella</a>
+                <a href="#" class="text-emerald-600 hover:underline">Certificado DT</a>
+                <a href="#" class="text-emerald-600 hover:underline">Cambio de Dominio</a>
+            </div>
+        </div>
+    </header>
+
+    <section class="py-12 px-6">
+        <div class="max-w-[1000px] mx-auto">
+            <h2 class="text-2xl font-bold mb-8 text-gray-900">Explorar por producto</h2>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <a href="#" class="group p-8 rounded-3xl border border-gray-100 hover:border-emerald-200 hover:shadow-xl hover:shadow-emerald-500/5 transition-all duration-300 bg-white">
+                    <div class="w-12 h-12 rounded-xl bg-blue-50 text-blue-600 flex items-center justify-center text-xl mb-6 group-hover:scale-110 transition">
+                        <i class="fa-solid fa-fingerprint"></i>
+                    </div>
+                    <h3 class="text-lg font-bold text-gray-900 mb-2">Marcación Digital</h3>
+                    <p class="text-gray-500 text-sm leading-relaxed">Guías de enrolamiento, biometría, app móvil y cumplimiento Dirección del Trabajo.</p>
+                </a>
+
+                <a href="#" class="group p-8 rounded-3xl border border-gray-100 hover:border-emerald-200 hover:shadow-xl hover:shadow-emerald-500/5 transition-all duration-300 bg-white">
+                    <div class="w-12 h-12 rounded-xl bg-emerald-50 text-emerald-600 flex items-center justify-center text-xl mb-6 group-hover:scale-110 transition">
+                        <i class="fa-solid fa-laptop-code"></i>
+                    </div>
+                    <h3 class="text-lg font-bold text-gray-900 mb-2">Desarrollo Web</h3>
+                    <p class="text-gray-500 text-sm leading-relaxed">Manual de administración, cambios de contenido, correos corporativos y analíticas.</p>
+                </a>
+
+                <a href="#" class="group p-8 rounded-3xl border border-gray-100 hover:border-emerald-200 hover:shadow-xl hover:shadow-emerald-500/5 transition-all duration-300 bg-white">
+                    <div class="w-12 h-12 rounded-xl bg-purple-50 text-purple-600 flex items-center justify-center text-xl mb-6 group-hover:scale-110 transition">
+                        <i class="fa-solid fa-file-invoice"></i>
+                    </div>
+                    <h3 class="text-lg font-bold text-gray-900 mb-2">Facturación y Planes</h3>
+                    <p class="text-gray-500 text-sm leading-relaxed">Actualización de métodos de pago, descarga de facturas y cambios de suscripción.</p>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <section class="py-16 px-6 bg-gray-50 border-y border-gray-100">
+        <div class="max-w-3xl mx-auto">
+            <h2 class="text-2xl font-bold mb-8 text-gray-900 text-center">Artículos Populares</h2>
+            
+            <div x-data="{ activeAccordion: null }" class="space-y-4">
+                
+                <div class="bg-white border border-gray-200 rounded-2xl overflow-hidden transition-all duration-300">
+                    <button @click="activeAccordion = activeAccordion === 1 ? null : 1" class="w-full px-6 py-5 text-left flex justify-between items-center focus:outline-none hover:bg-gray-50 transition">
+                        <span class="font-bold text-gray-900">¿Cómo enrolo la huella de un nuevo trabajador?</span>
+                        <i class="fa-solid fa-chevron-down text-gray-400 transition-transform duration-300" :class="activeAccordion === 1 ? 'rotate-180 text-emerald-500' : ''"></i>
+                    </button>
+                    <div x-show="activeAccordion === 1" x-collapse>
+                        <div class="px-6 pb-6 text-gray-600 text-sm leading-relaxed">
+                            Para enrolar a un nuevo trabajador, dirígete al menú "Colaboradores" en tu panel de administración. Selecciona "Añadir Nuevo", completa sus datos y luego haz clic en "Iniciar Enrolamiento Biométrico". Sigue las instrucciones en pantalla conectando el lector USB a tu computadora.
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-white border border-gray-200 rounded-2xl overflow-hidden transition-all duration-300">
+                    <button @click="activeAccordion = activeAccordion === 2 ? null : 2" class="w-full px-6 py-5 text-left flex justify-between items-center focus:outline-none hover:bg-gray-50 transition">
+                        <span class="font-bold text-gray-900">¿El sistema de marcación cumple con la normativa de la DT?</span>
+                        <i class="fa-solid fa-chevron-down text-gray-400 transition-transform duration-300" :class="activeAccordion === 2 ? 'rotate-180 text-emerald-500' : ''"></i>
+                    </button>
+                    <div x-show="activeAccordion === 2" x-collapse>
+                        <div class="px-6 pb-6 text-gray-600 text-sm leading-relaxed">
+                            Sí, nuestra plataforma cumple al 100% con los dictámenes de la Dirección del Trabajo (DT) en Chile, incluyendo la inalterabilidad de los datos, reportes oficiales requeridos por fiscalizadores y el envío comprobantes de marcación por correo electrónico.
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-white border border-gray-200 rounded-2xl overflow-hidden transition-all duration-300">
+                    <button @click="activeAccordion = activeAccordion === 3 ? null : 3" class="w-full px-6 py-5 text-left flex justify-between items-center focus:outline-none hover:bg-gray-50 transition">
+                        <span class="font-bold text-gray-900">¿Cómo edito los textos de mi sitio web?</span>
+                        <i class="fa-solid fa-chevron-down text-gray-400 transition-transform duration-300" :class="activeAccordion === 3 ? 'rotate-180 text-emerald-500' : ''"></i>
+                    </button>
+                    <div x-show="activeAccordion === 3" x-collapse>
+                        <div class="px-6 pb-6 text-gray-600 text-sm leading-relaxed">
+                            Puedes ingresar al panel de administración de Django añadiendo `/admin` al final de la URL de tu sitio web (ejemplo: tudominio.cl/admin). Ingresa con tus credenciales entregadas por nuestro equipo. Dirígete a la sección "Contenidos" donde podrás editar textos, subir nuevas imágenes y publicar noticias.
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <section class="py-20 px-6">
+        <div class="max-w-4xl mx-auto bg-gray-900 rounded-[3rem] p-12 text-center text-white relative overflow-hidden">
+            <div class="absolute top-0 right-0 w-64 h-64 bg-emerald-500/20 blur-[80px] rounded-full pointer-events-none"></div>
+            
+            <div class="w-16 h-16 bg-white/10 rounded-full flex items-center justify-center text-2xl mx-auto mb-6 backdrop-blur-sm border border-white/20">
+                <i class="fa-solid fa-headset"></i>
+            </div>
+            <h2 class="text-3xl font-bold mb-4">¿Aún no encuentras la solución?</h2>
+            <p class="text-gray-400 mb-8 max-w-xl mx-auto">Nuestro equipo de soporte técnico nivel 2 está disponible para ayudarte a resolver cualquier incidencia técnica con tus plataformas.</p>
+            <a href="{% url 'home' %}#contacto" class="inline-block bg-emerald-500 hover:bg-emerald-400 text-white font-bold py-4 px-8 rounded-full transition shadow-lg shadow-emerald-500/25">
+                Abrir Ticket de Soporte
+            </a>
+        </div>
+    </section>
+
+    <footer class="bg-black text-white py-12 px-6 border-t border-gray-800">
+        <div class="max-w-[1400px] mx-auto flex flex-col md:flex-row justify-between items-center">
+            <img src="{% static 'core/img/logo-perseus.png' %}" alt="Perseus Technology" class="h-10 w-auto mb-4 md:mb-0 grayscale opacity-50 hover:grayscale-0 hover:opacity-100 transition">
+            <div class="flex space-x-6 text-gray-500 text-sm">
+                <p>&copy; 2026 Perseus Technology.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        window.addEventListener('load', function() {
+            const loader = document.getElementById('page-loader');
+            loader.classList.add('opacity-0');
+            setTimeout(() => { loader.style.display = 'none'; }, 300);
+        });
+
+        document.querySelectorAll('a').forEach(enlace => {
+            enlace.addEventListener('click', function(e) {
+                const href = this.getAttribute('href');
+                if (href && !href.startsWith('#') && !href.startsWith('javascript') && this.target !== '_blank' && !e.ctrlKey && !e.metaKey) {
+                    e.preventDefault();
+                    const loader = document.getElementById('page-loader');
+                    loader.style.display = 'flex';
+                    setTimeout(() => {
+                        loader.classList.remove('opacity-0');
+                        setTimeout(() => { window.location.href = href; }, 300);
+                    }, 10);
+                }
+            });
+        });
+    </script>
+</body>
+</html>

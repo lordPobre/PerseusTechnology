@@ -1,0 +1,176 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="es" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Planes y Precios | Perseus Technology</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
+        body { font-family: 'Inter', sans-serif; }
+        
+        .pricing-card {
+            transition: all 0.3s ease;
+        }
+        .pricing-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 20px 40px -15px rgba(0,0,0,0.1);
+        }
+    </style>
+</head>
+<body class="bg-gray-50 text-gray-900 antialiased selection:bg-emerald-200 selection:text-emerald-900">
+
+    <nav x-data="{ mobileMenuOpen: false }" class="fixed w-full z-50 bg-black border-b border-gray-800">
+        <div class="max-w-[1400px] mx-auto px-6">
+            <div class="flex justify-between h-20 items-center">
+                <div class="flex items-center gap-10">
+                    <a href="{% url 'home' %}" class="flex items-center">
+                        <img src="{% static 'core/img/logo-2.png' %}" alt="Perseus Technology" class="h-16 w-auto object-contain">
+                    </a>
+                    <div class="hidden md:flex items-center space-x-8 font-medium text-gray-400">
+                        <a href="#servicios" class="hover:text-white transition">Soluciones</a>
+                        <a href="{% url 'precios' %}" class="hover:text-white transition">Precios</a>
+                        <div x-data="{ open: false }" @click.away="open = false" class="relative">
+                            <button @click="open = !open" class="text-gray-400 hover:text-white transition font-medium flex items-center gap-1 focus:outline-none">
+                                Recursos <i class="fa-solid fa-chevron-down text-xs mt-0.5" :class="{'rotate-180': open, 'transition-transform duration-200': true}"></i>
+                            </button>
+                            <div x-show="open" style="display: none;" class="absolute top-full right-0 mt-4 w-64 bg-white rounded-2xl shadow-xl border border-gray-100 p-3 z-50">
+                                <div class="space-y-1">
+                                    <a href="{% url 'ayuda' %}" class="block p-3 rounded-xl hover:bg-gray-50 text-gray-900 font-bold">Centro de Ayuda</a>
+                                    <a href="{% url 'blog' %}" class="block p-3 rounded-xl hover:bg-gray-50 text-gray-900 font-bold">Blog Corporativo</a>
+                                    <a href="#" class="block p-3 rounded-xl hover:bg-gray-50 text-gray-900 font-bold">Casos de Éxito</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="hidden md:flex items-center space-x-4 font-medium">
+                    <a href="#contacto" class="text-gray-400 hover:text-white transition">Iniciar sesión</a>
+                    <a href="#contacto" class="bg-white hover:bg-gray-200 text-black px-6 py-3 rounded-full transition duration-300 font-semibold">Comienza gratis</a>
+                </div>
+                <button @click="mobileMenuOpen = !mobileMenuOpen" class="md:hidden text-white">
+                    <i class="fa-solid fa-bars text-2xl"></i>
+                </button>
+            </div>
+        </div>
+        <div x-show="mobileMenuOpen" @click.away="mobileMenuOpen = false" class="md:hidden bg-black border-b border-gray-800 absolute w-full shadow-xl" style="display: none;">
+            <div class="px-6 py-4 space-y-4 font-medium">
+                <a href="#servicios" class="block text-gray-400">Soluciones</a>
+                <a href="{% url 'precios' %}" class="block text-gray-400">Precios</a>
+                <a href="#contacto" class="block w-full text-center bg-white text-black px-6 py-3 rounded-full mt-4">Comienza gratis</a>
+            </div>
+        </div>
+    </nav>
+
+    <header class="pt-40 pb-20 px-6 bg-white border-b border-gray-200">
+        <div class="max-w-4xl mx-auto text-center">
+            <h1 class="text-5xl md:text-7xl font-extrabold tracking-tight mb-6 text-gray-900">
+                Planes transparentes para <br>
+                <span class="text-transparent bg-clip-text bg-gradient-to-r from-emerald-500 to-green-600">empresas que crecen</span>
+            </h1>
+            <p class="text-xl text-gray-500 max-w-2xl mx-auto">
+                Elige la solución tecnológica que mejor se adapte a tu operación. Sin costos ocultos ni sorpresas.
+            </p>
+        </div>
+    </header>
+
+    <section class="py-20 px-6 max-w-[1200px] mx-auto">
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8 items-start">
+            
+            <div class="pricing-card bg-white rounded-3xl p-8 border border-gray-200 shadow-sm mt-8">
+                <h3 class="text-2xl font-bold text-gray-900 mb-2">Desarrollo Web</h3>
+                <p class="text-gray-500 text-sm mb-6 h-10">Plataformas corporativas diseñadas a la medida.</p>
+                <div class="mb-6">
+                    <span class="text-sm font-semibold text-gray-400 uppercase tracking-wider">Pago único desde</span>
+                    <div class="flex items-baseline mt-2">
+                        <span class="text-4xl font-extrabold text-gray-900">$850.000</span>
+                        <span class="text-gray-500 ml-2">CLP</span>
+                    </div>
+                </div>
+                <a href="{% url 'home' %}#contacto" class="block w-full text-center bg-gray-100 hover:bg-gray-200 text-gray-900 font-bold py-3 rounded-xl transition mb-8">
+                    Cotizar Proyecto
+                </a>
+                <ul class="space-y-4 text-gray-600">
+                    <li class="flex items-start"><i class="fa-solid fa-check text-emerald-500 mt-1 mr-3"></i> Diseño UI/UX Premium</li>
+                    <li class="flex items-start"><i class="fa-solid fa-check text-emerald-500 mt-1 mr-3"></i> Arquitectura en Python/Django</li>
+                    <li class="flex items-start"><i class="fa-solid fa-check text-emerald-500 mt-1 mr-3"></i> Panel autoadministrable</li>
+                    <li class="flex items-start"><i class="fa-solid fa-check text-emerald-500 mt-1 mr-3"></i> Optimización SEO técnica</li>
+                </ul>
+            </div>
+
+            <div class="pricing-card bg-gray-900 rounded-3xl p-8 border-2 border-emerald-500 shadow-2xl shadow-emerald-900/20 relative z-10 transform md:-translate-y-4">
+                <div class="absolute top-0 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-gradient-to-r from-emerald-500 to-green-600 text-white px-4 py-1 rounded-full text-sm font-bold uppercase tracking-wider shadow-lg">
+                    Más Popular
+                </div>
+
+                <h3 class="text-2xl font-bold text-white mb-2">Marcación Digital</h3>
+                <p class="text-gray-400 text-sm mb-6 h-10">Software como Servicio (SaaS) para control de asistencia.</p>
+                <div class="mb-6">
+                    <span class="text-sm font-semibold text-gray-400 uppercase tracking-wider">Suscripción mensual</span>
+                    <div class="flex items-baseline mt-2 text-white">
+                        <span class="text-5xl font-extrabold">0.8</span>
+                        <span class="text-xl ml-2">UF</span>
+                        <span class="text-gray-400 ml-1">/ base</span>
+                    </div>
+                    <p class="text-xs text-emerald-400 mt-2">+ costo mínimo por trabajador activo</p>
+                </div>
+                <a href="{% url 'home' %}#contacto" class="block w-full text-center bg-emerald-500 hover:bg-emerald-400 text-white font-bold py-4 rounded-xl transition mb-8 shadow-lg shadow-emerald-500/25">
+                    Solicitar Demo Gratis
+                </a>
+                <ul class="space-y-4 text-gray-300">
+                    <li class="flex items-start"><i class="fa-solid fa-circle-check text-emerald-400 mt-1 mr-3"></i> Cumplimiento normativo DT (Dirección del Trabajo)</li>
+                    <li class="flex items-start"><i class="fa-solid fa-circle-check text-emerald-400 mt-1 mr-3"></i> App móvil con geolocalización</li>
+                    <li class="flex items-start"><i class="fa-solid fa-circle-check text-emerald-400 mt-1 mr-3"></i> Validaciones biométricas</li>
+                    <li class="flex items-start"><i class="fa-solid fa-circle-check text-emerald-400 mt-1 mr-3"></i> Reportes automatizados para RRHH</li>
+                </ul>
+            </div>
+
+            <div class="pricing-card bg-white rounded-3xl p-8 border border-gray-200 shadow-sm mt-8">
+                <h3 class="text-2xl font-bold text-gray-900 mb-2">Soporte TI</h3>
+                <p class="text-gray-500 text-sm mb-6 h-10">Asegura la continuidad operativa de tu infraestructura.</p>
+                <div class="mb-6">
+                    <span class="text-sm font-semibold text-gray-400 uppercase tracking-wider">Bolsa de horas desde</span>
+                    <div class="flex items-baseline mt-2">
+                        <span class="text-4xl font-extrabold text-gray-900">4.5</span>
+                        <span class="text-gray-500 ml-2">UF / mes</span>
+                    </div>
+                </div>
+                <a href="{% url 'home' %}#contacto" class="block w-full text-center bg-gray-100 hover:bg-gray-200 text-gray-900 font-bold py-3 rounded-xl transition mb-8">
+                    Hablar con un asesor
+                </a>
+                <ul class="space-y-4 text-gray-600">
+                    <li class="flex items-start"><i class="fa-solid fa-check text-emerald-500 mt-1 mr-3"></i> Monitoreo proactivo 24/7</li>
+                    <li class="flex items-start"><i class="fa-solid fa-check text-emerald-500 mt-1 mr-3"></i> Mantenimiento de bases de datos</li>
+                    <li class="flex items-start"><i class="fa-solid fa-check text-emerald-500 mt-1 mr-3"></i> Soporte remoto para usuarios</li>
+                    <li class="flex items-start"><i class="fa-solid fa-check text-emerald-500 mt-1 mr-3"></i> Gestión de entornos Cloud</li>
+                </ul>
+            </div>
+
+        </div>
+        
+        <div class="mt-20 text-center bg-emerald-50 rounded-3xl p-10 border border-emerald-100">
+            <h3 class="text-2xl font-bold text-gray-900 mb-4">¿Necesitas una solución a medida?</h3>
+            <p class="text-gray-600 mb-6 max-w-2xl mx-auto">Entendemos que cada empresa es única. Si requieres integraciones personalizadas o un volumen muy alto de usuarios, diseñamos un plan específico para ti.</p>
+            <a href="{% url 'home' %}#contacto" class="inline-flex items-center text-emerald-700 font-bold hover:text-emerald-800">
+                Contactar al área de ventas <i class="fa-solid fa-arrow-right ml-2"></i>
+            </a>
+        </div>
+    </section>
+
+    <footer class="bg-black text-white py-12 px-6 border-t border-gray-800 mt-10">
+        <div class="max-w-[1400px] mx-auto flex flex-col md:flex-row justify-between items-center">
+            <img src="{% static 'core/img/logo-perseus.png' %}" alt="Perseus Technology" class="h-10 w-auto mb-4 md:mb-0 grayscale opacity-50 hover:grayscale-0 hover:opacity-100 transition">
+            <div class="flex space-x-6 text-gray-500 text-sm">
+                <p>&copy; 2026 Perseus Technology.</p>
+                <a href="#" class="hover:text-white transition">Privacidad</a>
+                <a href="#" class="hover:text-white transition">Términos</a>
+            </div>
+        </div>
+    </footer>
+
+</body>
+</html>
