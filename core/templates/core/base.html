@@ -1,0 +1,113 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="es" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}{{ nombre_empresa }} | La plataforma para tu empresa{% endblock %}</title>
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
+        body { font-family: 'Inter', sans-serif; }
+    </style>
+
+    {% block extra_css %}{% endblock %}
+</head>
+<body class="{% block body_class %}bg-white text-gray-900 antialiased{% endblock %}">
+
+    {% block loader %}{% endblock %}
+
+    <nav x-data="{ mobileMenuOpen: false }" class="fixed w-full z-50 bg-black border-b border-gray-800">
+        <div class="max-w-[1400px] mx-auto px-6">
+            <div class="flex justify-between h-20 items-center">
+                <div class="flex items-center gap-10">
+                    <a href="{% url 'home' %}" class="flex items-center">
+                        <img src="{% static 'core/img/logo-2.png' %}" alt="Perseus Technology" class="h-16 w-auto object-contain">
+                    </a>
+                    <div class="hidden md:flex items-center space-x-8 font-medium text-gray-400">
+                        <div x-data="{ openSoluciones: false }" @click.away="openSoluciones = false" class="relative">
+                            <button @click="openSoluciones = !openSoluciones" class="text-gray-400 hover:text-white transition font-medium flex items-center gap-1 focus:outline-none">
+                                Soluciones <i class="fa-solid fa-chevron-down text-xs mt-0.5" :class="{'rotate-180': openSoluciones, 'transition-transform duration-200': true}"></i>
+                            </button>
+                            <div x-show="openSoluciones" style="display: none;" class="absolute top-full left-0 mt-4 w-72 bg-white rounded-2xl shadow-xl border border-gray-100 p-3 z-50">
+                                <div class="space-y-1">
+                                    <a href="{% url 'marcacion' %}" class="flex items-center gap-3 p-3 rounded-xl hover:bg-gray-50 transition group">
+                                        <div class="w-10 h-10 rounded-lg bg-blue-50 text-blue-600 flex items-center justify-center group-hover:scale-110 transition"><i class="fa-solid fa-fingerprint"></i></div>
+                                        <div>
+                                            <p class="text-gray-900 font-bold text-sm">Marcación Digital</p>
+                                            <p class="text-gray-500 text-xs">Cumplimiento DT</p>
+                                        </div>
+                                    </a>
+                                    <a href="{% url 'web' %}" class="flex items-center gap-3 p-3 rounded-xl hover:bg-gray-50 transition group">
+                                        <div class="w-10 h-10 rounded-lg bg-emerald-50 text-emerald-600 flex items-center justify-center group-hover:scale-110 transition"><i class="fa-solid fa-code"></i></div>
+                                        <div>
+                                            <p class="text-gray-900 font-bold text-sm">Desarrollo Web</p>
+                                            <p class="text-gray-500 text-xs">Django & Next.js</p>
+                                        </div>
+                                    </a>
+                                    <a href="{% url 'consultoria' %}" class="flex items-center gap-3 p-3 rounded-xl hover:bg-gray-50 transition group">
+                                        <div class="w-10 h-10 rounded-lg bg-purple-50 text-purple-600 flex items-center justify-center group-hover:scale-110 transition"><i class="fa-solid fa-server"></i></div>
+                                        <div>
+                                            <p class="text-gray-900 font-bold text-sm">Consultoría TI</p>
+                                            <p class="text-gray-500 text-xs">Infraestructura y Soporte</p>
+                                        </div>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                        <a href="{% url 'precios' %}" class="hover:text-white transition">Precios</a>
+                        <div x-data="{ open: false }" @click.away="open = false" class="relative">
+                            <button @click="open = !open" class="text-gray-400 hover:text-white transition font-medium flex items-center gap-1 focus:outline-none">
+                                Recursos <i class="fa-solid fa-chevron-down text-xs mt-0.5" :class="{'rotate-180': open, 'transition-transform duration-200': true}"></i>
+                            </button>
+                            <div x-show="open" style="display: none;" class="absolute top-full right-0 mt-4 w-64 bg-white rounded-2xl shadow-xl border border-gray-100 p-3 z-50">
+                                <div class="space-y-1">
+                                    <a href="{% url 'nosotros' %}" class="block p-3 rounded-xl hover:bg-gray-50 text-gray-900 font-bold">Nosotros</a>
+                                    <a href="{% url 'ayuda' %}" class="block p-3 rounded-xl hover:bg-gray-50 text-gray-900 font-bold">Centro de Ayuda</a>
+                                    <a href="{% url 'blog' %}" class="block p-3 rounded-xl hover:bg-gray-50 text-gray-900 font-bold">Blog Corporativo</a>    
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="hidden md:flex items-center space-x-4 font-medium">
+                    <a href="#contacto" class="bg-white hover:bg-gray-200 text-black px-6 py-3 rounded-full transition duration-300 font-semibold">Solicita tu Proyecto</a>
+                </div>
+                <button @click="mobileMenuOpen = !mobileMenuOpen" class="md:hidden text-white">
+                    <i class="fa-solid fa-bars text-2xl"></i>
+                </button>
+            </div>
+        </div>
+        <div x-show="mobileMenuOpen" @click.away="mobileMenuOpen = false" class="md:hidden bg-black border-b border-gray-800 absolute w-full shadow-xl" style="display: none;">
+            <div class="px-6 py-4 space-y-4 font-medium">
+                <a href="#servicios" class="block text-gray-400">Soluciones</a>
+                <a href="{% url 'precios' %}" class="block text-gray-400">Precios</a>
+                <a href="#contacto" class="block w-full text-center bg-white text-black px-6 py-3 rounded-full mt-4">Comienza gratis</a>
+            </div>
+        </div>
+    </nav>
+
+    <main>
+        {% block content %}
+        {% endblock %}
+    </main>
+
+    <footer class="bg-black text-white py-12 px-6 border-t border-gray-800">
+        <div class="max-w-[1400px] mx-auto flex flex-col md:flex-row justify-between items-center">
+            <img src="{% static 'core/img/logo-2.png' %}" alt="Perseus" class="h-10 w-auto mb-4 md:mb-0 grayscale opacity-50 hover:grayscale-0 hover:opacity-100 transition">
+            <div class="flex space-x-6 text-gray-500 text-sm">
+                <p>&copy; 2026 Perseus Technology.</p>
+                <a href="{% url 'privacidad' %}" class="hover:text-white transition">Privacidad</a>
+                <a href="#" class="hover:text-white transition">Términos</a>
+            </div>
+        </div>
+    </footer>
+
+    {% block extra_js %}{% endblock %}
+
+</body>
+</html>

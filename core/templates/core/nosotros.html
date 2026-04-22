@@ -1,0 +1,121 @@
+{% extends 'core/base.html' %}
+{% load static %}
+
+{% block title %}Nosotros | Perseus Technology{% endblock %}
+
+{% block body_class %}bg-[#0a0f1a] text-white antialiased selection:bg-emerald-500/30 selection:text-emerald-200{% endblock %}
+
+{% block extra_css %}
+<style>
+    .cyber-glass-card { background: rgba(15, 20, 25, 0.6); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px); border: 1px solid rgba(16, 185, 129, 0.15); box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1); }
+    .loader-3d-wrapper { perspective: 1000px; display: flex; align-items: center; justify-content: center; }
+    .logo-extrusion { position: relative; width: 100px; height: 100px; transform-style: preserve-3d; animation: rotate-3d 5s infinite linear; }
+    .logo-layer { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background-image: url("{% static 'core/img/logo-2.png' %}"); background-size: contain; background-repeat: no-repeat; background-position: center; filter: drop-shadow(0 0 1px rgba(16, 185, 129, 0.2)); }
+    @keyframes rotate-3d { 0% { transform: rotateX(15deg) rotateY(0deg); } 100% { transform: rotateX(15deg) rotateY(360deg); } }
+    .logo-extrusion::after { content: ""; position: absolute; inset: -20px; background: linear-gradient(120deg, transparent, rgba(255,255,255,0.3), transparent); transform: translateZ(6px); animation: shine-sweep 3s infinite; pointer-events: none; }
+    @keyframes shine-sweep { 0% { opacity: 0; transform: translateX(-100%) translateZ(6px); } 50% { opacity: 1; } 100% { opacity: 0; transform: translateX(100%) translateZ(6px); } }
+</style>
+{% endblock %}
+
+{% block loader %}
+<div id="page-loader" class="fixed inset-0 z-[9999] bg-black flex flex-col items-center justify-center transition-opacity duration-300 ease-in-out">
+    <img src="{% static 'core/img/logo-3.png' %}" alt="Cargando" class="absolute inset-0 w-full h-full object-cover opacity-80 animate-pulse">
+    <div class="relative z-10 mt-auto mb-10 text-cyan-400 font-bold tracking-[0.3em] uppercase text-sm animate-bounce">
+        Iniciando Sistemas...
+    </div>
+</div>
+{% endblock %}
+
+{% block content %}
+<div id="vanta-net-bg" class="relative min-h-screen bg-[#0a0f1a] overflow-hidden">
+    <header class="pt-48 pb-20 px-6 relative z-10">
+        <div class="max-w-4xl mx-auto text-center">
+            <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 text-xs font-mono uppercase tracking-widest mb-8 backdrop-blur-md">
+                <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span> Nuestro ADN
+            </div>
+            <h1 class="text-5xl md:text-7xl font-extrabold tracking-tight mb-8 leading-[1.1] text-white">
+                Forjando el futuro de la <br>
+                <span class="text-transparent bg-clip-text bg-gradient-to-r from-emerald-400 to-cyan-400 drop-shadow-sm">ingeniería digital.</span>
+            </h1>
+        </div>
+    </header>
+
+    <section class="py-12 px-6 relative z-10">
+        <div class="max-w-[1000px] mx-auto">
+            <div class="cyber-glass-card rounded-[2.5rem] p-8 md:p-14 mb-8">
+                <div class="grid grid-cols-1 md:grid-cols-12 gap-12 items-center">
+                    <div class="md:col-span-4 flex flex-col items-center text-center">
+                        <div class="w-40 h-40 rounded-full bg-gradient-to-br from-emerald-500/20 to-blue-500/20 border border-emerald-500/30 flex items-center justify-center mb-6 shadow-[0_0_40px_rgba(16,185,129,0.15)] relative overflow-hidden">
+                            <i class="fa-solid fa-user-tie text-5xl text-emerald-400 relative z-10"></i>
+                            <div class="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI0MCIgaGVpZ2h0PSI0MCI+PHBhdGggZD0iTTAgMGg0MHY0MEgweiIgZmlsbD0ibm9uZSIvPjxwYXRoIGQ9Ik0wIDB2NDBIMTBWMHptMjAgMHY0MEgzMFYwem0tMjAgMjBoNDBWMHptMCAyMGg0MFYyMHoiIGZpbGw9IiMxMGI5ODEiIGZpbGwtb3BhY2l0eT0iMC4wNSIvPjwvc3ZnPg==')] opacity-50 z-0"></div>
+                        </div>
+                        <h2 class="text-2xl font-bold text-white">Carlos López Figueroa</h2>
+                        <p class="text-emerald-400 text-sm font-mono mt-1 uppercase tracking-widest">Fundador & CEO</p>
+                    </div>
+
+                    <div class="md:col-span-8">
+                        <h3 class="text-3xl font-bold text-white mb-6">Del Hardware a la Arquitectura Escalable</h3>
+                        <div class="space-y-4 text-gray-400 leading-relaxed text-lg">
+                            <p>Mi fascinación por la tecnología comenzó en las bases más profundas...</p>
+                            <p>Con esa filosofía nació <b>Perseus Technology</b>. Evolucioné hacia el desarrollo de software Full-Stack dominando ecosistemas como <b>Python, Django y arquitecturas modernas en React/Next.js</b>.</p>
+                            <p>Perseus es el resultado de unir la precisión de la ingeniería de servidores con el diseño de software de élite.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div class="cyber-glass-card rounded-[2.5rem] p-10 flex flex-col relative overflow-hidden group">
+                    <div class="absolute top-0 right-0 w-32 h-32 bg-cyan-500/10 blur-[50px] group-hover:bg-cyan-500/20 transition-all duration-500"></div>
+                    <div class="w-14 h-14 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center text-cyan-400 text-2xl mb-8">
+                        <i class="fa-solid fa-eye"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold text-white mb-4">Nuestra Visión</h3>
+                    <p class="text-gray-400 leading-relaxed">Ser la columna vertebral tecnológica de las empresas en crecimiento...</p>
+                </div>
+
+                <div class="cyber-glass-card rounded-[2.5rem] p-10 flex flex-col relative overflow-hidden group">
+                    <div class="absolute top-0 right-0 w-32 h-32 bg-emerald-500/10 blur-[50px] group-hover:bg-emerald-500/20 transition-all duration-500"></div>
+                    <div class="w-14 h-14 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center text-emerald-400 text-2xl mb-8">
+                        <i class="fa-solid fa-handshake-angle"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold text-white mb-4">Compromiso Inquebrantable</h3>
+                    <p class="text-gray-400 leading-relaxed">Mi promesa como fundador es clara: <b>tu éxito es nuestro éxito</b>. No entregamos código para luego desaparecer. Nos convertimos en tu brazo armado tecnológico.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    <div class="absolute bottom-0 left-0 w-full h-32 bg-gradient-to-t from-[#0a0f1a] to-transparent z-0 pointer-events-none"></div>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+    window.addEventListener('load', function() {
+        const loader = document.getElementById('page-loader');
+        loader.classList.add('opacity-0');
+        setTimeout(() => { loader.classList.add('pointer-events-none'); }, 500);
+    });
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r134/three.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/vanta@latest/dist/vanta.net.min.js"></script>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        VANTA.NET({
+            el: "#vanta-net-bg",
+            mouseControls: true,
+            touchControls: true,
+            gyroControls: false,
+            minHeight: 200.00,
+            minWidth: 200.00,
+            scale: 1.00,
+            scaleMobile: 1.00,
+            color: 0x10b981,         
+            backgroundColor: 0x0a0f1a, 
+            points: 10.00,
+            maxDistance: 22.00,
+            spacing: 18.00
+        });
+    });
+</script>
+{% endblock %}

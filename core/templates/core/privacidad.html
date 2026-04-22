@@ -1,0 +1,96 @@
+{% extends 'core/base.html' %}
+{% load static %}
+
+{% block title %}Privacidad y Seguridad | Perseus Technology{% endblock %}
+
+{% block body_class %}bg-[#0a0f1a] text-gray-300 antialiased{% endblock %}
+
+{% block extra_css %}
+<style>
+    .legal-card { background: rgba(255, 255, 255, 0.03); backdrop-filter: blur(10px); border: 1px solid rgba(255, 255, 255, 0.1); transition: all 0.3s ease; }
+    .legal-card:hover { border: 1px solid rgba(16, 185, 129, 0.4); background: rgba(255, 255, 255, 0.05); }
+    @keyframes slow-pulse { 0%, 100% { opacity: 0.1; } 50% { opacity: 0.2; } }
+    .bg-pulse { animation: slow-pulse 8s infinite ease-in-out; }
+</style>
+{% endblock %}
+
+{% block loader %}
+<div id="page-loader" class="fixed inset-0 z-[9999] bg-[#05080a] flex flex-col items-center justify-center transition-opacity duration-500">
+    <div class="loader-3d-wrapper">
+        <div class="text-emerald-500 font-mono text-[10px] tracking-[0.5em] uppercase mt-10">Verificando Protocolos</div>
+    </div>
+</div>
+{% endblock %}
+
+{% block content %}
+<main class="relative pt-40 pb-24 px-6 overflow-hidden">
+    <div class="absolute top-0 left-1/2 -translate-x-1/2 w-[1000px] h-[600px] bg-emerald-500/10 blur-[120px] rounded-full bg-pulse pointer-events-none"></div>
+
+    <div class="max-w-4xl mx-auto relative z-10">
+        <div class="mb-16">
+            <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 text-xs font-mono uppercase mb-6">
+                <i class="fa-solid fa-shield-check"></i> Documento de Confidencialidad
+            </div>
+            <h1 class="text-5xl md:text-6xl font-extrabold text-white mb-6 tracking-tight">Política de Privacidad y <span class="text-emerald-400">Tratamiento de Datos.</span></h1>
+            <p class="text-gray-400 text-lg leading-relaxed">Última actualización: Abril 2026. En Perseus Technology, la seguridad de la información no es solo una característica, es nuestra base operativa.</p>
+        </div>
+
+        <div class="space-y-6">
+            <div class="legal-card rounded-3xl p-8 md:p-10">
+                <div class="flex items-start gap-6">
+                    <div class="w-12 h-12 shrink-0 rounded-2xl bg-emerald-500/10 border border-emerald-500/20 flex items-center justify-center text-emerald-400"><i class="fa-solid fa-scale-balanced text-xl"></i></div>
+                    <div>
+                        <h2 class="text-2xl font-bold text-white mb-4">Cumplimiento Normativo (Ley 19.628)</h2>
+                        <p class="leading-relaxed mb-4">El tratamiento de datos personales realizado por Perseus Technology se rige estrictamente por la <b>Ley 19.628</b> sobre Protección de la Vida Privada en Chile y los dictámenes vigentes de la <b>Dirección del Trabajo (DT)</b> respecto a sistemas de marcación digital.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="legal-card rounded-3xl p-8 md:p-10">
+                <div class="flex items-start gap-6">
+                    <div class="w-12 h-12 shrink-0 rounded-2xl bg-blue-500/10 border border-blue-500/20 flex items-center justify-center text-blue-400"><i class="fa-solid fa-fingerprint text-xl"></i></div>
+                    <div>
+                        <h2 class="text-2xl font-bold text-white mb-4">Tratamiento de Datos Biométricos</h2>
+                        <p class="leading-relaxed mb-4">Para el funcionamiento de <b>Perseus Enterprise</b>, recolectamos patrones biométricos. Es importante destacar que:</p>
+                        <ul class="space-y-3 text-gray-400">
+                            <li class="flex items-center gap-3"><i class="fa-solid fa-circle-check text-emerald-500 text-[10px]"></i> No almacenamos imágenes reales, sino <b>hashes criptográficos</b> unidireccionales.</li>
+                            <li class="flex items-center gap-3"><i class="fa-solid fa-circle-check text-emerald-500 text-[10px]"></i> Los datos son utilizados exclusivamente para la verificación de identidad laboral.</li>
+                            <li class="flex items-center gap-3"><i class="fa-solid fa-circle-check text-emerald-500 text-[10px]"></i> Aplicamos encriptación de grado militar (AES-256).</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="legal-card rounded-3xl p-8 md:p-10 border-emerald-500/20">
+                <div class="flex items-start gap-6">
+                    <div class="w-12 h-12 shrink-0 rounded-2xl bg-purple-500/10 border border-purple-500/20 flex items-center justify-center text-purple-400"><i class="fa-solid fa-vault text-xl"></i></div>
+                    <div>
+                        <h2 class="text-2xl font-bold text-white mb-4">Estándares de Seguridad</h2>
+                        <p class="leading-relaxed mb-4">Nuestra infraestructura está alineada con los controles de la norma <b>ISO 27001</b>. Implementamos auditorías constantes para garantizar la confidencialidad.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="legal-card rounded-3xl p-8 md:p-10">
+                <div class="flex items-start gap-6">
+                    <div class="w-12 h-12 shrink-0 rounded-2xl bg-gray-500/10 border border-gray-500/20 flex items-center justify-center text-gray-300"><i class="fa-solid fa-user-gear text-xl"></i></div>
+                    <div>
+                        <h2 class="text-2xl font-bold text-white mb-4">Derechos del Titular (ARCO)</h2>
+                        <p class="leading-relaxed">Usted podrá ejercer en cualquier momento sus derechos de <b>Acceso, Rectificación, Cancelación y Oposición</b> enviando una solicitud a <u>privacidad@perseustechnology.com</u>.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+    window.addEventListener('load', function() {
+        const loader = document.getElementById('page-loader');
+        loader.classList.add('opacity-0');
+        setTimeout(() => { loader.style.display = 'none'; }, 500);
+    });
+</script>
+{% endblock %}

@@ -31,3 +31,9 @@ def pagina_ayuda(request):
 
 def pagina_blog(request):
     return render(request, 'core/blog.html')
+
+def privacidad(request):
+    return render(request, 'core/privacidad.html')
+
+def nosotros(request):
+    return render(request, 'core/nosotros.html')
