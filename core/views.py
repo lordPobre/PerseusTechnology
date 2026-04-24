@@ -1,18 +1,44 @@
 from django.shortcuts import render
 from .forms import ContactoForm
+from django.shortcuts import render, redirect
+from django.core.mail import send_mail
+from django.conf import settings
+from django.contrib import messages
 
 def home(request):
-    formulario = ContactoForm()
     if request.method == 'POST':
-        formulario = ContactoForm(request.POST)
-        if formulario.is_valid():
-            formulario.save()
-            formulario = ContactoForm() 
-    context = {
-        'form': formulario,
-        'nombre_empresa': 'Perseus Technology',
-    }
-    return render(request, 'core/home.html', context)
+        # Capturamos los datos del formulario (coincidiendo con los names en tu HTML)
+        nombre = request.POST.get('nombre')
+        email_cliente = request.POST.get('email')
+        mensaje_cliente = request.POST.get('mensaje')
+
+        # Estructuramos el correo que recibirás tú
+        asunto = f"🚀 Nueva solicitud de propuesta: {nombre}"
+        cuerpo_mensaje = f"""
+        Has recibido una nueva solicitud desde la web de Perseus Technology:
+        
+        Nombre del interesado: {nombre}
+        Correo de contacto: {email_cliente}
+        
+        Mensaje o requerimiento:
+        {mensaje_cliente}
+        """
+        
+        try:
+            # Enviamos el correo
+            send_mail(
+                asunto,
+                cuerpo_mensaje,
+                settings.EMAIL_HOST_USER, # Remitente (tu correo de configuración)
+                [settings.EMAIL_HOST_USER], # Destinatario (donde quieres recibirlo)
+                fail_silently=False,
+            )
+            # Agregamos un mensaje de éxito para mostrar en el frontend
+            messages.success(request, '¡Tu solicitud ha sido enviada con éxito! Te contactaremos a la brevedad.')
+        except Exception as e:
+            messages.error(request, 'Hubo un error al enviar el mensaje. Por favor, inténtalo de nuevo.')
+
+    return render(request, 'core/home.html', {'nombre_empresa': 'Perseus Technology'})
 
 def pagina_web(request):
     return render(request, 'core/servicios/web.html')
