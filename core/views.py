@@ -43,6 +43,9 @@ def home(request):
 def pagina_web(request):
     return render(request, 'core/servicios/web.html')
 
+def apps_corporativas(request):
+    return render(request, 'core/servicios/apps.html')
+
 def pagina_marcacion(request):
     return render(request, 'core/servicios/marcacion.html')
 

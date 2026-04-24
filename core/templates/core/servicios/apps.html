@@ -1,0 +1,176 @@
+{% extends 'core/base.html' %}
+{% load static %}
+
+{% block title %}Apps Corporativas | Perseus Technology{% endblock %}
+
+{% block body_class %}bg-[#05080a] text-gray-300 antialiased selection:bg-cyan-500/30 selection:text-cyan-200{% endblock %}
+
+{% block extra_css %}
+<style>
+    .app-card { background: rgba(20, 25, 35, 0.6); backdrop-filter: blur(12px); border: 1px solid rgba(255, 255, 255, 0.05); transition: all 0.4s ease; }
+    .app-card:hover { border-color: rgba(34, 211, 238, 0.3); transform: translateY(-5px); box-shadow: 0 20px 40px -10px rgba(0,0,0,0.5), 0 0 20px -5px rgba(34, 211, 238, 0.1); }
+    .tech-pill { background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); color: #9ca3af; font-size: 0.75rem; padding: 0.25rem 0.75rem; border-radius: 999px; }
+    .app-card:hover .tech-pill { border-color: rgba(34, 211, 238, 0.2); color: #cbd5e1; }
+</style>
+{% endblock %}
+
+{% block loader %}
+<div id="page-loader" class="fixed inset-0 z-[9999] bg-[#05080a] flex flex-col items-center justify-center transition-opacity duration-500">
+    <div class="text-cyan-500 font-mono text-[10px] tracking-[0.5em] uppercase animate-pulse">Compilando Ecosistema...</div>
+</div>
+{% endblock %}
+
+{% block content %}
+<main class="relative pt-40 pb-24 px-6 overflow-hidden min-h-screen">
+    <div class="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[500px] bg-cyan-500/10 blur-[120px] rounded-full pointer-events-none"></div>
+    <div class="absolute bottom-0 right-0 w-[600px] h-[600px] bg-purple-500/10 blur-[150px] rounded-full pointer-events-none"></div>
+
+    <div class="max-w-[1400px] mx-auto relative z-10">
+        
+        <div class="text-center max-w-3xl mx-auto mb-20">
+            <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-cyan-500/10 border border-cyan-500/20 text-cyan-400 text-xs font-mono uppercase mb-6">
+                <i class="fa-solid fa-layer-group"></i> Ecosistema Perseus
+            </div>
+            <h1 class="text-5xl md:text-7xl font-extrabold text-white mb-6 tracking-tight">
+                Aplicaciones <span class="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-blue-600">Corporativas</span>
+            </h1>
+            <p class="text-gray-400 text-lg md:text-xl leading-relaxed">
+                No usamos plantillas. Construimos software a medida diseñado para automatizar, controlar y escalar la operativa de tu negocio.
+            </p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+
+            <div class="app-card rounded-[2rem] p-8 md:p-10 flex flex-col h-full relative overflow-hidden group">
+                <div class="absolute top-0 right-0 w-32 h-32 bg-cyan-500/10 blur-[40px] group-hover:bg-cyan-500/20 transition-all"></div>
+                
+                <div class="flex justify-between items-start mb-8 relative z-10">
+                    <div class="w-16 h-16 rounded-2xl bg-cyan-500/10 border border-cyan-500/20 flex items-center justify-center text-cyan-400 text-3xl">
+                        <i class="fa-solid fa-fingerprint"></i>
+                    </div>
+                    <span class="px-3 py-1 bg-green-500/10 text-green-400 text-xs font-bold uppercase tracking-wider rounded-full border border-green-500/20">
+                        Certificado DT
+                    </span>
+                </div>
+                
+                <h3 class="text-3xl font-bold text-white mb-3 relative z-10">Marcación Digital</h3>
+                <p class="text-gray-400 leading-relaxed mb-8 flex-grow relative z-10">
+                    Control de asistencia biométrico con geolocalización GPS. Sistema inalterable que automatiza los registros del personal en terreno, cumpliendo estrictamente con la normativa de la Dirección del Trabajo.
+                </p>
+                
+                <div class="flex flex-wrap gap-2 mb-8 relative z-10">
+                    <span class="tech-pill">Django</span>
+                    <span class="tech-pill">GPS API</span>
+                    <span class="tech-pill">Biometría Hashed</span>
+                </div>
+                
+                <a href="{% url 'marcacion' %}" class="inline-flex items-center font-bold text-cyan-400 hover:text-cyan-300 transition w-max relative z-10">
+                    Ver características <i class="fa-solid fa-arrow-right ml-2 group-hover:translate-x-1 transition-transform"></i>
+                </a>
+            </div>
+
+            <div class="app-card rounded-[2rem] p-8 md:p-10 flex flex-col h-full relative overflow-hidden group">
+                <div class="absolute top-0 right-0 w-32 h-32 bg-orange-500/10 blur-[40px] group-hover:bg-orange-500/20 transition-all"></div>
+                
+                <div class="flex justify-between items-start mb-8 relative z-10">
+                    <div class="w-16 h-16 rounded-2xl bg-orange-500/10 border border-orange-500/20 flex items-center justify-center text-orange-400 text-3xl">
+                        <i class="fa-solid fa-dumbbell"></i>
+                    </div>
+                    <span class="px-3 py-1 bg-white/5 text-gray-400 text-xs font-bold uppercase tracking-wider rounded-full border border-white/10">
+                        SaaS / Gestión
+                    </span>
+                </div>
+                
+                <h3 class="text-3xl font-bold text-white mb-3 relative z-10">Sistema de Reservas GYM</h3>
+                <p class="text-gray-400 leading-relaxed mb-8 flex-grow relative z-10">
+                    Plataforma web diseñada para la gestión inteligente de centros deportivos. Permite a los alumnos agendar reservas en bloques de entrenamiento con control de aforo, automatizar el flujo de sus pagos y ofrece a la administración un monitoreo de asistencia en tiempo real mediante el panel "Muro de Hierro".
+                </p>
+
+                <div class="flex flex-wrap gap-2 mb-8 relative z-10">
+                    <span class="tech-pill">Django & Next.js</span>
+                    <span class="tech-pill">Gestión de Bloques</span>
+                    <span class="tech-pill">PostgreSQL</span>
+                </div>
+                
+                <a href="#contacto" class="inline-flex items-center font-bold text-orange-400 hover:text-orange-300 transition w-max relative z-10">
+                    Cotizar un SaaS similar <i class="fa-solid fa-arrow-right ml-2 group-hover:translate-x-1 transition-transform"></i>
+                </a>
+            </div>
+
+            <div class="app-card rounded-[2rem] p-8 md:p-10 flex flex-col h-full relative overflow-hidden group">
+                <div class="absolute top-0 right-0 w-32 h-32 bg-yellow-500/10 blur-[40px] group-hover:bg-yellow-500/20 transition-all"></div>
+                
+                <div class="flex justify-between items-start mb-8 relative z-10">
+                    <div class="w-16 h-16 rounded-2xl bg-yellow-500/10 border border-yellow-500/20 flex items-center justify-center text-yellow-400 text-3xl">
+                        <i class="fa-solid fa-helmet-safety"></i>
+                    </div>
+                </div>
+                
+                <h3 class="text-3xl font-bold text-white mb-3 relative z-10">Gastos de Obra</h3>
+                <p class="text-gray-400 leading-relaxed mb-8 flex-grow relative z-10">
+                    Sistema de control financiero y gestión de gastos para el rubro de la construcción. Integra sincronización automática de boletas y respaldos directamente con entornos corporativos de Microsoft SharePoint.
+                </p>
+                
+                <div class="flex flex-wrap gap-2 mb-8 relative z-10">
+                    <span class="tech-pill">Python</span>
+                    <span class="tech-pill">Microsoft 365 API</span>
+                    <span class="tech-pill">SharePoint Sync</span>
+                </div>
+                
+                <a href="#contacto" class="inline-flex items-center font-bold text-yellow-400 hover:text-yellow-300 transition w-max relative z-10">
+                    Automatizar mis procesos <i class="fa-solid fa-arrow-right ml-2 group-hover:translate-x-1 transition-transform"></i>
+                </a>
+            </div>
+
+           <div class="app-card rounded-[2rem] p-8 md:p-10 flex flex-col h-full relative overflow-hidden group">
+                <div class="absolute top-0 right-0 w-32 h-32 bg-purple-500/10 blur-[40px] group-hover:bg-purple-500/20 transition-all"></div>
+                
+                <div class="flex justify-between items-start mb-8 relative z-10">
+                    <div class="w-16 h-16 rounded-2xl bg-purple-500/10 border border-purple-500/20 flex items-center justify-center text-purple-400 text-3xl">
+                        <i class="fa-solid fa-chart-line"></i>
+                    </div>
+                    <span class="px-3 py-1 bg-purple-500/10 text-purple-400 text-xs font-bold uppercase tracking-wider rounded-full border border-purple-500/20">
+                        Finanzas y Analítica
+                    </span>
+                </div>
+                
+                <h3 class="text-3xl font-bold text-white mb-3 relative z-10">Plataforma de Gestión Financiera</h3>
+                <p class="text-gray-400 leading-relaxed mb-8 flex-grow relative z-10">
+                    Sistema web orientado al control total de finanzas y flujos de caja. Permite el seguimiento detallado de ingresos y gastos, proyección de retornos de inversión (depósitos a plazo y activos digitales), y la generación de dashboards interactivos para la toma de decisiones estratégicas.
+                </p>
+
+                <div class="flex flex-wrap gap-2 mb-8 relative z-10">
+                    <span class="tech-pill">Python & Analítica de Datos</span>
+                    <span class="tech-pill">Dashboards Interactivos</span>
+                    <span class="tech-pill">Integración de APIs</span>
+                </div>
+                                
+                <a href="#contacto" class="inline-flex items-center font-bold text-purple-400 hover:text-purple-300 transition w-max relative z-10">
+                    Digitalizar mis finanzas <i class="fa-solid fa-arrow-right ml-2 group-hover:translate-x-1 transition-transform"></i>
+                </a>
+            </div>
+
+        </div>
+
+        <div class="mt-20 text-center bg-gradient-to-b from-gray-900 to-black border border-gray-800 rounded-[2rem] p-12 relative overflow-hidden">
+            <div class="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/cubes.png')] opacity-10"></div>
+            <h2 class="text-3xl md:text-4xl font-bold text-white mb-6 relative z-10">¿Tienes un proceso manual que necesita ser digitalizado?</h2>
+            <p class="text-gray-400 mb-8 max-w-2xl mx-auto relative z-10">Cuéntanos tu problema. Nuestro equipo diseñará y desarrollará la arquitectura de software exacta que tu empresa necesita para escalar.</p>
+            <a href="{% url 'contacto' %}" class="relative z-10 inline-block bg-cyan-500 hover:bg-cyan-400 text-black font-bold py-4 px-10 rounded-full transition-colors shadow-[0_0_20px_rgba(34,211,238,0.3)] hover:shadow-[0_0_30px_rgba(34,211,238,0.5)]">
+                Iniciar Proyecto a Medida
+            </a>
+        </div>
+
+    </div>
+</main>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+    window.addEventListener('load', function() {
+        const loader = document.getElementById('page-loader');
+        loader.classList.add('opacity-0');
+        setTimeout(() => { loader.style.display = 'none'; }, 500);
+    });
+</script>
+{% endblock %}
