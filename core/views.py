@@ -1,5 +1,6 @@
-from django.shortcuts import render
 from .forms import ContactoForm
+from .models import Post, Categoria
+from django.shortcuts import render, get_object_or_404
 from django.shortcuts import render, redirect
 from django.core.mail import send_mail
 from django.conf import settings
@@ -59,7 +60,34 @@ def pagina_ayuda(request):
     return render(request, 'core/ayuda.html')
 
 def pagina_blog(request):
-    return render(request, 'core/blog.html')
+
+    post_destacado = Post.objects.filter(destacado=True).first()
+    if post_destacado:
+        posts = Post.objects.exclude(id=post_destacado.id)
+    else:
+        posts = Post.objects.all()
+
+    categorias = Categoria.objects.all()
+
+    context = {
+        'post_destacado': post_destacado,
+        'posts': posts,
+        'categorias': categorias,
+    }
+    return render(request, 'core/blog.html', context)
+
+def post_detail(request, slug):
+    # Buscamos el post por su slug amigable
+    post = get_object_or_404(Post, slug=slug)
+    
+    # Podemos enviar un par de posts recientes para sugerir lecturas al final
+    posts_recientes = Post.objects.exclude(id=post.id)[:2]
+    
+    context = {
+        'post': post,
+        'posts_recientes': posts_recientes
+    }
+    return render(request, 'core/post_detail.html', context)
 
 def privacidad(request):
     return render(request, 'core/privacidad.html')

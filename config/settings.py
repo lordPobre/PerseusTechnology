@@ -16,7 +16,7 @@ ALLOWED_HOSTS = [
     '127.0.0.1', 
     'localhost', 
     '.vercel.app',
-    'perseustechnology.dev',  # Esto autoriza cualquier URL que te asigne Vercel
+    'perseustechnology.dev',  #
 ]
 
 INSTALLED_APPS = [

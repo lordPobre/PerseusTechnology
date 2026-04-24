@@ -1,0 +1,97 @@
+{% extends 'core/base.html' %}
+{% load static %}
+
+{% block title %}{{ post.titulo }} | Blog Perseus{% endblock %}
+
+{% block body_class %}bg-[#05080a] text-gray-300 antialiased selection:bg-{{ post.color_tema }}-500/30 selection:text-{{ post.color_tema }}-200{% endblock %}
+
+{% block extra_css %}
+<style>
+    /* Estilos para que el contenido que escribas en el admin se vea perfecto */
+    .article-content p { margin-bottom: 1.5rem; line-height: 1.8; color: #9ca3af; font-size: 1.125rem; }
+    .article-content h2 { color: #f8fafc; font-size: 1.875rem; font-weight: 700; margin-top: 3rem; margin-bottom: 1.5rem; letter-spacing: -0.025em; }
+    .article-content h3 { color: #f1f5f9; font-size: 1.5rem; font-weight: 600; margin-top: 2rem; margin-bottom: 1rem; }
+    .article-content ul { list-style-type: disc; padding-left: 1.5rem; margin-bottom: 1.5rem; color: #9ca3af; }
+    .article-content li { margin-bottom: 0.5rem; }
+    .article-content strong { color: #f8fafc; font-weight: 700; }
+    .article-content a { color: #22d3ee; text-decoration: none; border-bottom: 1px solid rgba(34, 211, 238, 0.3); transition: all 0.2s; }
+    .article-content a:hover { border-bottom-color: #22d3ee; }
+</style>
+{% endblock %}
+
+{% block loader %}
+<div id="page-loader" class="fixed inset-0 z-[9999] bg-[#05080a] flex flex-col items-center justify-center transition-opacity duration-500">
+    <div class="text-{{ post.color_tema }}-500 font-mono text-[10px] tracking-[0.5em] uppercase animate-pulse">Desencriptando artículo...</div>
+</div>
+{% endblock %}
+
+{% block content %}
+<main class="relative pt-32 pb-24 px-6 overflow-hidden min-h-screen">
+    <div class="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[500px] bg-{{ post.color_tema }}-500/10 blur-[120px] rounded-full pointer-events-none"></div>
+
+    <article class="max-w-[800px] mx-auto relative z-10">
+        
+        <a href="{% url 'blog' %}" class="inline-flex items-center gap-2 text-gray-500 hover:text-cyan-400 transition-all duration-300 mb-12 font-mono text-sm group">
+            <span class="text-cyan-500 group-hover:translate-x-[-4px] transition-transform duration-300">
+                <i class="fa-solid fa-terminal text-xs"></i>
+            </span>
+            <span class="text-cyan-400">..</span>/blog
+            <span class="inline-block w-2 h-4 bg-cyan-500/50 animate-pulse ml-1"></span>
+        </a>
+
+        <header class="mb-16 text-center">
+            <div class="w-24 h-24 mx-auto rounded-3xl bg-black border border-white/10 flex items-center justify-center text-{{ post.color_tema }}-400 text-4xl mb-8 relative">
+                <div class="absolute inset-0 bg-{{ post.color_tema }}-500/20 blur-[20px] rounded-full"></div>
+                <i class="{{ post.icono }} relative z-10"></i>
+            </div>
+            
+            <div class="flex items-center justify-center gap-3 mb-6">
+                <span class="px-3 py-1 bg-{{ post.color_tema }}-500/10 text-{{ post.color_tema }}-400 text-xs font-bold uppercase tracking-wider rounded-full border border-{{ post.color_tema }}-500/20">
+                    {{ post.categoria.nombre }}
+                </span>
+                <span class="text-gray-500 text-sm font-mono">{{ post.fecha_publicacion|date:"d M Y" }}</span>
+            </div>
+            
+            <h1 class="text-4xl md:text-5xl lg:text-6xl font-extrabold text-white mb-8 tracking-tight leading-tight">
+                {{ post.titulo }}
+            </h1>
+            
+            <div class="flex items-center justify-center gap-4 py-6 border-y border-white/5">
+                <div class="w-12 h-12 rounded-full bg-gray-800 border border-gray-700 flex items-center justify-center text-cyan-500 text-lg">
+                    <i class="fa-solid fa-user-astronaut"></i>
+                </div>
+                <div class="text-left">
+                    <p class="text-white font-bold">{{ post.autor }}</p>
+                    <p class="text-gray-500 text-sm">{{ post.tiempo_lectura }} min de lectura</p>
+                </div>
+            </div>
+        </header>
+
+        <div class="p-6 md:p-8 rounded-3xl bg-white/5 border border-white/10 text-xl md:text-2xl text-gray-300 font-medium leading-relaxed mb-16 border-l-4 border-l-{{ post.color_tema }}-500">
+            {{ post.resumen }}
+        </div>
+
+        <div class="article-content">
+            {{ post.contenido|linebreaks }}
+        </div>
+
+        <footer class="mt-20 pt-10 border-t border-white/10 text-center">
+            <h3 class="text-2xl font-bold text-white mb-6">¿Necesitas ayuda técnica con este tema?</h3>
+            <a href="{% url 'contacto' %}" class="inline-block bg-cyan-600 hover:bg-cyan-500 text-black font-bold py-4 px-10 rounded-2xl transition shadow-[0_0_20px_rgba(34,211,238,0.2)] hover:shadow-[0_0_30px_rgba(34,211,238,0.4)]">
+                Contactar a un Ingeniero
+            </a>
+        </footer>
+
+    </article>
+</main>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+    window.addEventListener('load', function() {
+        const loader = document.getElementById('page-loader');
+        loader.classList.add('opacity-0');
+        setTimeout(() => { loader.style.display = 'none'; }, 500);
+    });
+</script>
+{% endblock %}
