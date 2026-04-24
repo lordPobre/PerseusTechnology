@@ -76,18 +76,41 @@
                     </div>
                 </div>
                 <div class="hidden md:flex items-center space-x-4 font-medium">
-                    <a href="#contacto" class="bg-white hover:bg-gray-200 text-black px-6 py-3 rounded-full transition duration-300 font-semibold">Solicita tu Proyecto</a>
+                    <a href="{% url 'contacto' %}" class="bg-white hover:bg-gray-200 text-black px-6 py-3 rounded-full transition duration-300 font-semibold">Solicita tu Proyecto</a>
                 </div>
-                <button @click="mobileMenuOpen = !mobileMenuOpen" class="md:hidden text-white">
+                <button @click="mobileMenuOpen = !mobileMenuOpen" class="md:hidden text-white focus:outline-none">
                     <i class="fa-solid fa-bars text-2xl"></i>
                 </button>
             </div>
         </div>
+
         <div x-show="mobileMenuOpen" @click.away="mobileMenuOpen = false" class="md:hidden bg-black border-b border-gray-800 absolute w-full shadow-xl" style="display: none;">
-            <div class="px-6 py-4 space-y-4 font-medium">
-                <a href="#servicios" class="block text-gray-400">Soluciones</a>
-                <a href="{% url 'precios' %}" class="block text-gray-400">Precios</a>
-                <a href="#contacto" class="block w-full text-center bg-white text-black px-6 py-3 rounded-full mt-4">Comienza gratis</a>
+            <div class="px-6 py-6 space-y-5 font-medium max-h-[calc(100vh-80px)] overflow-y-auto">
+                
+                <div>
+                    <p class="text-white text-sm uppercase tracking-wider mb-3">Soluciones</p>
+                    <div class="space-y-3 pl-4 border-l border-gray-800">
+                        <a href="{% url 'marcacion' %}" class="block text-gray-400 hover:text-white transition">Marcación Digital</a>
+                        <a href="{% url 'web' %}" class="block text-gray-400 hover:text-white transition">Desarrollo Web</a>
+                        <a href="{% url 'consultoria' %}" class="block text-gray-400 hover:text-white transition">Consultoría TI</a>
+                    </div>
+                </div>
+
+                <a href="{% url 'precios' %}" class="block text-white text-lg">Precios</a>
+
+                <div>
+                    <p class="text-white text-sm uppercase tracking-wider mb-3">Recursos</p>
+                    <div class="space-y-3 pl-4 border-l border-gray-800">
+                        <a href="{% url 'nosotros' %}" class="block text-gray-400 hover:text-white transition">Nosotros</a>
+                        <a href="{% url 'ayuda' %}" class="block text-gray-400 hover:text-white transition">Centro de Ayuda</a>
+                        <a href="{% url 'blog' %}" class="block text-gray-400 hover:text-white transition">Blog Corporativo</a>
+                        <a href="{% url 'contacto' %}" class="block text-gray-400 hover:text-white transition">Contacto</a>
+                    </div>
+                </div>
+
+                <div class="pt-4">
+                    <a href="{% url 'contacto' %}" class="block w-full text-center bg-white text-black px-6 py-3 rounded-full font-bold hover:bg-gray-200 transition">Solicita tu Proyecto</a>
+                </div>
             </div>
         </div>
     </nav>
