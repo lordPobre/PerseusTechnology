@@ -63,3 +63,39 @@ def privacidad(request):
 
 def nosotros(request):
     return render(request, 'core/nosotros.html')
+
+def contacto(request):
+    if request.method == 'POST':
+        nombre = request.POST.get('nombre')
+        email = request.POST.get('email')
+        asunto = request.POST.get('asunto') # Capturamos el selector del nuevo diseño
+        mensaje = request.POST.get('mensaje')
+
+        # Formateamos el mensaje que leerás en tu bandeja de entrada
+        contenido = f"Nuevo prospecto desde Perseus Technology:\n\n" \
+                    f"Nombre: {nombre}\n" \
+                    f"Email: {email}\n" \
+                    f"Área de interés: {asunto}\n\n" \
+                    f"Mensaje:\n{mensaje}"
+
+        try:
+            # Enviar el correo usando las credenciales del .env
+            send_mail(
+                subject=f"Nuevo contacto Web - {nombre}",
+                message=contenido,
+                from_email=settings.EMAIL_HOST_USER, # Usa tu correo configurado en settings
+                recipient_list=['contacto@vcchile.cl'], # Tu bandeja de entrada real
+                fail_silently=False,
+            )
+            # Mensaje de éxito para el usuario
+            messages.success(request, '¡Gracias por escribirnos! Te contactaremos pronto.')
+            return redirect('contacto') # Mejor redirigir a contacto de nuevo para que vea el mensaje
+            
+        except Exception as e:
+            # Imprimimos el error en consola para que Vercel lo registre si algo falla
+            print(f"Error al enviar correo: {e}") 
+            messages.error(request, 'Hubo un error al enviar el mensaje. Por favor, intenta de nuevo.')
+            return redirect('contacto')
+
+    # Si es una petición GET (el usuario hace clic en el enlace del menú)
+    return render(request, 'core/contacto.html')
