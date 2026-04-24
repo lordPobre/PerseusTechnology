@@ -1,5 +1,6 @@
 from django.db import models
 from django.utils import timezone
+from cloudinary.models import CloudinaryField
 
 class Categoria(models.Model):
     nombre = models.CharField(max_length=100)
@@ -13,7 +14,7 @@ class Post(models.Model):
     slug = models.SlugField(unique=True)
     resumen = models.TextField(max_length=300)
     contenido = models.TextField() # Aquí escribirás el artículo
-    icono = models.CharField(max_length=50, default='fa-solid fa-code', help_text="Clase de FontAwesome (ej. fa-brands fa-python)")
+    imagen_portada = CloudinaryField('imagen', null=True, blank=True)
     color_tema = models.CharField(max_length=50, default='emerald', help_text="emerald, cyan, blue, purple, etc.")
     categoria = models.ForeignKey(Categoria, on_delete=models.CASCADE)
     autor = models.CharField(max_length=100, default='Equipo Perseus')
