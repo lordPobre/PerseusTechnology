@@ -12,7 +12,11 @@ SECRET_KEY = os.getenv('SECRET_KEY')
 
 DEBUG = os.getenv('DEBUG', 'False') == 'True'
 
-ALLOWED_HOSTS = os.getenv('ALLOWED_HOSTS', '').split(',')
+ALLOWED_HOSTS = [
+    '127.0.0.1', 
+    'localhost', 
+    '.vercel.app',  # Esto autoriza cualquier URL que te asigne Vercel
+]
 
 INSTALLED_APPS = [
     'django.contrib.admin',
