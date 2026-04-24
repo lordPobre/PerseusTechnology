@@ -49,9 +49,14 @@
         <section class="mb-16">
             <a href="{% url 'post_detail' post_destacado.slug %}" class="group block dark-glass-card rounded-[2.5rem] overflow-hidden flex flex-col md:flex-row">
                 <div class="md:w-2/5 h-64 md:h-auto bg-black relative overflow-hidden flex items-center justify-center border-b md:border-b-0 md:border-r border-white/5">
-                    <div class="absolute inset-0 opacity-20 bg-[url('https://www.transparenttextures.com/patterns/cubes.png')]"></div>
-                    <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-40 h-40 bg-{{ post_destacado.color_tema }}-500/20 blur-[50px] rounded-full transition-all group-hover:scale-150 duration-700"></div>
-                    <i class="{{ post_destacado.icono }} text-8xl text-{{ post_destacado.color_tema }}-400/80 relative z-10 group-hover:scale-110 transition-transform duration-500"></i>
+                    {% if post_destacado.imagen_portada %}
+                        <img src="{{ post_destacado.imagen_portada.url }}" alt="{{ post_destacado.titulo }}" class="absolute inset-0 w-full h-full object-cover opacity-60 group-hover:scale-105 transition-transform duration-700">
+                        <div class="absolute inset-0 bg-gradient-to-t from-[#05080a] via-transparent to-transparent opacity-80"></div>
+                    {% else %}
+                        <div class="absolute inset-0 opacity-20 bg-[url('https://www.transparenttextures.com/patterns/cubes.png')]"></div>
+                        <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-40 h-40 bg-{{ post_destacado.color_tema }}-500/20 blur-[50px] rounded-full transition-all group-hover:scale-150 duration-700"></div>
+                        <i class="{{ post_destacado.icono }} text-8xl text-{{ post_destacado.color_tema }}-400/80 relative z-10 group-hover:scale-110 transition-transform duration-500"></i>
+                    {% endif %}
                 </div>
                 
                 <div class="md:w-3/5 p-10 md:p-14 flex flex-col justify-center">
@@ -87,8 +92,12 @@
             {% for post in posts %}
             <a href="{% url 'post_detail' post.slug %}" class="group dark-glass-card rounded-[2rem] overflow-hidden flex flex-col h-full">
                 <div class="h-48 bg-black relative flex items-center justify-center border-b border-white/5 overflow-hidden">
-                    <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-32 h-32 bg-{{ post.color_tema }}-500/10 blur-[40px] rounded-full group-hover:bg-{{ post.color_tema }}-500/20 transition-all duration-500"></div>
-                    <i class="{{ post.icono }} text-6xl text-{{ post.color_tema }}-400/50 group-hover:text-{{ post.color_tema }}-400 group-hover:scale-110 transition-all duration-500 relative z-10"></i>
+                    {% if post.imagen_portada %}
+                        <img src="{{ post.imagen_portada.url }}" alt="{{ post.titulo }}" class="absolute inset-0 w-full h-full object-cover opacity-50 group-hover:opacity-70 group-hover:scale-110 transition-all duration-500">
+                    {% else %}
+                        <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-32 h-32 bg-{{ post.color_tema }}-500/10 blur-[40px] rounded-full group-hover:bg-{{ post.color_tema }}-500/20 transition-all duration-500"></div>
+                        <i class="{{ post.icono }} text-6xl text-{{ post.color_tema }}-400/50 group-hover:text-{{ post.color_tema }}-400 group-hover:scale-110 transition-all duration-500 relative z-10"></i>
+                    {% endif %}
                 </div>
                 
                 <div class="p-8 flex flex-col flex-1">

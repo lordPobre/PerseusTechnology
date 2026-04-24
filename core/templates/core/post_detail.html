@@ -40,10 +40,18 @@
         </a>
 
         <header class="mb-16 text-center">
-            <div class="w-24 h-24 mx-auto rounded-3xl bg-black border border-white/10 flex items-center justify-center text-{{ post.color_tema }}-400 text-4xl mb-8 relative">
-                <div class="absolute inset-0 bg-{{ post.color_tema }}-500/20 blur-[20px] rounded-full"></div>
-                <i class="{{ post.icono }} relative z-10"></i>
-            </div>
+            
+            {% if post.imagen_portada %}
+                <div class="w-full h-[300px] md:h-[450px] mx-auto rounded-[3rem] border border-white/10 overflow-hidden mb-12 relative shadow-2xl">
+                    <img src="{{ post.imagen_portada.url }}" alt="{{ post.titulo }}" class="w-full h-full object-cover opacity-80">
+                    <div class="absolute inset-0 bg-gradient-to-t from-[#05080a] via-transparent to-transparent"></div>
+                </div>
+            {% else %}
+                <div class="w-24 h-24 mx-auto rounded-3xl bg-black border border-white/10 flex items-center justify-center text-{{ post.color_tema }}-400 text-4xl mb-8 relative">
+                    <div class="absolute inset-0 bg-{{ post.color_tema }}-500/20 blur-[20px] rounded-full"></div>
+                    <i class="{{ post.icono }} relative z-10"></i>
+                </div>
+            {% endif %}
             
             <div class="flex items-center justify-center gap-3 mb-6">
                 <span class="px-3 py-1 bg-{{ post.color_tema }}-500/10 text-{{ post.color_tema }}-400 text-xs font-bold uppercase tracking-wider rounded-full border border-{{ post.color_tema }}-500/20">
