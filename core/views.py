@@ -84,7 +84,7 @@ def contacto(request):
                 subject=f"Nuevo contacto Web - {nombre}",
                 message=contenido,
                 from_email=settings.EMAIL_HOST_USER, # Usa tu correo configurado en settings
-                recipient_list=['contacto@vcchile.cl'], # Tu bandeja de entrada real
+                recipient_list=['carlos.esteban.l.f@gmail.com'], # Tu bandeja de entrada real
                 fail_silently=False,
             )
             # Mensaje de éxito para el usuario
