@@ -1,8 +1,12 @@
 #!/bin/bash
 
-echo " BUILD START"
+echo "--- INICIO DEL BUILD ---"
 
-python3.9 -m pip install -r requirements.txt
-python3.9 manage.py collectstatic --noinput --clear
+# Usamos python3 y nos aseguramos de que pip esté actualizado
+python3 -m pip install --upgrade pip
+python3 -m pip install -r requirements.txt
 
-echo " BUILD END"
+# Ejecutamos collectstatic usando python3
+python3 manage.py collectstatic --noinput --clear
+
+echo "--- FIN DEL BUILD ---"

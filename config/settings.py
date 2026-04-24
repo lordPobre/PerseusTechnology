@@ -87,10 +87,8 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
-# Esto le dice a Django dónde poner los archivos para Vercel
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
-# Configuración necesaria para WhiteNoise
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
