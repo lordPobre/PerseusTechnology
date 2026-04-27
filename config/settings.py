@@ -17,7 +17,8 @@ ALLOWED_HOSTS = [
     '127.0.0.1', 
     'localhost', 
     '.vercel.app',
-    'perseustechnology.dev',  #
+    'perseustechnology.dev',
+    'www.perseustechnology.dev',  
 ]
 
 INSTALLED_APPS = [
