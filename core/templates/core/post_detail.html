@@ -19,15 +19,6 @@
 </style>
 {% endblock %}
 
-{% block loader %}
-<div id="page-loader" class="fixed inset-0 z-[9999] bg-black flex flex-col items-center justify-center transition-opacity duration-300 ease-in-out">
-    <img src="{% static 'core/img/logo-3.png' %}" alt="Cargando" class="absolute inset-0 w-full h-full object-cover opacity-80 animate-pulse">
-    <div class="relative z-10 mt-auto mb-10 text-cyan-400 font-bold tracking-[0.3em] uppercase text-sm animate-bounce">
-        Iniciando Sistemas...
-    </div>
-</div>
-{% endblock %}
-
 {% block content %}
 <main class="relative pt-32 pb-24 px-6 overflow-hidden min-h-screen">
     <div class="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[500px] bg-{{ post.color_tema }}-500/10 blur-[120px] rounded-full pointer-events-none"></div>

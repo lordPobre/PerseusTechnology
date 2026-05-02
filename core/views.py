@@ -130,3 +130,9 @@ def contacto(request):
 
     # Si es una petición GET (el usuario hace clic en el enlace del menú)
     return render(request, 'core/contacto.html')
+
+def gym_app(request):
+    return render(request, 'core/servicios/gym.html')
+
+def spendbox_app(request):
+    return render(request, 'core/servicios/spendbox.html')

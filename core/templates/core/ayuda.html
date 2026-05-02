@@ -5,13 +5,6 @@
 
 {% block body_class %}bg-white text-gray-900 antialiased selection:bg-emerald-200 selection:text-emerald-900{% endblock %}
 
-{% block loader %}
-<div id="page-loader" class="fixed inset-0 z-[9999] bg-black flex flex-col items-center justify-center transition-opacity duration-300 ease-in-out">
-    <img src="{% static 'core/img/logo-3.png' %}" alt="Cargando" class="absolute inset-0 w-full h-full object-cover opacity-80 animate-pulse">
-    <div class="relative z-10 mt-auto mb-10 text-cyan-400 font-bold tracking-[0.3em] uppercase text-sm animate-bounce">Iniciando Sistemas...</div>
-</div>
-{% endblock %}
-
 {% block content %}
 <header class="pt-40 pb-20 px-6 bg-gradient-to-b from-gray-50 to-white">
     <div class="max-w-3xl mx-auto text-center">

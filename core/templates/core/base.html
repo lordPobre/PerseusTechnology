@@ -14,13 +14,62 @@
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
         body { font-family: 'Inter', sans-serif; }
+        
+        /* Animaciones para el Núcleo Holográfico (Triángulos) */
+        @keyframes color-shift-stroke {
+            0% { stroke: #3b82f6; filter: drop-shadow(0 0 8px rgba(59,130,246,0.8)); } /* Azul */
+            33% { stroke: #10b981; filter: drop-shadow(0 0 8px rgba(16,185,129,0.8)); } /* Verde */
+            66% { stroke: #a855f7; filter: drop-shadow(0 0 8px rgba(168,85,247,0.8)); } /* Morado */
+            100% { stroke: #3b82f6; filter: drop-shadow(0 0 8px rgba(59,130,246,0.8)); } /* Azul */
+        }
+        .animate-tech-colors {
+            animation: color-shift-stroke 4s ease-in-out infinite;
+        }
+
+        @keyframes color-shift-text {
+            0% { color: #3b82f6; text-shadow: 0 0 10px rgba(59,130,246,0.5); }
+            33% { color: #10b981; text-shadow: 0 0 10px rgba(16,185,129,0.5); }
+            66% { color: #a855f7; text-shadow: 0 0 10px rgba(168,85,247,0.5); }
+            100% { color: #3b82f6; text-shadow: 0 0 10px rgba(59,130,246,0.5); }
+        }
+        .animate-tech-text {
+            animation: color-shift-text 4s ease-in-out infinite;
+        }
     </style>
 
     {% block extra_css %}{% endblock %}
 </head>
 <body class="{% block body_class %}bg-white text-gray-900 antialiased{% endblock %}">
 
-    {% block loader %}{% endblock %}
+    <!-- LOADER NÚCLEO HOLOGRÁFICO -->
+    <div id="global-page-loader" class="fixed inset-0 z-[9999] bg-[#05080a] flex flex-col items-center justify-center transition-opacity duration-500 overflow-hidden">
+        
+        <!-- Contenedor 3D de los Triángulos -->
+        <div class="relative flex items-center justify-center w-32 h-32 mb-10">
+            <!-- Triángulo Exterior (Gira a la derecha) -->
+            <svg class="absolute w-full h-full animate-[spin_4s_linear_infinite]" viewBox="0 0 100 100" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <polygon points="50,10 90,90 10,90" class="animate-tech-colors" />
+            </svg>
+            
+            <!-- Triángulo Medio (Gira a la izquierda más rápido) -->
+            <svg class="absolute w-3/4 h-3/4 animate-[spin_2.5s_linear_infinite_reverse]" viewBox="0 0 100 100" fill="none" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+                <!-- Se le da un pequeño delay a la animación de color para que contraste con el exterior -->
+                <polygon points="50,90 90,10 10,10" class="animate-tech-colors" style="animation-delay: -1.5s;" />
+            </svg>
+
+            <!-- Triángulo Interior (Pequeño, gira a la derecha rápido) -->
+            <svg class="absolute w-1/3 h-1/3 animate-[spin_1.5s_linear_infinite]" viewBox="0 0 100 100" fill="none" stroke-width="4" stroke-linecap="round" stroke-linejoin="round">
+                <polygon points="50,10 90,90 10,90" class="animate-tech-colors" style="animation-delay: -3s;" />
+            </svg>
+        </div>
+        
+        <!-- Texto Animado -->
+        <div class="font-mono text-[11px] tracking-[0.5em] uppercase font-bold animate-tech-text animate-pulse">
+            Cargando sistema....
+        </div>
+
+    </div>
+    <!-- FIN LOADER -->
 
     <nav x-data="{ mobileMenuOpen: false }" class="fixed w-full z-50 bg-black border-b border-gray-800">
         <div class="max-w-[1400px] mx-auto px-6">
@@ -133,6 +182,43 @@
             </div>
         </div>
     </footer>
+
+    <!-- SCRIPT GLOBAL PARA LOADER Y TRANSICIÓN -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            
+            // 1. Desaparecer Loader y habilitar clics al cargar
+            window.addEventListener('load', function() {
+                const loader = document.getElementById('global-page-loader');
+                if (loader) {
+                    loader.classList.add('opacity-0');
+                    setTimeout(() => { 
+                        loader.classList.add('pointer-events-none');
+                    }, 500);
+                }
+            });
+
+            // 2. Transición de salida en los botones
+            document.querySelectorAll('a').forEach(enlace => {
+                enlace.addEventListener('click', function(e) {
+                    const href = this.getAttribute('href');
+                    
+                    if (href && !href.startsWith('#') && !href.startsWith('javascript') && this.target !== '_blank' && !e.ctrlKey && !e.metaKey) {
+                        e.preventDefault(); 
+                        
+                        const loader = document.getElementById('global-page-loader');
+                        if (loader) {
+                            loader.classList.remove('pointer-events-none', 'opacity-0');
+                            setTimeout(() => { window.location.href = href; }, 400);
+                        } else {
+                            window.location.href = href;
+                        }
+                    }
+                });
+            });
+            
+        });
+    </script>
 
     {% block extra_js %}{% endblock %}
 

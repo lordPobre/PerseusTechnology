@@ -1,0 +1,427 @@
+{% extends 'core/base.html' %}
+{% load static %}
+
+{% block title %}SpendBox | Control de Gastos con IA | Perseus Technology{% endblock %}
+
+{% block body_class %}bg-[#05080a] text-gray-300 antialiased selection:bg-emerald-500/30 selection:text-emerald-200{% endblock %}
+
+{% block extra_css %}
+<style>
+    /* Glassmorphism Financiero/Tech */
+    .dark-glass-card { 
+        background: linear-gradient(145deg, rgba(15, 20, 30, 0.7) 0%, rgba(5, 10, 15, 0.9) 100%);
+        backdrop-filter: blur(16px); 
+        border: 1px solid rgba(255, 255, 255, 0.05); 
+        transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1); 
+    }
+    .dark-glass-card:hover { 
+        border-color: rgba(52, 211, 153, 0.4); 
+        transform: translateY(-4px);
+        box-shadow: 0 20px 40px -10px rgba(0,0,0,0.8), inset 0 0 20px -5px rgba(52, 211, 153, 0.15); 
+    }
+    
+    /* Contenedor tipo navegador */
+    .browser-mockup {
+        border-radius: 12px;
+        overflow: hidden;
+        border: 1px solid rgba(255,255,255,0.1);
+        box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.7);
+        background: #fff;
+    }
+    .browser-header {
+        background: rgba(20, 25, 30, 0.95);
+        padding: 10px 15px;
+        display: flex;
+        gap: 6px;
+        border-bottom: 1px solid rgba(255,255,255,0.05);
+    }
+    .browser-dot { width: 10px; height: 10px; border-radius: 50%; }
+    .dot-red { background: #ef4444; }
+    .dot-yellow { background: #f59e0b; }
+    .dot-green { background: #10b981; }
+
+    @keyframes float {
+        0%, 100% { transform: translateY(0px); }
+        50% { transform: translateY(-10px); }
+    }
+    .hover-float { animation: float 5s ease-in-out infinite; }
+</style>
+{% endblock %}
+
+{% block content %}
+<!-- Fondo Interactivo de Partículas -->
+<canvas id="ia-network" class="fixed inset-0 w-full h-full z-0 pointer-events-none opacity-40"></canvas>
+
+<main class="relative pt-32 pb-24 px-6 overflow-hidden min-h-screen">
+    <!-- Luces de fondo dinámicas fijas detrás del contenido -->
+    <div class="absolute top-0 left-1/2 -translate-x-1/2 w-[900px] h-[500px] bg-indigo-600/10 blur-[150px] rounded-full pointer-events-none z-0"></div>
+    <div class="absolute bottom-0 right-0 w-[800px] h-[600px] bg-emerald-600/5 blur-[150px] rounded-full pointer-events-none z-0"></div>
+
+    <div class="max-w-[1200px] mx-auto relative z-10">
+        
+        <!-- Botón Volver -->
+        <a href="{% url 'apps' %}" class="inline-flex items-center gap-2 text-gray-500 hover:text-emerald-400 transition-all duration-300 mb-12 font-mono text-sm group">
+            <span class="text-emerald-500 group-hover:translate-x-[-4px] transition-transform duration-300">
+                <i class="fa-solid fa-terminal text-xs"></i>
+            </span>
+            <span class="text-emerald-400">..</span>/apps/spendbox
+            <span class="inline-block w-2 h-4 bg-emerald-500/50 animate-pulse ml-1"></span>
+        </a>
+
+        <!-- Hero Section -->
+        <header class="mb-32 text-center lg:text-left flex flex-col lg:flex-row items-center gap-16">
+            <div class="lg:w-1/2 relative">
+                <div class="inline-flex items-center gap-3 px-4 py-2 rounded-full bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 text-xs font-mono uppercase tracking-widest mb-8 shadow-[0_0_15px_rgba(52,211,153,0.15)]">
+                    <i class="fa-solid fa-bolt text-emerald-400"></i>
+                    IA OCR v2.0 Activa
+                </div>
+                
+                <h1 class="text-5xl md:text-6xl lg:text-7xl font-extrabold text-white mb-6 tracking-tight leading-[1.1]">
+                    Auditoría de obra <br/>
+                    automatizada con <br/>
+                    <span class="text-transparent bg-clip-text bg-gradient-to-r from-emerald-400 via-teal-400 to-indigo-400">Inteligencia Artificial.</span>
+                </h1>
+                
+                <p class="text-gray-400 text-lg md:text-xl leading-relaxed mb-10 max-w-2xl">
+                    Sube una foto de la boleta y deja que SpendBox haga el resto. Nuestro motor OCR extrae los montos, RUT y folios en milisegundos, asignando cada gasto al presupuesto de tu proyecto.
+                </p>
+                
+                <div class="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
+                    <a href="{% url 'contacto' %}" class="bg-indigo-600 hover:bg-indigo-500 text-white font-bold py-4 px-8 rounded-2xl transition-all duration-300 shadow-[0_0_20px_rgba(79,70,229,0.3)] hover:shadow-[0_0_30px_rgba(79,70,229,0.5)] hover:-translate-y-1 flex items-center justify-center group">
+                        Cotizar SpendBox <i class="fa-solid fa-arrow-trend-up ml-3 group-hover:translate-x-1 transition-transform"></i>
+                    </a>
+                    <a href="https://obragastos-production.up.railway.app/login/" target="_blank" class="dark-glass-card text-white font-bold py-4 px-8 rounded-2xl transition-all duration-300 flex items-center justify-center group hover:bg-white/5 border-emerald-500/30">
+                        <i class="fa-solid fa-arrow-right-to-bracket mr-3 text-emerald-400 group-hover:text-emerald-300 transition-colors"></i> Iniciar Sesión
+                    </a>
+                </div>
+            </div>
+            
+            <div class="lg:w-1/2 relative perspective-1000">
+                <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[110%] h-[110%] bg-gradient-to-tr from-emerald-600/20 to-indigo-600/20 blur-[70px] rounded-full z-0"></div>
+                
+                <div class="relative z-10 hover-float">
+                    <div class="browser-mockup">
+                        <div class="browser-header">
+                            <div class="browser-dot dot-red"></div>
+                            <div class="browser-dot dot-yellow"></div>
+                            <div class="browser-dot dot-green"></div>
+                        </div>
+                        <img src="{% static 'core/img/dashboard.png' %}" alt="Dashboard SpendBox" class="w-full">
+                    </div>
+                    
+                    <div class="absolute -right-8 top-10 dark-glass-card p-3 rounded-xl flex items-center gap-3 border-emerald-500/40 shadow-lg animate-bounce" style="animation-duration: 4s;">
+                        <i class="fa-solid fa-check-double text-emerald-400"></i>
+                        <span class="text-xs font-mono text-white">Monto: $176.340</span>
+                    </div>
+                    <div class="absolute -left-6 bottom-16 dark-glass-card p-3 rounded-xl flex items-center gap-3 border-indigo-500/40 shadow-lg animate-bounce" style="animation-duration: 5s; animation-delay: 1s;">
+                        <i class="fa-solid fa-fingerprint text-indigo-400"></i>
+                        <span class="text-xs font-mono text-white">RUT Validado</span>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <!-- Funcionalidades Clave -->
+        <section class="mb-32 relative">
+            <div class="text-center mb-16 relative z-10">
+                <h2 class="text-sm font-mono text-emerald-400 tracking-widest uppercase mb-3">Motor Core</h2>
+                <h3 class="text-3xl md:text-4xl font-bold text-white">Tecnología diseñada para Constructoras</h3>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 relative z-10">
+                <div class="dark-glass-card p-8 rounded-[2rem] group relative overflow-hidden border-t-2 border-t-emerald-500/50">
+                    <div class="absolute inset-0 bg-gradient-to-b from-emerald-500/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></div>
+                    <div class="w-16 h-16 rounded-2xl bg-black flex items-center justify-center text-emerald-400 text-2xl mb-6 border border-emerald-500/20 group-hover:scale-110 transition-transform duration-500 shadow-[0_0_15px_rgba(52,211,153,0.2)]">
+                        <i class="fa-solid fa-expand"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-white mb-4">Extracción OCR</h3>
+                    <p class="text-gray-400 text-sm leading-relaxed">Olvídate de la digitación manual. Nuestro motor procesa imágenes y PDFs, reconociendo textos, fechas y valores financieros con precisión milimétrica.</p>
+                </div>
+                
+                <div class="dark-glass-card p-8 rounded-[2rem] group relative overflow-hidden border-t-2 border-t-indigo-500/50">
+                    <div class="absolute inset-0 bg-gradient-to-b from-indigo-500/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></div>
+                    <div class="w-16 h-16 rounded-2xl bg-black flex items-center justify-center text-indigo-400 text-2xl mb-6 border border-indigo-500/20 group-hover:scale-110 transition-transform duration-500 shadow-[0_0_15px_rgba(99,102,241,0.2)]">
+                        <i class="fa-solid fa-layer-group"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-white mb-4">Control Multiproyecto</h3>
+                    <p class="text-gray-400 text-sm leading-relaxed">Administra múltiples obras en paralelo. Visualiza en tiempo real el saldo disponible, el presupuesto consumido y los documentos asociados a cada centro de costo.</p>
+                </div>
+                
+                <div class="dark-glass-card p-8 rounded-[2rem] group relative overflow-hidden border-t-2 border-t-purple-500/50">
+                    <div class="absolute inset-0 bg-gradient-to-b from-purple-500/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></div>
+                    <div class="w-16 h-16 rounded-2xl bg-black flex items-center justify-center text-purple-400 text-2xl mb-6 border border-purple-500/20 group-hover:scale-110 transition-transform duration-500 shadow-[0_0_15px_rgba(168,85,247,0.2)]">
+                        <i class="fa-solid fa-magnifying-glass-dollar"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-white mb-4">Trazabilidad Fiscal</h3>
+                    <p class="text-gray-400 text-sm leading-relaxed">Un buscador potente para encontrar cualquier gasto por proveedor, fecha o folio. Genera exportaciones limpias listas para revisión contable y auditorías.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Galería de Módulos -->
+        <section class="space-y-32 relative">
+            <div class="hidden md:block absolute left-1/2 top-0 bottom-0 w-px border-l-2 border-dashed border-emerald-500/30 -translate-x-1/2"></div>
+
+            <div class="flex flex-col md:flex-row-reverse items-center gap-12 lg:gap-20 relative">
+                <div class="hidden md:block absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-5 h-5 rounded-sm bg-emerald-500 shadow-[0_0_20px_rgba(52,211,153,0.6)] z-20 rotate-45"></div>
+                
+                <div class="md:w-1/2">
+                    <div class="inline-flex items-center gap-2 px-3 py-1 rounded-lg bg-emerald-500/10 text-emerald-400 text-xs font-mono font-bold mb-4 border border-emerald-500/20">
+                        <i class="fa-solid fa-microchip"></i> Paso 01: Captura
+                    </div>
+                    <h3 class="text-3xl font-bold text-white mb-6">Sube, escanea y clasifica</h3>
+                    <p class="text-gray-400 text-lg leading-relaxed mb-8">
+                        La vista de "Nuevo Gasto" es la puerta de entrada de tus datos. Su diseño limpio permite cargar facturas arrastrando el archivo y el sistema llena los campos vitales por ti.
+                    </p>
+                    <ul class="space-y-4 text-gray-300 bg-black/50 p-6 rounded-2xl border border-white/5 font-mono text-sm">
+                        <li class="flex items-center">
+                            <span class="text-emerald-400 mr-3">>></span> 
+                            <span>Lectura de JPG, PNG o PDF (Max. 10MB)</span>
+                        </li>
+                        <li class="flex items-center">
+                            <span class="text-emerald-400 mr-3">>></span> 
+                            <span>Asignación directa a catálogos (Ej: Materiales)</span>
+                        </li>
+                    </ul>
+                </div>
+                <div class="md:w-1/2 relative group">
+                    <div class="absolute inset-0 bg-emerald-500/10 blur-[50px] rounded-full transition-all duration-700 group-hover:bg-emerald-500/20"></div>
+                    <div class="relative z-10 transition-transform duration-500 group-hover:scale-[1.02]">
+                        <div class="browser-mockup">
+                            <div class="browser-header">
+                                <div class="browser-dot dot-red"></div>
+                                <div class="browser-dot dot-yellow"></div>
+                                <div class="browser-dot dot-green"></div>
+                            </div>
+                            <img src="{% static 'core/img/cargar_boleta.png' %}" alt="Carga de Gastos SpendBox" class="w-full">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="flex flex-col md:flex-row items-center gap-12 lg:gap-20 relative">
+                <div class="hidden md:block absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-5 h-5 rounded-sm bg-indigo-500 shadow-[0_0_20px_rgba(99,102,241,0.6)] z-20 rotate-45"></div>
+
+                <div class="md:w-1/2 md:text-right">
+                    <div class="inline-flex items-center gap-2 px-3 py-1 rounded-lg bg-indigo-500/10 text-indigo-400 text-xs font-mono font-bold mb-4 border border-indigo-500/20">
+                        <i class="fa-solid fa-database"></i> Paso 02: Gestión
+                    </div>
+                    <h3 class="text-3xl font-bold text-white mb-6">Historial Inteligente</h3>
+                    <p class="text-gray-400 text-lg leading-relaxed mb-8">
+                        Todo documento procesado forma un archivo digital inmutable. Filtra el caos contable de la construcción visualizando exactamente lo que necesitas, cuando lo necesitas.
+                    </p>
+                    <ul class="space-y-4 text-gray-300 bg-black/50 p-6 rounded-2xl border border-white/5 font-mono text-sm inline-block text-left w-full">
+                        <li class="flex items-center">
+                            <span class="text-indigo-400 mr-3">>></span> 
+                            <span>Filtros multicriterio (Obra + Rango de Fechas)</span>
+                        </li>
+                        <li class="flex items-center">
+                            <span class="text-indigo-400 mr-3">>></span> 
+                            <span>Resumen de "Total Filtrado" en tiempo real</span>
+                        </li>
+                    </ul>
+                </div>
+                <div class="md:w-1/2 relative group">
+                    <div class="absolute inset-0 bg-indigo-500/10 blur-[50px] rounded-full transition-all duration-700 group-hover:bg-indigo-500/20"></div>
+                    <div class="relative z-10 transition-transform duration-500 group-hover:scale-[1.02]">
+                        <div class="browser-mockup">
+                            <div class="browser-header">
+                                <div class="browser-dot dot-red"></div>
+                                <div class="browser-dot dot-yellow"></div>
+                                <div class="browser-dot dot-green"></div>
+                            </div>
+                            <img src="{% static 'core/img/historial_boletas.png' %}" alt="Historial SpendBox" class="w-full">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- CTA Final Tech -->
+        <section class="mt-32 relative">
+            <div class="dark-glass-card rounded-[3rem] p-12 md:p-16 text-center relative overflow-hidden border border-emerald-500/20">
+                <div class="absolute top-0 right-0 w-64 h-64 bg-emerald-500/10 blur-[80px] rounded-full pointer-events-none"></div>
+                <div class="absolute bottom-0 left-0 w-64 h-64 bg-indigo-500/10 blur-[80px] rounded-full pointer-events-none"></div>
+                
+                <div class="relative z-10 max-w-2xl mx-auto">
+                    <div class="w-16 h-16 mx-auto bg-black rounded-2xl flex items-center justify-center text-3xl text-emerald-400 mb-6 border border-emerald-500/30">
+                        <i class="fa-solid fa-power-off"></i>
+                    </div>
+                    <h2 class="text-4xl md:text-5xl font-bold text-white mb-6">Actualiza tu gestión contable</h2>
+                    <p class="text-gray-400 text-lg mb-10">Reduce el tiempo de digitación a cero y elimina el extravío de boletas en terreno. Implementa SpendBox en tus obras hoy.</p>
+                    <a href="{% url 'contacto' %}" class="inline-flex items-center bg-emerald-500 hover:bg-emerald-400 text-black font-extrabold py-4 px-10 rounded-2xl transition-all duration-300 shadow-[0_0_20px_rgba(52,211,153,0.3)] hover:shadow-[0_0_30px_rgba(52,211,153,0.5)]">
+                        Solicitar Demostración <i class="fa-solid fa-arrow-right ml-3"></i>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+    </div>
+</main>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+    // --- LÓGICA DEL EFECTO MATRIX PARA EL LOADER ---
+    const matrixCanvas = document.getElementById('matrix-canvas');
+    const mCtx = matrixCanvas.getContext('2d');
+
+    // Ajustar el canvas al tamaño de la ventana
+    function resizeMatrix() {
+        matrixCanvas.width = window.innerWidth;
+        matrixCanvas.height = window.innerHeight;
+    }
+    window.addEventListener('resize', resizeMatrix);
+    resizeMatrix();
+
+    // Caracteres para la lluvia (Letras, números y símbolos)
+    const matrixChars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789@#$%^&*()';
+    const charsArray = matrixChars.split('');
+
+    const fontSize = 14;
+    let columns = matrixCanvas.width / fontSize;
+    let drops = [];
+
+    for (let x = 0; x < columns; x++) {
+        drops[x] = 1;
+    }
+
+    let matrixInterval;
+
+    function drawMatrix() {
+        // Fondo semi-transparente para dejar el rastro
+        mCtx.fillStyle = 'rgba(5, 8, 10, 0.08)';
+        mCtx.fillRect(0, 0, matrixCanvas.width, matrixCanvas.height);
+
+        // Color del texto (Esmeralda)
+        mCtx.fillStyle = '#10b981'; 
+        mCtx.font = fontSize + 'px monospace';
+
+        for (let i = 0; i < drops.length; i++) {
+            const text = charsArray[Math.floor(Math.random() * charsArray.length)];
+            mCtx.fillText(text, i * fontSize, drops[i] * fontSize);
+
+            // Reiniciar la gota al llegar abajo con un poco de aleatoriedad
+            if (drops[i] * fontSize > matrixCanvas.height && Math.random() > 0.975) {
+                drops[i] = 0;
+            }
+            drops[i]++;
+        }
+    }
+
+    // Iniciar la animación Matrix
+    matrixInterval = setInterval(drawMatrix, 35);
+
+    // --- REMOVER LOADER Y DETENER MATRIX ---
+    window.addEventListener('load', function() {
+        const loader = document.getElementById('page-loader');
+        // Transición de salida suave
+        loader.classList.add('opacity-0');
+        
+        setTimeout(() => { 
+            loader.style.display = 'none'; 
+            clearInterval(matrixInterval); // Importante: Apagar la animación para no consumir RAM
+        }, 500);
+    });
+
+    // --- SCRIPT PARA LA RED NEURONAL INTERACTIVA (FONDO PRINCIPAL) ---
+    const canvas = document.getElementById('ia-network');
+    const ctx = canvas.getContext('2d');
+    
+    let width, height;
+    let particles = [];
+    
+    let mouse = { x: null, y: null, radius: 150 };
+    window.addEventListener('mousemove', function(event) {
+        mouse.x = event.x;
+        mouse.y = event.y;
+    });
+    
+    window.addEventListener('mouseout', function() {
+        mouse.x = undefined;
+        mouse.y = undefined;
+    });
+
+    function initCanvas() {
+        width = window.innerWidth;
+        height = window.innerHeight;
+        canvas.width = width;
+        canvas.height = height;
+        
+        particles = [];
+        let particleCount = (width * height) / 12000;
+        
+        for (let i = 0; i < particleCount; i++) {
+            let size = (Math.random() * 2) + 0.5;
+            let x = Math.random() * (width - size * 2) + size * 2;
+            let y = Math.random() * (height - size * 2) + size * 2;
+            let directionX = (Math.random() * 1) - 0.5;
+            let directionY = (Math.random() * 1) - 0.5;
+            let color = 'rgba(52, 211, 153, 0.6)'; 
+            
+            particles.push({ x, y, directionX, directionY, size, color });
+        }
+    }
+
+    function animate() {
+        requestAnimationFrame(animate);
+        ctx.clearRect(0, 0, width, height);
+        
+        for (let i = 0; i < particles.length; i++) {
+            let p = particles[i];
+            
+            if (p.x > width || p.x < 0) p.directionX = -p.directionX;
+            if (p.y > height || p.y < 0) p.directionY = -p.directionY;
+            
+            p.x += p.directionX;
+            p.y += p.directionY;
+            
+            ctx.beginPath();
+            ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2, false);
+            ctx.fillStyle = p.color;
+            ctx.fill();
+        }
+        
+        let opacityValue = 1;
+        for (let a = 0; a < particles.length; a++) {
+            for (let b = a; b < particles.length; b++) {
+                let dx = particles[a].x - particles[b].x;
+                let dy = particles[a].y - particles[b].y;
+                let distance = (dx * dx) + (dy * dy);
+                
+                if (distance < (width/7) * (height/7)) {
+                    opacityValue = 1 - (distance / 15000);
+                    ctx.strokeStyle = 'rgba(99, 102, 241,' + opacityValue + ')'; 
+                    ctx.lineWidth = 0.5;
+                    ctx.beginPath();
+                    ctx.moveTo(particles[a].x, particles[a].y);
+                    ctx.lineTo(particles[b].x, particles[b].y);
+                    ctx.stroke();
+                }
+            }
+            
+            if(mouse.x != null && mouse.y != null) {
+                let dxMouse = particles[a].x - mouse.x;
+                let dyMouse = particles[a].y - mouse.y;
+                let distanceMouse = Math.sqrt(dxMouse * dxMouse + dyMouse * dyMouse);
+                
+                if (distanceMouse < mouse.radius) {
+                    ctx.strokeStyle = `rgba(52, 211, 153, ${1 - distanceMouse/mouse.radius})`;
+                    ctx.lineWidth = 1;
+                    ctx.beginPath();
+                    ctx.moveTo(particles[a].x, particles[a].y);
+                    ctx.lineTo(mouse.x, mouse.y);
+                    ctx.stroke();
+                    
+                    particles[a].x -= dxMouse/50;
+                    particles[a].y -= dyMouse/50;
+                }
+            }
+        }
+    }
+
+    window.addEventListener('resize', initCanvas);
+    initCanvas();
+    animate();
+</script>
+{% endblock %}

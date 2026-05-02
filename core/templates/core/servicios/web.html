@@ -19,15 +19,6 @@
 </style>
 {% endblock %}
 
-{% block loader %}
-<div id="page-loader" class="fixed inset-0 z-[9999] bg-black flex flex-col items-center justify-center transition-opacity duration-300 ease-in-out">
-    <img src="{% static 'core/img/logo-3.png' %}" alt="Cargando" class="absolute inset-0 w-full h-full object-cover opacity-60 animate-pulse">
-    <div class="relative z-10 mt-auto mb-10 text-emerald-400 font-mono font-bold tracking-[0.3em] uppercase text-sm animate-bounce">
-        Compilando Código...
-    </div>
-</div>
-{% endblock %}
-
 {% block content %}
 <div id="vanta-dots-bg" class="relative min-h-screen bg-[#0a0f1a] overflow-hidden">
     <header class="pt-56 pb-16 px-6 relative z-10">

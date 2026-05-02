@@ -1,0 +1,238 @@
+{% extends 'core/base.html' %}
+{% load static %}
+
+{% block title %}Sistema de Gestión Deportiva | Perseus Technology{% endblock %}
+
+{% block body_class %}bg-[#05080a] text-gray-300 antialiased selection:bg-blue-500/30 selection:text-blue-200{% endblock %}
+
+{% block extra_css %}
+<style>
+    /* Tarjetas Glassmorphism avanzadas */
+    .dark-glass-card { 
+        background: linear-gradient(145deg, rgba(20, 25, 35, 0.6) 0%, rgba(10, 15, 20, 0.8) 100%);
+        backdrop-filter: blur(12px); 
+        border: 1px solid rgba(255, 255, 255, 0.05); 
+        transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1); 
+    }
+    .dark-glass-card:hover { 
+        border-color: rgba(59, 130, 246, 0.4); 
+        transform: translateY(-5px);
+        box-shadow: 0 20px 40px -10px rgba(0,0,0,0.7), inset 0 0 20px -5px rgba(59, 130, 246, 0.1); 
+    }
+    
+    /* Animación flotante suave */
+    @keyframes float {
+        0%, 100% { transform: translateY(0px) rotate(0deg); }
+        50% { transform: translateY(-15px) rotate(1deg); }
+    }
+    .hover-float { animation: float 6s ease-in-out infinite; }
+    
+    /* Efecto de líneas de cuadrícula para fondos técnicos */
+    .bg-grid {
+        background-size: 40px 40px;
+        background-image: linear-gradient(to right, rgba(255, 255, 255, 0.02) 1px, transparent 1px),
+                          linear-gradient(to bottom, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
+    }
+</style>
+{% endblock %}
+
+
+{% block content %}
+<main class="relative pt-32 pb-24 px-6 overflow-hidden min-h-screen bg-grid">
+    <!-- Luces de fondo dinámicas -->
+    <div class="absolute top-0 left-1/2 -translate-x-1/2 w-[1000px] h-[600px] bg-blue-600/10 blur-[150px] rounded-full pointer-events-none"></div>
+    <div class="absolute bottom-0 right-0 w-[800px] h-[600px] bg-cyan-600/5 blur-[150px] rounded-full pointer-events-none"></div>
+
+    <div class="max-w-[1200px] mx-auto relative z-10">
+        
+        <!-- Botón Volver (Estilo Terminal) -->
+        <a href="{% url 'apps' %}" class="inline-flex items-center gap-2 text-gray-500 hover:text-blue-400 transition-all duration-300 mb-12 font-mono text-sm group">
+            <span class="text-blue-500 group-hover:translate-x-[-4px] transition-transform duration-300">
+                <i class="fa-solid fa-terminal text-xs"></i>
+            </span>
+            <span class="text-blue-400">..</span>/apps/gym
+            <span class="inline-block w-2 h-4 bg-blue-500/50 animate-pulse ml-1"></span>
+        </a>
+
+        <!-- Hero Section -->
+        <header class="mb-32 text-center lg:text-left flex flex-col lg:flex-row items-center gap-16">
+            <div class="lg:w-1/2 relative">
+                <!-- Tech Pill -->
+                <div class="inline-flex items-center gap-3 px-4 py-2 rounded-full bg-blue-500/10 border border-blue-500/30 text-blue-400 text-xs font-mono uppercase tracking-widest mb-8 shadow-[0_0_15px_rgba(59,130,246,0.15)]">
+                    <span class="w-2 h-2 rounded-full bg-blue-400 animate-pulse shadow-[0_0_10px_rgba(96,165,250,0.8)]"></span>
+                    Módulo Deportivo Activo
+                </div>
+                
+                <h1 class="text-5xl md:text-6xl lg:text-7xl font-extrabold text-white mb-6 tracking-tight leading-[1.1]">
+                    El control total <br/>
+                    de tu centro en <br/>
+                    <span class="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-cyan-400 to-emerald-400">tiempo real.</span>
+                </h1>
+                
+                <p class="text-gray-400 text-lg md:text-xl leading-relaxed mb-10 max-w-2xl">
+                    Moderniza la administración de tu gimnasio. Un sistema diseñado para gestionar reservas, controlar aforos y monitorear el rendimiento de tu comunidad con reportes analíticos precisos.
+                </p>
+                
+                <div class="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
+                    <a href="{% url 'contacto' %}" class="bg-blue-600 hover:bg-blue-500 text-white font-bold py-4 px-8 rounded-2xl transition-all duration-300 shadow-[0_0_20px_rgba(59,130,246,0.3)] hover:shadow-[0_0_30px_rgba(59,130,246,0.5)] hover:-translate-y-1 flex items-center justify-center group">
+                        Cotizar Sistema <i class="fa-solid fa-rocket ml-3 group-hover:translate-x-1 transition-transform"></i>
+                    </a>
+                    <!-- ENLACE AL SISTEMA -->
+                    <a href="#" target="_blank" class="dark-glass-card text-white font-bold py-4 px-8 rounded-2xl transition-all duration-300 flex items-center justify-center group hover:bg-white/5">
+                        <i class="fa-solid fa-arrow-right-to-bracket mr-3 text-blue-400 group-hover:text-cyan-300 transition-colors"></i> Acceso Alumnos
+                    </a>
+                </div>
+            </div>
+            
+            <div class="lg:w-1/2 relative perspective-1000">
+                <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[120%] h-[120%] bg-gradient-to-tr from-blue-600/20 to-cyan-400/20 blur-[80px] rounded-full z-0"></div>
+                <div class="relative z-10 dark-glass-card p-2 rounded-3xl hover-float">
+                    <img src="{% static 'core/img/dashboard.jpg' %}" alt="Dashboard Gym" class="rounded-2xl border border-white/5 shadow-2xl w-full">
+                    
+                    <!-- Elementos flotantes decorativos tipo UI -->
+                    <div class="absolute -bottom-6 -left-6 dark-glass-card p-4 rounded-2xl flex items-center gap-4 animate-bounce" style="animation-duration: 4s;">
+                        <div class="w-10 h-10 rounded-full bg-green-500/20 flex items-center justify-center text-green-400"><i class="fa-solid fa-arrow-trend-up"></i></div>
+                        <div>
+                            <p class="text-xs text-gray-400 font-mono">Asistencia Hoy</p>
+                            <p class="text-white font-bold">+124 Alumnos</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <!-- Funcionalidades Clave -->
+        <section class="mb-32">
+            <div class="text-center mb-16">
+                <h2 class="text-sm font-mono text-blue-400 tracking-widest uppercase mb-3">Infraestructura</h2>
+                <h3 class="text-3xl md:text-4xl font-bold text-white">Arquitectura de Alto Rendimiento</h3>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- Card 1 -->
+                <div class="dark-glass-card p-8 rounded-[2rem] group relative overflow-hidden">
+                    <div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-blue-500 to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></div>
+                    <div class="w-16 h-16 rounded-2xl bg-gradient-to-br from-blue-500/20 to-blue-600/5 flex items-center justify-center text-blue-400 text-2xl mb-6 border border-blue-500/20 group-hover:scale-110 transition-transform duration-500">
+                        <i class="fa-regular fa-calendar-check"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-white mb-4 group-hover:text-blue-300 transition-colors">Reservas Inteligentes</h3>
+                    <p class="text-gray-400 text-sm leading-relaxed">Calendario interactivo con gestión de cupos por hora. Evita aglomeraciones y optimiza el flujo de alumnos diarios con un solo clic.</p>
+                </div>
+                
+                <!-- Card 2 -->
+                <div class="dark-glass-card p-8 rounded-[2rem] group relative overflow-hidden">
+                    <div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-cyan-500 to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></div>
+                    <div class="w-16 h-16 rounded-2xl bg-gradient-to-br from-cyan-500/20 to-cyan-600/5 flex items-center justify-center text-cyan-400 text-2xl mb-6 border border-cyan-500/20 group-hover:scale-110 transition-transform duration-500">
+                        <i class="fa-solid fa-heart-pulse"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-white mb-4 group-hover:text-cyan-300 transition-colors">Módulos de Salud</h3>
+                    <p class="text-gray-400 text-sm leading-relaxed">No solo entrenamiento. Integra fichas de alumnos, reservas nutricionales y seguimientos kinesiológicos en un único ecosistema.</p>
+                </div>
+                
+                <!-- Card 3 -->
+                <div class="dark-glass-card p-8 rounded-[2rem] group relative overflow-hidden">
+                    <div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-indigo-500 to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></div>
+                    <div class="w-16 h-16 rounded-2xl bg-gradient-to-br from-indigo-500/20 to-indigo-600/5 flex items-center justify-center text-indigo-400 text-2xl mb-6 border border-indigo-500/20 group-hover:scale-110 transition-transform duration-500">
+                        <i class="fa-solid fa-chart-line"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-white mb-4 group-hover:text-indigo-300 transition-colors">Métricas en Tiempo Real</h3>
+                    <p class="text-gray-400 text-sm leading-relaxed">Dashboard analítico con flujo de asistencia, promedios diarios y días de mayor actividad para una toma de decisiones informada.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Galería de Módulos (Conectados) -->
+        <section class="space-y-32 relative">
+            <!-- Línea conectora visual (Desktop) -->
+            <div class="hidden md:block absolute left-1/2 top-0 bottom-0 w-px bg-gradient-to-b from-transparent via-blue-500/20 to-transparent -translate-x-1/2"></div>
+
+            <!-- Calendario -->
+            <div class="flex flex-col md:flex-row-reverse items-center gap-12 lg:gap-20 relative">
+                <!-- Punto en la línea -->
+                <div class="hidden md:block absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-4 h-4 rounded-full bg-[#05080a] border-2 border-blue-500 shadow-[0_0_15px_rgba(59,130,246,0.5)] z-20"></div>
+                
+                <div class="md:w-1/2">
+                    <div class="inline-block px-3 py-1 rounded-lg bg-blue-500/10 text-blue-400 text-xs font-bold mb-4 border border-blue-500/20">Módulo 01</div>
+                    <h3 class="text-3xl font-bold text-white mb-6">Calendario Semanal Interactivo</h3>
+                    <p class="text-gray-400 text-lg leading-relaxed mb-8">
+                        Una interfaz clara donde los entrenadores pueden crear bloques, definir topes de alumnos por clase y agendar nuevos integrantes en segundos. El sistema gestiona los topes automáticamente.
+                    </p>
+                    <ul class="space-y-4 text-gray-300 bg-white/5 p-6 rounded-2xl border border-white/5">
+                        <li class="flex items-start">
+                            <i class="fa-solid fa-check text-blue-400 mt-1 mr-4 text-sm shadow-blue-500/50 drop-shadow-md"></i> 
+                            <span>Control estricto de cupos en tiempo real (Ej: 0/10).</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fa-solid fa-check text-blue-400 mt-1 mr-4 text-sm shadow-blue-500/50 drop-shadow-md"></i> 
+                            <span>Agendamiento rápido y edición dinámica de bloques.</span>
+                        </li>
+                    </ul>
+                </div>
+                <div class="md:w-1/2 relative group">
+                    <div class="absolute inset-0 bg-blue-500/10 blur-[50px] rounded-full group-hover:bg-blue-500/20 transition-all duration-700"></div>
+                    <div class="dark-glass-card p-3 rounded-[2rem] relative z-10 transition-transform duration-500 group-hover:scale-[1.02]">
+                        <img src="{% static 'core/img/calendario.png' %}" alt="Calendario Gym" class="rounded-2xl border border-white/5 w-full">
+                    </div>
+                </div>
+            </div>
+
+            <!-- Reportes -->
+            <div class="flex flex-col md:flex-row items-center gap-12 lg:gap-20 relative">
+                <!-- Punto en la línea -->
+                <div class="hidden md:block absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-4 h-4 rounded-full bg-[#05080a] border-2 border-cyan-500 shadow-[0_0_15px_rgba(6,182,212,0.5)] z-20"></div>
+
+                <div class="md:w-1/2 md:text-right">
+                    <div class="inline-block px-3 py-1 rounded-lg bg-cyan-500/10 text-cyan-400 text-xs font-bold mb-4 border border-cyan-500/20">Módulo 02</div>
+                    <h3 class="text-3xl font-bold text-white mb-6">Reporte Analítico de Flujo</h3>
+                    <p class="text-gray-400 text-lg leading-relaxed mb-8">
+                        Los datos valen oro. El módulo te entrega una visión clara de la asistencia mensual, el promedio de alumnos activos por día y desgloses diarios para identificar los horarios "peak".
+                    </p>
+                    <ul class="space-y-4 text-gray-300 bg-white/5 p-6 rounded-2xl border border-white/5 inline-block text-left w-full">
+                        <li class="flex items-start">
+                            <i class="fa-solid fa-chart-pie text-cyan-400 mt-1 mr-4 text-sm drop-shadow-md"></i> 
+                            <span>Visualización gráfica de datos estadísticos y tendencias.</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fa-solid fa-file-export text-cyan-400 mt-1 mr-4 text-sm drop-shadow-md"></i> 
+                            <span>Exportación directa e impresión de reportes gerenciales.</span>
+                        </li>
+                    </ul>
+                </div>
+                <div class="md:w-1/2 relative group">
+                    <div class="absolute inset-0 bg-cyan-500/10 blur-[50px] rounded-full group-hover:bg-cyan-500/20 transition-all duration-700"></div>
+                    <div class="dark-glass-card p-3 rounded-[2rem] relative z-10 transition-transform duration-500 group-hover:scale-[1.02]">
+                        <img src="{% static 'core/img/Reporte.png' %}" alt="Reportes Gym" class="rounded-2xl border border-white/5 w-full">
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- CTA Final -->
+        <section class="mt-32 relative">
+            <div class="dark-glass-card rounded-[3rem] p-12 md:p-16 text-center relative overflow-hidden border-t border-blue-500/30">
+                <div class="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/cubes.png')] opacity-10"></div>
+                <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-full bg-gradient-to-r from-blue-600/20 via-cyan-500/10 to-transparent blur-[80px] pointer-events-none"></div>
+                
+                <div class="relative z-10 max-w-2xl mx-auto">
+                    <h2 class="text-4xl md:text-5xl font-bold text-white mb-6">¿Listo para evolucionar tu gestión?</h2>
+                    <p class="text-gray-400 text-lg mb-10">Deja atrás las hojas de cálculo y los mensajes de WhatsApp desordenados. Digitaliza tu comunidad hoy mismo.</p>
+                    <a href="{% url 'contacto' %}" class="inline-flex items-center bg-white text-black font-extrabold py-4 px-10 rounded-2xl transition-all duration-300 hover:scale-105 hover:bg-gray-200 shadow-[0_0_20px_rgba(255,255,255,0.2)]">
+                        Solicitar una Demo <i class="fa-solid fa-arrow-right ml-3"></i>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+    </div>
+</main>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+    window.addEventListener('load', function() {
+        const loader = document.getElementById('page-loader');
+        loader.classList.add('opacity-0');
+        setTimeout(() => { loader.style.display = 'none'; }, 500);
+    });
+</script>
+{% endblock %}
