@@ -183,11 +183,8 @@
         </div>
     </footer>
 
-    <!-- SCRIPT GLOBAL PARA LOADER Y TRANSICIÓN -->
     <script>
         document.addEventListener('DOMContentLoaded', function() {
-            
-            // Función maestra para apagar el loader
             function hideLoader() {
                 const loader = document.getElementById('global-page-loader');
                 if (loader) {
@@ -198,17 +195,14 @@
                 }
             }
 
-            // 1. Desaparecer Loader al cargar la página normalmente
             window.addEventListener('load', hideLoader);
 
-            // 2. EL FIX: Apagar loader si el usuario regresa con la flecha "Atrás" (BFCache)
             window.addEventListener('pageshow', function(event) {
                 if (event.persisted) {
                     hideLoader();
                 }
             });
 
-            // 3. Transición de salida en los botones
             document.querySelectorAll('a').forEach(enlace => {
                 enlace.addEventListener('click', function(e) {
                     const href = this.getAttribute('href');

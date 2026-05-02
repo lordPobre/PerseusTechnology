@@ -1,184 +1,353 @@
 {% extends 'core/base.html' %}
 {% load static %}
 
-{% block title %}Marcación Digital | Perseus Technology{% endblock %}
+{% block title %}Perseus Enterprise | Marcación Digital | Perseus Technology{% endblock %}
 
-{% block body_class %}bg-white text-gray-900 antialiased selection:bg-blue-100 selection:text-blue-900{% endblock %}
+{% block body_class %}bg-gray-50 text-gray-900 antialiased selection:bg-blue-200 selection:text-blue-900{% endblock %}
 
 {% block extra_css %}
 <style>
-    .step-card { transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1); }
-    .step-card:hover { transform: translateY(-8px); }
-    .bg-grid-tech {
-        background-size: 40px 40px;
-        background-image: linear-gradient(to right, rgba(0, 0, 0, 0.03) 1px, transparent 1px), linear-gradient(to bottom, rgba(0, 0, 0, 0.03) 1px, transparent 1px);
-        mask-image: linear-gradient(to bottom, transparent, black 10%, black 90%, transparent);
-        -webkit-mask-image: linear-gradient(to bottom, transparent, black 10%, black 90%, transparent);
+    .light-glass-card {
+        background: rgba(255, 255, 255, 0.7);
+        backdrop-filter: blur(20px);
+        -webkit-backdrop-filter: blur(20px);
+        border: 1px solid rgba(255, 255, 255, 0.5);
+        box-shadow: 0 10px 40px -10px rgba(0,0,0,0.08);
+        transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    .light-glass-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 20px 40px -10px rgba(59, 130, 246, 0.15);
+        border-color: rgba(59, 130, 246, 0.3);
+    }
+
+    @keyframes float-phone {
+        0%, 100% { transform: translateY(0px) rotate(0deg); }
+        50% { transform: translateY(-15px) rotate(2deg); }
+    }
+    @keyframes pulse-ring {
+        0% { transform: scale(0.8); opacity: 0.5; }
+        100% { transform: scale(2); opacity: 0; }
+    }
+    .animate-float-phone { animation: float-phone 6s ease-in-out infinite; }
+    .animate-pulse-ring { animation: pulse-ring 3s cubic-bezier(0.215, 0.61, 0.355, 1) infinite; }
+
+    .bg-dot-pattern {
+        background-image: radial-gradient(rgba(59, 130, 246, 0.15) 1px, transparent 1px);
+        background-size: 24px 24px;
     }
 </style>
 {% endblock %}
 
 {% block content %}
-<header id="vanta-waves-bg" class="pt-48 pb-24 px-6 relative overflow-hidden">
-    <div class="max-w-5xl mx-auto text-center relative z-10">
-        <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-blue-50/90 text-blue-700 text-sm font-bold uppercase tracking-widest mb-8 border border-blue-200 backdrop-blur-sm">
-            <i class="fa-solid fa-shield-halved"></i> 100% Cumplimiento DT
+
+<header id="vanta-waves-bg" class="pt-40 pb-24 px-6 relative overflow-hidden bg-white">
+    <div class="absolute bottom-0 left-0 w-full h-32 bg-gradient-to-t from-gray-50 to-transparent z-10"></div>
+    <div class="max-w-[1200px] mx-auto relative z-20 flex flex-col lg:flex-row items-center gap-12">
+        <div class="lg:w-1/2 text-center lg:text-left">
+            <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-blue-50 text-blue-700 text-xs font-bold uppercase tracking-widest mb-8 border border-blue-100 shadow-sm">
+                <i class="fa-solid fa-check-double"></i> Certificado Dirección del Trabajo
+            </div>
+            <h1 class="text-5xl md:text-7xl font-extrabold tracking-tight mb-6 leading-[1.1] text-gray-900">
+                Gestión de asistencia <br>
+                <span class="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-cyan-500">sin fricciones.</span>
+            </h1>
+            <p class="text-lg md:text-xl text-gray-600 font-medium mb-10 leading-relaxed max-w-xl mx-auto lg:mx-0">
+                Descubre <strong>Perseus Enterprise</strong>. El control de asistencia biométrico con geolocalización diseñado para la fuerza laboral moderna y las exigencias legales actuales.
+            </p>
+            <div class="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
+                <a href="#app-showcase" class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-4 px-8 rounded-full transition-all duration-300 shadow-[0_10px_20px_rgba(37,99,235,0.2)] hover:shadow-[0_15px_25px_rgba(37,99,235,0.3)] hover:-translate-y-1">
+                    Ver la Plataforma
+                </a>
+            </div>
         </div>
-        <h1 class="text-6xl md:text-8xl font-extrabold tracking-tight mb-8 leading-[1.1] text-gray-900">
-            Gestión de asistencia <br>
-            <span class="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-indigo-600">sin fricciones.</span>
-        </h1>
-        <p class="text-xl md:text-2xl text-gray-600 font-medium max-w-3xl mx-auto leading-relaxed bg-white/30 rounded-3xl p-4 backdrop-blur-sm">
-            Control de asistencia biométrico con geolocalización, diseñado para la fuerza laboral moderna y las exigencias legales actuales.
-        </p>
+
+        <div class="lg:w-1/2 relative h-[400px] w-full flex items-center justify-center animate-float-phone">
+            <div class="absolute w-72 h-72 bg-blue-400/20 rounded-full blur-3xl"></div>
+            <div class="absolute w-64 h-64 border border-blue-200 rounded-full animate-[spin_10s_linear_infinite]"></div>
+            <div class="relative bg-white/90 backdrop-blur-md p-6 rounded-[2.5rem] border border-white shadow-2xl w-72 z-10 flex flex-col items-center">
+                <div class="w-20 h-20 bg-green-100 text-green-500 rounded-full flex items-center justify-center text-4xl mb-4 shadow-inner relative">
+                    <div class="absolute inset-0 rounded-full border-2 border-green-400 animate-pulse-ring"></div>
+                    <i class="fa-solid fa-fingerprint"></i>
+                </div>
+                <h3 class="font-bold text-gray-900 text-xl mb-1">Carlos López</h3>
+                <p class="text-gray-400 text-sm mb-6">Desarrollador Software</p>
+                
+                <div class="w-full bg-gray-50 rounded-2xl p-4 border border-gray-100 mb-4">
+                    <div class="flex justify-between items-center mb-2">
+                        <span class="text-xs font-bold text-gray-400 uppercase">Entrada</span>
+                        <span class="text-sm font-bold text-gray-900">08:56 AM</span>
+                    </div>
+                    <div class="flex items-center gap-2 text-xs text-green-600 font-medium">
+                        <i class="fa-solid fa-location-dot"></i> Oficina Central
+                    </div>
+                </div>
+                <div class="w-full bg-blue-600 text-white text-center py-3 rounded-xl font-bold text-sm shadow-md">
+                    Marcación Exitosa
+                </div>
+            </div>
+            
+            <div class="absolute -right-4 bottom-16 bg-white p-4 rounded-2xl shadow-xl border border-gray-100 flex items-center gap-3 z-20">
+                <div class="w-10 h-10 bg-cyan-100 text-cyan-600 rounded-full flex items-center justify-center">
+                    <i class="fa-solid fa-building-user"></i>
+                </div>
+                <div>
+                    <p class="text-xs text-gray-500 font-bold uppercase">Turno</p>
+                    <p class="text-sm text-gray-900 font-bold">Activo (8 hrs)</p>
+                </div>
+            </div>
+        </div>
     </div>
 </header>
 
-<section id="vanta-rings-bg" class="py-32 px-6 bg-[#0a0f1a] relative z-20 overflow-hidden border-t border-gray-800">
-    <div class="absolute inset-0 bg-[#0a0f1a] opacity-90 z-0"></div>
-    <div class="max-w-[1200px] mx-auto relative z-10">
-        <div class="text-center mb-24">
-            <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-500/10 border border-blue-500/20 text-blue-400 text-xs font-mono tracking-widest uppercase mb-6 backdrop-blur-sm">
-                <span class="w-2 h-2 rounded-full bg-blue-500 animate-pulse"></span> Sistema Encriptado
-            </div>
-            <h2 class="text-4xl md:text-5xl font-extrabold mb-6 text-white tracking-tight">
-                Arquitectura del <span class="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-cyan-300">Flujo de Datos</span>
+<section id="app-showcase" class="py-32 px-6 relative overflow-hidden border-y border-gray-200">
+    <div id="vanta-topology-bg" class="absolute inset-0 z-0 opacity-40"></div>
+    <div class="absolute top-0 left-0 w-full h-32 bg-gradient-to-b from-white to-transparent z-10"></div>
+    <div class="absolute bottom-0 left-0 w-full h-32 bg-gradient-to-t from-gray-50 to-transparent z-10"></div>
+
+    <div class="max-w-[1200px] mx-auto relative z-20">
+        
+        <div class="text-center mb-24 scroll-reveal opacity-0 translate-y-16 transition-all duration-1000 ease-out">
+            <h2 class="text-4xl md:text-5xl font-extrabold mb-6 text-gray-900 tracking-tight">
+                Diseño que impulsa la <span class="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-cyan-500">productividad.</span>
             </h2>
-            <p class="text-blue-100/60 text-xl max-w-2xl mx-auto font-light leading-relaxed bg-black/30 rounded-full p-4 backdrop-blur-sm">
-                Seguridad de extremo a extremo. Desde la captura en el hardware hasta el almacenamiento en la nube, garantizando la inalterabilidad exigida por la ley.
+            <p class="text-gray-600 text-lg max-w-2xl mx-auto leading-relaxed">
+                Navega por Perseus Control. Una interfaz clara, moderna y sin manuales complejos, donde cada colaborador tiene el control de su tiempo.
+            </p>
+        </div>
+
+        <div class="space-y-32">
+            <div class="flex flex-col lg:flex-row items-center gap-12 lg:gap-20 scroll-reveal opacity-0 translate-y-24 transition-all duration-1000">
+                <div class="lg:w-4/12 relative group mx-auto">
+                    <div class="absolute inset-0 bg-pink-500/20 blur-3xl rounded-full transform group-hover:scale-110 transition-transform duration-500"></div>
+                    <div class="relative w-full max-w-[320px] rounded-[3rem] shadow-2xl overflow-hidden group-hover:-translate-y-2 transition-transform duration-500 border-[6px] border-white">
+                        <img src="{% static 'core/img/login-marcacion.png' %}" alt="Login Perseus Control" class="w-full h-auto object-cover">
+                    </div>
+                </div>
+                <div class="lg:w-8/12 light-glass-card p-10 rounded-[2.5rem]">
+                    <div class="w-14 h-14 rounded-2xl bg-pink-50 text-pink-500 flex items-center justify-center text-2xl mb-6 shadow-sm border border-pink-100"><i class="fa-solid fa-right-to-bracket"></i></div>
+                    <h3 class="text-3xl font-bold text-gray-900 mb-4">Acceso Seguro y Universal</h3>
+                    <p class="text-gray-600 text-lg leading-relaxed mb-6">El portal de entrada a la plataforma. Diseñado con una interfaz limpia y corporativa (Mobile-First) para que los colaboradores ingresen fácilmente desde cualquier dispositivo usando sus credenciales únicas.</p>
+                    <ul class="space-y-2 font-medium text-gray-700">
+                        <li class="flex items-center gap-2"><i class="fa-solid fa-check text-pink-500"></i> Autenticación cifrada RUT / Contraseña</li>
+                        <li class="flex items-center gap-2"><i class="fa-solid fa-check text-pink-500"></i> Recuperación automatizada con Recursos Humanos</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="flex flex-col-reverse lg:flex-row items-center gap-12 lg:gap-20 scroll-reveal opacity-0 translate-y-24 transition-all duration-1000">
+                <div class="lg:w-5/12 light-glass-card p-10 rounded-[2.5rem]">
+                    <div class="w-14 h-14 rounded-2xl bg-blue-50 text-blue-600 flex items-center justify-center text-2xl mb-6 shadow-sm border border-blue-100"><i class="fa-solid fa-table-columns"></i></div>
+                    <h3 class="text-3xl font-bold text-gray-900 mb-4">Panel Central de Operaciones</h3>
+                    <p class="text-gray-600 text-lg leading-relaxed mb-6">El corazón del sistema. Un entorno unificado donde el trabajador puede ver el feed de su cámara en tiempo real para la validación de identidad (Liveness) e interactuar con los botones de acción rápida de su turno.</p>
+                    <ul class="space-y-2 font-medium text-gray-700">
+                        <li class="flex items-center gap-2"><i class="fa-solid fa-check text-blue-500"></i> Status en vivo (Jefe TI, GPS Activo)</li>
+                        <li class="flex items-center gap-2"><i class="fa-solid fa-check text-blue-500"></i> Historial de marcaciones del día con ubicación</li>
+                        <li class="flex items-center gap-2"><i class="fa-solid fa-check text-blue-500"></i> Seguimiento emocional y productivo de la semana</li>
+                    </ul>
+                </div>
+                <div class="lg:w-7/12 relative group">
+                    <div class="absolute inset-0 bg-blue-500/10 blur-3xl rounded-full transform group-hover:scale-110 transition-transform duration-500"></div>
+                    <img src="{% static 'core/img/dashboard-marcacion.png' %}" alt="Dashboard Perseus" class="relative rounded-[2rem] shadow-[0_20px_50px_rgba(0,0,0,0.1)] border border-gray-100 group-hover:-translate-y-2 transition-transform duration-500 w-full">
+                </div>
+            </div>
+
+            <div class="flex flex-col lg:flex-row items-center gap-12 lg:gap-20 scroll-reveal opacity-0 translate-y-24 transition-all duration-1000">
+                <div class="lg:w-7/12 relative group">
+                    <div class="absolute inset-0 bg-amber-500/10 blur-3xl rounded-full transform group-hover:scale-110 transition-transform duration-500"></div>
+                    <img src="{% static 'core/img/solicitud-problema.png' %}" alt="Modal Excepciones" class="relative rounded-[2rem] shadow-[0_20px_50px_rgba(0,0,0,0.1)] border border-gray-100 group-hover:-translate-y-2 transition-transform duration-500 w-full">
+                </div>
+                <div class="lg:w-5/12 light-glass-card p-10 rounded-[2.5rem]">
+                    <div class="w-14 h-14 rounded-2xl bg-amber-50 text-amber-500 flex items-center justify-center text-2xl mb-6 shadow-sm border border-amber-100"><i class="fa-solid fa-code-pull-request"></i></div>
+                    <h3 class="text-3xl font-bold text-gray-900 mb-4">Gestión de Excepciones</h3>
+                    <p class="text-gray-600 text-lg leading-relaxed mb-6">Sabemos que los olvidos ocurren. Si un trabajador olvida marcar o falla su hardware, el sistema ofrece un modal interactivo para enviar una solicitud manual. Esto alerta a RRHH para su revisión y aprobación.</p>
+                    <ul class="space-y-2 font-medium text-gray-700">
+                        <li class="flex items-center gap-2"><i class="fa-solid fa-check text-amber-500"></i> Tipificación del problema (Olvido de entrada, Salida)</li>
+                        <li class="flex items-center gap-2"><i class="fa-solid fa-check text-amber-500"></i> Justificación textual para auditoría legal</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="flex flex-col-reverse lg:flex-row items-center gap-12 lg:gap-20 scroll-reveal opacity-0 translate-y-24 transition-all duration-1000">
+                <div class="lg:w-5/12 light-glass-card p-10 rounded-[2.5rem]">
+                    <div class="w-14 h-14 rounded-2xl bg-cyan-50 text-cyan-600 flex items-center justify-center text-2xl mb-6 shadow-sm border border-cyan-100"><i class="fa-solid fa-umbrella-beach"></i></div>
+                    <h3 class="text-3xl font-bold text-gray-900 mb-4">Autogestión de Días Libres</h3>
+                    <p class="text-gray-600 text-lg leading-relaxed mb-6">Empodera a tu equipo eliminando el papeleo. Los colaboradores pueden revisar su saldo disponible de días hábiles y enviar formularios de solicitud directamente a su supervisor.</p>
+                    <ul class="space-y-2 font-medium text-gray-700">
+                        <li class="flex items-center gap-2"><i class="fa-solid fa-check text-cyan-500"></i> Calculadora visual de saldo disponible</li>
+                        <li class="flex items-center gap-2"><i class="fa-solid fa-check text-cyan-500"></i> Formulario de fechas con selector de jornada</li>
+                        <li class="flex items-center gap-2"><i class="fa-solid fa-check text-cyan-500"></i> Historial de solicitudes (Aprobadas / Rechazadas)</li>
+                    </ul>
+                </div>
+                <div class="lg:w-7/12 relative group mt-10 lg:mt-0">
+                    <div class="absolute inset-0 bg-cyan-500/10 blur-3xl rounded-full transform group-hover:scale-110 transition-transform duration-500"></div>
+                    
+                    <!-- Imagen Base (Dashboard Vacaciones) -->
+                    <img src="{% static 'core/img/solicitud-vacaciones.png' %}" alt="Saldo Vacaciones" class="relative rounded-[2rem] shadow-[0_20px_50px_rgba(0,0,0,0.1)] border border-gray-100 w-full transition-transform duration-500">
+                    
+                    <!-- Imagen Superpuesta (Formulario Solicitar Día) para efecto 3D -->
+                    <img src="{% static 'core/img/solicitar-dia.png' %}" alt="Formulario Solicitar Día" class="absolute -bottom-12 -left-8 md:-bottom-16 md:-left-16 w-2/3 md:w-3/5 rounded-[2rem] shadow-[0_30px_60px_rgba(0,0,0,0.2)] border border-gray-100 group-hover:-translate-y-4 group-hover:-translate-x-2 transition-transform duration-500">
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+<section id="arquitectura" class="py-24 px-6 bg-gray-50 relative overflow-hidden">
+    <div class="absolute inset-0 bg-dot-pattern opacity-50 z-0"></div>
+    <div class="max-w-[1200px] mx-auto relative z-10">
+        <div class="text-center mb-20 scroll-reveal opacity-0 translate-y-16 transition-all duration-1000 ease-out">
+            <h2 class="text-3xl md:text-5xl font-extrabold mb-6 text-gray-900 tracking-tight">
+                Arquitectura del <span class="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-cyan-500">Flujo de Datos</span>
+            </h2>
+            <p class="text-gray-600 text-lg max-w-2xl mx-auto leading-relaxed">
+                Seguridad de extremo a extremo. Desde la captura en el dispositivo móvil hasta el almacenamiento en la nube, garantizando la inalterabilidad exigida por la ley.
             </p>
         </div>
 
         <div class="grid grid-cols-1 md:grid-cols-4 gap-6 relative">
-            <div class="hidden md:block absolute top-12 left-10 right-10 h-[1px] bg-gradient-to-r from-transparent via-blue-500/50 to-transparent z-0"></div>
+            <div class="hidden md:block absolute top-16 left-12 right-12 h-[2px] bg-gradient-to-r from-blue-100 via-blue-300 to-blue-100 z-0"></div>
 
-            <div class="group relative bg-white/[0.02] backdrop-blur-xl border border-white/10 p-8 rounded-[2rem] hover:bg-white/[0.04] hover:border-blue-500/40 transition-all duration-500 hover:-translate-y-2 overflow-hidden flex flex-col h-full">
-                <div class="relative w-14 h-14 rounded-full bg-[#0a0f1a] border border-blue-500/30 flex items-center justify-center text-blue-400 font-mono text-xl mb-8 z-10 group-hover:shadow-[0_0_25px_rgba(59,130,246,0.6)] group-hover:border-blue-400 transition-all duration-500">01</div>
-                <h3 class="text-xl font-bold text-white mb-3 group-hover:text-blue-300 transition-colors">Captura Biométrica</h3>
-                <p class="text-gray-400 text-sm leading-relaxed flex-1">Registro mediante App o Terminal. El rostro o huella se transforma en un hash criptográfico, imposibilitando la ingeniería inversa.</p>
+            <div class="scroll-reveal opacity-0 translate-y-24 transition-all duration-1000 delay-100 light-glass-card p-8 rounded-[2rem] flex flex-col h-full relative z-10 group">
+                <div class="w-16 h-16 rounded-2xl bg-white shadow-md border border-gray-100 flex items-center justify-center text-blue-600 text-2xl mb-6 group-hover:scale-110 transition-transform duration-300">
+                    <i class="fa-solid fa-fingerprint"></i>
+                </div>
+                <h3 class="text-lg font-bold text-gray-900 mb-3">1. Captura Biométrica</h3>
+                <p class="text-gray-500 text-sm leading-relaxed flex-1">Registro mediante App. El rostro se transforma en un hash criptográfico, imposibilitando la ingeniería inversa.</p>
             </div>
 
-            <div class="group relative bg-white/[0.02] backdrop-blur-xl border border-white/10 p-8 rounded-[2rem] hover:bg-white/[0.04] hover:border-blue-500/40 transition-all duration-500 hover:-translate-y-2 overflow-hidden flex flex-col h-full">
-                <div class="relative w-14 h-14 rounded-full bg-[#0a0f1a] border border-blue-500/30 flex items-center justify-center text-blue-400 font-mono text-xl mb-8 z-10 group-hover:shadow-[0_0_25px_rgba(59,130,246,0.6)] group-hover:border-blue-400 transition-all duration-500">02</div>
-                <h3 class="text-xl font-bold text-white mb-3 group-hover:text-blue-300 transition-colors">Validación GPS</h3>
-                <p class="text-gray-400 text-sm leading-relaxed flex-1">El motor de reglas cruza las coordenadas del dispositivo con las geocercas autorizadas para el perfil del trabajador en tiempo real.</p>
+            <div class="scroll-reveal opacity-0 translate-y-24 transition-all duration-1000 delay-200 light-glass-card p-8 rounded-[2rem] flex flex-col h-full relative z-10 group">
+                <div class="w-16 h-16 rounded-2xl bg-white shadow-md border border-gray-100 flex items-center justify-center text-emerald-500 text-2xl mb-6 group-hover:scale-110 transition-transform duration-300">
+                    <i class="fa-solid fa-location-dot"></i>
+                </div>
+                <h3 class="text-lg font-bold text-gray-900 mb-3">2. Validación GPS</h3>
+                <p class="text-gray-500 text-sm leading-relaxed flex-1">El motor de reglas cruza las coordenadas del dispositivo con las geocercas autorizadas en tiempo real.</p>
             </div>
 
-            <div class="group relative bg-white/[0.02] backdrop-blur-xl border border-white/10 p-8 rounded-[2rem] hover:bg-white/[0.04] hover:border-blue-500/40 transition-all duration-500 hover:-translate-y-2 overflow-hidden flex flex-col h-full">
-                <div class="relative w-14 h-14 rounded-full bg-[#0a0f1a] border border-blue-500/30 flex items-center justify-center text-blue-400 font-mono text-xl mb-8 z-10 group-hover:shadow-[0_0_25px_rgba(59,130,246,0.6)] group-hover:border-blue-400 transition-all duration-500">03</div>
-                <h3 class="text-xl font-bold text-white mb-3 group-hover:text-blue-300 transition-colors">Cifrado en Tránsito</h3>
-                <p class="text-gray-400 text-sm leading-relaxed flex-1">La data viaja a nuestros servidores a través de protocolos TLS 1.3, emitiendo automáticamente el comprobante legal por correo.</p>
+            <div class="scroll-reveal opacity-0 translate-y-24 transition-all duration-1000 delay-300 light-glass-card p-8 rounded-[2rem] flex flex-col h-full relative z-10 group">
+                <div class="w-16 h-16 rounded-2xl bg-white shadow-md border border-gray-100 flex items-center justify-center text-cyan-500 text-2xl mb-6 group-hover:scale-110 transition-transform duration-300">
+                    <i class="fa-solid fa-shield-halved"></i>
+                </div>
+                <h3 class="text-lg font-bold text-gray-900 mb-3">3. Cifrado en Tránsito</h3>
+                <p class="text-gray-500 text-sm leading-relaxed flex-1">La data viaja a nuestros servidores a través de protocolos TLS 1.3, emitiendo el comprobante legal por correo.</p>
             </div>
 
-            <div class="group relative bg-white/[0.02] backdrop-blur-xl border border-white/10 p-8 rounded-[2rem] hover:bg-white/[0.04] hover:border-blue-500/40 transition-all duration-500 hover:-translate-y-2 overflow-hidden flex flex-col h-full">
-                <div class="relative w-14 h-14 rounded-full bg-[#0a0f1a] border border-blue-500/30 flex items-center justify-center text-blue-400 font-mono text-xl mb-8 z-10 group-hover:shadow-[0_0_25px_rgba(59,130,246,0.6)] group-hover:border-blue-400 transition-all duration-500">04</div>
-                <h3 class="text-xl font-bold text-white mb-3 group-hover:text-blue-300 transition-colors">Auditoría DT</h3>
-                <p class="text-gray-400 text-sm leading-relaxed flex-1">Consolidación en bases de datos inalterables. Listos para ser exportados en los formatos exactos que exige la Dirección del Trabajo.</p>
+            <div class="scroll-reveal opacity-0 translate-y-24 transition-all duration-1000 delay-400 light-glass-card p-8 rounded-[2rem] flex flex-col h-full relative z-10 group">
+                <div class="w-16 h-16 rounded-2xl bg-white shadow-md border border-gray-100 flex items-center justify-center text-indigo-600 text-2xl mb-6 group-hover:scale-110 transition-transform duration-300">
+                    <i class="fa-solid fa-file-signature"></i>
+                </div>
+                <h3 class="text-lg font-bold text-gray-900 mb-3">4. Auditoría DT</h3>
+                <p class="text-gray-500 text-sm leading-relaxed flex-1">Consolidación en bases de datos inalterables. Listos para ser exportados en los formatos exactos exigidos.</p>
             </div>
         </div>
     </div>
 </section>
 
-<section class="py-24 px-6 bg-gray-50">
+<section class="py-24 px-6 bg-white relative">
     <div class="max-w-[1200px] mx-auto">
         <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-            <div class="md:col-span-2 bg-white p-12 rounded-[3rem] border border-gray-100 flex flex-col md:flex-row gap-10 items-center">
-                <div class="text-center md:text-left">
-                    <h3 class="text-3xl font-bold mb-4">Reconocimiento Facial IA</h3>
-                    <p class="text-gray-500 text-lg mb-6">Nuestros algoritmos detectan vida y previenen suplantaciones mediante fotografías o videos, asegurando que quien marca es quien dice ser.</p>
+            <div class="md:col-span-2 scroll-reveal opacity-0 translate-y-16 transition-all duration-1000 bg-gray-50 p-10 lg:p-12 rounded-[3rem] border border-gray-100 flex flex-col md:flex-row gap-10 items-center overflow-hidden relative group hover:shadow-xl hover:border-blue-200 transition-all">
+                <div class="absolute right-0 top-0 w-64 h-64 bg-blue-100/50 blur-3xl rounded-full pointer-events-none"></div>
+                <div class="text-center md:text-left relative z-10 flex-1">
+                    <div class="inline-flex items-center justify-center w-12 h-12 rounded-xl bg-blue-600 text-white mb-6 shadow-lg">
+                        <i class="fa-solid fa-face-viewfinder text-2xl"></i>
+                    </div>
+                    <h3 class="text-3xl font-bold mb-4 text-gray-900">Reconocimiento Facial IA</h3>
+                    <p class="text-gray-600 text-lg mb-6 leading-relaxed">Nuestros algoritmos detectan vida (Liveness Detection) y previenen suplantaciones mediante fotografías o videos, asegurando que quien marca es quien dice ser.</p>
                     <ul class="space-y-3">
-                        <li class="flex items-center gap-3 text-sm font-semibold text-gray-700"><i class="fa-solid fa-check text-blue-500"></i> Velocidad de detección < 0.5s</li>
-                        <li class="flex items-center gap-3 text-sm font-semibold text-gray-700"><i class="fa-solid fa-check text-blue-500"></i> Funciona en condiciones de poca luz</li>
+                        <li class="flex items-center gap-3 text-sm font-bold text-gray-700 bg-white px-4 py-2 rounded-lg border border-gray-100 w-max"><i class="fa-solid fa-bolt text-yellow-500"></i> Velocidad de detección < 0.5s</li>
+                        <li class="flex items-center gap-3 text-sm font-bold text-gray-700 bg-white px-4 py-2 rounded-lg border border-gray-100 w-max"><i class="fa-solid fa-moon text-indigo-500"></i> Funciona en poca luz</li>
                     </ul>
-                </div>
-                <div class="w-full md:w-1/3 bg-blue-50 rounded-[2rem] aspect-square flex items-center justify-center">
-                    <i class="fa-solid fa-face-viewfinder text-8xl text-blue-200"></i>
                 </div>
             </div>
 
-            <div class="bg-blue-600 text-white p-12 rounded-[3rem] flex flex-col justify-between">
-                <div>
-                    <div class="w-14 h-14 bg-white/10 rounded-2xl flex items-center justify-center text-2xl mb-8"><i class="fa-solid fa-map-location-dot"></i></div>
-                    <h3 class="text-2xl font-bold mb-4">Geocercas</h3>
-                    <p class="text-blue-100 text-sm leading-relaxed">Define perímetros permitidos para la marcación. Si el trabajador está fuera del rango, el sistema alerta al supervisor.</p>
+            <div class="scroll-reveal opacity-0 translate-y-16 transition-all duration-1000 delay-200 bg-gradient-to-br from-blue-600 to-indigo-700 text-white p-10 lg:p-12 rounded-[3rem] flex flex-col justify-between relative overflow-hidden group hover:shadow-2xl transition-all">
+                <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full aspect-square border border-white/20 rounded-full animate-ping opacity-20"></div>
+                <div class="relative z-10">
+                    <div class="w-14 h-14 bg-white/10 backdrop-blur-md rounded-2xl border border-white/20 flex items-center justify-center text-2xl mb-8"><i class="fa-solid fa-map-location-dot"></i></div>
+                    <h3 class="text-2xl font-bold mb-4">Control de Geocercas</h3>
+                    <p class="text-blue-100 text-sm leading-relaxed mb-6">Define perímetros permitidos para la marcación. Si el trabajador está fuera del rango, el sistema bloquea el registro o alerta al supervisor.</p>
                 </div>
-                <div class="mt-8 pt-8 border-t border-white/10">
-                    <span class="text-3xl font-bold tracking-tighter">Precisión GPS <br> de grado militar</span>
+                <div class="mt-auto pt-6 border-t border-white/20 relative z-10">
+                    <span class="text-3xl font-bold tracking-tighter text-white">Precisión GPS <br> <span class="text-cyan-300">Grado Militar</span></span>
                 </div>
             </div>
         </div>
     </div>
 </section>
 
-<section class="py-24 px-6 bg-white text-center">
-    <div class="max-w-3xl mx-auto">
-        <h2 class="text-4xl font-bold mb-8">¿Listo para modernizar tus RRHH?</h2>
+<section class="py-24 px-6 bg-gray-50 text-center border-t border-gray-200">
+    <div class="max-w-3xl mx-auto scroll-reveal opacity-0 translate-y-16 transition-all duration-1000">
+        <h2 class="text-4xl font-extrabold mb-6 text-gray-900">¿Listo para modernizar tus RRHH?</h2>
+        <p class="text-lg text-gray-600 mb-10">Implementa Perseus Enterprise hoy y despídete de los errores manuales y las multas normativas.</p>
         <div class="flex flex-col sm:flex-row gap-4 justify-center">
-            <a href="{% url 'precios' %}" class="bg-black text-white px-10 py-4 rounded-full font-bold hover:bg-gray-800 transition shadow-xl">Ver Planes</a>
-            <a href="{% url 'home' %}#contacto" class="bg-gray-100 text-gray-900 px-10 py-4 rounded-full font-bold hover:bg-gray-200 transition">Agendar Demo</a>
+            <a href="{% url 'precios' %}" class="bg-blue-600 text-white px-10 py-4 rounded-full font-bold hover:bg-blue-700 transition shadow-lg hover:shadow-xl hover:-translate-y-1">Ver Planes</a>
+            <a href="{% url 'contacto' %}" class="bg-white text-gray-900 border border-gray-200 px-10 py-4 rounded-full font-bold hover:bg-gray-50 transition shadow-sm hover:shadow-md hover:-translate-y-1">Agendar Demo</a>
         </div>
     </div>
 </section>
 {% endblock %}
 
 {% block extra_js %}
-<script>
-    window.addEventListener('load', function() {
-        const loader = document.getElementById('page-loader');
-        loader.classList.add('opacity-0');
-        setTimeout(() => { loader.classList.add('pointer-events-none'); }, 300);
-    });
-</script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r134/three.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/vanta@latest/dist/vanta.waves.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/vanta@latest/dist/vanta.rings.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.1.9/p5.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/vanta@latest/dist/vanta.topology.min.js"></script>
+
 <script>
     document.addEventListener('DOMContentLoaded', function() {
-        VANTA.WAVES({
-            el: "#vanta-waves-bg",
-            mouseControls: true,
-            touchControls: true,
-            gyroControls: false,
-            minHeight: 200.00,
-            minWidth: 200.00,
-            scale: 1.00,
-            scaleMobile: 1.00,
-            color: 0xf8fafc,       
-            shininess: 30.00,      
-            waveHeight: 15.00,     
-            waveSpeed: 0.80,       
-            zoom: 0.90             
-        });
-    });
+        if (document.getElementById('vanta-waves-bg')) {
+            VANTA.WAVES({
+                el: "#vanta-waves-bg",
+                mouseControls: true,
+                touchControls: true,
+                gyroControls: false,
+                minHeight: 200.00,
+                minWidth: 200.00,
+                scale: 1.00,
+                scaleMobile: 1.00,
+                color: 0xf1f5f9,       
+                shininess: 30.00,      
+                waveHeight: 15.00,     
+                waveSpeed: 0.80,       
+                zoom: 0.90             
+            });
+        }
 
-    document.addEventListener('DOMContentLoaded', function() {
-        VANTA.RINGS({
-            el: "#vanta-rings-bg", 
-            mouseControls: true,
-            touchControls: true,
-            gyroControls: false,
-            minHeight: 200.00,
-            minWidth: 200.00,
-            scale: 1.00,
-            scaleMobile: 1.00,
-            color: 0x3b82f6,      
-            backgroundColor: 0x0a0f1a, 
-            backgroundAlpha: 1.00, 
-            waveHeight: 20.00,     
-            waveSpeed: 1.50,       
-            zoom: 0.90             
-        });
-    });
+        if (document.getElementById('vanta-topology-bg')) {
+            VANTA.TOPOLOGY({
+                el: "#vanta-topology-bg",
+                mouseControls: true,
+                touchControls: true,
+                gyroControls: false,
+                minHeight: 200.00,
+                minWidth: 200.00,
+                scale: 1.00,
+                scaleMobile: 1.00,
+                color: 0x93c5fd,        
+                backgroundColor: 0xf8fafc 
+            });
+        }
 
-    document.querySelectorAll('a').forEach(enlace => {
-        enlace.addEventListener('click', function(e) {
-            const href = this.getAttribute('href');
-            if (href && !href.startsWith('#') && !href.startsWith('javascript') && this.target !== '_blank' && !e.ctrlKey && !e.metaKey) {
-                e.preventDefault();
-                const loader = document.getElementById('page-loader');
-                loader.classList.remove('opacity-0', 'pointer-events-none');
-                setTimeout(() => { window.location.href = href; }, 300);
-            }
+        const observerOptions = {
+            root: null,
+            rootMargin: '0px',
+            threshold: 0.15
+        };
+
+        const observer = new IntersectionObserver((entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.remove('opacity-0', 'translate-y-16', 'translate-y-24');
+                    entry.target.classList.add('opacity-100', 'translate-y-0');
+                    observer.unobserve(entry.target); 
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.scroll-reveal').forEach((el) => {
+            observer.observe(el);
         });
     });
 </script>

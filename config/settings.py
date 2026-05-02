@@ -4,7 +4,6 @@ from pathlib import Path
 import dj_database_url
 from dotenv import load_dotenv
 
-# Carga las variables del archivo .env
 load_dotenv()
 
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -92,9 +91,9 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-LANGUAGE_CODE = 'en-us'
+LANGUAGE_CODE = 'es-cl'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'America/Santiago'
 
 USE_I18N = True
 

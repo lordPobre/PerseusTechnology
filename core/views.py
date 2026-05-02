@@ -8,12 +8,9 @@ from django.contrib import messages
 
 def home(request):
     if request.method == 'POST':
-        # Capturamos los datos del formulario (coincidiendo con los names en tu HTML)
         nombre = request.POST.get('nombre')
         email_cliente = request.POST.get('email')
         mensaje_cliente = request.POST.get('mensaje')
-
-        # Estructuramos el correo que recibirás tú
         asunto = f"🚀 Nueva solicitud de propuesta: {nombre}"
         cuerpo_mensaje = f"""
         Has recibido una nueva solicitud desde la web de Perseus Technology:
@@ -26,15 +23,14 @@ def home(request):
         """
         
         try:
-            # Enviamos el correo
             send_mail(
                 asunto,
                 cuerpo_mensaje,
-                settings.EMAIL_HOST_USER, # Remitente (tu correo de configuración)
-                [settings.EMAIL_HOST_USER], # Destinatario (donde quieres recibirlo)
+                settings.EMAIL_HOST_USER, 
+                [settings.EMAIL_HOST_USER], 
                 fail_silently=False,
             )
-            # Agregamos un mensaje de éxito para mostrar en el frontend
+            
             messages.success(request, '¡Tu solicitud ha sido enviada con éxito! Te contactaremos a la brevedad.')
         except Exception as e:
             messages.error(request, 'Hubo un error al enviar el mensaje. Por favor, inténtalo de nuevo.')
@@ -77,10 +73,7 @@ def pagina_blog(request):
     return render(request, 'core/blog.html', context)
 
 def post_detail(request, slug):
-    # Buscamos el post por su slug amigable
     post = get_object_or_404(Post, slug=slug)
-    
-    # Podemos enviar un par de posts recientes para sugerir lecturas al final
     posts_recientes = Post.objects.exclude(id=post.id)[:2]
     
     context = {
@@ -99,10 +92,9 @@ def contacto(request):
     if request.method == 'POST':
         nombre = request.POST.get('nombre')
         email = request.POST.get('email')
-        asunto = request.POST.get('asunto') # Capturamos el selector del nuevo diseño
+        asunto = request.POST.get('asunto') 
         mensaje = request.POST.get('mensaje')
 
-        # Formateamos el mensaje que leerás en tu bandeja de entrada
         contenido = f"Nuevo prospecto desde Perseus Technology:\n\n" \
                     f"Nombre: {nombre}\n" \
                     f"Email: {email}\n" \
@@ -110,25 +102,21 @@ def contacto(request):
                     f"Mensaje:\n{mensaje}"
 
         try:
-            # Enviar el correo usando las credenciales del .env
             send_mail(
                 subject=f"Nuevo contacto Web - {nombre}",
                 message=contenido,
-                from_email=settings.EMAIL_HOST_USER, # Usa tu correo configurado en settings
-                recipient_list=['carlos.esteban.l.f@gmail.com'], # Tu bandeja de entrada real
+                from_email=settings.EMAIL_HOST_USER, 
+                recipient_list=['carlos.esteban.l.f@gmail.com'], 
                 fail_silently=False,
             )
-            # Mensaje de éxito para el usuario
             messages.success(request, '¡Gracias por escribirnos! Te contactaremos pronto.')
-            return redirect('contacto') # Mejor redirigir a contacto de nuevo para que vea el mensaje
+            return redirect('contacto') 
             
         except Exception as e:
-            # Imprimimos el error en consola para que Vercel lo registre si algo falla
             print(f"Error al enviar correo: {e}") 
             messages.error(request, 'Hubo un error al enviar el mensaje. Por favor, intenta de nuevo.')
             return redirect('contacto')
 
-    # Si es una petición GET (el usuario hace clic en el enlace del menú)
     return render(request, 'core/contacto.html')
 
 def gym_app(request):
