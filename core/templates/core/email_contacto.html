@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nuevo Requerimiento - Perseus</title>
+</head>
+<body style="font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; background-color: #f3f4f6; margin: 0; padding: 40px 20px;">
+    
+    <table width="100%" cellpadding="0" cellspacing="0" border="0" style="max-width: 600px; margin: 0 auto; background-color: #ffffff; border-radius: 12px; overflow: hidden; box-shadow: 0 10px 25px rgba(0,0,0,0.05);">
+        
+        <!-- Header Oscuro -->
+        <tr>
+            <td style="background-color: #05080a; padding: 40px 30px; text-align: center; border-bottom: 4px solid #06b6d4;">
+                <h1 style="color: #ffffff; margin: 0; font-size: 24px; font-weight: 800; letter-spacing: -0.5px;">Nuevo Requerimiento Técnico</h1>
+                <p style="color: #06b6d4; margin: 8px 0 0 0; font-size: 13px; text-transform: uppercase; letter-spacing: 2px; font-weight: bold;">Perseus Technology</p>
+            </td>
+        </tr>
+
+        <!-- Cuerpo del mensaje -->
+        <tr>
+            <td style="padding: 40px 30px; color: #374151;">
+                <p style="font-size: 16px; margin: 0 0 25px 0; line-height: 1.6;">
+                    Se ha recibido una nueva solicitud desde el portal corporativo. A continuación, los detalles del prospecto:
+                </p>
+
+                <!-- Caja de Datos del Cliente -->
+                <div style="background-color: #f8fafc; border: 1px solid #e2e8f0; border-left: 4px solid #3b82f6; border-radius: 8px; padding: 20px; margin-bottom: 30px;">
+                    <table width="100%" cellpadding="0" cellspacing="0" border="0" style="font-size: 15px;">
+                        <tr>
+                            <td width="30%" style="padding-bottom: 12px; color: #6b7280; font-weight: bold;">👤 Nombre:</td>
+                            <td width="70%" style="padding-bottom: 12px; color: #111827; font-weight: 600;">{{ nombre }}</td>
+                        </tr>
+                        <tr>
+                            <td style="padding-bottom: 12px; color: #6b7280; font-weight: bold;">✉️ Email:</td>
+                            <td style="padding-bottom: 12px;">
+                                <a href="mailto:{{ email }}" style="color: #2563eb; text-decoration: none; font-weight: 600;">{{ email }}</a>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="color: #6b7280; font-weight: bold;">🏷️ Asunto:</td>
+                            <td>
+                                <span style="display: inline-block; background-color: #cffafe; color: #0891b2; padding: 4px 10px; border-radius: 20px; font-size: 12px; font-weight: bold; text-transform: uppercase;">
+                                    {{ asunto }}
+                                </span>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+
+                <!-- Detalles Técnicos -->
+                <h3 style="color: #111827; font-size: 18px; margin: 0 0 15px 0; border-bottom: 2px solid #f3f4f6; padding-bottom: 10px;">
+                    📝 Detalles del Proyecto
+                </h3>
+                <div style="background-color: #ffffff; border: 1px solid #e5e7eb; padding: 20px; border-radius: 8px; font-size: 15px; line-height: 1.7; color: #4b5563; white-space: pre-wrap;">{{ mensaje }}</div>
+                
+                <!-- Botón de acción -->
+                <div style="text-align: center; margin-top: 35px;">
+                    <a href="mailto:{{ email }}" style="display: inline-block; background-color: #06b6d4; color: #ffffff; text-decoration: none; padding: 14px 30px; font-size: 15px; font-weight: bold; border-radius: 8px;">
+                        Responder al Cliente
+                    </a>
+                </div>
+            </td>
+        </tr>
+
+        <!-- Footer -->
+        <tr>
+            <td style="background-color: #f9fafb; padding: 20px 30px; text-align: center; border-top: 1px solid #e5e7eb;">
+                <p style="margin: 0; font-size: 12px; color: #9ca3af;">
+                    Este es un mensaje automático generado por los sistemas de <br><strong>Perseus Technology</strong>.
+                </p>
+            </td>
+        </tr>
+    </table>
+
+</body>
+</html>
