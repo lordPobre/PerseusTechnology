@@ -130,29 +130,43 @@
                 <div class="hidden md:flex items-center space-x-4 font-medium">
                     <a href="{% url 'contacto' %}" class="bg-white hover:bg-gray-200 text-black px-6 py-3 rounded-full transition duration-300 font-semibold">Solicita tu Proyecto</a>
                 </div>
+                <!-- Botón Menú Móvil -->
                 <button @click="mobileMenuOpen = !mobileMenuOpen" class="md:hidden text-white focus:outline-none">
-                    <i class="fa-solid fa-bars text-2xl"></i>
+                    <i class="fa-solid fa-bars text-2xl" x-show="!mobileMenuOpen"></i>
+                    <i class="fa-solid fa-xmark text-2xl" x-show="mobileMenuOpen" style="display: none;"></i>
                 </button>
             </div>
         </div>
 
-        <div x-show="mobileMenuOpen" @click.away="mobileMenuOpen = false" class="md:hidden bg-black border-b border-gray-800 absolute w-full shadow-xl" style="display: none;">
-            <div class="px-6 py-6 space-y-5 font-medium max-h-[calc(100vh-80px)] overflow-y-auto">
+        <!-- MENÚ MÓVIL (Con Acordeones) -->
+        <div x-show="mobileMenuOpen" x-transition.opacity @click.away="mobileMenuOpen = false" class="md:hidden bg-black border-b border-gray-800 absolute w-full shadow-xl" style="display: none;">
+            <div class="px-6 py-6 font-medium max-h-[calc(100vh-80px)] overflow-y-auto">
                 
-                <div>
-                    <p class="text-white text-sm uppercase tracking-wider mb-3">Soluciones</p>
-                    <div class="space-y-3 pl-4 border-l border-gray-800">
+                <!-- Acordeón: Soluciones -->
+                <div x-data="{ openSolucionesMobile: false }" class="border-b border-gray-800 py-4">
+                    <button @click="openSolucionesMobile = !openSolucionesMobile" class="w-full flex justify-between items-center text-white text-lg focus:outline-none">
+                        <span>Soluciones</span>
+                        <i class="fa-solid fa-chevron-down text-sm transition-transform duration-300" :class="{'rotate-180': openSolucionesMobile}"></i>
+                    </button>
+                    <div x-show="openSolucionesMobile" x-collapse style="display: none;" class="mt-4 space-y-4 pl-4 border-l border-gray-800">
                         <a href="{% url 'marcacion' %}" class="block text-gray-400 hover:text-white transition">Marcación Digital</a>
                         <a href="{% url 'web' %}" class="block text-gray-400 hover:text-white transition">Desarrollo Web</a>
                         <a href="{% url 'consultoria' %}" class="block text-gray-400 hover:text-white transition">Consultoría TI</a>
                     </div>
                 </div>
 
-                <a href="{% url 'precios' %}" class="block text-white text-lg">Precios</a>
+                <!-- Enlace Directo: Precios -->
+                <div class="border-b border-gray-800 py-4">
+                    <a href="{% url 'precios' %}" class="block text-white text-lg w-full">Precios</a>
+                </div>
 
-                <div>
-                    <p class="text-white text-sm uppercase tracking-wider mb-3">Recursos</p>
-                    <div class="space-y-3 pl-4 border-l border-gray-800">
+                <!-- Acordeón: Recursos -->
+                <div x-data="{ openRecursosMobile: false }" class="border-b border-gray-800 py-4">
+                    <button @click="openRecursosMobile = !openRecursosMobile" class="w-full flex justify-between items-center text-white text-lg focus:outline-none">
+                        <span>Recursos</span>
+                        <i class="fa-solid fa-chevron-down text-sm transition-transform duration-300" :class="{'rotate-180': openRecursosMobile}"></i>
+                    </button>
+                    <div x-show="openRecursosMobile" x-collapse style="display: none;" class="mt-4 space-y-4 pl-4 border-l border-gray-800">
                         <a href="{% url 'nosotros' %}" class="block text-gray-400 hover:text-white transition">Nosotros</a>
                         <a href="{% url 'ayuda' %}" class="block text-gray-400 hover:text-white transition">Centro de Ayuda</a>
                         <a href="{% url 'blog' %}" class="block text-gray-400 hover:text-white transition">Blog Corporativo</a>
@@ -160,8 +174,9 @@
                     </div>
                 </div>
 
-                <div class="pt-4">
-                    <a href="{% url 'contacto' %}" class="block w-full text-center bg-white text-black px-6 py-3 rounded-full font-bold hover:bg-gray-200 transition">Solicita tu Proyecto</a>
+                <!-- Call to action Móvil -->
+                <div class="pt-8 pb-4">
+                    <a href="{% url 'contacto' %}" class="block w-full text-center bg-white text-black px-6 py-4 rounded-full font-bold hover:bg-gray-200 transition shadow-lg">Solicita tu Proyecto</a>
                 </div>
             </div>
         </div>
@@ -223,6 +238,8 @@
             
         });
     </script>
+    <!-- Alpine Plugins (Necesario para la transición suave x-collapse) -->
+    <script defer src="https://cdn.jsdelivr.net/npm/@alpinejs/collapse@3.x.x/dist/cdn.min.js"></script>
     {% block extra_js %}{% endblock %}
 
 </body>

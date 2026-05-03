@@ -613,9 +613,177 @@
         </div>
     </div>
 </section>
+
+
+<!-- WIDGET FLOTANTE DE ASISTENTE IA (PerseusBot) -->
+<div class="fixed bottom-6 right-6 z-[999] font-sans"
+     x-data="{
+        openChat: false,
+        newMessage: '',
+        isTyping: false,
+        messages: [
+            { role: 'bot', text: '¡Hola! Soy PerseusIA 🤖. El asistente virtual de la plataforma. ¿En qué te puedo ayudar hoy?' }
+        ],
+        
+        // 🧠 EL CEREBRO DEL BOT: Respuestas predefinidas
+        getBotResponse(query) {
+            const text = query.toLowerCase();
+            
+            if (text.includes('mision') || text.includes('misión') || text.includes('vision') || text.includes('visión')) {
+                return 'Nuestra misión es impulsar la transformación digital de las empresas mediante ingeniería de software de élite. Construimos plataformas seguras, escalables y de alto rendimiento que eliminan la fricción operativa.';
+            }
+            if (text.includes('valor') || text.includes('valores')) {
+                return 'Nuestros valores centrales son la Seguridad (cumplimiento estricto y NDA), el Rendimiento Extremo (optimización al máximo), y la Innovación constante con tecnologías como Python, Next.js y AWS.';
+            }
+            if (text.includes('servicio') || text.includes('que hacen') || text.includes('ofrecen') || text.includes('desarrollo')) {
+                return 'Ofrecemos 3 soluciones core: 1. Desarrollo Web Premium (e-commerce y corporativo). 2. Apps Corporativas (como nuestro sistema de marcación y SpendBox). 3. Consultoría e Infraestructura Cloud TI.';
+            }
+            if (text.includes('precio') || text.includes('costo') || text.includes('plan') || text.includes('cobran') || text.includes('cotizar')) {
+                return 'Nuestros precios varían según la escala y complejidad de tu requerimiento. Te invito a visitar nuestra sección de Precios en el menú superior o a llenar el formulario al final de la página para una cotización exacta.';
+            }
+            if (text.includes('contacto') || text.includes('hablar') || text.includes('reunion') || text.includes('reunión') || text.includes('telefono')) {
+                return '¡Claro! Puedes contactarnos llenando el formulario seguro al final de esta página. Nuestro equipo de ingenieros revisará tu caso y te responderá en menos de 24 horas.';
+            }
+            if (text.includes('hola') || text.includes('buenas') || text.includes('saludos')) {
+                return '¡Hola de nuevo! ¿Te gustaría saber sobre nuestros servicios, valores, o prefieres que te contactemos directamente?';
+            }
+            
+            // Respuesta por defecto si no entiende la pregunta
+            return 'He recibido tu consulta sobre: \'' + query + '\'. Para darte una respuesta técnica precisa sobre este tema, te sugiero utilizar nuestro formulario de Contacto al final de la página o agendar una Demo.';
+        },
+
+        sendMessage() {
+            if (this.newMessage.trim() === '') return;
+            
+            // 1. Agregar mensaje del usuario
+            const query = this.newMessage;
+            this.messages.push({ role: 'user', text: query });
+            this.newMessage = '';
+            this.isTyping = true;
+            this.scrollToBottom();
+
+            // 2. Simular tiempo de respuesta (1.5 segundos) y buscar en el cerebro
+            setTimeout(() => {
+                this.isTyping = false;
+                const respuestaIA = this.getBotResponse(query);
+                this.messages.push({ role: 'bot', text: respuestaIA });
+                this.scrollToBottom();
+            }, 1500);
+        },
+        scrollToBottom() {
+            setTimeout(() => {
+                const container = document.getElementById('chat-messages-container');
+                if(container) container.scrollTop = container.scrollHeight;
+            }, 50);
+        }
+     }">
+     
+    <!-- Ventana del Chat (Se muestra al hacer clic) -->
+    <div x-show="openChat" 
+         style="display: none;"
+         x-transition:enter="transition ease-out duration-300 transform origin-bottom-right"
+         x-transition:enter-start="opacity-0 translate-y-10 scale-90"
+         x-transition:enter-end="opacity-100 translate-y-0 scale-100"
+         x-transition:leave="transition ease-in duration-200 transform origin-bottom-right"
+         x-transition:leave-start="opacity-100 translate-y-0 scale-100"
+         x-transition:leave-end="opacity-0 translate-y-10 scale-90"
+         class="absolute bottom-20 right-0 w-[340px] sm:w-[380px] bg-gray-900/95 backdrop-blur-2xl border border-gray-800 rounded-3xl shadow-[0_20px_50px_rgba(0,0,0,0.5)] flex flex-col overflow-hidden"
+         style="height: 550px; max-height: 80vh;">
+         
+        <!-- Header del Chat -->
+        <div class="bg-black/60 p-4 border-b border-gray-800 flex justify-between items-center relative overflow-hidden">
+            <div class="absolute inset-0 bg-gradient-to-r from-cyan-500/10 to-blue-500/10"></div>
+            <div class="flex items-center gap-3 relative z-10">
+                <div class="w-10 h-10 rounded-full bg-cyan-500/20 flex items-center justify-center text-cyan-400 border border-cyan-500/30">
+                    <i class="fa-solid fa-robot"></i>
+                </div>
+                <div>
+                    <h4 class="text-white font-bold text-sm">PerseusIA</h4>
+                    <p class="text-emerald-400 text-[10px] flex items-center gap-1.5 font-mono uppercase tracking-wider">
+                        <span class="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></span> Online
+                    </p>
+                </div>
+            </div>
+            <button @click="openChat = false" class="text-gray-400 hover:text-white transition w-8 h-8 rounded-full hover:bg-gray-800 flex items-center justify-center relative z-10">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+        </div>
+
+        <!-- Área de Mensajes -->
+        <div id="chat-messages-container" class="flex-1 p-5 overflow-y-auto flex flex-col gap-4 scroll-smooth">
+            <template x-for="(msg, index) in messages" :key="index">
+                <div class="w-full flex" :class="msg.role === 'user' ? 'justify-end' : 'justify-start'">
+                    
+                    <!-- Mensaje del Bot -->
+                    <template x-if="msg.role === 'bot'">
+                        <div class="flex gap-3 max-w-[85%]">
+                            <div class="w-8 h-8 rounded-full bg-cyan-500/20 shrink-0 flex items-center justify-center text-cyan-400 text-xs border border-cyan-500/30 mt-1">
+                                <i class="fa-solid fa-robot"></i>
+                            </div>
+                            <div class="bg-gray-800/80 border border-gray-700 text-gray-200 p-3.5 rounded-2xl rounded-tl-sm text-sm leading-relaxed shadow-sm" x-text="msg.text"></div>
+                        </div>
+                    </template>
+
+                    <!-- Mensaje del Usuario -->
+                    <template x-if="msg.role === 'user'">
+                        <div class="bg-cyan-600 text-white p-3.5 rounded-2xl rounded-tr-sm text-sm leading-relaxed shadow-md max-w-[85%]" x-text="msg.text"></div>
+                    </template>
+                </div>
+            </template>
+
+            <!-- Indicador de "Escribiendo..." -->
+            <div x-show="isTyping" class="flex gap-3 max-w-[85%] items-end">
+                <div class="w-8 h-8 rounded-full bg-cyan-500/20 shrink-0 flex items-center justify-center text-cyan-400 text-xs border border-cyan-500/30">
+                    <i class="fa-solid fa-robot"></i>
+                </div>
+                <div class="bg-gray-800/80 border border-gray-700 p-4 rounded-2xl rounded-tl-sm flex gap-1.5 items-center h-[42px]">
+                    <div class="w-1.5 h-1.5 bg-gray-400 rounded-full animate-bounce" style="animation-delay: 0ms"></div>
+                    <div class="w-1.5 h-1.5 bg-gray-400 rounded-full animate-bounce" style="animation-delay: 150ms"></div>
+                    <div class="w-1.5 h-1.5 bg-gray-400 rounded-full animate-bounce" style="animation-delay: 300ms"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Input de Texto -->
+        <div class="p-4 bg-black/60 border-t border-gray-800">
+            <form @submit.prevent="sendMessage()" class="relative flex items-center">
+                <input type="text" x-model="newMessage" placeholder="Escribe tu consulta..." 
+                       class="w-full bg-gray-800 text-white text-sm rounded-full py-3.5 pl-5 pr-14 focus:outline-none focus:ring-1 focus:ring-cyan-500 border border-gray-700 placeholder-gray-500 transition-all shadow-inner">
+                <button type="submit" 
+                        class="absolute right-1.5 w-9 h-9 bg-cyan-600 rounded-full flex items-center justify-center text-white hover:bg-cyan-500 transition-colors shadow-md disabled:opacity-50 disabled:cursor-not-allowed"
+                        :disabled="newMessage.trim() === ''">
+                    <i class="fa-solid fa-paper-plane text-[13px] ml-[-2px]"></i>
+                </button>
+            </form>
+            <div class="text-center mt-3">
+                <span class="text-[10px] text-gray-500 font-mono">Potenciado por Perseus IA</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Botón Flotante (Trigger) -->
+    <div class="relative group">
+        <!-- Aro exterior que parpadea para llamar la atención -->
+        <div x-show="!openChat" class="absolute inset-0 bg-cyan-400 rounded-full animate-ping opacity-30"></div>
+        
+        <button @click="openChat = !openChat" 
+                class="relative w-14 h-14 bg-gradient-to-tr from-cyan-600 to-blue-600 rounded-full flex items-center justify-center text-white text-2xl shadow-[0_10px_25px_rgba(8,145,178,0.5)] hover:scale-110 transition-transform duration-300 border border-cyan-400/30 z-10 focus:outline-none">
+            
+            <!-- Icono del Robot (Gira y desaparece al abrir) -->
+            <i class="fa-solid fa-robot absolute transition-all duration-300 transform"
+               :class="openChat ? 'rotate-90 scale-0 opacity-0' : 'rotate-0 scale-100 opacity-100'"></i>
+               
+            <!-- Icono de la X (Aparece al abrir) -->
+            <i class="fa-solid fa-xmark absolute transition-all duration-300 transform"
+               :class="openChat ? 'rotate-0 scale-100 opacity-100' : '-rotate-90 scale-0 opacity-0'"></i>
+        </button>
+    </div>
+</div>
+
 {% endblock %}
 
 {% block extra_js %}
+
 <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r134/three.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/vanta@latest/dist/vanta.net.min.js"></script>
 <script>
