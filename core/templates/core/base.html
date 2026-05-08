@@ -1,10 +1,10 @@
-{% load static %}
+{% load static i18n %}
 <!DOCTYPE html>
-<html lang="es" class="scroll-smooth">
+<html lang="{{ LANGUAGE_CODE }}" class="scroll-smooth">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{% block title %}{{ nombre_empresa }} | La plataforma para tu empresa{% endblock %}</title>
+    <title>{% block title %}{{ nombre_empresa }} | {% trans "La plataforma para tu empresa" %}{% endblock %}</title>
     
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="icon" type="image/png" href="{% static 'core/img/favicon.png' %}">
@@ -15,16 +15,13 @@
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
         body { font-family: 'Inter', sans-serif; }
         
-        /* Animaciones para el Núcleo Holográfico (Triángulos) */
         @keyframes color-shift-stroke {
-            0% { stroke: #3b82f6; filter: drop-shadow(0 0 8px rgba(59,130,246,0.8)); } /* Azul */
-            33% { stroke: #10b981; filter: drop-shadow(0 0 8px rgba(16,185,129,0.8)); } /* Verde */
-            66% { stroke: #a855f7; filter: drop-shadow(0 0 8px rgba(168,85,247,0.8)); } /* Morado */
-            100% { stroke: #3b82f6; filter: drop-shadow(0 0 8px rgba(59,130,246,0.8)); } /* Azul */
+            0% { stroke: #3b82f6; filter: drop-shadow(0 0 8px rgba(59,130,246,0.8)); }
+            33% { stroke: #10b981; filter: drop-shadow(0 0 8px rgba(16,185,129,0.8)); }
+            66% { stroke: #a855f7; filter: drop-shadow(0 0 8px rgba(168,85,247,0.8)); }
+            100% { stroke: #3b82f6; filter: drop-shadow(0 0 8px rgba(59,130,246,0.8)); }
         }
-        .animate-tech-colors {
-            animation: color-shift-stroke 4s ease-in-out infinite;
-        }
+        .animate-tech-colors { animation: color-shift-stroke 4s ease-in-out infinite; }
 
         @keyframes color-shift-text {
             0% { color: #3b82f6; text-shadow: 0 0 10px rgba(59,130,246,0.5); }
@@ -32,44 +29,33 @@
             66% { color: #a855f7; text-shadow: 0 0 10px rgba(168,85,247,0.5); }
             100% { color: #3b82f6; text-shadow: 0 0 10px rgba(59,130,246,0.5); }
         }
-        .animate-tech-text {
-            animation: color-shift-text 4s ease-in-out infinite;
-        }
+        .animate-tech-text { animation: color-shift-text 4s ease-in-out infinite; }
     </style>
 
     {% block extra_css %}{% endblock %}
 </head>
 <body class="{% block body_class %}bg-white text-gray-900 antialiased{% endblock %}">
 
-    <!-- LOADER NÚCLEO HOLOGRÁFICO -->
+    <!-- LOADER -->
     <div id="global-page-loader" class="fixed inset-0 z-[9999] bg-[#05080a] flex flex-col items-center justify-center transition-opacity duration-500 overflow-hidden">
-        
-        <!-- Contenedor 3D de los Triángulos -->
         <div class="relative flex items-center justify-center w-32 h-32 mb-10">
-            <!-- Triángulo Exterior (Gira a la derecha) -->
             <svg class="absolute w-full h-full animate-[spin_4s_linear_infinite]" viewBox="0 0 100 100" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                 <polygon points="50,10 90,90 10,90" class="animate-tech-colors" />
             </svg>
-            
-            <!-- Triángulo Medio (Gira a la izquierda más rápido) -->
             <svg class="absolute w-3/4 h-3/4 animate-[spin_2.5s_linear_infinite_reverse]" viewBox="0 0 100 100" fill="none" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
-                <!-- Se le da un pequeño delay a la animación de color para que contraste con el exterior -->
                 <polygon points="50,90 90,10 10,10" class="animate-tech-colors" style="animation-delay: -1.5s;" />
             </svg>
-
-            <!-- Triángulo Interior (Pequeño, gira a la derecha rápido) -->
             <svg class="absolute w-1/3 h-1/3 animate-[spin_1.5s_linear_infinite]" viewBox="0 0 100 100" fill="none" stroke-width="4" stroke-linecap="round" stroke-linejoin="round">
                 <polygon points="50,10 90,90 10,90" class="animate-tech-colors" style="animation-delay: -3s;" />
             </svg>
         </div>
-        
-        <!-- Texto Animado -->
         <div class="font-mono text-[11px] tracking-[0.5em] uppercase font-bold animate-tech-text animate-pulse">
-            Cargando sistema....
+            {% trans "Cargando sistema...." %}
         </div>
-
     </div>
     <!-- FIN LOADER -->
+
+    {% get_current_language as CURRENT_LANG %}
 
     <nav x-data="{ mobileMenuOpen: false }" class="fixed w-full z-50 bg-black border-b border-gray-800">
         <div class="max-w-[1400px] mx-auto px-6">
@@ -79,9 +65,11 @@
                         <img src="{% static 'core/img/logo-2.png' %}" alt="Perseus Technology" class="h-16 w-auto object-contain">
                     </a>
                     <div class="hidden md:flex items-center space-x-8 font-medium text-gray-400">
+
+                        <!-- Dropdown: Soluciones -->
                         <div x-data="{ openSoluciones: false }" @click.away="openSoluciones = false" class="relative">
                             <button @click="openSoluciones = !openSoluciones" class="text-gray-400 hover:text-white transition font-medium flex items-center gap-1 focus:outline-none">
-                                Soluciones <i class="fa-solid fa-chevron-down text-xs mt-0.5" :class="{'rotate-180': openSoluciones, 'transition-transform duration-200': true}"></i>
+                                {% trans "Soluciones" %} <i class="fa-solid fa-chevron-down text-xs mt-0.5" :class="{'rotate-180': openSoluciones, 'transition-transform duration-200': true}"></i>
                             </button>
                             <div x-show="openSoluciones" style="display: none;" class="absolute top-full left-0 mt-4 w-72 bg-white rounded-2xl shadow-xl border border-gray-100 p-3 z-50">
                                 <div class="space-y-1">
@@ -90,46 +78,74 @@
                                             <i class="fa-solid fa-mobile-screen-button"></i>
                                         </div>
                                         <div>
-                                            <p class="text-gray-900 font-bold text-sm">Apps Corporativas</p>
-                                            <p class="text-gray-500 text-xs">Ecosistema a medida</p>
+                                            <p class="text-gray-900 font-bold text-sm">{% trans "Apps Corporativas" %}</p>
+                                            <p class="text-gray-500 text-xs">{% trans "Ecosistema a medida" %}</p>
                                         </div>
                                     </a>
                                     <a href="{% url 'web' %}" class="flex items-center gap-3 p-3 rounded-xl hover:bg-gray-50 transition group">
                                         <div class="w-10 h-10 rounded-lg bg-emerald-50 text-emerald-600 flex items-center justify-center group-hover:scale-110 transition"><i class="fa-solid fa-code"></i></div>
                                         <div>
-                                            <p class="text-gray-900 font-bold text-sm">Desarrollo Web</p>
+                                            <p class="text-gray-900 font-bold text-sm">{% trans "Desarrollo Web" %}</p>
                                             <p class="text-gray-500 text-xs">Django & Next.js</p>
                                         </div>
                                     </a>
                                     <a href="{% url 'consultoria' %}" class="flex items-center gap-3 p-3 rounded-xl hover:bg-gray-50 transition group">
                                         <div class="w-10 h-10 rounded-lg bg-purple-50 text-purple-600 flex items-center justify-center group-hover:scale-110 transition"><i class="fa-solid fa-server"></i></div>
                                         <div>
-                                            <p class="text-gray-900 font-bold text-sm">Consultoría TI</p>
-                                            <p class="text-gray-500 text-xs">Infraestructura y Soporte</p>
+                                            <p class="text-gray-900 font-bold text-sm">{% trans "Consultoría TI" %}</p>
+                                            <p class="text-gray-500 text-xs">{% trans "Infraestructura y Soporte" %}</p>
                                         </div>
                                     </a>
                                 </div>
                             </div>
                         </div>
-                        <a href="{% url 'precios' %}" class="hover:text-white transition">Precios</a>
+
+                        <a href="{% url 'precios' %}" class="hover:text-white transition">{% trans "Precios" %}</a>
+
+                        <!-- Dropdown: Recursos -->
                         <div x-data="{ open: false }" @click.away="open = false" class="relative">
                             <button @click="open = !open" class="text-gray-400 hover:text-white transition font-medium flex items-center gap-1 focus:outline-none">
-                                Recursos <i class="fa-solid fa-chevron-down text-xs mt-0.5" :class="{'rotate-180': open, 'transition-transform duration-200': true}"></i>
+                                {% trans "Recursos" %} <i class="fa-solid fa-chevron-down text-xs mt-0.5" :class="{'rotate-180': open, 'transition-transform duration-200': true}"></i>
                             </button>
                             <div x-show="open" style="display: none;" class="absolute top-full right-0 mt-4 w-64 bg-white rounded-2xl shadow-xl border border-gray-100 p-3 z-50">
                                 <div class="space-y-1">
-                                    <a href="{% url 'nosotros' %}" class="block p-3 rounded-xl hover:bg-gray-50 text-gray-900 font-bold">Nosotros</a>
-                                    <a href="{% url 'ayuda' %}" class="block p-3 rounded-xl hover:bg-gray-50 text-gray-900 font-bold">Centro de Ayuda</a>
-                                    <a href="{% url 'blog' %}" class="block p-3 rounded-xl hover:bg-gray-50 text-gray-900 font-bold">Blog Corporativo</a>   
-                                    <a href="{% url 'contacto' %}" class="block p-3 rounded-xl hover:bg-gray-50 text-gray-900 font-bold">Contacto</a> 
+                                    <a href="{% url 'nosotros' %}" class="block p-3 rounded-xl hover:bg-gray-50 text-gray-900 font-bold">{% trans "Nosotros" %}</a>
+                                    <a href="{% url 'ayuda' %}" class="block p-3 rounded-xl hover:bg-gray-50 text-gray-900 font-bold">{% trans "Centro de Ayuda" %}</a>
+                                    <a href="{% url 'blog' %}" class="block p-3 rounded-xl hover:bg-gray-50 text-gray-900 font-bold">{% trans "Blog Corporativo" %}</a>
+                                    <a href="{% url 'contacto' %}" class="block p-3 rounded-xl hover:bg-gray-50 text-gray-900 font-bold">{% trans "Contacto" %}</a>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-                <div class="hidden md:flex items-center space-x-4 font-medium">
-                    <a href="{% url 'contacto' %}" class="bg-white hover:bg-gray-200 text-black px-6 py-3 rounded-full transition duration-300 font-semibold">Solicita tu Proyecto</a>
+
+                <!-- Botones Desktop: idioma + CTA -->
+                <div class="hidden md:flex items-center space-x-3 font-medium">
+
+                    <!-- BOTÓN CAMBIO DE IDIOMA DESKTOP -->
+                    <form action="{% url 'set_language' %}" method="post">
+                        {% csrf_token %}
+                        <input name="next" type="hidden" value="/">
+                        {% if 'en' in CURRENT_LANG %}
+                            <input name="language" type="hidden" value="es">
+                            <button type="submit"
+                                    class="flex items-center gap-2 text-gray-400 hover:text-white border border-gray-700 hover:border-gray-500 px-3 py-2 rounded-full transition-all duration-200 text-sm font-bold"
+                                    title="Cambiar a Español">
+                                <span>🇨🇱</span> ES
+                            </button>
+                        {% else %}
+                            <input name="language" type="hidden" value="en">
+                            <button type="submit"
+                                    class="flex items-center gap-2 text-gray-400 hover:text-white border border-gray-700 hover:border-gray-500 px-3 py-2 rounded-full transition-all duration-200 text-sm font-bold"
+                                    title="Switch to English">
+                                <span>🇺🇸</span> EN
+                            </button>
+                        {% endif %}
+                    </form>
+
+                    <a href="{% url 'contacto' %}" class="bg-white hover:bg-gray-200 text-black px-6 py-3 rounded-full transition duration-300 font-semibold">{% trans "Solicita tu Proyecto" %}</a>
                 </div>
+
                 <!-- Botón Menú Móvil -->
                 <button @click="mobileMenuOpen = !mobileMenuOpen" class="md:hidden text-white focus:outline-none">
                     <i class="fa-solid fa-bars text-2xl" x-show="!mobileMenuOpen"></i>
@@ -138,45 +154,63 @@
             </div>
         </div>
 
-        <!-- MENÚ MÓVIL (Con Acordeones) -->
+        <!-- MENÚ MÓVIL -->
         <div x-show="mobileMenuOpen" x-transition.opacity @click.away="mobileMenuOpen = false" class="md:hidden bg-black border-b border-gray-800 absolute w-full shadow-xl" style="display: none;">
             <div class="px-6 py-6 font-medium max-h-[calc(100vh-80px)] overflow-y-auto">
-                
+
                 <!-- Acordeón: Soluciones -->
                 <div x-data="{ openSolucionesMobile: false }" class="border-b border-gray-800 py-4">
                     <button @click="openSolucionesMobile = !openSolucionesMobile" class="w-full flex justify-between items-center text-white text-lg focus:outline-none">
-                        <span>Soluciones</span>
+                        <span>{% trans "Soluciones" %}</span>
                         <i class="fa-solid fa-chevron-down text-sm transition-transform duration-300" :class="{'rotate-180': openSolucionesMobile}"></i>
                     </button>
                     <div x-show="openSolucionesMobile" x-collapse style="display: none;" class="mt-4 space-y-4 pl-4 border-l border-gray-800">
-                        <a href="{% url 'apps' %}" class="block text-gray-400 hover:text-white transition">Apps Corporativas </a>
-                        <a href="{% url 'web' %}" class="block text-gray-400 hover:text-white transition">Desarrollo Web</a>
-                        <a href="{% url 'consultoria' %}" class="block text-gray-400 hover:text-white transition">Consultoría TI</a>
+                        <a href="{% url 'apps' %}" class="block text-gray-400 hover:text-white transition">{% trans "Apps Corporativas" %}</a>
+                        <a href="{% url 'web' %}" class="block text-gray-400 hover:text-white transition">{% trans "Desarrollo Web" %}</a>
+                        <a href="{% url 'consultoria' %}" class="block text-gray-400 hover:text-white transition">{% trans "Consultoría TI" %}</a>
                     </div>
                 </div>
 
-                <!-- Enlace Directo: Precios -->
+                <!-- Precios -->
                 <div class="border-b border-gray-800 py-4">
-                    <a href="{% url 'precios' %}" class="block text-white text-lg w-full">Precios</a>
+                    <a href="{% url 'precios' %}" class="block text-white text-lg w-full">{% trans "Precios" %}</a>
                 </div>
 
                 <!-- Acordeón: Recursos -->
                 <div x-data="{ openRecursosMobile: false }" class="border-b border-gray-800 py-4">
                     <button @click="openRecursosMobile = !openRecursosMobile" class="w-full flex justify-between items-center text-white text-lg focus:outline-none">
-                        <span>Recursos</span>
+                        <span>{% trans "Recursos" %}</span>
                         <i class="fa-solid fa-chevron-down text-sm transition-transform duration-300" :class="{'rotate-180': openRecursosMobile}"></i>
                     </button>
                     <div x-show="openRecursosMobile" x-collapse style="display: none;" class="mt-4 space-y-4 pl-4 border-l border-gray-800">
-                        <a href="{% url 'nosotros' %}" class="block text-gray-400 hover:text-white transition">Nosotros</a>
-                        <a href="{% url 'ayuda' %}" class="block text-gray-400 hover:text-white transition">Centro de Ayuda</a>
-                        <a href="{% url 'blog' %}" class="block text-gray-400 hover:text-white transition">Blog Corporativo</a>
-                        <a href="{% url 'contacto' %}" class="block text-gray-400 hover:text-white transition">Contacto</a>
+                        <a href="{% url 'nosotros' %}" class="block text-gray-400 hover:text-white transition">{% trans "Nosotros" %}</a>
+                        <a href="{% url 'ayuda' %}" class="block text-gray-400 hover:text-white transition">{% trans "Centro de Ayuda" %}</a>
+                        <a href="{% url 'blog' %}" class="block text-gray-400 hover:text-white transition">{% trans "Blog Corporativo" %}</a>
+                        <a href="{% url 'contacto' %}" class="block text-gray-400 hover:text-white transition">{% trans "Contacto" %}</a>
                     </div>
                 </div>
 
-                <!-- Call to action Móvil -->
+                <!-- BOTÓN CAMBIO DE IDIOMA MÓVIL -->
+                <div class="border-b border-gray-800 py-4">
+                    <form action="{% url 'set_language' %}" method="post">
+                        {% csrf_token %}
+                        <input name="next" type="hidden" value="/">
+                        {% if 'en' in CURRENT_LANG %}
+                            <input name="language" type="hidden" value="es">
+                            <button type="submit" class="flex items-center gap-3 text-gray-400 hover:text-white text-lg w-full transition">
+                                <span>🇨🇱</span> Cambiar a Español
+                            </button>
+                        {% else %}
+                            <input name="language" type="hidden" value="en">
+                            <button type="submit" class="flex items-center gap-3 text-gray-400 hover:text-white text-lg w-full transition">
+                                <span>🇺🇸</span> Switch to English
+                            </button>
+                        {% endif %}
+                    </form>
+                </div>
+                <!-- CTA Móvil -->
                 <div class="pt-8 pb-4">
-                    <a href="{% url 'contacto' %}" class="block w-full text-center bg-white text-black px-6 py-4 rounded-full font-bold hover:bg-gray-200 transition shadow-lg">Solicita tu Proyecto</a>
+                    <a href="{% url 'contacto' %}" class="block w-full text-center bg-white text-black px-6 py-4 rounded-full font-bold hover:bg-gray-200 transition shadow-lg">{% trans "Solicita tu Proyecto" %}</a>
                 </div>
             </div>
         </div>
@@ -192,8 +226,8 @@
             <img src="{% static 'core/img/logo-2.png' %}" alt="Perseus" class="h-10 w-auto mb-4 md:mb-0 grayscale opacity-50 hover:grayscale-0 hover:opacity-100 transition">
             <div class="flex space-x-6 text-gray-500 text-sm">
                 <p>&copy; 2026 Perseus Technology.</p>
-                <a href="{% url 'privacidad' %}" class="hover:text-white transition">Privacidad</a>
-                <a href="#" class="hover:text-white transition">Términos</a>
+                <a href="{% url 'privacidad' %}" class="hover:text-white transition">{% trans "Privacidad" %}</a>
+                <a href="#" class="hover:text-white transition">{% trans "Términos" %}</a>
             </div>
         </div>
     </footer>
@@ -204,27 +238,21 @@
                 const loader = document.getElementById('global-page-loader');
                 if (loader) {
                     loader.classList.add('opacity-0');
-                    setTimeout(() => { 
-                        loader.classList.add('pointer-events-none');
-                    }, 500);
+                    setTimeout(() => { loader.classList.add('pointer-events-none'); }, 500);
                 }
             }
 
             window.addEventListener('load', hideLoader);
 
             window.addEventListener('pageshow', function(event) {
-                if (event.persisted) {
-                    hideLoader();
-                }
+                if (event.persisted) { hideLoader(); }
             });
 
             document.querySelectorAll('a').forEach(enlace => {
                 enlace.addEventListener('click', function(e) {
                     const href = this.getAttribute('href');
-                    
                     if (href && !href.startsWith('#') && !href.startsWith('javascript') && this.target !== '_blank' && !e.ctrlKey && !e.metaKey) {
-                        e.preventDefault(); 
-                        
+                        e.preventDefault();
                         const loader = document.getElementById('global-page-loader');
                         if (loader) {
                             loader.classList.remove('pointer-events-none', 'opacity-0');
@@ -235,10 +263,8 @@
                     }
                 });
             });
-            
         });
     </script>
-    <!-- Alpine Plugins (Necesario para la transición suave x-collapse) -->
     <script defer src="https://cdn.jsdelivr.net/npm/@alpinejs/collapse@3.x.x/dist/cdn.min.js"></script>
     {% block extra_js %}{% endblock %}
 

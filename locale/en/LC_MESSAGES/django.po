@@ -1,0 +1,1303 @@
+# English translations for Perseus Technology
+# Copyright (C) 2026 Perseus Technology
+msgid ""
+msgstr ""
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: en\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+# base.html
+msgid "La plataforma para tu empresa"
+msgstr "The platform for your business"
+
+msgid "Cargando sistema...."
+msgstr "Loading system...."
+
+msgid "Soluciones"
+msgstr "Solutions"
+
+msgid "Apps Corporativas"
+msgstr "Corporate Apps"
+
+msgid "Ecosistema a medida"
+msgstr "Custom ecosystem"
+
+msgid "Desarrollo Web"
+msgstr "Web Development"
+
+msgid "Consultoría TI"
+msgstr "IT Consulting"
+
+msgid "Infraestructura y Soporte"
+msgstr "Infrastructure & Support"
+
+msgid "Precios"
+msgstr "Pricing"
+
+msgid "Recursos"
+msgstr "Resources"
+
+msgid "Nosotros"
+msgstr "About Us"
+
+msgid "Centro de Ayuda"
+msgstr "Help Center"
+
+msgid "Blog Corporativo"
+msgstr "Corporate Blog"
+
+msgid "Contacto"
+msgstr "Contact"
+
+msgid "Solicita tu Proyecto"
+msgstr "Start Your Project"
+
+msgid "Privacidad"
+msgstr "Privacy"
+
+msgid "Términos"
+msgstr "Terms"
+
+# home.html
+msgid "Tu empresa puede ser"
+msgstr "Your company can be"
+
+msgid "un éxito rotundo"
+msgstr "a resounding success"
+
+msgid ""
+"Sueña en grande, construye rápido y llega lejos con %(empresa)s. La "
+"infraestructura inteligente para el líder de hoy."
+msgstr ""
+"Dream big, build fast and go far with %(empresa)s. The intelligent "
+"infrastructure for today's leader."
+
+msgid "Explora nuestras divisiones"
+msgstr "Explore our divisions"
+
+msgid "Tecnologías que impulsan nuestro ecosistema"
+msgstr "Technologies powering our ecosystem"
+
+msgid "Soluciones Core"
+msgstr "Core Solutions"
+
+msgid "Una plataforma,"
+msgstr "One platform,"
+
+msgid "todo el poder."
+msgstr "all the power."
+
+msgid "Portafolio Activo"
+msgstr "Active Portfolio"
+
+msgid ""
+"Arquitectura escalable en Django y Next.js. Construimos tiendas como "
+"<strong>DL Parfums</strong> y plataformas corporativas como <strong>VC "
+"Chile</strong>."
+msgstr ""
+"Scalable architecture in Django and Next.js. We build stores like <strong>DL "
+"Parfums</strong> and corporate platforms like <strong>VC Chile</strong>."
+
+msgid "Portafolio Web Perseus"
+msgstr "Perseus Web Portfolio"
+
+msgid "Ver servicios de desarrollo"
+msgstr "View development services"
+
+msgid ""
+"Ecosistema inteligente. Desarrollamos herramientas internas para optimizar "
+"tu equipo."
+msgstr ""
+"Intelligent ecosystem. We develop internal tools to optimize your team."
+
+msgid "Ver Ecosistema"
+msgstr "View Ecosystem"
+
+msgid "Marcación"
+msgstr "Attendance"
+
+msgid "Certificado DT"
+msgstr "DT Certified"
+
+msgid "App de Asistencia Biométrica"
+msgstr "Biometric Attendance App"
+
+msgid "Plataforma inalterable por GPS bajo normativa de la DT."
+msgstr "GPS-secured platform compliant with labor regulations."
+
+msgid "Ver sistema RRHH"
+msgstr "View HR System"
+
+msgid "IA / OCR"
+msgstr "AI / OCR"
+
+msgid "Auditoría con IA"
+msgstr "AI Auditing"
+
+msgid "Extracción de datos desde boletas para control de presupuesto."
+msgstr "Data extraction from receipts for budget control."
+
+msgid "Ver SpendBox"
+msgstr "View SpendBox"
+
+msgid "Gestión GYM"
+msgstr "GYM Management"
+
+msgid "SaaS Deportivo"
+msgstr "Sports SaaS"
+
+msgid "Administración Operativa"
+msgstr "Operational Management"
+
+msgid "Control de aforos, reservas y perfiles de alumnos en tiempo real."
+msgstr "Real-time capacity, reservations and student profile management."
+
+msgid "Saber más"
+msgstr "Learn more"
+
+msgid "Finanzas"
+msgstr "Finance"
+
+msgid "Flujo de Caja"
+msgstr "Cash Flow"
+
+msgid "Control Financiero Inteligente"
+msgstr "Intelligent Financial Control"
+
+msgid "Dashboard analítico para categorizar ingresos y egresos empresariales."
+msgstr "Analytical dashboard to categorize business income and expenses."
+
+msgid "Acceder a la app"
+msgstr "Access the app"
+
+msgid "Consultoría e Infraestructura TI"
+msgstr "IT Consulting & Infrastructure"
+
+msgid "Estrategia Cloud, administración M365 y bases de datos."
+msgstr "Cloud strategy, M365 administration and databases."
+
+msgid "Ver servicios Cloud"
+msgstr "View Cloud services"
+
+msgid "Arquitectura de"
+msgstr "Architecture of"
+
+msgid "Alto Nivel"
+msgstr "High Performance"
+
+msgid ""
+"Construimos sobre bases sólidas. Cada línea de código está pensada para la "
+"seguridad, velocidad y escalabilidad de tu negocio."
+msgstr ""
+"We build on solid foundations. Every line of code is designed for security, "
+"speed and scalability of your business."
+
+msgid "Ecosistema Centralizado"
+msgstr "Centralized Ecosystem"
+
+msgid ""
+"No más software desconectado. Ya sea la extracción OCR en SpendBox o el "
+"marcaje GPS en terreno, todas nuestras herramientas se conectan bajo una "
+"misma infraestructura de datos para darte control operativo absoluto."
+msgstr ""
+"No more disconnected software. Whether OCR extraction in SpendBox or GPS "
+"tracking in the field, all our tools connect under a single data "
+"infrastructure to give you absolute operational control."
+
+msgid "API Sync Activa"
+msgstr "API Sync Active"
+
+msgid "Uptime Garantizado"
+msgstr "Guaranteed Uptime"
+
+msgid "Servidores Cloud optimizados para que tu operación jamás se detenga."
+msgstr "Cloud servers optimized so your operation never stops."
+
+msgid "Soporte TI 24/7"
+msgstr "24/7 IT Support"
+
+msgid ""
+"Ingenieros listos para resolver cualquier incidente crítico y monitoreo "
+"proactivo constante."
+msgstr ""
+"Engineers ready to resolve any critical incident with constant proactive "
+"monitoring."
+
+msgid "Cumplimiento Normativo"
+msgstr "Regulatory Compliance"
+
+msgid ""
+"Software validado bajo estrictos estándares de seguridad y con certificación "
+"oficial."
+msgstr ""
+"Software validated under strict security standards with official "
+"certification."
+
+msgid "Dirección del Trabajo"
+msgstr "Chilean Labor Directorate"
+
+msgid "Motores de IA"
+msgstr "AI Engines"
+
+msgid ""
+"Extracción de datos inteligente (OCR) para automatizar procesos manuales "
+"tediosos."
+msgstr ""
+"Intelligent data extraction (OCR) to automate tedious manual processes."
+
+msgid "Análisis de ROI"
+msgstr "ROI Analysis"
+
+msgid "El costo oculto de"
+msgstr "The hidden cost of"
+
+msgid "no automatizar"
+msgstr "not automating"
+
+msgid ""
+"Las horas que tu equipo gasta digitando boletas, calculando horas extras o "
+"armando reportes en Excel, es dinero que tu empresa pierde mes a mes. "
+"Descubre cuánto podrías recuperar implementando nuestras soluciones."
+msgstr ""
+"The hours your team spends typing receipts, calculating overtime or building "
+"Excel reports is money your company loses every month. Discover how much you "
+"could recover by implementing our solutions."
+
+msgid "Horas manuales a la semana:"
+msgstr "Manual hours per week:"
+
+msgid "Tiempo Recuperado"
+msgstr "Time Recovered"
+
+msgid "Al mes"
+msgstr "Per month"
+
+msgid "Ahorro Proyectado"
+msgstr "Projected Savings"
+
+msgid "Al año"
+msgstr "Per year"
+
+msgid "Automatizar mis procesos"
+msgstr "Automate my processes"
+
+msgid "Metodología"
+msgstr "Methodology"
+
+msgid "El Método"
+msgstr "The Perseus"
+
+msgid ""
+"No improvisamos. Aplicamos ingeniería de software de alto nivel para "
+"garantizar que tu plataforma se entregue a tiempo, segura y lista para "
+"escalar."
+msgstr ""
+"We don't improvise. We apply high-level software engineering to ensure your "
+"platform is delivered on time, secure and ready to scale."
+
+msgid "Auditoría y Arquitectura"
+msgstr "Audit & Architecture"
+
+msgid ""
+"Analizamos tu infraestructura actual y diseñamos la base de datos y la "
+"arquitectura Cloud necesaria antes de escribir la primera línea de código."
+msgstr ""
+"We analyze your current infrastructure and design the database and Cloud "
+"architecture needed before writing the first line of code."
+
+msgid "Desarrollo Ágil"
+msgstr "Agile Development"
+
+msgid ""
+"Construimos tu plataforma en ciclos cortos (Sprints). Usamos Python y "
+"Next.js para asegurar un rendimiento corporativo y entregas visuales "
+"continuas."
+msgstr ""
+"We build your platform in short cycles (Sprints). We use Python and Next.js "
+"to ensure corporate performance and continuous visual deliveries."
+
+msgid "Despliegue y Soporte TI"
+msgstr "Deployment & IT Support"
+
+msgid ""
+"Migramos el software a tus servidores o a nuestra nube de alta "
+"disponibilidad. A partir de aquí, nuestro equipo de soporte TI asume el "
+"monitoreo 24/7."
+msgstr ""
+"We migrate the software to your servers or our high-availability cloud. From "
+"here, our IT support team takes over 24/7 monitoring."
+
+msgid "Sistemas en línea"
+msgstr "Systems online"
+
+msgid "Inicia tu"
+msgstr "Start your"
+
+msgid "transformación."
+msgstr "transformation."
+
+msgid ""
+"Ya sea que necesites automatizar auditorías con IA, gestionar recursos "
+"corporativos o desarrollar arquitectura Cloud a medida, nuestro equipo de "
+"ingenieros está listo."
+msgstr ""
+"Whether you need to automate audits with AI, manage corporate resources or "
+"develop custom Cloud architecture, our engineering team is ready."
+
+msgid "Respuesta Rápida"
+msgstr "Fast Response"
+
+msgid "Evaluación técnica inicial en menos de 24 horas."
+msgstr "Initial technical evaluation in less than 24 hours."
+
+msgid "NDA Estricto"
+msgstr "Strict NDA"
+
+msgid "Tu información comercial y operativa está 100% protegida."
+msgstr "Your commercial and operational information is 100% protected."
+
+msgid "Solicita una propuesta"
+msgstr "Request a proposal"
+
+msgid "Nombre completo"
+msgstr "Full name"
+
+msgid "Correo laboral"
+msgstr "Work email"
+
+msgid "Contacto desde Home"
+msgstr "Contact from Home"
+
+msgid "Describe tu proyecto o desafío técnico..."
+msgstr "Describe your project or technical challenge..."
+
+msgid "Enviar Requerimiento"
+msgstr "Send Request"
+
+msgid "Potenciado por Perseus IA"
+msgstr "Powered by Perseus AI"
+
+# #-#-#-#-#  django.po  #-#-#-#-#
+# contacto.html
+msgid "Cuéntanos tu requerimiento"
+msgstr "Tell us your requirement"
+
+msgid "Tu Nombre"
+msgstr "Your Name"
+
+msgid "Email Profesional"
+msgstr "Professional Email"
+
+msgid "Asunto del Proyecto"
+msgstr "Project Subject"
+
+msgid "Desarrollo de Software a Medida"
+msgstr "Custom Software Development"
+
+msgid "Soporte, Mantenimiento o M365"
+msgstr "Support, Maintenance or M365"
+
+msgid "Otro requerimiento"
+msgstr "Other requirement"
+
+msgid "Detalles técnicos"
+msgstr "Technical details"
+
+msgid "Describe los desafíos o funcionalidades clave que buscas resolver..."
+msgstr "Describe the key challenges or features you want to solve..."
+
+msgid "Desplegar Solicitud"
+msgstr "Deploy Request"
+
+# ayuda.html
+msgid "Hola, ¿cómo podemos ayudarte?"
+msgstr "Hello, how can we help you?"
+
+msgid "Explorar por producto"
+msgstr "Browse by product"
+
+msgid "Marcación Digital"
+msgstr "Digital Attendance"
+
+msgid "Facturación y Planes"
+msgstr "Billing & Plans"
+
+msgid "Artículos Populares"
+msgstr "Popular Articles"
+
+msgid "¿Aún no encuentras la solución?"
+msgstr "Still can't find the solution?"
+
+msgid "Abrir Ticket de Soporte"
+msgstr "Open Support Ticket"
+
+# blog.html
+msgid "Insights & Tecnología"
+msgstr "Insights & Technology"
+
+msgid "Ver todos"
+msgstr "View all"
+
+msgid "Leer artículo"
+msgstr "Read article"
+
+msgid "Base de datos vacía"
+msgstr "Empty database"
+
+msgid ""
+"Aún no hay artículos publicados. Ingresa al panel de administración para "
+"escribir el primero."
+msgstr ""
+"No articles published yet. Log in to the admin panel to write the first one."
+
+msgid "Actualiza tu sistema operativo mental"
+msgstr "Update your mental operating system"
+
+msgid "Suscribirse"
+msgstr "Subscribe"
+
+# precios.html
+msgid "Planes y Precios"
+msgstr "Plans & Pricing"
+
+msgid "Invierte en"
+msgstr "Invest in"
+
+msgid "Infraestructura Real"
+msgstr "Real Infrastructure"
+
+msgid "Servicios Base"
+msgstr "Base Services"
+
+msgid "Soporte TI"
+msgstr "IT Support"
+
+msgid "Ecosistema SaaS"
+msgstr "SaaS Ecosystem"
+
+msgid "SpendBox"
+msgstr "SpendBox"
+
+msgid "Perseus Finanzas"
+msgstr "Perseus Finance"
+
+msgid "Cotizar Proyecto"
+msgstr "Quote Project"
+
+msgid "Desplegar Sistema"
+msgstr "Deploy System"
+
+msgid "Arquitectura Enterprise a Medida"
+msgstr "Custom Enterprise Architecture"
+
+msgid "Contactar al área de ingeniería"
+msgstr "Contact the engineering team"
+
+# nosotros.html
+msgid "Fundador & CEO"
+msgstr "Founder & CEO"
+
+msgid "Nuestra Visión"
+msgstr "Our Vision"
+
+msgid "Compromiso Inquebrantable"
+msgstr "Unwavering Commitment"
+
+# privacidad.html  
+msgid "Política de Privacidad y Tratamiento de Datos."
+msgstr "Privacy Policy and Data Processing."
+
+msgid "Derechos del Titular (ARCO)"
+msgstr "Data Subject Rights (ARCO)"
+
+# post_detail.html
+msgid "min de lectura"
+msgstr "min read"
+
+msgid "¿Necesitas ayuda técnica con este tema?"
+msgstr "Need technical help with this topic?"
+
+msgid "Contactar a un Ingeniero"
+msgstr "Contact an Engineer"
+
+# servicios/apps.html
+msgid "Aplicaciones Corporativas"
+msgstr "Corporate Applications"
+
+msgid "Interacción de siguiente nivel."
+msgstr "Next-level interaction."
+
+msgid "¿Tienes un proceso manual que necesita ser digitalizado?"
+msgstr "Do you have a manual process that needs to be digitized?"
+
+msgid "Iniciar Proyecto a Medida"
+msgstr "Start Custom Project"
+
+# servicios/marcacion.html
+msgid "Gestión de asistencia sin fricciones."
+msgstr "Frictionless attendance management."
+
+msgid "Ver la Plataforma"
+msgstr "View the Platform"
+
+msgid "Reconocimiento Facial IA"
+msgstr "AI Facial Recognition"
+
+msgid "¿Listo para modernizar tus RRHH?"
+msgstr "Ready to modernize your HR?"
+
+msgid "Ver Planes"
+msgstr "View Plans"
+
+msgid "Agendar Demo"
+msgstr "Schedule Demo"
+
+# servicios/gym.html
+msgid "El control total de tu centro en tiempo real."
+msgstr "Total control of your center in real time."
+
+msgid "Cotizar Sistema"
+msgstr "Quote System"
+
+msgid "¿Listo para evolucionar tu gestión?"
+msgstr "Ready to evolve your management?"
+
+msgid "Solicitar una Demo"
+msgstr "Request a Demo"
+
+# servicios/spendbox.html
+msgid "Auditoría de obra automatizada con Inteligencia Artificial."
+msgstr "Automated construction auditing with Artificial Intelligence."
+
+msgid "Cotizar SpendBox"
+msgstr "Quote SpendBox"
+
+msgid "Actualiza tu gestión contable"
+msgstr "Upgrade your accounting management"
+
+msgid "Solicitar Demostración"
+msgstr "Request a Demo"
+
+# servicios/consultoria.html
+msgid "Escala tu negocio sin límites."
+msgstr "Scale your business without limits."
+
+msgid "Ver Servicios"
+msgstr "View Services"
+
+msgid "Auditoría Gratuita"
+msgstr "Free Audit"
+
+# servicios/web.html
+msgid "Código que domina el mercado."
+msgstr "Code that dominates the market."
+
+msgid "Ver Arquitectura"
+msgstr "View Architecture"
+
+msgid "Cotizar Desarrollo"
+msgstr "Quote Development"
+
+# Traducciones adicionales — templates restantes
+# Agregar estas entradas al archivo locale/en/LC_MESSAGES/django.po existente
+# ─── ayuda.html ───────────────────────────────────────────────
+msgid "Busca artículos, guías o soluciones..."
+msgstr "Search articles, guides or solutions..."
+
+msgid "Buscar"
+msgstr "Search"
+
+msgid "Búsquedas comunes:"
+msgstr "Popular searches:"
+
+msgid "Configurar Huella"
+msgstr "Configure Fingerprint"
+
+msgid "Cambio de Dominio"
+msgstr "Domain Change"
+
+msgid ""
+"Guías de enrolamiento, biometría, app móvil y cumplimiento Dirección del "
+"Trabajo."
+msgstr ""
+"Enrollment guides, biometrics, mobile app and Labor Directorate compliance."
+
+msgid ""
+"Manual de administración, cambios de contenido, correos corporativos y "
+"analíticas."
+msgstr "Administration manual, content changes, corporate email and analytics."
+
+msgid ""
+"Actualización de métodos de pago, descarga de facturas y cambios de "
+"suscripción."
+msgstr "Payment method updates, invoice downloads and subscription changes."
+
+msgid "¿Cómo enrolo la huella de un nuevo trabajador?"
+msgstr "How do I enroll a new employee's fingerprint?"
+
+msgid "Para enrolar a un nuevo trabajador, dirígete al menú Colaboradores..."
+msgstr "To enroll a new employee, go to the Collaborators menu..."
+
+msgid "¿El sistema cumple con la normativa de la DT?"
+msgstr "Does the system comply with DT regulations?"
+
+msgid "Sí, nuestra plataforma cumple al 100% con los dictámenes de la DT..."
+msgstr "Yes, our platform fully complies with all DT rulings..."
+
+msgid "¿Cómo edito los textos de mi sitio web?"
+msgstr "How do I edit my website's text content?"
+
+msgid ""
+"Puedes ingresar al panel de administración añadiendo /admin al final de la "
+"URL..."
+msgstr ""
+"You can access the admin panel by adding /admin to the end of the URL..."
+
+msgid ""
+"Nuestro equipo de soporte técnico nivel 2 está disponible para ayudarte a "
+"resolver cualquier incidencia técnica con tus plataformas."
+msgstr ""
+"Our level 2 technical support team is available to help you resolve any "
+"technical issues with your platforms."
+
+# ─── contacto.html ────────────────────────────────────────────
+msgid "Sistema en línea"
+msgstr "System online"
+
+msgid "Conecta con la"
+msgstr "Connect with"
+
+msgid "ingeniería del futuro."
+msgstr "the engineering of the future."
+
+msgid ""
+"¿Tienes un desafío técnico complejo? Nuestro equipo está listo para diseñar, "
+"desarrollar y desplegar la solución que tu empresa necesita."
+msgstr ""
+"Do you have a complex technical challenge? Our team is ready to design, "
+"develop and deploy the solution your company needs."
+
+msgid "Centro de Operaciones"
+msgstr "Operations Center"
+
+msgid "Email Corporativo"
+msgstr "Corporate Email"
+
+msgid "WhatsApp Tech Support"
+msgstr "WhatsApp Tech Support"
+
+msgid "Chat directo para cotizaciones ágiles"
+msgstr "Direct chat for agile quotes"
+
+msgid "Status del Sistema"
+msgstr "System Status"
+
+msgid "Equipo técnico:"
+msgstr "Technical team:"
+
+msgid "DISPONIBLE"
+msgstr "AVAILABLE"
+
+msgid "Especialidad: Full-Stack & Cloud M365"
+msgstr "Specialty: Full-Stack & Cloud M365"
+
+msgid "Ej: Juan Pérez"
+msgstr "E.g.: John Smith"
+
+# ─── blog.html ────────────────────────────────────────────────
+msgid "Tecnología"
+msgstr "Technology"
+
+msgid ""
+"Arquitectura de software, normativas de la DT y estrategias operativas "
+"directo del código fuente de nuestros ingenieros."
+msgstr ""
+"Software architecture, DT regulations and operational strategies direct from "
+"our engineers' source code."
+
+msgid ""
+"Únete a cientos de líderes TI. Recibe análisis técnicos y guías normativas "
+"directo en tu bandeja de entrada."
+msgstr ""
+"Join hundreds of IT leaders. Receive technical analysis and regulatory "
+"guides directly in your inbox."
+
+msgid "Tu correo corporativo"
+msgstr "Your corporate email"
+
+# ─── nosotros.html ────────────────────────────────────────────
+msgid "Nuestro ADN"
+msgstr "Our DNA"
+
+msgid "Forjando el futuro de la"
+msgstr "Forging the future of"
+
+msgid "ingeniería digital."
+msgstr "digital engineering."
+
+msgid "Del Hardware a la Arquitectura Escalable"
+msgstr "From Hardware to Scalable Architecture"
+
+msgid "Mi fascinación por la tecnología comenzó en las bases más profundas..."
+msgstr "My fascination with technology started from the deepest foundations..."
+
+msgid ""
+"Perseus es el resultado de unir la precisión de la ingeniería de servidores "
+"con el diseño de software de élite."
+msgstr ""
+"Perseus is the result of combining server engineering precision with elite "
+"software design."
+
+msgid "Ser la columna vertebral tecnológica de las empresas en crecimiento..."
+msgstr "To be the technological backbone of growing companies..."
+
+# ─── privacidad.html ──────────────────────────────────────────
+msgid "Documento de Confidencialidad"
+msgstr "Confidentiality Document"
+
+msgid "Privacidad y Seguridad"
+msgstr "Privacy & Security"
+
+msgid "Política de Privacidad y"
+msgstr "Privacy Policy and"
+
+msgid ""
+"Última actualización: Abril 2026. En Perseus Technology, la seguridad de la "
+"información no es solo una característica, es nuestra base operativa."
+msgstr ""
+"Last updated: April 2026. At Perseus Technology, information security is not "
+"just a feature — it is our operational foundation."
+
+msgid "Cumplimiento Normativo (Ley 19.628)"
+msgstr "Regulatory Compliance (Law 19.628)"
+
+msgid "Tratamiento de Datos Biométricos"
+msgstr "Biometric Data Processing"
+
+msgid "Estándares de Seguridad"
+msgstr "Security Standards"
+
+msgid ""
+"Los datos son utilizados exclusivamente para la verificación de identidad "
+"laboral."
+msgstr "Data is used exclusively for labor identity verification."
+
+msgid "Aplicamos encriptación de grado militar (AES-256)."
+msgstr "We apply military-grade encryption (AES-256)."
+
+# ─── precios.html ─────────────────────────────────────────────
+msgid "Flujo de Datos Continuo"
+msgstr "Continuous Data Flow"
+
+msgid "Pago Único desde"
+msgstr "One-time payment from"
+
+msgid "Planes desde"
+msgstr "Plans from"
+
+msgid "Mes"
+msgstr "Month"
+
+msgid "Nota:"
+msgstr "Note:"
+
+msgid ""
+"Las mantenciones y cambios estructurales posteriores a la entrega se cotizan "
+"como servicios adicionales."
+msgstr ""
+"Post-delivery maintenance and structural changes are quoted as additional "
+"services."
+
+msgid "Hablar con un Especialista"
+msgstr "Talk to a Specialist"
+
+msgid "Normativa DT Activa"
+msgstr "Active DT Regulation"
+
+msgid "Por trabajador activo / mes"
+msgstr "Per active worker / month"
+
+msgid "Uso completo / mes"
+msgstr "Full usage / month"
+
+msgid "Software Gratuito"
+msgstr "Free Software"
+
+msgid "Integrar IA a mi obra"
+msgstr "Integrate AI into my project"
+
+msgid "Activar Plataforma"
+msgstr "Activate Platform"
+
+msgid "Crear Cuenta"
+msgstr "Create Account"
+
+msgid ""
+"Entendemos que cada operación es única. Si requieres integraciones "
+"personalizadas (APIs), servidores dedicados o un despliegue masivo de "
+"usuarios, diseñamos un SLA específico para ti."
+msgstr ""
+"We understand that every operation is unique. If you require custom "
+"integrations (APIs), dedicated servers or a massive user deployment, we "
+"design a specific SLA for you."
+
+msgid "Diseño UI/UX Premium (Glassmorphism)"
+msgstr "Premium UI/UX Design (Glassmorphism)"
+
+msgid "Arquitectura escalable Python/Django"
+msgstr "Scalable Python/Django Architecture"
+
+msgid "Panel autoadministrable"
+msgstr "Self-managed admin panel"
+
+msgid "Administración de Microsoft 365"
+msgstr "Microsoft 365 Administration"
+
+msgid "Respaldo de datos (Backups)"
+msgstr "Data Backups"
+
+msgid "Mantención de hardware"
+msgstr "Hardware Maintenance"
+
+msgid "Creación de dominios corporativos"
+msgstr "Corporate Domain Creation"
+
+msgid "Asesoría TI y configuración de software"
+msgstr "IT Consulting and Software Configuration"
+
+msgid "App móvil Android/iOS + GPS"
+msgstr "Android/iOS Mobile App + GPS"
+
+msgid "Libro de remuneraciones digital"
+msgstr "Digital payroll book"
+
+msgid "Dashboard RRHH en tiempo real"
+msgstr "Real-time HR Dashboard"
+
+msgid "Extracción de boletas con IA (OCR)"
+msgstr "AI Receipt Extraction (OCR)"
+
+msgid "Gestión de múltiples proyectos simultáneos"
+msgstr "Multi-project management"
+
+msgid "Exportación de reportes fiscales a CSV"
+msgstr "Tax report export to CSV"
+
+msgid "Calendario interactivo de reservas"
+msgstr "Interactive booking calendar"
+
+msgid "Control de aforos automatizado"
+msgstr "Automated capacity control"
+
+msgid "Módulos de Nutrición y Kinesiología"
+msgstr "Nutrition and Kinesiology Modules"
+
+msgid "Dashboard de ingresos y egresos analítico"
+msgstr "Analytical income and expense dashboard"
+
+msgid "Categorización de movimientos"
+msgstr "Transaction categorization"
+
+msgid "Acceso seguro en la nube (24/7)"
+msgstr "Secure cloud access (24/7)"
+
+# ─── servicios/apps.html ──────────────────────────────────────
+msgid "Arquitectura Modular"
+msgstr "Modular Architecture"
+
+msgid "Aplicaciones"
+msgstr "Applications"
+
+msgid "Corporativas"
+msgstr "Corporate"
+
+msgid ""
+"Interacción de siguiente nivel. Construimos software a medida diseñado para "
+"automatizar, controlar y escalar la operativa de tu negocio."
+msgstr ""
+"Next-level interaction. We build custom software designed to automate, "
+"control and scale your business operations."
+
+msgid "Biometría"
+msgstr "Biometrics"
+
+msgid "Ver características"
+msgstr "View features"
+
+msgid "Motor OCR"
+msgstr "OCR Engine"
+
+msgid ""
+"Auditoría financiera de obras automatizada. Nuestro motor de Inteligencia "
+"Artificial extrae datos de boletas y facturas al instante, manteniendo el "
+"presupuesto en tiempo real."
+msgstr ""
+"Automated construction financial auditing. Our AI engine extracts data from "
+"receipts and invoices instantly, keeping the budget up to date in real time."
+
+msgid ""
+"Plataforma web diseñada para la gestión inteligente de centros deportivos. "
+"Permite agendar reservas en bloques con control de aforo y ofrece un "
+"monitoreo analítico."
+msgstr ""
+"Web platform designed for intelligent sports center management. Schedule "
+"block reservations with capacity control and analytical monitoring."
+
+msgid "Bloques Dinámicos"
+msgstr "Dynamic Blocks"
+
+msgid ""
+"Sistema web orientado al control total de finanzas y flujos de caja. Permite "
+"el seguimiento detallado de ingresos y gastos, y dashboards interactivos "
+"para decisiones."
+msgstr ""
+"Web system focused on total financial control and cash flow. Enables "
+"detailed income and expense tracking with interactive decision-making "
+"dashboards."
+
+msgid "Data Analytics"
+msgstr "Data Analytics"
+
+msgid ""
+"Cuéntanos tu problema. Nuestro equipo diseñará la arquitectura de software "
+"exacta que tu empresa necesita para escalar de manera segura."
+msgstr ""
+"Tell us your problem. Our team will design the exact software architecture "
+"your company needs to scale securely."
+
+# ─── servicios/web.html ───────────────────────────────────────
+msgid "Ingeniería de Software"
+msgstr "Software Engineering"
+
+msgid "Código que domina"
+msgstr "Code that dominates"
+
+msgid "el mercado."
+msgstr "the market."
+
+msgid ""
+"No hacemos simples sitios web. Construimos plataformas rápidas, escalables y "
+"orientadas a la conversión utilizando Python, Django y las mejores prácticas "
+"SEO."
+msgstr ""
+"We don't build simple websites. We build fast, scalable, conversion-focused "
+"platforms using Python, Django and best SEO practices."
+
+msgid "Frameworks Modernos"
+msgstr "Modern Frameworks"
+
+msgid "Sistemas Web a Medida"
+msgstr "Custom Web Systems"
+
+msgid ""
+"Desarrollamos herramientas internas, CRMs y portales utilizando la potencia "
+"de Python y Django. Bases de datos robustas diseñadas para procesar miles de "
+"transacciones por segundo sin latencia."
+msgstr ""
+"We develop internal tools, CRMs and portals using the power of Python and "
+"Django. Robust databases designed to process thousands of transactions per "
+"second without latency."
+
+msgid "Landings de Alta Conversión"
+msgstr "High-Conversion Landing Pages"
+
+msgid ""
+"Sitios web ultra rápidos diseñados con técnicas de UX/UI persuasivas para "
+"transformar visitantes en clientes reales."
+msgstr ""
+"Ultra-fast websites designed with persuasive UX/UI techniques to convert "
+"visitors into real customers."
+
+msgid "Tiendas Online (E-Commerce)"
+msgstr "Online Stores (E-Commerce)"
+
+msgid ""
+"Catálogos digitales autoadministrables con carritos de compra e integración "
+"directa con pasarelas de pago chilenas e internacionales."
+msgstr ""
+"Self-managed digital catalogs with shopping carts and direct integration "
+"with Chilean and international payment gateways."
+
+msgid "Integración de APIs"
+msgstr "API Integration"
+
+msgid ""
+"Conectamos tu web con sistemas externos (ERP, Facturación Electrónica, CRMs) "
+"para automatizar el flujo de información de tu empresa."
+msgstr ""
+"We connect your website with external systems (ERP, Electronic Invoicing, "
+"CRMs) to automate your company's information flow."
+
+msgid "SEO & Performance Técnico"
+msgstr "SEO & Technical Performance"
+
+msgid ""
+"Optimización Lighthouse. Entregamos plataformas con arquitectura limpia para "
+"asegurar la máxima visibilidad orgánica en Google."
+msgstr ""
+"Lighthouse optimization. We deliver platforms with clean architecture to "
+"ensure maximum organic visibility on Google."
+
+msgid "Empresas que confían en nuestro desarrollo"
+msgstr "Companies that trust our development"
+
+# ─── servicios/consultoria.html ───────────────────────────────
+msgid "Soporte & Operaciones TI"
+msgstr "IT Support & Operations"
+
+msgid "Escala tu negocio"
+msgstr "Scale your business"
+
+msgid "sin límites."
+msgstr "without limits."
+
+msgid ""
+"Desde el soporte integral de hardware hasta la administración de Microsoft "
+"365 y el cumplimiento ISO 27001. Digitalizamos y blindamos la "
+"infraestructura operativa de tu empresa."
+msgstr ""
+"From comprehensive hardware support to Microsoft 365 administration and ISO "
+"27001 compliance. We digitize and secure your company's operational "
+"infrastructure."
+
+msgid "Soporte Integral de Hardware y Software"
+msgstr "Comprehensive Hardware and Software Support"
+
+msgid ""
+"Mantenimiento preventivo, resolución de incidencias en equipos físicos y "
+"despliegue de software empresarial. Aseguramos que la continuidad operativa "
+"de tu equipo no se detenga jamás."
+msgstr ""
+"Preventive maintenance, physical equipment incident resolution and "
+"enterprise software deployment. We ensure your team's operational continuity "
+"never stops."
+
+msgid "Administración Microsoft 365"
+msgstr "Microsoft 365 Administration"
+
+msgid ""
+"Gestión centralizada de licencias, correos Exchange, SharePoint y "
+"configuración de políticas de seguridad para todo tu ecosistema."
+msgstr ""
+"Centralized management of licenses, Exchange email, SharePoint and security "
+"policy configuration for your entire ecosystem."
+
+msgid "Dominio Empresarial"
+msgstr "Corporate Domain"
+
+msgid ""
+"Identidad digital sólida. Creación, configuración de DNS y protección contra "
+"suplantación para tus dominios corporativos."
+msgstr ""
+"Solid digital identity. DNS creation, configuration and anti-spoofing "
+"protection for your corporate domains."
+
+msgid "Digitalización de Procesos"
+msgstr "Process Digitization"
+
+msgid ""
+"Transición de flujos manuales y papel a entornos 100% digitales, optimizando "
+"tiempos de respuesta y reduciendo errores operativos."
+msgstr ""
+"Transition from manual and paper-based flows to 100% digital environments, "
+"optimizing response times and reducing operational errors."
+
+msgid "Cumplimiento ISO 27001"
+msgstr "ISO 27001 Compliance"
+
+msgid ""
+"Asesoría experta en ciberseguridad y gestión de riesgos para adaptar tu "
+"infraestructura al estándar internacional de seguridad de la información."
+msgstr ""
+"Expert cybersecurity and risk management consulting to adapt your "
+"infrastructure to the international information security standard."
+
+msgid "Stack Tecnológico Dominado"
+msgstr "Mastered Technology Stack"
+
+# ─── servicios/gym.html ───────────────────────────────────────
+msgid "Módulo Deportivo Activo"
+msgstr "Active Sports Module"
+
+msgid "El control total"
+msgstr "Total control"
+
+msgid "de tu centro en"
+msgstr "of your center in"
+
+msgid ""
+"Moderniza la administración de tu gimnasio. Un sistema diseñado para "
+"gestionar reservas, controlar aforos y monitorear el rendimiento de tu "
+"comunidad con reportes analíticos precisos."
+msgstr ""
+"Modernize your gym administration. A system designed to manage reservations, "
+"control capacity and monitor your community's performance with precise "
+"analytical reports."
+
+msgid "Asistencia Hoy"
+msgstr "Today's Attendance"
+
+msgid "Alumnos"
+msgstr "Students"
+
+msgid "Infraestructura"
+msgstr "Infrastructure"
+
+msgid "Arquitectura de Alto Rendimiento"
+msgstr "High-Performance Architecture"
+
+msgid "Reservas Inteligentes"
+msgstr "Smart Reservations"
+
+msgid ""
+"Calendario interactivo con gestión de cupos por hora. Evita aglomeraciones y "
+"optimiza el flujo de alumnos diarios con un solo clic."
+msgstr ""
+"Interactive calendar with hourly capacity management. Avoid overcrowding and "
+"optimize the daily student flow with a single click."
+
+msgid "Módulos de Salud"
+msgstr "Health Modules"
+
+msgid ""
+"No solo entrenamiento. Integra fichas de alumnos, reservas nutricionales y "
+"seguimientos kinesiológicos en un único ecosistema."
+msgstr ""
+"Not just training. Integrate student records, nutrition reservations and "
+"kinesiology follow-ups into a single ecosystem."
+
+msgid "Métricas en Tiempo Real"
+msgstr "Real-Time Metrics"
+
+msgid ""
+"Dashboard analítico con flujo de asistencia, promedios diarios y días de "
+"mayor actividad para una toma de decisiones informada."
+msgstr ""
+"Analytical dashboard with attendance flow, daily averages and peak activity "
+"days for informed decision-making."
+
+msgid ""
+"Deja atrás las hojas de cálculo y los mensajes de WhatsApp desordenados. "
+"Digitaliza tu comunidad hoy mismo."
+msgstr ""
+"Leave behind spreadsheets and disorganized WhatsApp messages. Digitize your "
+"community today."
+
+# ─── servicios/marcacion.html ─────────────────────────────────
+msgid "Certificado Dirección del Trabajo"
+msgstr "Labor Directorate Certified"
+
+msgid "Gestión de asistencia"
+msgstr "Attendance management"
+
+msgid "Desarrollador Software"
+msgstr "Software Developer"
+
+msgid "Entrada"
+msgstr "Check-in"
+
+msgid "Oficina Central"
+msgstr "Main Office"
+
+msgid "Marcación Exitosa"
+msgstr "Successful Check-in"
+
+msgid "Diseño que impulsa la"
+msgstr "Design that drives"
+
+msgid ""
+"Navega por Perseus Control. Una interfaz clara, moderna y sin manuales "
+"complejos, donde cada colaborador tiene el control de su tiempo."
+msgstr ""
+"Navigate Perseus Control. A clear, modern interface without complex manuals, "
+"where every employee controls their own time."
+
+msgid "Acceso Seguro y Universal"
+msgstr "Secure and Universal Access"
+
+msgid "Autenticación cifrada RUT / Contraseña"
+msgstr "Encrypted RUT / Password Authentication"
+
+msgid "Recuperación automatizada con Recursos Humanos"
+msgstr "Automated recovery with Human Resources"
+
+msgid "Panel Central de Operaciones"
+msgstr "Central Operations Panel"
+
+msgid "Status en vivo (Jefe TI, GPS Activo)"
+msgstr "Live status (IT Manager, Active GPS)"
+
+msgid "Historial de marcaciones del día con ubicación"
+msgstr "Daily check-in history with location"
+
+msgid ""
+"Implementa Perseus Enterprise hoy y despídete de los errores manuales y las "
+"multas normativas."
+msgstr ""
+"Deploy Perseus Enterprise today and say goodbye to manual errors and "
+"regulatory fines."
+
+# ─── servicios/spendbox.html ──────────────────────────────────
+msgid "Activa"
+msgstr "Active"
+
+msgid "Auditoría de obra"
+msgstr "Construction Audit"
+
+msgid "automatizada con"
+msgstr "automated with"
+
+msgid ""
+"Sube una foto de la boleta y deja que SpendBox haga el resto. Nuestro motor "
+"OCR extrae los montos, RUT y folios en milisegundos, asignando cada gasto al "
+"presupuesto de tu proyecto."
+msgstr ""
+"Upload a photo of the receipt and let SpendBox do the rest. Our OCR engine "
+"extracts amounts, RUT and invoice numbers in milliseconds, assigning each "
+"expense to your project budget."
+
+msgid "Motor Core"
+msgstr "Core Engine"
+
+msgid "Tecnología diseñada para Constructoras"
+msgstr "Technology designed for Construction Companies"
+
+msgid "Extracción OCR"
+msgstr "OCR Extraction"
+
+msgid ""
+"Olvídate de la digitación manual. Nuestro motor procesa imágenes y PDFs, "
+"reconociendo textos, fechas y valores financieros con precisión milimétrica."
+msgstr ""
+"Forget manual data entry. Our engine processes images and PDFs, recognizing "
+"text, dates and financial values with millimetric precision."
+
+msgid "Control Multiproyecto"
+msgstr "Multi-project Control"
+
+msgid ""
+"Administra múltiples obras en paralelo. Visualiza en tiempo real el saldo "
+"disponible, el presupuesto consumido y los documentos asociados a cada "
+"centro de costo."
+msgstr ""
+"Manage multiple projects in parallel. View in real time the available "
+"balance, consumed budget and documents associated with each cost center."
+
+msgid "Trazabilidad Fiscal"
+msgstr "Fiscal Traceability"
+
+msgid ""
+"Un buscador potente para encontrar cualquier gasto por proveedor, fecha o "
+"folio. Genera exportaciones limpias listas para revisión contable y "
+"auditorías."
+msgstr ""
+"A powerful search engine to find any expense by supplier, date or invoice "
+"number. Generate clean exports ready for accounting review and audits."
+
+msgid ""
+"Reduce el tiempo de digitación a cero y elimina el extravío de boletas en "
+"terreno. Implementa SpendBox en tus obras hoy."
+msgstr ""
+"Reduce typing time to zero and eliminate lost receipts in the field. Deploy "
+"SpendBox on your projects today."

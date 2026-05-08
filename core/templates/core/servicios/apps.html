@@ -1,53 +1,21 @@
 {% extends 'core/base.html' %}
-{% load static %}
+{% load static i18n %}
 
-{% block title %}Apps Corporativas | Perseus Technology{% endblock %}
-
+{% block title %}{% trans "Apps Corporativas" %} | Perseus Technology{% endblock %}
 {% block body_class %}bg-[#05080a] text-gray-300 antialiased selection:bg-cyan-500/30 selection:text-cyan-200{% endblock %}
 
 {% block extra_css %}
 <style>
-    .spotlight-wrapper {
-        position: relative;
-    }
-    .spotlight-wrapper::before {
-        content: "";
-        position: absolute;
-        inset: 0;
-        background: radial-gradient(circle 600px at var(--mouse-x, 50%) var(--mouse-y, 50%), rgba(34, 211, 238, 0.08), transparent 40%);
-        pointer-events: none;
-        z-index: 1;
-    }
-
-    .bg-grid-tech {
-        background-size: 50px 50px;
-        background-image: 
-            linear-gradient(to right, rgba(255, 255, 255, 0.03) 1px, transparent 1px),
-            linear-gradient(to bottom, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
-        mask-image: linear-gradient(to bottom, black 40%, transparent 100%);
-        -webkit-mask-image: linear-gradient(to bottom, black 40%, transparent 100%);
-    }
-
-    .tilt-card {
-        background: linear-gradient(145deg, rgba(15, 20, 25, 0.7) 0%, rgba(5, 10, 15, 0.9) 100%);
-        backdrop-filter: blur(12px); 
-        border: 1px solid rgba(255, 255, 255, 0.05); 
-        transform-style: preserve-3d;
-        transform: perspective(1000px);
-        transition: border-color 0.4s ease, box-shadow 0.4s ease;
-    }
-    
-    .tilt-content {
-        transform: translateZ(40px);
-        transition: transform 0.3s ease;
-    }
-
-    .tilt-card.cyan:hover { border-color: rgba(34, 211, 238, 0.4); box-shadow: 0 20px 40px -10px rgba(0,0,0,0.8), inset 0 0 30px -5px rgba(34, 211, 238, 0.15); }
-    .tilt-card.emerald:hover { border-color: rgba(52, 211, 153, 0.4); box-shadow: 0 20px 40px -10px rgba(0,0,0,0.8), inset 0 0 30px -5px rgba(52, 211, 153, 0.15); }
-    .tilt-card.indigo:hover { border-color: rgba(99, 102, 241, 0.4); box-shadow: 0 20px 40px -10px rgba(0,0,0,0.8), inset 0 0 30px -5px rgba(99, 102, 241, 0.15); }
-    .tilt-card.blue:hover { border-color: rgba(59, 130, 246, 0.4); box-shadow: 0 20px 40px -10px rgba(0,0,0,0.8), inset 0 0 30px -5px rgba(59, 130, 246, 0.15); }
-    .tilt-card.teal:hover { border-color: rgba(20, 184, 166, 0.4); box-shadow: 0 20px 40px -10px rgba(0,0,0,0.8), inset 0 0 30px -5px rgba(20, 184, 166, 0.15); }
-
+    .spotlight-wrapper { position: relative; }
+    .spotlight-wrapper::before { content: ""; position: absolute; inset: 0; background: radial-gradient(circle 600px at var(--mouse-x, 50%) var(--mouse-y, 50%), rgba(34,211,238,0.08), transparent 40%); pointer-events: none; z-index: 1; }
+    .bg-grid-tech { background-size: 50px 50px; background-image: linear-gradient(to right, rgba(255,255,255,0.03) 1px, transparent 1px), linear-gradient(to bottom, rgba(255,255,255,0.03) 1px, transparent 1px); mask-image: linear-gradient(to bottom, black 40%, transparent 100%); -webkit-mask-image: linear-gradient(to bottom, black 40%, transparent 100%); }
+    .tilt-card { background: linear-gradient(145deg, rgba(15,20,25,0.7) 0%, rgba(5,10,15,0.9) 100%); backdrop-filter: blur(12px); border: 1px solid rgba(255,255,255,0.05); transform-style: preserve-3d; transform: perspective(1000px); transition: border-color 0.4s ease, box-shadow 0.4s ease; }
+    .tilt-content { transform: translateZ(40px); transition: transform 0.3s ease; }
+    .tilt-card.cyan:hover { border-color: rgba(34,211,238,0.4); box-shadow: 0 20px 40px -10px rgba(0,0,0,0.8), inset 0 0 30px -5px rgba(34,211,238,0.15); }
+    .tilt-card.emerald:hover { border-color: rgba(52,211,153,0.4); box-shadow: 0 20px 40px -10px rgba(0,0,0,0.8), inset 0 0 30px -5px rgba(52,211,153,0.15); }
+    .tilt-card.indigo:hover { border-color: rgba(99,102,241,0.4); box-shadow: 0 20px 40px -10px rgba(0,0,0,0.8), inset 0 0 30px -5px rgba(99,102,241,0.15); }
+    .tilt-card.blue:hover { border-color: rgba(59,130,246,0.4); box-shadow: 0 20px 40px -10px rgba(0,0,0,0.8), inset 0 0 30px -5px rgba(59,130,246,0.15); }
+    .tilt-card.teal:hover { border-color: rgba(20,184,166,0.4); box-shadow: 0 20px 40px -10px rgba(0,0,0,0.8), inset 0 0 30px -5px rgba(20,184,166,0.15); }
     .tech-pill { background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.1); color: #9ca3af; font-size: 0.75rem; padding: 0.3rem 0.8rem; border-radius: 999px; transition: all 0.3s; }
 </style>
 {% endblock %}
@@ -61,276 +29,130 @@
     <div class="max-w-[1200px] mx-auto relative z-10">
         <div class="text-center max-w-3xl mx-auto mb-24 tilt-content">
             <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-cyan-500/10 border border-cyan-500/30 text-cyan-400 text-xs font-mono uppercase mb-6 shadow-[0_0_20px_rgba(34,211,238,0.2)]">
-                <i class="fa-solid fa-layer-group"></i> Arquitectura Modular
+                <i class="fa-solid fa-layer-group"></i> {% trans "Arquitectura Modular" %}
             </div>
             <h1 class="text-5xl md:text-7xl font-extrabold text-white mb-6 tracking-tight leading-[1.1]">
-                Aplicaciones <br>
-                <span class="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 via-blue-500 to-purple-500">Corporativas</span>
+                {% trans "Aplicaciones" %} <br>
+                <span class="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 via-blue-500 to-purple-500">{% trans "Corporativas" %}</span>
             </h1>
             <p class="text-gray-400 text-lg md:text-xl leading-relaxed">
-                Interacción de siguiente nivel. Construimos software a medida diseñado para automatizar, controlar y escalar la operativa de tu negocio.
+                {% trans "Interacción de siguiente nivel. Construimos software a medida diseñado para automatizar, controlar y escalar la operativa de tu negocio." %}
             </p>
         </div>
 
         <div class="grid grid-cols-1 md:grid-cols-2 gap-10">
+            <!-- Marcación Digital -->
             <div class="tilt-card emerald rounded-[2rem] p-8 md:p-10 flex flex-col h-full relative overflow-hidden group border-t-2 border-t-emerald-500/30">
-                <div class="absolute top-0 right-0 w-40 h-40 bg-emerald-500/10 blur-[50px] group-hover:bg-emerald-500/20 transition-all pointer-events-none"></div>              
+                <div class="absolute top-0 right-0 w-40 h-40 bg-emerald-500/10 blur-[50px] group-hover:bg-emerald-500/20 transition-all pointer-events-none"></div>
                 <div class="tilt-content flex flex-col h-full">
                     <div class="flex justify-between items-start mb-8">
-                        <div class="w-16 h-16 rounded-2xl bg-black border border-emerald-500/30 flex items-center justify-center text-emerald-400 text-3xl shadow-[0_0_20px_rgba(52,211,153,0.3)]">
-                            <i class="fa-solid fa-fingerprint"></i>
-                        </div>
-                        <span class="px-3 py-1 bg-emerald-500 text-black text-xs font-bold uppercase tracking-wider rounded-full shadow-[0_0_15px_rgba(52,211,153,0.4)]">
-                            Certificado DT
-                        </span>
+                        <div class="w-16 h-16 rounded-2xl bg-black border border-emerald-500/30 flex items-center justify-center text-emerald-400 text-3xl shadow-[0_0_20px_rgba(52,211,153,0.3)]"><i class="fa-solid fa-fingerprint"></i></div>
+                        <span class="px-3 py-1 bg-emerald-500 text-black text-xs font-bold uppercase tracking-wider rounded-full shadow-[0_0_15px_rgba(52,211,153,0.4)]">{% trans "Certificado DT" %}</span>
                     </div>
-                    
-                    <h3 class="text-3xl font-bold text-white mb-3 group-hover:text-emerald-300 transition-colors">Marcación Digital</h3>
-                    <p class="text-gray-400 leading-relaxed mb-8 flex-grow">
-                        Control de asistencia biométrico con geolocalización GPS. Sistema inalterable que automatiza los registros del personal en terreno, cumpliendo estrictamente con la normativa.
-                    </p>
-                    
+                    <h3 class="text-3xl font-bold text-white mb-3 group-hover:text-emerald-300 transition-colors">{% trans "Marcación Digital" %}</h3>
+                    <p class="text-gray-400 leading-relaxed mb-8 flex-grow">{% trans "Control de asistencia biométrico con geolocalización GPS. Sistema inalterable que automatiza los registros del personal en terreno, cumpliendo estrictamente con la normativa." %}</p>
                     <div class="flex flex-wrap gap-2 mb-8">
                         <span class="tech-pill group-hover:border-emerald-500/40 group-hover:text-emerald-300">Django</span>
                         <span class="tech-pill group-hover:border-emerald-500/40 group-hover:text-emerald-300">GPS API</span>
-                        <span class="tech-pill group-hover:border-emerald-500/40 group-hover:text-emerald-300">Biometría</span>
+                        <span class="tech-pill group-hover:border-emerald-500/40 group-hover:text-emerald-300">{% trans "Biometría" %}</span>
                     </div>
-                    
                     <a href="{% url 'marcacion' %}" class="inline-flex items-center font-bold text-emerald-400 hover:text-emerald-300 transition w-max">
-                        Ver características <i class="fa-solid fa-arrow-right ml-2 group-hover:translate-x-2 transition-transform"></i>
+                        {% trans "Ver características" %} <i class="fa-solid fa-arrow-right ml-2 group-hover:translate-x-2 transition-transform"></i>
                     </a>
                 </div>
             </div>
 
+            <!-- SpendBox -->
             <div class="tilt-card indigo rounded-[2rem] p-8 md:p-10 flex flex-col h-full relative overflow-hidden group border-t-2 border-t-indigo-500/30">
                 <div class="absolute top-0 right-0 w-40 h-40 bg-indigo-500/10 blur-[50px] group-hover:bg-indigo-500/20 transition-all pointer-events-none"></div>
-                
                 <div class="tilt-content flex flex-col h-full">
                     <div class="flex justify-between items-start mb-8">
-                        <div class="w-16 h-16 rounded-2xl bg-black border border-indigo-500/30 flex items-center justify-center text-indigo-400 text-3xl shadow-[0_0_20px_rgba(99,102,241,0.3)]">
-                            <i class="fa-solid fa-robot"></i>
-                        </div>
-                        <span class="px-3 py-1 bg-indigo-500/20 text-indigo-300 text-xs font-bold uppercase tracking-wider rounded-full border border-indigo-500/40">
-                            IA / OCR
-                        </span>
+                        <div class="w-16 h-16 rounded-2xl bg-black border border-indigo-500/30 flex items-center justify-center text-indigo-400 text-3xl shadow-[0_0_20px_rgba(99,102,241,0.3)]"><i class="fa-solid fa-robot"></i></div>
+                        <span class="px-3 py-1 bg-indigo-500/20 text-indigo-300 text-xs font-bold uppercase tracking-wider rounded-full border border-indigo-500/40">{% trans "IA / OCR" %}</span>
                     </div>
-                    
                     <h3 class="text-3xl font-bold text-white mb-3 group-hover:text-indigo-300 transition-colors">SpendBox</h3>
-                    <p class="text-gray-400 leading-relaxed mb-8 flex-grow">
-                        Auditoría financiera de obras automatizada. Nuestro motor de Inteligencia Artificial extrae datos de boletas y facturas al instante, manteniendo el presupuesto en tiempo real.
-                    </p>
-                    
+                    <p class="text-gray-400 leading-relaxed mb-8 flex-grow">{% trans "Auditoría financiera de obras automatizada. Nuestro motor de Inteligencia Artificial extrae datos de boletas y facturas al instante, manteniendo el presupuesto en tiempo real." %}</p>
                     <div class="flex flex-wrap gap-2 mb-8">
-                        <span class="tech-pill group-hover:border-indigo-500/40 group-hover:text-indigo-300">Motor OCR</span>
+                        <span class="tech-pill group-hover:border-indigo-500/40 group-hover:text-indigo-300">{% trans "Motor OCR" %}</span>
                         <span class="tech-pill group-hover:border-indigo-500/40 group-hover:text-indigo-300">Python</span>
                         <span class="tech-pill group-hover:border-indigo-500/40 group-hover:text-indigo-300">SharePoint API</span>
                     </div>
-                    
                     <a href="{% url 'spendbox_app' %}" class="inline-flex items-center font-bold text-indigo-400 hover:text-indigo-300 transition w-max">
-                        Ver SpendBox <i class="fa-solid fa-arrow-right ml-2 group-hover:translate-x-2 transition-transform"></i>
+                        {% trans "Ver SpendBox" %} <i class="fa-solid fa-arrow-right ml-2 group-hover:translate-x-2 transition-transform"></i>
                     </a>
                 </div>
             </div>
 
+            <!-- GYM -->
             <div class="tilt-card blue rounded-[2rem] p-8 md:p-10 flex flex-col h-full relative overflow-hidden group border-t-2 border-t-blue-500/30">
                 <div class="absolute top-0 right-0 w-40 h-40 bg-blue-500/10 blur-[50px] group-hover:bg-blue-500/20 transition-all pointer-events-none"></div>
-                
                 <div class="tilt-content flex flex-col h-full">
                     <div class="flex justify-between items-start mb-8">
-                        <div class="w-16 h-16 rounded-2xl bg-black border border-blue-500/30 flex items-center justify-center text-blue-400 text-3xl shadow-[0_0_20px_rgba(59,130,246,0.3)]">
-                            <i class="fa-solid fa-dumbbell"></i>
-                        </div>
-                        <span class="px-3 py-1 bg-white/5 text-gray-300 text-xs font-bold uppercase tracking-wider rounded-full border border-white/10">
-                            SaaS / Gestión
-                        </span>
+                        <div class="w-16 h-16 rounded-2xl bg-black border border-blue-500/30 flex items-center justify-center text-blue-400 text-3xl shadow-[0_0_20px_rgba(59,130,246,0.3)]"><i class="fa-solid fa-dumbbell"></i></div>
+                        <span class="px-3 py-1 bg-white/5 text-gray-300 text-xs font-bold uppercase tracking-wider rounded-full border border-white/10">{% trans "SaaS / Gestión" %}</span>
                     </div>
-                    
-                    <h3 class="text-3xl font-bold text-white mb-3 group-hover:text-blue-300 transition-colors">Sistema de Reservas GYM</h3>
-                    <p class="text-gray-400 leading-relaxed mb-8 flex-grow">
-                        Plataforma web diseñada para la gestión inteligente de centros deportivos. Permite agendar reservas en bloques con control de aforo y ofrece un monitoreo analítico.
-                    </p>
-
+                    <h3 class="text-3xl font-bold text-white mb-3 group-hover:text-blue-300 transition-colors">{% trans "Sistema de Reservas GYM" %}</h3>
+                    <p class="text-gray-400 leading-relaxed mb-8 flex-grow">{% trans "Plataforma web diseñada para la gestión inteligente de centros deportivos. Permite agendar reservas en bloques con control de aforo y ofrece un monitoreo analítico." %}</p>
                     <div class="flex flex-wrap gap-2 mb-8">
                         <span class="tech-pill group-hover:border-blue-500/40 group-hover:text-blue-300">Django & Next.js</span>
-                        <span class="tech-pill group-hover:border-blue-500/40 group-hover:text-blue-300">Bloques Dinámicos</span>
+                        <span class="tech-pill group-hover:border-blue-500/40 group-hover:text-blue-300">{% trans "Bloques Dinámicos" %}</span>
                         <span class="tech-pill group-hover:border-blue-500/40 group-hover:text-blue-300">PostgreSQL</span>
                     </div>
-                    
                     <a href="{% url 'gym_app' %}" class="inline-flex items-center font-bold text-blue-400 hover:text-blue-300 transition w-max">
-                        Ver Sistema <i class="fa-solid fa-arrow-right ml-2 group-hover:translate-x-2 transition-transform"></i>
+                        {% trans "Ver Sistema" %} <i class="fa-solid fa-arrow-right ml-2 group-hover:translate-x-2 transition-transform"></i>
                     </a>
                 </div>
             </div>
 
+            <!-- Finanzas -->
             <div class="tilt-card teal rounded-[2rem] p-8 md:p-10 flex flex-col h-full relative overflow-hidden group border-t-2 border-t-teal-500/30">
                 <div class="absolute top-0 right-0 w-40 h-40 bg-teal-500/10 blur-[50px] group-hover:bg-teal-500/20 transition-all pointer-events-none"></div>
-                
                 <div class="tilt-content flex flex-col h-full">
                     <div class="flex justify-between items-start mb-8">
-                        <div class="w-16 h-16 rounded-2xl bg-black border border-teal-500/30 flex items-center justify-center text-teal-400 text-3xl shadow-[0_0_20px_rgba(20,184,166,0.3)]">
-                            <i class="fa-solid fa-chart-line"></i>
-                        </div>
-                        <span class="px-3 py-1 bg-teal-500/20 text-teal-300 text-xs font-bold uppercase tracking-wider rounded-full border border-teal-500/30">
-                            Analítica
-                        </span>
+                        <div class="w-16 h-16 rounded-2xl bg-black border border-teal-500/30 flex items-center justify-center text-teal-400 text-3xl shadow-[0_0_20px_rgba(20,184,166,0.3)]"><i class="fa-solid fa-chart-line"></i></div>
+                        <span class="px-3 py-1 bg-teal-500/20 text-teal-300 text-xs font-bold uppercase tracking-wider rounded-full border border-teal-500/30">{% trans "Analítica" %}</span>
                     </div>
-                    
-                    <h3 class="text-3xl font-bold text-white mb-3 group-hover:text-teal-300 transition-colors">Perseus Finanzas</h3>
-                    <p class="text-gray-400 leading-relaxed mb-8 flex-grow">
-                        Sistema web orientado al control total de finanzas y flujos de caja. Permite el seguimiento detallado de ingresos y gastos, y dashboards interactivos para decisiones.
-                    </p>
-
+                    <h3 class="text-3xl font-bold text-white mb-3 group-hover:text-teal-300 transition-colors">{% trans "Perseus Finanzas" %}</h3>
+                    <p class="text-gray-400 leading-relaxed mb-8 flex-grow">{% trans "Sistema web orientado al control total de finanzas y flujos de caja. Permite el seguimiento detallado de ingresos y gastos, y dashboards interactivos para decisiones." %}</p>
                     <div class="flex flex-wrap gap-2 mb-8">
-                        <span class="tech-pill group-hover:border-teal-500/40 group-hover:text-teal-300">Data Analytics</span>
+                        <span class="tech-pill group-hover:border-teal-500/40 group-hover:text-teal-300">{% trans "Data Analytics" %}</span>
                         <span class="tech-pill group-hover:border-teal-500/40 group-hover:text-teal-300">Dashboards</span>
                         <span class="tech-pill group-hover:border-teal-500/40 group-hover:text-teal-300">Cloud Storage</span>
                     </div>
-                                    
                     <a href="https://finanzas.pythonanywhere.com/login/" target="_blank" class="inline-flex items-center font-bold text-teal-400 hover:text-teal-300 transition w-max">
-                        Iniciar Sesión <i class="fa-solid fa-arrow-right-to-bracket ml-2 group-hover:translate-x-2 transition-transform"></i>
+                        {% trans "Iniciar Sesión" %} <i class="fa-solid fa-arrow-right-to-bracket ml-2 group-hover:translate-x-2 transition-transform"></i>
                     </a>
                 </div>
             </div>
         </div>
 
         <div class="mt-24 tilt-card cyan rounded-[3rem] p-12 md:p-16 text-center border border-cyan-500/30 relative overflow-hidden group">
-            <div class="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/cubes.png')] opacity-10 pointer-events-none"></div>
-            <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-full bg-gradient-to-r from-cyan-600/10 via-blue-500/10 to-transparent blur-[80px] pointer-events-none"></div>
-            
             <div class="tilt-content relative z-10 max-w-2xl mx-auto">
-                <h2 class="text-3xl md:text-4xl font-bold text-white mb-6">¿Tienes un proceso manual que necesita ser digitalizado?</h2>
-                <p class="text-gray-400 text-lg mb-8">Cuéntanos tu problema. Nuestro equipo diseñará la arquitectura de software exacta que tu empresa necesita para escalar de manera segura.</p>
+                <h2 class="text-3xl md:text-4xl font-bold text-white mb-6">{% trans "¿Tienes un proceso manual que necesita ser digitalizado?" %}</h2>
+                <p class="text-gray-400 text-lg mb-8">{% trans "Cuéntanos tu problema. Nuestro equipo diseñará la arquitectura de software exacta que tu empresa necesita para escalar de manera segura." %}</p>
                 <a href="{% url 'contacto' %}" class="inline-flex items-center bg-cyan-600 hover:bg-cyan-500 text-black font-extrabold py-4 px-10 rounded-2xl transition-all duration-300 shadow-[0_0_20px_rgba(34,211,238,0.4)] hover:shadow-[0_0_30px_rgba(34,211,238,0.6)]">
-                    Iniciar Proyecto a Medida <i class="fa-solid fa-terminal ml-3"></i>
+                    {% trans "Iniciar Proyecto a Medida" %} <i class="fa-solid fa-terminal ml-3"></i>
                 </a>
             </div>
         </div>
-
     </div>
 </main>
 {% endblock %}
 
 {% block extra_js %}
 <script>
-    window.addEventListener('load', function() {
-        const loader = document.getElementById('page-loader');
-        loader.classList.add('opacity-0');
-        setTimeout(() => { loader.style.display = 'none'; }, 500);
-    });
-
     const wrapper = document.getElementById('main-wrapper');
-    window.addEventListener('mousemove', (e) => {
-        const rect = wrapper.getBoundingClientRect();
-        const x = e.clientX - rect.left;
-        const y = e.clientY - rect.top;
-        wrapper.style.setProperty('--mouse-x', `${x}px`);
-        wrapper.style.setProperty('--mouse-y', `${y}px`);
-    });
-
+    window.addEventListener('mousemove', (e) => { const r = wrapper.getBoundingClientRect(); wrapper.style.setProperty('--mouse-x', `${e.clientX - r.left}px`); wrapper.style.setProperty('--mouse-y', `${e.clientY - r.top}px`); });
     const tiltCards = document.querySelectorAll('.tilt-card');
     tiltCards.forEach(card => {
-        card.addEventListener('mousemove', (e) => {
-            const rect = card.getBoundingClientRect();
-            const x = e.clientX - rect.left;
-            const y = e.clientY - rect.top;
-            
-            const centerX = rect.width / 2;
-            const centerY = rect.height / 2;
-            
-            const rotateX = ((y - centerY) / centerY) * -10; // Grados de inclinación
-            const rotateY = ((x - centerX) / centerX) * 10;
-            
-            card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale3d(1.02, 1.02, 1.02)`;
-        });
-
-        card.addEventListener('mouseleave', () => {
-            card.style.transform = `perspective(1000px) rotateX(0deg) rotateY(0deg) scale3d(1, 1, 1)`;
-            card.style.transition = "transform 0.5s ease, box-shadow 0.4s ease";
-        });
-        
-        card.addEventListener('mouseenter', () => {
-            card.style.transition = "none"; // Quita transición al entrar para que siga el mouse rápido
-        });
+        card.addEventListener('mousemove', (e) => { const r = card.getBoundingClientRect(); const rX = ((e.clientY - r.top - r.height/2) / (r.height/2)) * -10; const rY = ((e.clientX - r.left - r.width/2) / (r.width/2)) * 10; card.style.transform = `perspective(1000px) rotateX(${rX}deg) rotateY(${rY}deg) scale3d(1.02,1.02,1.02)`; });
+        card.addEventListener('mouseleave', () => { card.style.transform = `perspective(1000px) rotateX(0deg) rotateY(0deg) scale3d(1,1,1)`; card.style.transition = "transform 0.5s ease, box-shadow 0.4s ease"; });
+        card.addEventListener('mouseenter', () => { card.style.transition = "none"; });
     });
-
-    const canvas = document.getElementById('data-forcefield');
-    const ctx = canvas.getContext('2d');
-    let width, height, particles = [];
-    
-    let mouse = { x: null, y: null, radius: 150 };
-    window.addEventListener('mousemove', (e) => {
-        mouse.x = e.x;
-        mouse.y = e.y;
-    });
-
-    function initCanvas() {
-        width = window.innerWidth;
-        height = window.innerHeight;
-        canvas.width = width;
-        canvas.height = height;
-        particles = [];
-        
-        let particleCount = (width * height) / 8000;
-        for (let i = 0; i < particleCount; i++) {
-            particles.push(new Particle());
-        }
-    }
-
-    class Particle {
-        constructor() {
-            this.x = Math.random() * width;
-            this.y = Math.random() * height;
-            this.baseY = this.y; 
-            this.speed = (Math.random() * 2) + 0.5; 
-            this.size = Math.random() * 1.5 + 0.5;
-            const colors = ['rgba(34, 211, 238, 0.6)', 'rgba(59, 130, 246, 0.6)', 'rgba(168, 85, 247, 0.4)'];
-            this.color = colors[Math.floor(Math.random() * colors.length)];
-        }
-        
-        update() {
-            this.x += this.speed;
-            
-            if (this.x > width) {
-                this.x = 0;
-                this.y = this.baseY;
-            }
-
-            if (mouse.x != null && mouse.y != null) {
-                let dx = mouse.x - this.x;
-                let dy = mouse.y - this.y;
-                let distance = Math.sqrt(dx * dx + dy * dy);
-                
-                if (distance < mouse.radius) {
-                    let force = (mouse.radius - distance) / mouse.radius;
-                    let direction = dy > 0 ? -1 : 1; 
-                    this.y += direction * force * 4; 
-                } else {
-                    if (this.y !== this.baseY) {
-                        this.y -= (this.y - this.baseY) * 0.05;
-                    }
-                }
-            }
-            
-            this.draw();
-        }
-        
-        draw() {
-            ctx.beginPath();
-            ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
-            ctx.fillStyle = this.color;
-            ctx.fill();
-        }
-    }
-
-    function animateCanvas() {
-        requestAnimationFrame(animateCanvas);
-        ctx.clearRect(0, 0, width, height);
-        
-        particles.forEach(p => p.update());
-    }
-
-    window.addEventListener('resize', initCanvas);
-    initCanvas();
-    animateCanvas();
+    const canvas = document.getElementById('data-forcefield'); const ctx = canvas.getContext('2d'); let w, h, parts = []; let mouse = { x: null, y: null, radius: 150 };
+    window.addEventListener('mousemove', (e) => { mouse.x = e.x; mouse.y = e.y; });
+    function initCanvas() { w = canvas.width = window.innerWidth; h = canvas.height = window.innerHeight; parts = []; for(let i = 0; i < (w*h)/8000; i++) parts.push({ x: Math.random()*w, y: Math.random()*h, baseY: 0, speed: Math.random()*2+0.5, size: Math.random()*1.5+0.5, color: ['rgba(34,211,238,0.6)','rgba(59,130,246,0.6)','rgba(168,85,247,0.4)'][Math.floor(Math.random()*3)] }); parts.forEach(p => p.baseY = p.y); }
+    function animateCanvas() { requestAnimationFrame(animateCanvas); ctx.clearRect(0,0,w,h); parts.forEach(p => { p.x += p.speed; if(p.x > w) { p.x = 0; p.y = p.baseY; } if(mouse.x) { let dx = mouse.x-p.x, dy = mouse.y-p.y, dist = Math.sqrt(dx*dx+dy*dy); if(dist < mouse.radius) { p.y += (dy > 0 ? -1 : 1) * ((mouse.radius-dist)/mouse.radius) * 4; } else { p.y -= (p.y-p.baseY)*0.05; } } ctx.beginPath(); ctx.arc(p.x,p.y,p.size,0,Math.PI*2); ctx.fillStyle = p.color; ctx.fill(); }); }
+    window.addEventListener('resize', initCanvas); initCanvas(); animateCanvas();
 </script>
 {% endblock %}
