@@ -5,7 +5,6 @@ from django.template.loader import render_to_string
 from django.utils.html import strip_tags
 from django.conf import settings
 from .models import Post, Categoria
-# from .forms import ContactoForm  <-- La comenté porque no la estás usando en la vista
 
 def home(request):
     return render(request, 'core/home.html', {'nombre_empresa': 'Perseus Technology'})
@@ -82,7 +81,7 @@ def contacto(request):
         text_admin = strip_tags(html_admin)
         
         subject_admin = f"Nuevo Requerimiento Perseus: {asunto.capitalize()} - {nombre}"
-        to_admin = [correo_remitente] # Te lo envías a ti mismo
+        to_admin = [correo_remitente] 
 
         msg_admin = EmailMultiAlternatives(subject_admin, text_admin, remitente_con_nombre, to_admin)
         msg_admin.attach_alternative(html_admin, "text/html")
