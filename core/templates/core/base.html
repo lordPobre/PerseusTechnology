@@ -5,7 +5,16 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{% block title %}{{ nombre_empresa }} | {% trans "La plataforma para tu empresa" %}{% endblock %}</title>
-    
+    <meta name="description" content="{% block meta_description %}Desarrollo de software, plataformas web y aplicaciones corporativas de alto rendimiento con inteligencia artificial.{% endblock %}">
+    <meta property="og:title" content="{% block og_title %}Perseus Technology{% endblock %}">
+    <meta property="og:description" content="{% block og_description %}Construimos plataformas rápidas, escalables y orientadas a la conversión.{% endblock %}">
+    <meta property="og:image" content="{% static 'core/img/perseus-banner.png' %}">
+    <meta property="og:url" content="{{ request.build_absolute_uri }}">
+    {% get_current_language as LANGUAGE_CODE %}
+    <html lang="{{ LANGUAGE_CODE }}">
+    <link rel="alternate" hreflang="es" href="https://www.perseustechnology.dev/es{{ request.path }}">
+    <link rel="alternate" hreflang="en" href="https://www.perseustechnology.dev/en{{ request.path }}">
+    <link rel="alternate" hreflang="x-default" href="https://www.perseustechnology.dev/es{{ request.path }}">  
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="icon" type="image/png" href="{% static 'core/img/favicon.png' %}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />

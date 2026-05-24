@@ -1,6 +1,8 @@
 {% extends 'core/base.html' %}
 {% load static i18n %}
-
+{% block meta_description %}
+    Descripción de la página...
+{% endblock meta_description %}
 {% block title %}{% trans "Sistema de Gestión Deportiva" %} | Perseus Technology{% endblock %}
 {% block body_class %}bg-[#05080a] text-gray-300 antialiased selection:bg-blue-500/30 selection:text-blue-200{% endblock %}
 
@@ -129,15 +131,15 @@
                 <div class="absolute right-0 top-0 w-16 md:w-48 h-full bg-gradient-to-l from-[#05080a] to-transparent z-20 pointer-events-none"></div>
                 
                 <div class="gym-carousel-track gap-6 px-4">
-                    <img src="{% static 'core/img/dashboard.jpg' %}" alt="Gym Vista 1" class="gym-portfolio-image">
-                    <img src="{% static 'core/img/calendario-gym.png' %}" alt="Gym Vista 2" class="gym-portfolio-image">
-                    <img src="{% static 'core/img/alumnos-gym.png' %}" alt="Gym Vista 3" class="gym-portfolio-image">
-                    <img src="{% static 'core/img/reporte-gym.png' %}" alt="Gym Vista 4" class="gym-portfolio-image">
+                    <img src="{% static 'core/img/dashboard.jpg' %}" alt="Gym Vista 1" class="gym-portfolio-image" loading="lazy">
+                    <img src="{% static 'core/img/calendario-gym.png' %}" alt="Gym Vista 2" class="gym-portfolio-image" loading="lazy">
+                    <img src="{% static 'core/img/alumnos-gym.png' %}" alt="Gym Vista 3" class="gym-portfolio-image" loading="lazy">
+                    <img src="{% static 'core/img/reporte-gym.png' %}" alt="Gym Vista 4" class="gym-portfolio-image" loading="lazy">
                     
-                    <img src="{% static 'core/img/dashboard.jpg' %}" alt="Gym Vista 1" class="gym-portfolio-image">
-                    <img src="{% static 'core/img/calendario-gym.png' %}" alt="Gym Vista 2" class="gym-portfolio-image">
-                    <img src="{% static 'core/img/alumnos-gym.png' %}" alt="Gym Vista 3" class="gym-portfolio-image">
-                    <img src="{% static 'core/img/reporte-gym.png' %}" alt="Gym Vista 4" class="gym-portfolio-image">
+                    <img src="{% static 'core/img/dashboard.jpg' %}" alt="Gym Vista 1" class="gym-portfolio-image" loading="lazy">
+                    <img src="{% static 'core/img/calendario-gym.png' %}" alt="Gym Vista 2" class="gym-portfolio-image" loading="lazy">
+                    <img src="{% static 'core/img/alumnos-gym.png' %}" alt="Gym Vista 3" class="gym-portfolio-image" loading="lazy">
+                    <img src="{% static 'core/img/reporte-gym.png' %}" alt="Gym Vista 4" class="gym-portfolio-image" loading="lazy">
                 </div>
             </div>
         </section>

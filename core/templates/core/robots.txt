@@ -1,0 +1,6 @@
+User-agent: *
+Disallow: /perseus-access-x1/
+Disallow: /en/perseus-access-x1/
+Disallow: /es/perseus-access-x1/
+
+Sitemap: https://www.perseustechnology.dev/sitemap.xml

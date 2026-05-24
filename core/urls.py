@@ -16,5 +16,4 @@ urlpatterns = [
     path('blog/', views.pagina_blog, name='blog'),
     path('blog/<slug:slug>/', views.post_detail, name='post_detail'),
     path('privacidad/', views.privacidad, name='privacidad'),
-
 ]
