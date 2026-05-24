@@ -604,14 +604,20 @@
 {% block extra_js %}
 <script defer src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r134/three.min.js"></script>
 <script defer src="https://cdn.jsdelivr.net/npm/vanta@latest/dist/vanta.net.min.js"></script>
+
 <script>
     window.addEventListener('load', function() {
         const loader = document.getElementById('page-loader');
-        if(loader) { loader.classList.add('opacity-0'); setTimeout(() => { loader.classList.add('pointer-events-none'); }, 300); }
+        if(loader) { 
+            loader.classList.add('opacity-0'); 
+            setTimeout(() => { loader.classList.add('pointer-events-none'); }, 300); 
+        }
+        if (typeof VANTA !== 'undefined') {
+            VANTA.NET({ el: "#vanta-canvas-unico", mouseControls: true, touchControls: true, gyroControls: false, minHeight: 200, minWidth: 200, scale: 1, scaleMobile: 1, color: 0x22d3ee, backgroundColor: 0xffffff, points: 10, maxDistance: 20, spacing: 16 });
+            VANTA.NET({ el: "#vanta-canvas-roi", mouseControls: true, touchControls: true, gyroControls: false, minHeight: 200, minWidth: 200, scale: 1, scaleMobile: 1, color: 0x6366f1, backgroundColor: 0xf9fafb, points: 9, maxDistance: 22, spacing: 17 });
+            VANTA.NET({ el: "#vanta-canvas-contacto", mouseControls: true, touchControls: true, gyroControls: false, minHeight: 200, minWidth: 200, scale: 1, scaleMobile: 1, color: 0x06b6d4, backgroundColor: 0xf9fafb, points: 8, maxDistance: 20, spacing: 18 });
+        }
     });
-    VANTA.NET({ el: "#vanta-canvas-unico", mouseControls: true, touchControls: true, gyroControls: false, minHeight: 200, minWidth: 200, scale: 1, scaleMobile: 1, color: 0x22d3ee, backgroundColor: 0xffffff, points: 10, maxDistance: 20, spacing: 16 });
-    VANTA.NET({ el: "#vanta-canvas-roi", mouseControls: true, touchControls: true, gyroControls: false, minHeight: 200, minWidth: 200, scale: 1, scaleMobile: 1, color: 0x6366f1, backgroundColor: 0xf9fafb, points: 9, maxDistance: 22, spacing: 17 });
-    VANTA.NET({ el: "#vanta-canvas-contacto", mouseControls: true, touchControls: true, gyroControls: false, minHeight: 200, minWidth: 200, scale: 1, scaleMobile: 1, color: 0x06b6d4, backgroundColor: 0xf9fafb, points: 8, maxDistance: 20, spacing: 18 });
 
     document.addEventListener('DOMContentLoaded', function() {
         const slides = document.querySelectorAll('.carousel-item');
@@ -619,22 +625,37 @@
         const dots = dotsContainer ? dotsContainer.querySelectorAll('div') : [];
         const colorClasses = ['bg-cyan-500','bg-indigo-500','bg-blue-500','bg-teal-500'];
         let currentIndex = 0;
+        
         function showSlide(index) {
             if(slides.length === 0) return;
             slides.forEach(s => s.classList.remove('active'));
-            if(dots.length > 0) { dots.forEach(d => { d.className = 'w-2 h-1.5 rounded-full bg-gray-600 transition-all duration-300'; }); dots[index].className = `w-6 h-1.5 rounded-full ${colorClasses[index]} transition-all duration-300`; }
+            if(dots.length > 0) { 
+                dots.forEach(d => { d.className = 'w-2 h-1.5 rounded-full bg-gray-600 transition-all duration-300'; }); 
+                dots[index].className = `w-6 h-1.5 rounded-full ${colorClasses[index]} transition-all duration-300`; 
+            }
             slides[index].classList.add('active');
         }
         if(slides.length > 0) { setInterval(() => { currentIndex = (currentIndex + 1) % slides.length; showSlide(currentIndex); }, 5000); }
 
         const observer = new IntersectionObserver((entries, obs) => {
-            entries.forEach(e => { if(e.isIntersecting) { e.target.classList.remove('opacity-0','translate-y-16','translate-y-24'); e.target.classList.add('opacity-100','translate-y-0'); obs.unobserve(e.target); } });
+            entries.forEach(e => { 
+                if(e.isIntersecting) { 
+                    e.target.classList.remove('opacity-0','translate-y-16','translate-y-24'); 
+                    e.target.classList.add('opacity-100','translate-y-0'); 
+                    obs.unobserve(e.target); 
+                } 
+            });
         }, { threshold: 0.2 });
         document.querySelectorAll('.scroll-reveal').forEach(el => observer.observe(el));
 
         const laserObs = new IntersectionObserver((entries) => {
-            if(entries[0].isIntersecting) { const l = document.getElementById('timeline-laser'); if(l) { l.classList.remove('scale-y-0'); l.classList.add('scale-y-100'); } laserObs.disconnect(); }
+            if(entries[0].isIntersecting) { 
+                const l = document.getElementById('timeline-laser'); 
+                if(l) { l.classList.remove('scale-y-0'); l.classList.add('scale-y-100'); } 
+                laserObs.disconnect(); 
+            }
         }, { threshold: 0.1 });
+        
         const secMet = document.getElementById('metodologia');
         if(secMet) laserObs.observe(secMet);
     });

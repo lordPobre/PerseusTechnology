@@ -16,7 +16,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{% block title %}{{ nombre_empresa }} | {% trans "La plataforma para tu empresa" %}{% endblock %}</title>
-    <meta name="description" content="Empresa de ingeniería de software en Chile. Desarrollamos plataformas web, aplicaciones corporativas con Django y sistemas de marcación y auditoría, ayuda en Infraestructura TI.">
+    
+    <meta name="description" content="{% block meta_description %}Empresa de ingeniería de software en Chile. Desarrollamos plataformas web, aplicaciones corporativas con Django y sistemas de marcación y auditoría, ayuda en Infraestructura TI.{% endblock meta_description %}">
     
     <meta property="og:title" content="{% block og_title %}Perseus Technology{% endblock %}">
     <meta property="og:description" content="{% block og_description %}Construimos plataformas rápidas, escalables y orientadas a la conversión.{% endblock %}">
@@ -55,7 +56,8 @@
         .animate-tech-text { animation: color-shift-text 4s ease-in-out infinite; }
     </style>
 
-    <script defer src="https://kit.fontawesome.com/b9539d09c2.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
