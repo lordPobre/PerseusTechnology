@@ -1,8 +1,6 @@
 {% extends 'core/base.html' %}
 {% load static i18n %}
-{% block meta_description %}
-    Descripción de la página...
-{% endblock meta_description %}
+{% block meta_description %}Control de asistencia biométrica inalterable por GPS. Plataforma de marcación laboral bajo cumplimiento estricto de la normativa de la Dirección del Trabajo.{% endblock meta_description %}
 {% block title %}Perseus Enterprise | {% trans "Marcación Digital" %} | Perseus Technology{% endblock %}
 {% block body_class %}bg-gray-50 text-gray-900 antialiased selection:bg-blue-200 selection:text-blue-900{% endblock %}
 
@@ -82,7 +80,7 @@
             <div class="flex flex-col lg:flex-row items-center gap-12 lg:gap-20 scroll-reveal">
                 <div class="lg:w-4/12 relative group mx-auto">
                     <div class="relative w-full max-w-[320px] rounded-[3rem] shadow-2xl overflow-hidden border-[6px] border-white">
-                        <img src="{% static 'core/img/login-marcacion.png' %}" alt="Login Perseus Control" class="w-full h-auto object-cover">
+                        <img src="{% static 'core/img/login-marcacion.webp' %}" alt="Login Perseus Control" class="w-full h-auto object-cover">
                     </div>
                 </div>
                 <div class="lg:w-8/12 light-glass-card p-10 rounded-[2.5rem]">
@@ -127,8 +125,8 @@
 {% endblock %}
 
 {% block extra_js %}
-<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r134/three.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/vanta@latest/dist/vanta.waves.min.js"></script>
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r134/three.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/vanta@latest/dist/vanta.waves.min.js"></script>
 <script>
     document.addEventListener('DOMContentLoaded', function() {
         if(document.getElementById('vanta-waves-bg')) {

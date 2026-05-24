@@ -40,7 +40,7 @@ MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
-    'django.middleware.locale.LocaleMiddleware',  # ← NUEVO: entre Sessions y Common
+    'django.middleware.locale.LocaleMiddleware',  
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
@@ -60,7 +60,7 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
-                'django.template.context_processors.i18n',  # ← NUEVO
+                'django.template.context_processors.i18n',  
             ],
         },
     },
@@ -89,17 +89,13 @@ AUTH_PASSWORD_VALIDATORS = [
     {'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator'},
 ]
 
-# ============================================================
-# INTERNACIONALIZACIÓN (i18n)
-# ============================================================
-LANGUAGE_CODE = 'es'  # Español como idioma predeterminado
+LANGUAGE_CODE = 'es'  
 
 LANGUAGES = [
     ('es', _('Español')),
     ('en', _('English')),
 ]
 
-# Directorio donde Django buscará los archivos de traducción
 LOCALE_PATHS = [
     BASE_DIR / 'locale',
 ]
@@ -107,7 +103,6 @@ LOCALE_PATHS = [
 TIME_ZONE = 'America/Santiago'
 USE_I18N = True
 USE_TZ = True
-# ============================================================
 
 CLOUDINARY_STORAGE = {
     'CLOUD_NAME': os.getenv('CLOUDINARY_CLOUD_NAME'),

@@ -1,8 +1,6 @@
 {% extends 'core/base.html' %}
 {% load static i18n %}
-{% block meta_description %}
-    Descripción de la página...
-{% endblock meta_description %}
+{% block meta_description %}Consultoría TI e infraestructura Cloud corporativa. Expertos en administración de Microsoft 365, despliegue de servidores y soporte técnico especializado.{% endblock meta_description %}
 {% block title %}{% trans "Consultoría TI" %} | Perseus Technology{% endblock %}
 {% block body_class %}bg-[#0a0f1a] text-white antialiased selection:bg-purple-500/30 selection:text-purple-200{% endblock %}
 
@@ -104,8 +102,8 @@
 {% endblock %}
 
 {% block extra_js %}
-<script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.1.9/p5.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/vanta@latest/dist/vanta.topology.min.js"></script>
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.1.9/p5.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/vanta@latest/dist/vanta.topology.min.js"></script>
 <script>
     document.addEventListener('DOMContentLoaded', function() {
         VANTA.TOPOLOGY({ el: "#vanta-topology-bg", mouseControls: true, touchControls: true, gyroControls: false, minHeight: 200, minWidth: 200, scale: 1, scaleMobile: 1, color: 0x8b5cf6, backgroundColor: 0x0a0f1a });

@@ -1,8 +1,6 @@
 {% extends 'core/base.html' %}
 {% load static i18n %}
-{% block meta_description %}
-    Descripción de la página...
-{% endblock meta_description %}
+{% block meta_description %}Diseño y desarrollo web profesional de alta velocidad. Creamos plataformas institucionales y e-commerce escalables con arquitectura Django y Next.js.{% endblock meta_description %}
 {% block title %}{% trans "Desarrollo Web" %} | Perseus Technology{% endblock %}
 {% block body_class %}bg-[#0a0f1a] text-white antialiased selection:bg-emerald-500/30 selection:text-emerald-200{% endblock %}
 
@@ -85,12 +83,12 @@
         <div class="relative">
             <div class="carousel-track items-center">
                 {% for i in "12121212" %}
-                <a href="https://vcchile.cl/" target="_blank" class="flex items-center justify-center w-[250px] px-10 opacity-50 hover:opacity-100 transition duration-500 group/item">
-                    <img src="{% static 'core/img/logo4.png' %}" alt="VC Chile" class="h-20 md:h-24 w-auto object-contain group-hover/item:scale-110 transition-all duration-300 filter grayscale opacity-70 group-hover/item:grayscale-0 group-hover/item:opacity-100" loading="lazy">
+                <a href="https://vcchile.cl/" target="_blank" rel="noopener noreferrer" class="flex items-center justify-center w-[250px] px-10 opacity-50 hover:opacity-100 transition duration-500 group/item">
+                    <img src="{% static 'core/img/logo4.webp' %}" alt="VC Chile" class="h-20 md:h-24 w-auto object-contain group-hover/item:scale-110 transition-all duration-300 filter grayscale opacity-70 group-hover/item:grayscale-0 group-hover/item:opacity-100" loading="lazy">
                 </a>
                 
-                <a href="https://dlparfums-web.vercel.app/" target="_blank" class="flex items-center justify-center w-[250px] px-10 opacity-50 hover:opacity-100 transition duration-500 group/item">
-                    <img src="{% static 'core/img/logo-dl.png' %}" alt="DL Parfums" class="h-20 md:h-24 w-auto object-contain group-hover/item:scale-110 transition-all duration-300 filter grayscale opacity-70 group-hover/item:grayscale-0 group-hover/item:opacity-100" loading="lazy">
+                <a href="https://dlparfums-web.vercel.app/" target="_blank" rel="noopener noreferrer" class="flex items-center justify-center w-[250px] px-10 opacity-50 hover:opacity-100 transition duration-500 group/item">
+                    <img src="{% static 'core/img/logo-dl.webp' %}" alt="DL Parfums" class="h-20 md:h-24 w-auto object-contain group-hover/item:scale-110 transition-all duration-300 filter grayscale opacity-70 group-hover/item:grayscale-0 group-hover/item:opacity-100" loading="lazy">
                 </a>
                 {% endfor %}
             </div>
@@ -157,19 +155,19 @@
             <div class="absolute right-0 top-0 w-16 md:w-48 h-full bg-gradient-to-l from-[#0a0f1a] to-transparent z-20 pointer-events-none"></div>
             
             <div class="portfolio-carousel-track gap-6 px-4">
-                <img src="{% static 'core/img/inicio-vc.png' %}" alt="Portafolio Perseus" class="portfolio-image" loading="lazy">
+                <img src="{% static 'core/img/inicio-vc.webp' %}" alt="Portafolio Perseus" class="portfolio-image" loading="lazy">
                 <img src="{% static 'core/img/dashboard-dl.png' %}" alt="Portafolio Perseus" class="portfolio-image" loading="lazy">
                 <img src="{% static 'core/img/catalogo-dl.png' %}" alt="Portafolio Perseus" class="portfolio-image" loading="lazy">
-                <img src="{% static 'core/img/proyectos-vc.png' %}" alt="Portafolio Perseus" class="portfolio-image" loading="lazy">
+                <img src="{% static 'core/img/proyectos-vc.webp' %}" alt="Portafolio Perseus" class="portfolio-image" loading="lazy">
                 <img src="{% static 'core/img/contacto-dl.png' %}" alt="Portafolio Perseus" class="portfolio-image" loading="lazy">
-                <img src="{% static 'core/img/nosotros-vc.png' %}" alt="Portafolio Perseus" class="portfolio-image" loading="lazy">
+                <img src="{% static 'core/img/nosotros-vc.webp' %}" alt="Portafolio Perseus" class="portfolio-image" loading="lazy">
                 
-                <img src="{% static 'core/img/inicio-vc.png' %}" alt="Portafolio Perseus" class="portfolio-image" loading="lazy">
+                <img src="{% static 'core/img/inicio-vc.webp' %}" alt="Portafolio Perseus" class="portfolio-image" loading="lazy">
                 <img src="{% static 'core/img/dashboard-dl.png' %}" alt="Portafolio Perseus" class="portfolio-image" loading="lazy">
                 <img src="{% static 'core/img/catalogo-dl.png' %}" alt="Portafolio Perseus" class="portfolio-image" loading="lazy">
-                <img src="{% static 'core/img/proyectos-vc.png' %}" alt="Portafolio Perseus" class="portfolio-image" loading="lazy">
+                <img src="{% static 'core/img/proyectos-vc.webp' %}" alt="Portafolio Perseus" class="portfolio-image" loading="lazy">
                 <img src="{% static 'core/img/contacto-dl.png' %}" alt="Portafolio Perseus" class="portfolio-image" loading="lazy">
-                <img src="{% static 'core/img/nosotros-vc.png' %}" alt="Portafolio Perseus" class="portfolio-image" loading="lazy">
+                <img src="{% static 'core/img/nosotros-vc.webp' %}" alt="Portafolio Perseus" class="portfolio-image" loading="lazy">
             </div>
         </div>
     </section>
@@ -184,8 +182,8 @@
 {% endblock %}
 
 {% block extra_js %}
-<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r134/three.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/vanta@latest/dist/vanta.dots.min.js"></script>
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r134/three.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/vanta@latest/dist/vanta.dots.min.js"></script>
 <script>
     const modal = document.getElementById("imageModal");
     const modalImg = document.getElementById("modalImage");

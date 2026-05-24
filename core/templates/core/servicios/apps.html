@@ -1,8 +1,6 @@
 {% extends 'core/base.html' %}
 {% load static i18n %}
-{% block meta_description %}
-    Descripción de la página...
-{% endblock meta_description %}
+{% block meta_description %}Desarrollo de aplicaciones corporativas a medida. Creamos ecosistemas digitales inteligentes para optimizar la productividad y gestión de tu equipo.{% endblock meta_description %}
 {% block title %}{% trans "Apps Corporativas" %} | Perseus Technology{% endblock %}
 {% block body_class %}bg-[#05080a] text-gray-300 antialiased selection:bg-cyan-500/30 selection:text-cyan-200{% endblock %}
 
@@ -43,7 +41,6 @@
         </div>
 
         <div class="grid grid-cols-1 md:grid-cols-2 gap-10">
-            <!-- Marcación Digital -->
             <div class="tilt-card emerald rounded-[2rem] p-8 md:p-10 flex flex-col h-full relative overflow-hidden group border-t-2 border-t-emerald-500/30">
                 <div class="absolute top-0 right-0 w-40 h-40 bg-emerald-500/10 blur-[50px] group-hover:bg-emerald-500/20 transition-all pointer-events-none"></div>
                 <div class="tilt-content flex flex-col h-full">
@@ -64,7 +61,6 @@
                 </div>
             </div>
 
-            <!-- SpendBox -->
             <div class="tilt-card indigo rounded-[2rem] p-8 md:p-10 flex flex-col h-full relative overflow-hidden group border-t-2 border-t-indigo-500/30">
                 <div class="absolute top-0 right-0 w-40 h-40 bg-indigo-500/10 blur-[50px] group-hover:bg-indigo-500/20 transition-all pointer-events-none"></div>
                 <div class="tilt-content flex flex-col h-full">
@@ -85,7 +81,6 @@
                 </div>
             </div>
 
-            <!-- GYM -->
             <div class="tilt-card blue rounded-[2rem] p-8 md:p-10 flex flex-col h-full relative overflow-hidden group border-t-2 border-t-blue-500/30">
                 <div class="absolute top-0 right-0 w-40 h-40 bg-blue-500/10 blur-[50px] group-hover:bg-blue-500/20 transition-all pointer-events-none"></div>
                 <div class="tilt-content flex flex-col h-full">
@@ -106,7 +101,6 @@
                 </div>
             </div>
 
-            <!-- Finanzas -->
             <div class="tilt-card teal rounded-[2rem] p-8 md:p-10 flex flex-col h-full relative overflow-hidden group border-t-2 border-t-teal-500/30">
                 <div class="absolute top-0 right-0 w-40 h-40 bg-teal-500/10 blur-[50px] group-hover:bg-teal-500/20 transition-all pointer-events-none"></div>
                 <div class="tilt-content flex flex-col h-full">
@@ -121,7 +115,7 @@
                         <span class="tech-pill group-hover:border-teal-500/40 group-hover:text-teal-300">Dashboards</span>
                         <span class="tech-pill group-hover:border-teal-500/40 group-hover:text-teal-300">Cloud Storage</span>
                     </div>
-                    <a href="https://finanzas.pythonanywhere.com/login/" target="_blank" class="inline-flex items-center font-bold text-teal-400 hover:text-teal-300 transition w-max">
+                    <a href="https://finanzas.pythonanywhere.com/login/" target="_blank" rel="noopener noreferrer" class="inline-flex items-center font-bold text-teal-400 hover:text-teal-300 transition w-max">
                         {% trans "Iniciar Sesión" %} <i class="fa-solid fa-arrow-right-to-bracket ml-2 group-hover:translate-x-2 transition-transform"></i>
                     </a>
                 </div>

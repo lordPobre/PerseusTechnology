@@ -12,24 +12,28 @@
       gtag('config', 'G-D4L5VPQ7BJ');
     </script>
     {% endif %}
+    
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{% block title %}{{ nombre_empresa }} | {% trans "La plataforma para tu empresa" %}{% endblock %}</title>
-    <meta name="description" content="{% block meta_description %}Desarrollo de software, plataformas web y aplicaciones corporativas de alto rendimiento con inteligencia artificial.{% endblock %}">
+    <meta name="description" content="Empresa de ingeniería de software en Chile. Desarrollamos plataformas web, aplicaciones corporativas con Django y sistemas de marcación y auditoría, ayuda en Infraestructura TI.">
+    
     <meta property="og:title" content="{% block og_title %}Perseus Technology{% endblock %}">
     <meta property="og:description" content="{% block og_description %}Construimos plataformas rápidas, escalables y orientadas a la conversión.{% endblock %}">
     <meta property="og:image" content="{% static 'core/img/perseus-banner.png' %}">
     <meta property="og:url" content="{{ request.build_absolute_uri }}">
+    
     {% get_current_language as LANGUAGE_CODE %}
-    <html lang="{{ LANGUAGE_CODE }}">
     <link rel="alternate" hreflang="es" href="https://www.perseustechnology.dev/es{{ request.path }}">
     <link rel="alternate" hreflang="en" href="https://www.perseustechnology.dev/en{{ request.path }}">
-    <link rel="alternate" hreflang="x-default" href="https://www.perseustechnology.dev/es{{ request.path }}">  
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="icon" type="image/png" href="{% static 'core/img/favicon.png' %}">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+    <link rel="alternate" hreflang="x-default" href="https://www.perseustechnology.dev/es{{ request.path }}">
+    <link rel="canonical" href="{{ request.build_absolute_uri }}">
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 
+    <script src="https://cdn.tailwindcss.com"></script>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
         body { font-family: 'Inter', sans-serif; }
@@ -51,11 +55,30 @@
         .animate-tech-text { animation: color-shift-text 4s ease-in-out infinite; }
     </style>
 
+    <script defer src="https://kit.fontawesome.com/b9539d09c2.js" crossorigin="anonymous"></script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "ITUtility",
+      "name": "Perseus Technology",
+      "url": "https://www.perseustechnology.dev/",
+      "logo": "https://www.perseustechnology.dev{% static 'core/img/perseus-banner.png' %}",
+      "description": "Empresa de ingeniería de software en Chile. Desarrollamos plataformas web y aplicaciones corporativas con Django.",
+      "address": {
+        "@type": "PostalAddress",
+        "addressCountry": "CL"
+      },
+      "offers": {
+        "@type": "Offer",
+        "category": "Desarrollo de Software y Consultoría TI"
+      }
+    }
+    </script>
+    
     {% block extra_css %}{% endblock %}
 </head>
 <body class="{% block body_class %}bg-white text-gray-900 antialiased{% endblock %}">
 
-    <!-- LOADER -->
     <div id="global-page-loader" class="fixed inset-0 z-[9999] bg-[#05080a] flex flex-col items-center justify-center transition-opacity duration-500 overflow-hidden">
         <div class="relative flex items-center justify-center w-32 h-32 mb-10">
             <svg class="absolute w-full h-full animate-[spin_4s_linear_infinite]" viewBox="0 0 100 100" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -72,7 +95,6 @@
             {% trans "Cargando sistema...." %}
         </div>
     </div>
-    <!-- FIN LOADER -->
 
     {% get_current_language as CURRENT_LANG %}
 
@@ -81,11 +103,9 @@
             <div class="flex justify-between h-20 items-center">
                 <div class="flex items-center gap-10">
                     <a href="{% url 'home' %}" class="flex items-center">
-                        <img src="{% static 'core/img/logo-2.png' %}" alt="Perseus Technology" class="h-16 w-auto object-contain">
+                        <img src="{% static 'core/img/logo-2.webp' %}" alt="Perseus Technology" class="h-16 w-auto object-contain">
                     </a>
                     <div class="hidden md:flex items-center space-x-8 font-medium text-gray-400">
-
-                        <!-- Dropdown: Soluciones -->
                         <div x-data="{ openSoluciones: false }" @click.away="openSoluciones = false" class="relative">
                             <button @click="openSoluciones = !openSoluciones" class="text-gray-400 hover:text-white transition font-medium flex items-center gap-1 focus:outline-none">
                                 {% trans "Soluciones" %} <i class="fa-solid fa-chevron-down text-xs mt-0.5" :class="{'rotate-180': openSoluciones, 'transition-transform duration-200': true}"></i>
@@ -121,7 +141,6 @@
 
                         <a href="{% url 'precios' %}" class="hover:text-white transition">{% trans "Precios" %}</a>
 
-                        <!-- Dropdown: Recursos -->
                         <div x-data="{ open: false }" @click.away="open = false" class="relative">
                             <button @click="open = !open" class="text-gray-400 hover:text-white transition font-medium flex items-center gap-1 focus:outline-none">
                                 {% trans "Recursos" %} <i class="fa-solid fa-chevron-down text-xs mt-0.5" :class="{'rotate-180': open, 'transition-transform duration-200': true}"></i>
@@ -138,10 +157,7 @@
                     </div>
                 </div>
 
-                <!-- Botones Desktop: idioma + CTA -->
                 <div class="hidden md:flex items-center space-x-3 font-medium">
-
-                    <!-- BOTÓN CAMBIO DE IDIOMA DESKTOP -->
                     <form action="{% url 'set_language' %}" method="post">
                         {% csrf_token %}
                         <input name="next" type="hidden" value="/">
@@ -164,20 +180,14 @@
 
                     <a href="{% url 'contacto' %}" class="bg-white hover:bg-gray-200 text-black px-6 py-3 rounded-full transition duration-300 font-semibold">{% trans "Solicita tu Proyecto" %}</a>
                 </div>
-
-                <!-- Botón Menú Móvil -->
                 <button @click="mobileMenuOpen = !mobileMenuOpen" class="md:hidden text-white focus:outline-none">
                     <i class="fa-solid fa-bars text-2xl" x-show="!mobileMenuOpen"></i>
                     <i class="fa-solid fa-xmark text-2xl" x-show="mobileMenuOpen" style="display: none;"></i>
                 </button>
             </div>
         </div>
-
-        <!-- MENÚ MÓVIL -->
         <div x-show="mobileMenuOpen" x-transition.opacity @click.away="mobileMenuOpen = false" class="md:hidden bg-black border-b border-gray-800 absolute w-full shadow-xl" style="display: none;">
             <div class="px-6 py-6 font-medium max-h-[calc(100vh-80px)] overflow-y-auto">
-
-                <!-- Acordeón: Soluciones -->
                 <div x-data="{ openSolucionesMobile: false }" class="border-b border-gray-800 py-4">
                     <button @click="openSolucionesMobile = !openSolucionesMobile" class="w-full flex justify-between items-center text-white text-lg focus:outline-none">
                         <span>{% trans "Soluciones" %}</span>
@@ -189,13 +199,9 @@
                         <a href="{% url 'consultoria' %}" class="block text-gray-400 hover:text-white transition">{% trans "Consultoría TI" %}</a>
                     </div>
                 </div>
-
-                <!-- Precios -->
                 <div class="border-b border-gray-800 py-4">
                     <a href="{% url 'precios' %}" class="block text-white text-lg w-full">{% trans "Precios" %}</a>
                 </div>
-
-                <!-- Acordeón: Recursos -->
                 <div x-data="{ openRecursosMobile: false }" class="border-b border-gray-800 py-4">
                     <button @click="openRecursosMobile = !openRecursosMobile" class="w-full flex justify-between items-center text-white text-lg focus:outline-none">
                         <span>{% trans "Recursos" %}</span>
@@ -208,8 +214,6 @@
                         <a href="{% url 'contacto' %}" class="block text-gray-400 hover:text-white transition">{% trans "Contacto" %}</a>
                     </div>
                 </div>
-
-                <!-- BOTÓN CAMBIO DE IDIOMA MÓVIL -->
                 <div class="border-b border-gray-800 py-4">
                     <form action="{% url 'set_language' %}" method="post">
                         {% csrf_token %}
@@ -227,7 +231,6 @@
                         {% endif %}
                     </form>
                 </div>
-                <!-- CTA Móvil -->
                 <div class="pt-8 pb-4">
                     <a href="{% url 'contacto' %}" class="block w-full text-center bg-white text-black px-6 py-4 rounded-full font-bold hover:bg-gray-200 transition shadow-lg">{% trans "Solicita tu Proyecto" %}</a>
                 </div>
@@ -242,7 +245,7 @@
 
     <footer class="bg-black text-white py-12 px-6 border-t border-gray-800">
         <div class="max-w-[1400px] mx-auto flex flex-col md:flex-row justify-between items-center">
-            <img src="{% static 'core/img/logo-2.png' %}" alt="Perseus" class="h-10 w-auto mb-4 md:mb-0 grayscale opacity-50 hover:grayscale-0 hover:opacity-100 transition">
+            <img src="{% static 'core/img/logo-2.webp' %}" alt="Perseus" class="h-10 w-auto mb-4 md:mb-0 grayscale opacity-50 hover:grayscale-0 hover:opacity-100 transition">
             <div class="flex space-x-6 text-gray-500 text-sm">
                 <p>&copy; 2026 Perseus Technology.</p>
                 <a href="{% url 'privacidad' %}" class="hover:text-white transition">{% trans "Privacidad" %}</a>

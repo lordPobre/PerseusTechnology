@@ -1,0 +1,19 @@
+{% extends 'core/base.html' %}
+{% load i18n %}
+
+{% block title %}Página no encontrada | Perseus Technology{% endblock %}
+
+{% block content %}
+<main class="min-h-screen flex items-center justify-center bg-[#05080a] text-white px-6">
+    <div class="text-center">
+        <h1 class="text-9xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-emerald-400 to-cyan-500 mb-4">404</h1>
+        <h2 class="text-3xl font-bold mb-6">{% trans "Ruta no encontrada" %}</h2>
+        <p class="text-gray-400 mb-10 max-w-md mx-auto">
+            {% trans "Parece que el enlace que seguiste está roto o la página ha sido movida de nuestra base de datos." %}
+        </p>
+        <a href="{% url 'home' %}" class="bg-white text-black font-bold py-3 px-8 rounded-full hover:bg-gray-200 transition-all">
+            <i class="fa-solid fa-house mr-2"></i> {% trans "Volver al Inicio" %}
+        </a>
+    </div>
+</main>
+{% endblock %}

@@ -1,8 +1,6 @@
 {% extends 'core/base.html' %}
 {% load static i18n %}
-{% block meta_description %}
-    Descripción de la página...
-{% endblock meta_description %}
+{% block meta_description %}Optimiza la auditoría de tu empresa con SpendBox. Control de presupuestos y extracción inteligente de datos de boletas mediante motores de IA y OCR.{% endblock meta_description %}
 {% block title %}SpendBox | {% trans "Control de Gastos con IA" %} | Perseus Technology{% endblock %}
 {% block body_class %}bg-[#05080a] text-gray-300 antialiased selection:bg-emerald-500/30 selection:text-emerald-200{% endblock %}
 
@@ -83,7 +81,7 @@
                     <a href="{% url 'contacto' %}" class="bg-indigo-600 hover:bg-indigo-500 text-white font-bold py-4 px-8 rounded-2xl transition-all duration-300 hover:-translate-y-1 flex items-center justify-center group">
                         {% trans "Cotizar SpendBox" %} <i class="fa-solid fa-arrow-trend-up ml-3 group-hover:translate-x-1 transition-transform"></i>
                     </a>
-                    <a href="https://obragastos-production.up.railway.app/login/" target="_blank" class="dark-glass-card text-white font-bold py-4 px-8 rounded-2xl transition-all duration-300 flex items-center justify-center group hover:bg-white/5">
+                    <a href="https://obragastos-production.up.railway.app/login/" target="_blank" rel="noopener noreferrer" class="dark-glass-card text-white font-bold py-4 px-8 rounded-2xl transition-all duration-300 flex items-center justify-center group hover:bg-white/5">
                         <i class="fa-solid fa-arrow-right-to-bracket mr-3 text-emerald-400"></i> {% trans "Iniciar Sesión" %}
                     </a>
                 </div>
