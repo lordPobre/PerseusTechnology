@@ -2,6 +2,16 @@
 <!DOCTYPE html>
 <html lang="{{ LANGUAGE_CODE }}" class="scroll-smooth">
 <head>
+    {% if request.get_host != '127.0.0.1:8000' and request.get_host != 'localhost:8000' %}
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-D4L5VPQ7BJ"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-D4L5VPQ7BJ');
+    </script>
+    {% endif %}
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{% block title %}{{ nombre_empresa }} | {% trans "La plataforma para tu empresa" %}{% endblock %}</title>
