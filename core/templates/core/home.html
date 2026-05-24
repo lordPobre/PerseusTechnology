@@ -111,7 +111,7 @@
                         </p>
                     </div>
                     <div class="relative w-full aspect-video rounded-2xl overflow-hidden bg-gray-100 border border-gray-200 my-8 shadow-inner"
-                         x-data="{
+                        x-data="{
                             activeSlide: 0,
                             slides: [
                                 '{% static 'core/img/dashboard-dl.png' %}',
@@ -120,19 +120,23 @@
                                 '{% static 'core/img/proyectos-vc.webp' %}',
                                 '{% static 'core/img/contacto-dl.png' %}',
                                 '{% static 'core/img/nosotros-vc.webp' %}'
-                            ],
-                            init() { setInterval(() => { this.activeSlide = this.activeSlide === this.slides.length - 1 ? 0 : this.activeSlide + 1; }, 3000); }
-                         }">
+                            ]
+                        }"
+                        x-init="setInterval(() => { activeSlide = activeSlide === slides.length - 1 ? 0 : activeSlide + 1 }, 3000)">
+                        
                         <div class="h-7 bg-gray-200/90 backdrop-blur-sm border-b border-gray-300 flex items-center px-3 gap-1.5 absolute top-0 left-0 w-full z-20">
                             <div class="w-2.5 h-2.5 rounded-full bg-red-400"></div>
                             <div class="w-2.5 h-2.5 rounded-full bg-yellow-400"></div>
                             <div class="w-2.5 h-2.5 rounded-full bg-green-400"></div>
                         </div>
+
                         <div class="relative w-full h-full pt-7">
                             <template x-for="(slide, index) in slides" :key="index">
-                                <img :src="slide" alt="{% trans 'Portafolio Web Perseus' %}"
-                                     class="absolute top-7 left-0 w-full h-[calc(100%-1.75rem)] object-cover object-top transition-opacity duration-1000 ease-in-out"
-                                     :class="activeSlide === index ? 'opacity-100 z-10' : 'opacity-0 z-0'">
+                                <img :src="slide" 
+                                    alt="{% trans 'Portafolio Web Perseus' %}"
+                                    loading="lazy"
+                                    class="absolute top-7 left-0 w-full h-[calc(100%-1.75rem)] object-cover object-top transition-opacity duration-1000 ease-in-out"
+                                    :class="activeSlide === index ? 'opacity-100 z-10' : 'opacity-0 z-0'">
                             </template>
                         </div>
                     </div>
