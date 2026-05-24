@@ -23,6 +23,10 @@
     <meta property="og:description" content="{% block og_description %}Construimos plataformas rápidas, escalables y orientadas a la conversión.{% endblock %}">
     <meta property="og:image" content="{% static 'core/img/perseus-banner.png' %}">
     <meta property="og:url" content="{{ request.build_absolute_uri }}">
+    <link rel="icon" type="image/x-icon" href="{% static 'core/img/favicon.ico' %}">
+    <link rel="apple-touch-icon" sizes="180x180" href="{% static 'core/img/apple-touch-icon.png' %}">
+    <link rel="icon" type="image/png" sizes="32x32" href="{% static 'core/img/favicon-32x32.png' %}">
+    <link rel="icon" type="image/png" sizes="16x16" href="{% static 'core/img/favicon-16x16.png' %}">
     
     {% get_current_language as LANGUAGE_CODE %}
     <link rel="alternate" hreflang="es" href="https://www.perseustechnology.dev/es{{ request.path }}">
