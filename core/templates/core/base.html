@@ -144,7 +144,7 @@
                                 </div>
                             </div>
                         </div>
-
+                        
                         <a href="{% url 'precios' %}" class="hover:text-white transition">{% trans "Precios" %}</a>
 
                         <div x-data="{ open: false }" @click.away="open = false" class="relative">
@@ -160,6 +160,8 @@
                                 </div>
                             </div>
                         </div>
+
+                
                     </div>
                 </div>
 
@@ -227,12 +229,14 @@
                         {% if 'en' in CURRENT_LANG %}
                             <input name="language" type="hidden" value="es">
                             <button type="submit" class="flex items-center gap-3 text-gray-400 hover:text-white text-lg w-full transition">
-                                <span>🇨🇱</span> Cambiar a Español
+                                <img src="https://flagcdn.com/w20/cl.png" srcset="https://flagcdn.com/w40/cl.png 2x" width="24" alt="Español" class="inline-block rounded-sm"> 
+                                <span>Cambiar a Español</span>
                             </button>
                         {% else %}
                             <input name="language" type="hidden" value="en">
                             <button type="submit" class="flex items-center gap-3 text-gray-400 hover:text-white text-lg w-full transition">
-                                <span>🇺🇸</span> Switch to English
+                                <img src="https://flagcdn.com/w20/us.png" srcset="https://flagcdn.com/w40/us.png 2x" width="24" alt="English" class="inline-block rounded-sm"> 
+                                <span>Switch to English</span>
                             </button>
                         {% endif %}
                     </form>
@@ -294,7 +298,6 @@
         });
     </script>
     <script defer src="https://cdn.jsdelivr.net/npm/@alpinejs/collapse@3.x.x/dist/cdn.min.js"></script>
-    
     <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
     {% block extra_js %}{% endblock %}
 

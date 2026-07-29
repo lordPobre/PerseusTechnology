@@ -1,5 +1,6 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from django.core.mail import EmailMultiAlternatives
+from django.views.generic import TemplateView
 from django.contrib import messages
 from django.template.loader import render_to_string
 from django.utils.html import strip_tags
@@ -113,3 +114,6 @@ def gym_app(request):
 
 def spendbox_app(request):
     return render(request, 'core/servicios/spendbox.html')
+
+class SentinelView(TemplateView):
+    template_name = 'core/sentinel.html'

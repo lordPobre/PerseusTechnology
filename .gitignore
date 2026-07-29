@@ -15,3 +15,5 @@ ngrok.exe
 # IDEs
 .vscode/
 .idea/
+
+extractor_pymes.py
