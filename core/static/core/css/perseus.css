@@ -36,7 +36,7 @@ input::placeholder, textarea::placeholder { color: #6f6f69; }
 .p-input { width: 100%; min-height: 48px; padding: 0 0 4px; background: transparent; border: 0; border-bottom: 1px solid rgba(255,255,255,.18); color: var(--bone); font-family: inherit; font-size: 17px; outline: none; }
 .p-input:focus { border-bottom-color: var(--acid); }
 textarea.p-input { min-height: 96px; padding: 8px 0; resize: vertical; }
-.p-wordmark { font-weight: 700; font-size: 23vw; line-height: .74; letter-spacing: -.075em; text-align: center; margin-top: 40px; background: linear-gradient(180deg, var(--bone) 0%, rgba(245,245,240,.05) 92%); -webkit-background-clip: text; background-clip: text; color: transparent; user-select: none; }
+.p-wordmark { font-weight: 700; font-size: 23vw; line-height: .74; letter-spacing: -.075em; text-align: center; margin-top: 40px; background: linear-gradient(180deg, var(--bone) 0%, rgba(245,245,240,.05) 92%); -webkit-background-clip: text; background-clip: text; color: transparent; user-select: none; pointer-events: none; position: relative; z-index: 0; }
 
 /* Hero */
 .p-hero-grid { background-image: linear-gradient(rgba(255,255,255,.035) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,.035) 1px, transparent 1px); background-size: 72px 72px; -webkit-mask-image: radial-gradient(70% 70% at 70% 45%, #000 20%, transparent 75%); mask-image: radial-gradient(70% 70% at 70% 45%, #000 20%, transparent 75%); }

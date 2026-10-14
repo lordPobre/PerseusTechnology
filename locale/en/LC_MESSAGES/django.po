@@ -116,8 +116,8 @@ msgstr "Technical SEO"
 msgid "Ver desarrollo web"
 msgstr "See web development"
 
-msgid "Apps a medida que reemplazan planillas y procesos manuales, sobre la misma base que Fintora, nuestra app de flujo de caja."
-msgstr "Custom apps that replace spreadsheets and manual processes, built on the same foundation as Fintora, our cash flow app."
+msgid "Apps a medida que reemplazan planillas y procesos manuales, sobre la misma base que Fintora, nuestra app de finanzas personales."
+msgstr "Custom apps that replace spreadsheets and manual processes, built on the same foundation as Fintora, our personal finance app."
 
 msgid "Apps a medida"
 msgstr "Custom apps"
@@ -362,8 +362,8 @@ msgstr "Apps"
 msgid "App propia"
 msgstr "Our own app"
 
-msgid "Flujo de caja personal y empresarial bajo control."
-msgstr "Personal and business cash flow under control."
+msgid "Tus finanzas personales bajo control."
+msgstr "Your personal finances under control."
 
 msgid "Software gratuito"
 msgstr "Free software"
@@ -599,11 +599,11 @@ msgstr "Platforms already running."
 msgid "Ver todos los precios"
 msgstr "See all pricing"
 
-msgid "Flujo de caja gratis"
-msgstr "Free cash flow app"
+msgid "Finanzas personales gratis"
+msgstr "Free personal finance app"
 
-msgid "Software gratuito en la nube, para personas y empresas."
-msgstr "Free cloud software for individuals and businesses."
+msgid "Software gratuito en la nube para tus finanzas personales."
+msgstr "Free cloud software for your personal finances."
 
 msgid "Cómo funciona"
 msgstr "How it works"
@@ -701,8 +701,8 @@ msgstr "Internal tools"
 msgid "que reemplazan planillas."
 msgstr "that replace spreadsheets."
 
-msgid "Aplicaciones a medida que reemplazan planillas y procesos manuales, construidas sobre la misma base que Fintora, nuestra app de flujo de caja."
-msgstr "Custom applications that replace spreadsheets and manual processes, built on the same foundation as Fintora, our cash flow app."
+msgid "Aplicaciones a medida que reemplazan planillas y procesos manuales, construidas sobre la misma base que Fintora, nuestra app de finanzas personales."
+msgstr "Custom applications that replace spreadsheets and manual processes, built on the same foundation as Fintora, our personal finance app."
 
 msgid "Cotizar una app"
 msgstr "Get an app quote"
@@ -710,8 +710,8 @@ msgstr "Get an app quote"
 msgid "Partimos por el proceso que hoy vive en planillas y lo convertimos en una app con roles, historial y reportes."
 msgstr "We start with the process that lives in spreadsheets today and turn it into an app with roles, history and reports."
 
-msgid "Nuestra app propia y gratuita para categorizar ingresos y egresos y proyectar el flujo de caja."
-msgstr "Our own free app to categorize income and expenses and forecast cash flow."
+msgid "Nuestra app propia y gratuita de finanzas personales: ordena tus ingresos y gastos y proyecta tu saldo."
+msgstr "Our own free personal finance app: organize your income and expenses and forecast your balance."
 
 msgid "Si tu proceso no calza con un producto existente, lo construimos sobre la misma base."
 msgstr "If your process doesn't fit an existing product, we build it on the same foundation."
@@ -869,11 +869,11 @@ msgstr "Is Fintora free?"
 msgid "Sí. Fintora es un software gratuito desarrollado por Perseus Technology."
 msgstr "Yes. Fintora is free software built by Perseus Technology."
 
-msgid "¿Sirve para personas y empresas?"
-msgstr "Does it work for individuals and businesses?"
+msgid "¿Sirve para empresas?"
+msgstr "Does it work for businesses?"
 
-msgid "Sí. Está pensado para controlar el flujo de caja personal y empresarial."
-msgstr "Yes. It's designed to manage both personal and business cash flow."
+msgid "No. Fintora está pensada para finanzas personales: tus ingresos, gastos y ahorro. Para una empresa construimos una app a medida."
+msgstr "No. Fintora is built for personal finances: your income, expenses and savings. For a business, we build a custom app."
 
 msgid "¿Necesito instalar algo?"
 msgstr "Do I need to install anything?"
@@ -989,8 +989,8 @@ msgstr "The site uses technical cookies to remember your language and protect fo
 msgid "Cuando desarrollamos o administramos sistemas para una empresa, tratamos sus datos solo siguiendo sus instrucciones y para prestar el servicio contratado. Firmamos acuerdos de confidencialidad (NDA) desde la primera reunión."
 msgstr "When we build or manage systems for a company, we process its data only on its instructions and to provide the contracted service. We sign non-disclosure agreements (NDA) from the first meeting."
 
-msgid "Fintora, nuestra app de flujo de caja, tiene su propia política de privacidad publicada en fintora.cl."
-msgstr "Fintora, our cash flow app, has its own privacy policy published at fintora.cl."
+msgid "Fintora, nuestra app de finanzas personales, tiene su propia política de privacidad publicada en fintora.cl."
+msgstr "Fintora, our personal finance app, has its own privacy policy published at fintora.cl."
 
 msgid "Aplicamos medidas técnicas y organizativas alineadas con la norma ISO 27001: conexión cifrada (HTTPS), control de accesos por persona y respaldos periódicos."
 msgstr "We apply technical and organizational measures aligned with ISO 27001: encrypted connections (HTTPS), per-person access control and regular backups."

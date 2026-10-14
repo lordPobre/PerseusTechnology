@@ -37,12 +37,12 @@ DIVISIONES = {
         'demo': 'perseus-dash', 'demo_label': _('Panel de flujo de caja con datos de ejemplo. Recorre el gráfico.'),
         'stack': _stack(('Python', 'python/python-original'), ('Django', 'django/django-plain'), ('React', 'react/react-original'), ('PostgreSQL', 'postgresql/postgresql-original'), ('Docker', 'docker/docker-original')),
         'h1': _('Herramientas internas'), 'h1_acento': _('que reemplazan planillas.'),
-        'sub': _('Aplicaciones a medida que reemplazan planillas y procesos manuales, construidas sobre la misma base que Fintora, nuestra app de flujo de caja.'),
+        'sub': _('Aplicaciones a medida que reemplazan planillas y procesos manuales, construidas sobre la misma base que Fintora, nuestra app de finanzas personales.'),
         'cta': _('Cotizar una app'),
         'caps_titulo': _('Lo que construimos.'),
         'caps_intro': _('Partimos por el proceso que hoy vive en planillas y lo convertimos en una app con roles, historial y reportes.'),
         'caps': [
-            ('Fintora', _('Nuestra app propia y gratuita para categorizar ingresos y egresos y proyectar el flujo de caja.'), 'fintora'),
+            ('Fintora', _('Nuestra app propia y gratuita de finanzas personales: ordena tus ingresos y gastos y proyecta tu saldo.'), 'fintora'),
             (_('Apps a medida'), _('Si tu proceso no calza con un producto existente, lo construimos sobre la misma base.'), None),
         ],
         'precio': None,
@@ -100,7 +100,7 @@ PRODUCTOS = {
     'fintora': {
         'nombre': 'Fintora', 'url': 'fintora', 'imagen': 'producto-fintora',
         'imagen_static': 'core/img/dashboard-finapp.png', 'sello': _('App propia · Gratis'),
-        'sub': _('Flujo de caja personal y empresarial bajo control.'),
+        'sub': _('Tus finanzas personales bajo control.'),
         'monto': '$0', 'unidad': _('CLP · software gratuito'),
         'cta': _('Crear cuenta'), 'cta_url': FINTORA_URL,
         'features': [
@@ -115,7 +115,7 @@ PRODUCTOS = {
         ],
         'faq': [
             (_('¿Fintora es gratis?'), _('Sí. Fintora es un software gratuito desarrollado por Perseus Technology.')),
-            (_('¿Sirve para personas y empresas?'), _('Sí. Está pensado para controlar el flujo de caja personal y empresarial.')),
+            (_('¿Sirve para empresas?'), _('No. Fintora está pensada para finanzas personales: tus ingresos, gastos y ahorro. Para una empresa construimos una app a medida.')),
             (_('¿Necesito instalar algo?'), _('No. Funciona en la nube y entras desde el navegador.')),
             (_('¿Pueden adaptarlo a mi empresa?'), _('Sí. Construimos apps a medida sobre la misma base. Escríbenos y lo evaluamos.')),
         ],

@@ -22,7 +22,7 @@ PROYECTOS = [
          descripcion_corta='Sitio corporativo para una empresa de ingeniería y construcción.',
          url_externa='https://vcchile.cl/', img='core/img/inicio-vc.webp'),
     dict(nombre='Fintora', tipo='apps', orden=3, etiquetas='App propia, Gratis', cliente='Perseus Technology',
-         descripcion_corta='App propia de Perseus para categorizar ingresos y egresos y proyectar el flujo de caja.',
+         descripcion_corta='App propia de Perseus para ordenar las finanzas personales: ingresos, gastos y saldo.',
          url_externa='https://www.fintora.cl', img='core/img/dashboard-finapp.png'),
 ]
 
@@ -52,7 +52,7 @@ POSTS = [
 <p>Más sucursales, más vendedores o más productos hacen que el archivo se vuelva lento y difícil de mantener. Si para agregar un vendedor hay que rehacer fórmulas, la herramienta ya está limitando el crecimiento.</p>
 <h2>Cómo dar el paso sin detener la operación</h2>
 <p>No hace falta reemplazar todo de una vez. Lo habitual es partir por el proceso que más duele, construir una primera versión en pocas semanas y migrar los datos existentes. Después se suman módulos según la prioridad del negocio.</p>
-<p>En Perseus construimos apps a medida sobre la misma base que <a href="https://www.fintora.cl">Fintora</a>, nuestra app de flujo de caja. Si te reconoces en dos o más de estas señales, <a href="/contacto/">cuéntanos tu caso</a> y te decimos por dónde empezar.</p>""",
+<p>En Perseus construimos apps a medida sobre la misma base que <a href="https://www.fintora.cl">Fintora</a>, nuestra app de finanzas personales. Si te reconoces en dos o más de estas señales, <a href="/contacto/">cuéntanos tu caso</a> y te decimos por dónde empezar.</p>""",
     ),
     dict(
         categoria='Desarrollo web', tiempo_lectura=6,
