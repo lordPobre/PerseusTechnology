@@ -70,6 +70,30 @@ DIVISIONES = {
     },
 }
 
+# Cotizador de /precios/. VALORES DE EJEMPLO: ajústalos a tus precios reales.
+COTIZADOR = {
+    'base': [
+        {'id': 'landing', 't': _('Landing page'), 'd': _('Una página de alta conversión para una campaña o producto.'), 'p': 150000, 'pages': 1, 'weeks': 2},
+        {'id': 'corp', 't': _('Sitio corporativo'), 'd': _('Secciones autoadministrables, blog y formulario de contacto.'), 'p': 350000, 'pages': 5, 'weeks': 4},
+        {'id': 'shop', 't': _('E-commerce'), 'd': _('Catálogo, carrito, stock y pagos integrados.'), 'p': 650000, 'pages': 5, 'weeks': 6},
+        {'id': 'app', 't': _('Sistema a medida'), 'd': _('Herramienta interna con roles, historial y reportes.'), 'p': 1200000, 'pages': 0, 'weeks': 10},
+    ],
+    'page_price': 40000,
+    'max_pages': 20,
+    'extras': [
+        {'id': 'seo', 't': _('SEO técnico avanzado'), 'p': 120000, 'weeks': 0.5},
+        {'id': 'blog', 't': _('Blog autoadministrable'), 'p': 90000, 'weeks': 0.5},
+        {'id': 'en', 't': _('Versión en inglés'), 'p': 150000, 'weeks': 1},
+        {'id': 'api', 't': _('Integración con ERP o facturación'), 'p': 250000, 'weeks': 2},
+        {'id': 'pay', 't': _('Pasarela de pago'), 'p': 120000, 'weeks': 1, 'hide': ['shop']},
+    ],
+    'support': [
+        {'t': _('Sin plan'), 'p': 0},
+        {'t': _('Soporte TI'), 'p': 25000},
+        {'t': _('Soporte y mejoras'), 'p': 60000},
+    ],
+}
+
 PRODUCTOS = {
     'fintora': {
         'nombre': 'Fintora', 'url': 'fintora', 'imagen': 'producto-fintora',
@@ -77,6 +101,21 @@ PRODUCTOS = {
         'sub': _('Flujo de caja personal y empresarial bajo control.'),
         'monto': '$0', 'unidad': _('CLP · software gratuito'),
         'cta': _('Crear cuenta'), 'cta_url': FINTORA_URL,
-        'features': [_('Dashboard de ingresos y egresos analítico'), _('Categorización de movimientos'), _('Acceso seguro en la nube (24/7)')],
+        'features': [
+            (_('Dashboard de ingresos y egresos'), _('Ve en un solo panel cuánto entra, cuánto sale y cómo cambia tu saldo mes a mes.')),
+            (_('Categorización de movimientos'), _('Agrupa cada ingreso y egreso por categoría para saber dónde se va el dinero.')),
+            (_('Acceso seguro en la nube'), _('Disponible 24/7 desde el navegador, sin instalar nada.')),
+        ],
+        'pasos': [
+            (_('Crea tu cuenta'), _('Regístrate gratis en fintora.cl con tu correo.')),
+            (_('Registra tus movimientos'), _('Anota ingresos y egresos y asígnales una categoría.')),
+            (_('Revisa tu flujo'), _('El panel muestra tu saldo y la proyección del flujo de caja.')),
+        ],
+        'faq': [
+            (_('¿Fintora es gratis?'), _('Sí. Fintora es un software gratuito desarrollado por Perseus Technology.')),
+            (_('¿Sirve para personas y empresas?'), _('Sí. Está pensado para controlar el flujo de caja personal y empresarial.')),
+            (_('¿Necesito instalar algo?'), _('No. Funciona en la nube y entras desde el navegador.')),
+            (_('¿Pueden adaptarlo a mi empresa?'), _('Sí. Construimos apps a medida sobre la misma base. Escríbenos y lo evaluamos.')),
+        ],
     },
 }

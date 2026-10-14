@@ -1,6 +1,23 @@
 {% extends 'core/base.html' %}
 {% load static i18n perseus %}
 {% block title %}Perseus Technology | {% trans "Software a medida, apps corporativas e infraestructura TI" %}{% endblock %}
+{% block jsonld %}
+<script type="application/ld+json">
+{ "@context": "https://schema.org", "@graph": [
+    {
+      "@type": "WebSite",
+      "name": "Perseus Technology",
+      "url": "https://www.perseustechnology.dev/",
+      "inLanguage": ["es", "en"]
+    },
+    {
+      "@type": "ItemList",
+      "name": "{% trans 'Trabajo en producción.'|escapejs %}",
+      "itemListElement": [{% for p in proyectos %}{ "@type": "ListItem", "position": {{ forloop.counter }}, "name": "{{ p.nombre|escapejs }}", "url": "{{ request.scheme }}://{{ request.get_host }}{{ p.get_absolute_url }}" }{% if not forloop.last %},{% endif %}{% endfor %}]
+    }
+] }
+</script>
+{% endblock %}
 
 {% block content %}
 

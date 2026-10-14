@@ -1,6 +1,16 @@
 {% extends 'core/base.html' %}
 {% load i18n %}
 {% block title %}{% trans "Centro de Ayuda" %} | Perseus Technology{% endblock %}
+{% block jsonld %}
+<script type="application/ld+json">
+{ "@context": "https://schema.org", "@graph": [
+    {
+      "@type": "FAQPage",
+      "mainEntity": [{ "@type": "Question", "name": "{% trans '¿Cómo edito los textos de mi sitio web?'|escapejs %}", "acceptedAnswer": { "@type": "Answer", "text": "{% trans 'Puedes ingresar al panel de administración añadiendo /admin al final de la URL...'|escapejs %}" } }]
+    }
+] }
+</script>
+{% endblock %}
 
 {% block content %}
 <div x-data="{ q: '', open: null, match(t) { return !this.q || t.toLowerCase().includes(this.q.toLowerCase()) } }">

@@ -1,12 +1,12 @@
 {% extends 'core/base.html' %}
-{% load i18n %}
+{% load static i18n %}
 {% block title %}{% trans "Contacto" %} | Perseus Technology{% endblock %}
 {% block meta_description %}{% trans "Cuéntanos qué quieres resolver. Un ingeniero responde con una evaluación técnica inicial en menos de 24 horas." %}{% endblock %}
 
 {% block content %}
 <section class="relative overflow-hidden">
     <div class="pointer-events-none absolute bottom-[-30%] right-[-10%] h-[700px] w-[900px]" style="background:radial-gradient(closest-side, rgba(198,255,61,.14), transparent)"></div>
-    <div class="relative mx-auto grid max-w-site items-start gap-16 px-5 py-[clamp(56px,8vw,112px)] md:px-14 lg:grid-cols-2">
+    <div class="relative mx-auto grid max-w-site items-start gap-12 px-5 py-[clamp(56px,8vw,112px)] md:px-14 xl:grid-cols-[minmax(0,.8fr)_minmax(0,1.2fr)]">
         <div class="flex flex-col gap-8">
             <h1 class="m-0 text-[clamp(52px,7.4vw,112px)] font-semibold leading-[.9] tracking-[-0.06em]">{% trans "Hablemos de tu" %} <span class="text-acid">{% trans "proyecto." %}</span></h1>
             <p class="m-0 max-w-[40ch] text-[19px] leading-relaxed text-body">{% trans "Un ingeniero revisa tu mensaje y te responde con una evaluación técnica inicial en menos de 24 horas." %}</p>
@@ -17,27 +17,21 @@
             </div>
         </div>
 
-        {% trans "Desarrollo Web" as a1 %}{% trans "Apps Corporativas" as a2 %}{% trans "Soporte TI" as a3 %}{% trans "Otro" as a4 %}
-        <form method="post" action="{% url 'contacto' %}" class="flex flex-col gap-6 rounded-[28px] border border-white/10 bg-white/[.035] p-[clamp(24px,3vw,40px)] backdrop-blur-lg"
-              x-data="{ asunto: '{{ asunto_inicial|default:a1|escapejs }}' }">
-            {% csrf_token %}
-            <input type="hidden" name="asunto" :value="asunto">
-            <div class="flex flex-col gap-2.5">
-                <span class="text-[13.5px] text-body">{% trans "Asunto" %}</span>
-                <div class="flex flex-wrap gap-2">
-                    <button type="button" class="p-need" :class="asunto === '{{ a1|escapejs }}' && 'on'" @click="asunto = '{{ a1|escapejs }}'">{{ a1 }}</button>
-                    <button type="button" class="p-need" :class="asunto === '{{ a2|escapejs }}' && 'on'" @click="asunto = '{{ a2|escapejs }}'">{{ a2 }}</button>
-                    <button type="button" class="p-need" :class="asunto === '{{ a3|escapejs }}' && 'on'" @click="asunto = '{{ a3|escapejs }}'">{{ a3 }}</button>
-                    <button type="button" class="p-need" :class="asunto === '{{ a4|escapejs }}' && 'on'" @click="asunto = '{{ a4|escapejs }}'">{{ a4 }}</button>
-                </div>
-            </div>
-            <div class="grid gap-[22px] sm:grid-cols-2">
-                <label class="flex flex-col gap-2 text-[13.5px] text-body">{% trans "Nombre" %}<input name="nombre" type="text" required autocomplete="name" placeholder="{% trans 'Tu nombre' %}" class="p-input"></label>
-                <label class="flex flex-col gap-2 text-[13.5px] text-body">{% trans "Correo laboral" %}<input name="email" type="email" required autocomplete="email" placeholder="tu@empresa.cl" class="p-input"></label>
-            </div>
-            <label class="flex flex-col gap-2 text-[13.5px] text-body">{% trans "Mensaje" %}<textarea name="mensaje" rows="4" required placeholder="{% trans 'Qué quieres resolver, plazos, sistemas actuales…' %}" class="p-input"></textarea></label>
-            <button type="submit" class="p-btn p-btn-lg justify-between">{% trans "Enviar solicitud" %}<span class="p-btn-dot"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></span></button>
-        </form>
+        <div class="min-w-0 lg:col-span-1">
+            <perseus-contact action="{% url 'contacto' %}" csrf="{{ csrf_token }}" asunto="{{ asunto_inicial }}" mensaje="{{ request.GET.mensaje }}" lang="{{ LANGUAGE_CODE }}"></perseus-contact>
+            <noscript>
+                <form method="post" action="{% url 'contacto' %}" class="flex flex-col gap-5 rounded-[28px] border border-white/10 p-8">
+                    {% csrf_token %}
+                    <input type="hidden" name="asunto" value="{{ asunto_inicial|default:'Consulta general' }}">
+                    <input name="nombre" required placeholder="{% trans 'Tu nombre' %}" class="p-input">
+                    <input name="email" type="email" required placeholder="tu@empresa.cl" class="p-input">
+                    <textarea name="mensaje" required class="p-input"></textarea>
+                    <button type="submit" class="p-btn p-btn-lg">{% trans "Enviar solicitud" %}</button>
+                </form>
+            </noscript>
+        </div>
     </div>
 </section>
 {% endblock %}
+
+{% block extra_js %}<script src="{% static 'core/js/perseus-forms.js' %}" defer></script>{% endblock %}

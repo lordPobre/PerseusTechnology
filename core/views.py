@@ -4,8 +4,9 @@ from django.contrib import messages
 from django.template.loader import render_to_string
 from django.utils.html import strip_tags
 from django.conf import settings
+from django.utils.translation import gettext as _
 from .models import Post, Categoria, Proyecto, Tecnologia
-from .contenido import DIVISIONES, PRODUCTOS
+from .contenido import DIVISIONES, PRODUCTOS, COTIZADOR
 
 
 def _proyectos():
@@ -49,7 +50,7 @@ def fintora(request):
 
 
 def pagina_precios(request):
-    return render(request, 'core/precios.html')
+    return render(request, 'core/precios.html', {'cotizador': COTIZADOR})
 
 
 def pagina_ayuda(request):
@@ -107,9 +108,9 @@ def contacto(request):
         try:
             msg_admin.send()
             msg_cliente.send()
-            messages.success(request, '¡Solicitud recibida! Te enviamos un correo de confirmación. Te responderemos en menos de 24 horas.')
+            messages.success(request, _('¡Solicitud recibida! Te enviamos un correo de confirmación. Te responderemos en menos de 24 horas.'))
         except Exception as e:
-            messages.error(request, 'Hubo un error al procesar la solicitud. Por favor, intenta de nuevo o escríbenos por WhatsApp.')
+            messages.error(request, _('Hubo un error al procesar la solicitud. Por favor, intenta de nuevo o escríbenos por WhatsApp.'))
             print(f"Error enviando correo: {e}")
 
         return redirect(request.META.get('HTTP_REFERER', 'contacto'))

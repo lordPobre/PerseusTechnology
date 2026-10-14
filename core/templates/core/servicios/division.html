@@ -2,6 +2,27 @@
 {% load static i18n perseus %}
 {% block title %}{{ d.nombre }} | Perseus Technology{% endblock %}
 {% block meta_description %}{{ d.sub }}{% endblock %}
+{% block jsonld %}
+<script type="application/ld+json">
+{ "@context": "https://schema.org", "@graph": [
+    {
+      "@type": "Service",
+      "name": "{{ d.nombre|escapejs }}",
+      "description": "{{ d.sub|escapejs }}",
+      "areaServed": { "@type": "Country", "name": "Chile" },
+      "provider": { "@type": "Organization", "name": "Perseus Technology", "url": "https://www.perseustechnology.dev/" }{% if d.precio %},
+      "offers": { "@type": "Offer", "priceCurrency": "CLP", "price": "{{ d.precio.monto|cut:'$'|cut:'.' }}", "description": "{{ d.precio.etiqueta|escapejs }}" }{% endif %}
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        { "@type": "ListItem", "position": 1, "name": "Perseus Technology", "item": "{{ request.scheme }}://{{ request.get_host }}{% url 'home' %}" },
+        { "@type": "ListItem", "position": 2, "name": "{{ d.nombre|escapejs }}", "item": "{{ request.build_absolute_uri }}" }
+      ]
+    }
+] }
+</script>
+{% endblock %}
 
 {% block content %}
 <section class="relative overflow-hidden border-b border-white/[.07]">

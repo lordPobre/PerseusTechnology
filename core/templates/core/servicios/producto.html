@@ -1,42 +1,127 @@
 {% extends 'core/base.html' %}
 {% load static i18n perseus %}
-{% block title %}{{ p.nombre }} | Perseus Technology{% endblock %}
-{% block meta_description %}{{ p.sub }}{% endblock %}
+{% block title %}{{ p.nombre }} · {% trans "Flujo de caja gratis" %} | Perseus Technology{% endblock %}
+{% block meta_description %}{{ p.nombre }}: {{ p.sub }} {% trans "Software gratuito en la nube, para personas y empresas." %}{% endblock %}
+{% block og_title %}{{ p.nombre }} · Perseus Technology{% endblock %}
+
+{% block jsonld %}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "SoftwareApplication",
+      "name": "{{ p.nombre|escapejs }}",
+      "url": "{{ p.cta_url }}",
+      "applicationCategory": "FinanceApplication",
+      "operatingSystem": "Web",
+      "description": "{{ p.sub|escapejs }}",
+      "offers": { "@type": "Offer", "price": "0", "priceCurrency": "CLP" },
+      "publisher": { "@type": "Organization", "name": "Perseus Technology", "url": "https://www.perseustechnology.dev/" }
+    },
+    {
+      "@type": "FAQPage",
+      "mainEntity": [{% for q, a in p.faq %}{ "@type": "Question", "name": "{{ q|escapejs }}", "acceptedAnswer": { "@type": "Answer", "text": "{{ a|escapejs }}" } }{% if not forloop.last %},{% endif %}{% endfor %}]
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        { "@type": "ListItem", "position": 1, "name": "Perseus Technology", "item": "{{ request.scheme }}://{{ request.get_host }}{% url 'home' %}" },
+        { "@type": "ListItem", "position": 2, "name": "{% trans 'Apps Corporativas'|escapejs %}", "item": "{{ request.scheme }}://{{ request.get_host }}{% url 'apps' %}" },
+        { "@type": "ListItem", "position": 3, "name": "{{ p.nombre|escapejs }}", "item": "{{ request.build_absolute_uri }}" }
+      ]
+    }
+  ]
+}
+</script>
+{% endblock %}
 
 {% block content %}
-<section class="mx-auto grid max-w-site items-center gap-12 px-5 py-[clamp(56px,7vw,96px)] md:px-14 lg:grid-cols-[1fr_1.1fr]">
-    <div class="flex flex-col gap-7">
-        <a href="{% url 'apps' %}" class="font-mono text-xs text-mute no-underline hover:text-bone">{% trans "Apps Corporativas" %} / {{ p.nombre }}</a>
-        <span class="self-start rounded-full bg-acid/[.12] px-3.5 py-1.5 font-mono text-xs text-acid">{{ p.sello }}</span>
-        <h1 class="m-0 text-[clamp(48px,6.4vw,96px)] font-semibold leading-[.92] tracking-[-0.055em]">{{ p.nombre }}.</h1>
-        <p class="m-0 max-w-[46ch] text-[clamp(17px,1.35vw,20px)] leading-relaxed text-body">{{ p.sub }}</p>
-        <div class="flex flex-wrap items-baseline gap-2.5 border-t border-white/[.08] pt-6"><span class="text-5xl font-semibold tracking-[-0.05em]">{{ p.monto }}</span><span class="text-mute">{{ p.unidad }}</span></div>
-        <div class="flex flex-wrap gap-3">
-            {% if p.cta_url %}
-            <a href="{{ p.cta_url }}" target="_blank" rel="noopener" class="p-btn p-btn-lg">{{ p.cta }}<span class="p-btn-dot"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7"/><path d="M7 7h10v10"/></svg></span></a>
-            {% else %}
-            <a href="{% url 'contacto' %}?asunto={{ p.nombre|urlencode }}" class="p-btn p-btn-lg">{{ p.cta }}<span class="p-btn-dot">→</span></a>
-            {% endif %}
-            <a href="{% url 'contacto' %}?asunto={% trans 'Apps Corporativas'|urlencode %}" class="p-btn-ghost">{% trans "Quiero una app a medida" %}</a>
+<section class="relative overflow-hidden border-b border-white/[.07]">
+    <perseus-field></perseus-field>
+    <div class="pointer-events-none absolute right-[-10%] top-[-20%] h-[800px] w-[900px]" style="background:radial-gradient(closest-side, rgba(198,255,61,.1), transparent)"></div>
+    <div class="relative mx-auto grid max-w-site items-center gap-[clamp(40px,5vw,72px)] px-5 py-[clamp(48px,7vw,96px)] md:px-14 xl:grid-cols-[minmax(0,.85fr)_minmax(0,1.15fr)]">
+        <div class="flex min-w-0 flex-col gap-7">
+            <a href="{% url 'apps' %}" class="font-mono text-xs text-mute no-underline hover:text-bone">{% trans "Apps Corporativas" %} / {{ p.nombre }}</a>
+            <span class="self-start rounded-full bg-acid/[.12] px-3.5 py-1.5 font-mono text-xs text-acid">{{ p.sello }}</span>
+            <h1 class="m-0 text-[clamp(56px,8vw,128px)] font-semibold leading-[.88] tracking-[-0.06em]">{{ p.nombre }}<span class="text-acid">.</span></h1>
+            <p class="m-0 max-w-[30ch] text-[clamp(22px,2vw,30px)] font-medium leading-tight tracking-[-0.02em]">{{ p.sub }}</p>
+            <div class="flex flex-wrap items-baseline gap-2.5 border-t border-white/[.08] pt-6"><span class="text-5xl font-semibold tracking-[-0.05em]">{{ p.monto }}</span><span class="text-mute">{{ p.unidad }}</span></div>
+            <div class="flex flex-wrap gap-3">
+                <a href="{{ p.cta_url }}" target="_blank" rel="noopener" class="p-btn p-btn-lg">{{ p.cta }}<span class="p-btn-dot"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7"/><path d="M7 7h10v10"/></svg></span></a>
+                <a href="#como-funciona" class="p-btn-ghost">{% trans "Cómo funciona" %}</a>
+            </div>
+        </div>
+        <div class="flex min-w-0 flex-col gap-3">
+            <span class="flex items-center gap-2.5 font-mono text-xs text-mute"><span class="rounded-full bg-acid px-2 py-0.5 font-medium text-ink">{% trans "en vivo" %}</span>{% trans "Vista de ejemplo con datos simulados. Recorre el gráfico." %}</span>
+            <div class="relative h-[600px] xl:h-[560px]"><perseus-dash></perseus-dash></div>
         </div>
     </div>
-    {% imagen_sitio p.imagen 1400 p.imagen_static as img %}
-    {% if img %}
-    <div class="aspect-[16/11] overflow-hidden rounded-[28px] border border-white/[.08]"><img src="{{ img }}" alt="{{ p.nombre }}" class="h-full w-full object-cover object-top"></div>
-    {% else %}
-    <div class="flex aspect-[16/11] items-end rounded-[28px] border border-dashed border-white/20 p-6 font-mono text-xs text-faint">{% trans "Sube la captura en Admin → Imágenes del sitio" %}</div>
-    {% endif %}
 </section>
 
-<section class="mx-auto grid max-w-site gap-4 px-5 pb-[clamp(56px,7vw,96px)] md:grid-cols-3 md:px-14">
-    {% for f in p.features %}
-    <div class="flex flex-col gap-10 rounded-3xl border border-white/[.08] bg-white/[.025] p-7">
-        <span class="font-mono text-xs text-acid">{{ forloop.counter|stringformat:"02d" }}</span>
-        <span class="text-2xl font-semibold leading-tight tracking-[-0.03em]">{{ f }}</span>
+<section class="mx-auto max-w-site px-5 py-[clamp(72px,9vw,128px)] md:px-14" data-reveal>
+    <h2 class="p-h2 mb-10 max-w-[16ch]">{% trans "Todo tu dinero en un solo panel." %}</h2>
+    <div class="grid gap-4 md:grid-cols-3">
+        {% for t, d in p.features %}
+        <div class="p-card !min-h-[300px]" data-spot>
+            <span class="font-mono text-xs text-acid">{{ forloop.counter|stringformat:"02d" }}</span>
+            <div class="flex flex-col gap-3">
+                <h3 class="m-0 text-[26px] font-semibold leading-tight tracking-[-0.03em]">{{ t }}</h3>
+                <p class="m-0 text-[15.5px] leading-relaxed text-body">{{ d }}</p>
+            </div>
+        </div>
+        {% endfor %}
     </div>
-    {% endfor %}
 </section>
 
-{% trans "¿Necesitas una app para tu operación?" as t %}{% trans "Cotizar una app" as b %}
-{% include 'core/partials/_cierre.html' with titulo=t boton=b asunto="Apps Corporativas" %}
+<section id="como-funciona" class="rounded-t-[40px] bg-bone text-ink" data-reveal>
+    <div class="mx-auto max-w-site px-5 py-[clamp(72px,9vw,128px)] md:px-14">
+        <span class="p-label mb-5 text-acid-deep">{% trans "Cómo funciona" %}</span>
+        <h2 class="p-h2 mb-12 max-w-[14ch]">{% trans "Empieza en minutos." %}</h2>
+        <ol class="m-0 grid list-none gap-0 p-0 md:grid-cols-3">
+            {% for t, d in p.pasos %}
+            <li class="relative flex flex-col gap-4 border-t-2 border-ink py-8 md:pr-10">
+                <span class="text-[clamp(64px,7vw,112px)] font-semibold leading-[.8] tracking-[-0.07em]">{{ forloop.counter }}</span>
+                <h3 class="m-0 text-2xl font-semibold tracking-[-0.03em]">{{ t }}</h3>
+                <p class="m-0 max-w-[34ch] text-base leading-relaxed text-[#3d3d39]">{{ d }}</p>
+            </li>
+            {% endfor %}
+        </ol>
+    </div>
+</section>
+
+<section class="bg-bone text-ink">
+    <div class="mx-auto grid max-w-site gap-12 px-5 pb-[clamp(72px,9vw,128px)] md:px-14 lg:grid-cols-[minmax(0,.7fr)_minmax(0,1.3fr)]" x-data="{ open: 0 }">
+        <h2 class="p-h2">{% trans "Preguntas frecuentes" %}</h2>
+        <div class="border-t border-ink/[.15]">
+            {% for q, a in p.faq %}
+            <div class="border-b border-ink/[.15]">
+                <button type="button" @click="open = open === {{ forloop.counter }} ? 0 : {{ forloop.counter }}" class="flex w-full items-center justify-between gap-6 border-0 bg-transparent py-6 text-left text-xl font-medium tracking-[-0.01em] text-ink" :aria-expanded="open === {{ forloop.counter }}">
+                    {{ q }}
+                    <span class="flex h-9 w-9 flex-none items-center justify-center rounded-full border border-ink/20 text-lg transition-transform duration-300" :class="open === {{ forloop.counter }} && 'rotate-45 bg-ink text-acid'">+</span>
+                </button>
+                <div x-show="open === {{ forloop.counter }}" x-transition.opacity style="display:none" class="max-w-[60ch] pb-6 text-[17px] leading-relaxed text-[#3d3d39]">{{ a }}</div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+
+<section class="mx-auto max-w-site px-5 py-[clamp(64px,8vw,112px)] md:px-14">
+    <div class="grid gap-4 md:grid-cols-[1.4fr_1fr]">
+        <a href="{{ p.cta_url }}" target="_blank" rel="noopener" class="group flex min-h-[280px] flex-col justify-between gap-10 rounded-[32px] bg-acid p-[clamp(28px,4vw,48px)] text-ink no-underline hover:text-ink">
+            <span class="font-mono text-xs uppercase tracking-wider">fintora.cl ↗</span>
+            <span class="text-[clamp(40px,5vw,80px)] font-semibold leading-[.92] tracking-[-0.055em]">{% trans "Crea tu cuenta gratis." %}</span>
+        </a>
+        <a href="{% url 'contacto' %}?asunto={% trans 'App a medida'|urlencode %}" class="flex min-h-[280px] flex-col justify-between gap-10 rounded-[32px] border border-white/10 bg-white/[.025] p-[clamp(28px,4vw,48px)] text-bone no-underline hover:border-acid/40 hover:text-bone">
+            <span class="font-mono text-xs uppercase tracking-wider text-mute">{% trans "Apps a medida" %}</span>
+            <span class="text-[clamp(28px,2.8vw,40px)] font-semibold leading-none tracking-[-0.04em]">{% trans "¿Necesitas algo así para tu empresa?" %} <span class="text-acid">→</span></span>
+        </a>
+    </div>
+</section>
+{% endblock %}
+
+{% block extra_js %}
+<script src="{% static 'core/js/perseus-live.js' %}" defer></script>
+<script src="{% static 'core/js/home.js' %}" defer></script>
 {% endblock %}

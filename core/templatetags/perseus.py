@@ -37,4 +37,14 @@ def imagen_sitio(clave, width=1600, fallback=''):
     img = mapa.get(clave)
     if img:
         return _url(img, width)
-    return static(fallback) if fallback else ''
+
+
+@register.simple_tag(takes_context=True)
+def ruta_idioma(context, idioma):
+    """URL de la página actual en otro idioma. Se calcula al renderizar, cuando Django
+    todavía sabe en qué idioma está la página (en /i18n/setlang/ ya no lo sabe)."""
+    from django.urls import translate_url
+    request = context.get('request')
+    if request is None:
+        return '/'
+    return translate_url(request.get_full_path(), idioma)

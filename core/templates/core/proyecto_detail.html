@@ -2,6 +2,29 @@
 {% load i18n perseus %}
 {% block title %}{{ proyecto.nombre }} · {% trans "Caso" %} | Perseus Technology{% endblock %}
 {% block meta_description %}{{ proyecto.descripcion_corta }}{% endblock %}
+{% block jsonld %}
+<script type="application/ld+json">
+{ "@context": "https://schema.org", "@graph": [
+    {
+      "@type": "CreativeWork",
+      "name": "{{ proyecto.nombre|escapejs }}",
+      "description": "{{ proyecto.descripcion_corta|escapejs }}",
+      {% if proyecto.anio %}"dateCreated": "{{ proyecto.anio }}",{% endif %}
+      {% if proyecto.imagen %}"image": "{{ proyecto.imagen|cdn:1200 }}",{% endif %}
+      {% if proyecto.url_externa %}"url": "{{ proyecto.url_externa }}",{% endif %}
+      "creator": { "@type": "Organization", "name": "Perseus Technology" }
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        { "@type": "ListItem", "position": 1, "name": "Perseus Technology", "item": "{{ request.scheme }}://{{ request.get_host }}{% url 'home' %}" },
+        { "@type": "ListItem", "position": 2, "name": "{% trans 'Casos'|escapejs %}", "item": "{{ request.scheme }}://{{ request.get_host }}{% url 'home' %}#casos" },
+        { "@type": "ListItem", "position": 3, "name": "{{ proyecto.nombre|escapejs }}", "item": "{{ request.build_absolute_uri }}" }
+      ]
+    }
+] }
+</script>
+{% endblock %}
 
 {% block content %}
 <div class="bg-bone text-ink">

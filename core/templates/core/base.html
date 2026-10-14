@@ -68,6 +68,7 @@
     }
     </script>
 
+    {% block jsonld %}{% endblock %}
     {% block extra_css %}{% endblock %}
 </head>
 <body class="{% block body_class %}bg-ink text-bone antialiased{% endblock %}">
@@ -104,12 +105,12 @@
 
             <form action="{% url 'set_language' %}" method="post" class="hidden lg:block">
                 {% csrf_token %}
-                <input name="next" type="hidden" value="{{ request.path }}">
+                
                 {% if 'en' in CURRENT_LANG %}
-                    <input name="language" type="hidden" value="es">
+                    <input name="language" type="hidden" value="es"><input name="next" type="hidden" value="{% ruta_idioma 'es' %}">
                     <button type="submit" class="font-mono text-xs tracking-wide text-mute hover:text-bone" title="Cambiar a Español">ES</button>
                 {% else %}
-                    <input name="language" type="hidden" value="en">
+                    <input name="language" type="hidden" value="en"><input name="next" type="hidden" value="{% ruta_idioma 'en' %}">
                     <button type="submit" class="font-mono text-xs tracking-wide text-mute hover:text-bone" title="Switch to English">EN</button>
                 {% endif %}
             </form>
@@ -134,9 +135,9 @@
                 <a href="{% url 'ayuda' %}" class="p-mobilelink">{% trans "Centro de Ayuda" %}</a>
                 <form action="{% url 'set_language' %}" method="post" class="p-mobilelink">
                     {% csrf_token %}
-                    <input name="next" type="hidden" value="{{ request.path }}">
-                    {% if 'en' in CURRENT_LANG %}<input name="language" type="hidden" value="es"><button type="submit" class="text-body">Cambiar a Español</button>
-                    {% else %}<input name="language" type="hidden" value="en"><button type="submit" class="text-body">Switch to English</button>{% endif %}
+                    
+                    {% if 'en' in CURRENT_LANG %}<input name="language" type="hidden" value="es"><input name="next" type="hidden" value="{% ruta_idioma 'es' %}"><button type="submit" class="text-body">Cambiar a Español</button>
+                    {% else %}<input name="language" type="hidden" value="en"><input name="next" type="hidden" value="{% ruta_idioma 'en' %}"><button type="submit" class="text-body">Switch to English</button>{% endif %}
                 </form>
                 <a href="{% url 'contacto' %}" class="p-btn mt-6 justify-between">{% trans "Hablemos" %}<span class="p-btn-dot"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7"/><path d="M7 7h10v10"/></svg></span></a>
             </nav>
@@ -175,6 +176,7 @@
         <div aria-hidden="true" class="p-wordmark">perseus</div>
     </footer>
 
+    <script src="{% static 'core/js/site.js' %}" defer></script>
     <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
     {% block extra_js %}{% endblock %}
 </body>

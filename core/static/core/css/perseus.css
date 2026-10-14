@@ -80,7 +80,23 @@ textarea.p-input { min-height: 96px; padding: 8px 0; resize: vertical; }
 .p-preview.on { opacity: 1; }
 @media (hover: none), (max-width: 999px) { .p-preview { display: none; } }
 
+/* Transiciones entre páginas (Chrome, Edge, Safari 18+) */
+@view-transition { navigation: auto; }
+::view-transition-old(root) { animation: pvtOut .26s cubic-bezier(.4,0,1,1) both; }
+::view-transition-new(root) { animation: pvtIn .5s cubic-bezier(0,0,.2,1) both; }
+body > header { view-transition-name: site-header; }
+::view-transition-old(site-header), ::view-transition-new(site-header) { animation: none; mix-blend-mode: normal; }
+@keyframes pvtOut { to { opacity: 0; transform: translateY(-10px) scale(.995); filter: blur(6px); } }
+@keyframes pvtIn { from { opacity: 0; transform: translateY(18px); filter: blur(6px); } }
+html.p-leaving main { opacity: 0; transform: translateY(-8px); transition: opacity .2s, transform .2s; }
+
+/* Revelado al scroll (lo activa site.js) */
+.p-reveal { opacity: 0; transform: translateY(28px); transition: opacity .9s cubic-bezier(.2,.7,.2,1), transform .9s cubic-bezier(.2,.7,.2,1); }
+.p-reveal.is-in { opacity: 1; transform: none; }
+
 @media (prefers-reduced-motion: reduce) {
   .p-marquee-track, .p-fill { animation: none; }
+  ::view-transition-old(root), ::view-transition-new(root) { animation: none; }
+  .p-reveal { opacity: 1; transform: none; }
   html { scroll-behavior: auto; }
 }

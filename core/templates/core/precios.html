@@ -1,12 +1,43 @@
 {% extends 'core/base.html' %}
-{% load i18n %}
+{% load static i18n %}
 {% block title %}{% trans "Planes y Precios" %} | Perseus Technology{% endblock %}
-{% block meta_description %}{% trans "Software de alto rendimiento sin costos ocultos. Desarrollo web desde $150.000 CLP, soporte TI desde $25.000 CLP al mes y y Fintora gratis." %}{% endblock %}
+{% block meta_description %}{% trans "Software de alto rendimiento sin costos ocultos. Desarrollo web desde $150.000 CLP, soporte TI desde $25.000 CLP al mes y Fintora gratis." %}{% endblock %}
+{% block jsonld %}
+<script type="application/ld+json">
+{ "@context": "https://schema.org", "@graph": [
+    {
+      "@type": "OfferCatalog",
+      "name": "{% trans 'Planes y Precios'|escapejs %}",
+      "itemListElement": [
+        { "@type": "Offer", "name": "{% trans 'Desarrollo Web'|escapejs %}", "price": "150000", "priceCurrency": "CLP" },
+        { "@type": "Offer", "name": "{% trans 'Soporte TI'|escapejs %}", "price": "25000", "priceCurrency": "CLP", "priceSpecification": { "@type": "UnitPriceSpecification", "price": "25000", "priceCurrency": "CLP", "unitText": "MONTH" } },
+        { "@type": "Offer", "name": "Fintora", "price": "0", "priceCurrency": "CLP" }
+      ]
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        { "@type": "ListItem", "position": 1, "name": "Perseus Technology", "item": "{{ request.scheme }}://{{ request.get_host }}{% url 'home' %}" },
+        { "@type": "ListItem", "position": 2, "name": "{% trans 'Precios'|escapejs %}", "item": "{{ request.build_absolute_uri }}" }
+      ]
+    }
+] }
+</script>
+{% endblock %}
+{% block extra_js %}<script src="{% static 'core/js/perseus-forms.js' %}" defer></script>{% endblock %}
 
 {% block content %}
 <section class="mx-auto flex max-w-site flex-wrap items-end justify-between gap-12 px-5 pb-12 pt-[clamp(56px,8vw,112px)] md:px-14">
     <h1 class="m-0 max-w-[12ch] text-[clamp(48px,7vw,112px)] font-semibold leading-[.92] tracking-[-0.055em]">{% trans "Invierte en infraestructura" %} <span class="text-acid">{% trans "real." %}</span></h1>
     <p class="m-0 max-w-[36ch] text-[17px] leading-relaxed text-body">{% trans "Software de alto rendimiento sin costos ocultos. Selecciona el módulo tecnológico que tu empresa necesita escalar hoy." %}</p>
+</section>
+
+<section id="cotizador" class="mx-auto max-w-site px-5 pb-[clamp(64px,8vw,112px)] md:px-14">
+    <div class="mb-6 flex flex-wrap items-baseline justify-between gap-4 border-b border-white/[.08] pb-4">
+        <span class="p-label text-acid">{% trans "Cotizador" %}</span>
+        <span class="text-sm text-mute">{% trans "Elige el tipo de proyecto y los extras. El total se actualiza al instante." %}</span>
+    </div>
+    <perseus-quote contact="{% url 'contacto' %}" lang="{{ LANGUAGE_CODE }}">{{ cotizador|json_script:"cotizador-cfg" }}</perseus-quote>
 </section>
 
 <section class="mx-auto max-w-site px-5 pb-12 md:px-14">
