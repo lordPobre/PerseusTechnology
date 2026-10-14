@@ -105,8 +105,9 @@ html.p-leaving main { opacity: 0; transform: translateY(-8px); transition: opaci
 .p-intro { position: fixed; inset: 0; z-index: 100; display: none; align-items: center; justify-content: center; background: var(--ink); transition: opacity .45s ease; }
 .p-intro.on { display: flex; }
 .p-intro.out { opacity: 0; pointer-events: none; }
-.p-intro-lockup { display: flex; align-items: center; gap: 18px; }
-.p-intro-word { font-size: clamp(44px, 7vw, 64px); font-weight: 600; letter-spacing: -.045em; color: var(--bone); opacity: 0; transform: translateX(-8px); animation: pIntroWord .5s ease .95s forwards; }
+.p-intro-lockup { display: flex; flex-direction: column; align-items: center; gap: clamp(20px, 3vw, 32px); }
+.p-intro-mark { width: clamp(140px, 22vw, 200px); height: auto; aspect-ratio: 1; }
+.p-intro-word { font-size: clamp(40px, 6vw, 60px); font-weight: 600; letter-spacing: -.045em; line-height: 1; color: var(--bone); opacity: 0; transform: translateY(8px); animation: pIntroWord .5s ease .95s forwards; }
 @keyframes pIntroWord { to { opacity: 1; transform: none; } }
 .p-loader { flex: none; }
 button[aria-busy="true"] { cursor: progress; }

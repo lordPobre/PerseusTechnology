@@ -22,12 +22,10 @@
     <meta property="og:description" content="{% block og_description %}Construimos plataformas rápidas, escalables y orientadas a la conversión.{% endblock %}">
     <meta property="og:image" content="{% imagen_sitio 'og' 1200 'core/img/perseus-banner.png' %}">
     <meta property="og:url" content="{{ request.build_absolute_uri }}">
-    <link rel="icon" type="image/svg+xml" href="{% static 'core/img/favicon.svg' %}">
-    <link rel="icon" type="image/x-icon" href="{% static 'core/img/favicon.ico' %}" sizes="48x48">
+    <link rel="icon" type="image/x-icon" href="{% static 'core/img/favicon.ico' %}">
     <link rel="apple-touch-icon" sizes="180x180" href="{% static 'core/img/apple-touch-icon.png' %}">
     <link rel="icon" type="image/png" sizes="32x32" href="{% static 'core/img/favicon-32x32.png' %}">
     <link rel="icon" type="image/png" sizes="16x16" href="{% static 'core/img/favicon-16x16.png' %}">
-    <link rel="manifest" href="{% static 'core/img/site.webmanifest' %}">
 
     {% get_current_language as LANGUAGE_CODE %}
     {% ruta_idioma 'es' as url_es %}{% ruta_idioma 'en' as url_en %}
@@ -65,7 +63,11 @@
     <header x-data="{ menu: false, sol: false }" class="sticky top-0 z-50 border-b border-white/[.07] bg-ink/60 backdrop-blur-xl">
         <div class="mx-auto flex h-[68px] max-w-site items-center gap-7 px-5 md:px-14">
             <a href="{% url 'home' %}" class="mr-auto flex items-center gap-2.5 text-bone no-underline" aria-label="Perseus Technology">
-                {% include 'core/partials/_logo_orbita.html' with clase='h-7 w-7 flex-none' %}
+                <span class="flex w-5 flex-col gap-[3px]">
+                    <span class="block h-1 rounded-sm bg-bone"></span>
+                    <span class="ml-[5px] block h-1 rounded-sm bg-acid"></span>
+                    <span class="block h-1 rounded-sm bg-bone"></span>
+                </span>
                 <span class="text-[19px] font-semibold tracking-[-0.03em]">perseus</span>
                 <span class="mt-0.5 font-mono text-[10.5px] tracking-wide text-mute">/tech</span>
             </a>
