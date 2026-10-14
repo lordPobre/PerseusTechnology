@@ -1,75 +1,52 @@
 {% extends 'core/base.html' %}
-{% load static i18n %}
-{% block meta_description %}
-    Descripción de la página...
-{% endblock meta_description %}
+{% load i18n perseus %}
 {% block title %}{{ post.titulo }} | Blog Perseus{% endblock %}
-
-{% block body_class %}bg-[#05080a] text-gray-300 antialiased selection:bg-{{ post.color_tema }}-500/30 selection:text-{{ post.color_tema }}-200{% endblock %}
+{% block meta_description %}{{ post.resumen|striptags|truncatechars:155 }}{% endblock %}
+{% block og_title %}{{ post.titulo }}{% endblock %}
+{% block og_description %}{{ post.resumen|striptags|truncatechars:155 }}{% endblock %}
 
 {% block extra_css %}
 <style>
-    .article-content p { margin-bottom: 1.5rem; line-height: 1.8; color: #9ca3af; font-size: 1.125rem; }
-    .article-content h2 { color: #f8fafc; font-size: 1.875rem; font-weight: 700; margin-top: 3rem; margin-bottom: 1.5rem; letter-spacing: -0.025em; }
-    .article-content h3 { color: #f1f5f9; font-size: 1.5rem; font-weight: 600; margin-top: 2rem; margin-bottom: 1rem; }
-    .article-content ul { list-style-type: disc; padding-left: 1.5rem; margin-bottom: 1.5rem; color: #9ca3af; }
-    .article-content li { margin-bottom: 0.5rem; }
-    .article-content strong { color: #f8fafc; font-weight: 700; }
-    .article-content a { color: #22d3ee; text-decoration: none; border-bottom: 1px solid rgba(34,211,238,0.3); transition: all 0.2s; }
-    .article-content a:hover { border-bottom-color: #22d3ee; }
+  .p-article p { margin: 0 0 1.5rem; line-height: 1.75; color: var(--body); font-size: 1.125rem; }
+  .p-article h2 { color: var(--bone); font-size: 2rem; font-weight: 600; letter-spacing: -.035em; margin: 3rem 0 1.25rem; }
+  .p-article h3 { color: var(--bone); font-size: 1.5rem; font-weight: 600; letter-spacing: -.02em; margin: 2rem 0 1rem; }
+  .p-article ul { padding-left: 1.5rem; margin-bottom: 1.5rem; color: var(--body); }
+  .p-article li { margin-bottom: .5rem; }
+  .p-article strong { color: var(--bone); }
+  .p-article a { color: var(--acid); text-decoration: none; border-bottom: 1px solid rgba(198,255,61,.35); }
+  .p-article a:hover { border-bottom-color: var(--acid); }
 </style>
 {% endblock %}
 
 {% block content %}
-<main class="relative pt-32 pb-24 px-6 overflow-hidden min-h-screen">
-    <div class="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[500px] bg-{{ post.color_tema }}-500/10 blur-[120px] rounded-full pointer-events-none"></div>
+<article class="mx-auto max-w-[820px] px-5 pb-20 pt-[clamp(40px,6vw,80px)]">
+    <a href="{% url 'blog' %}" class="font-mono text-xs text-mute no-underline hover:text-bone">← Blog</a>
+    <header class="mb-12 mt-8 flex flex-col gap-6">
+        <span class="font-mono text-xs text-acid">{{ post.categoria.nombre }} · {{ post.fecha_publicacion|date:"d M Y" }} · {{ post.tiempo_lectura }} {% trans "min de lectura" %}</span>
+        <h1 class="m-0 text-[clamp(40px,5.6vw,72px)] font-semibold leading-[.95] tracking-[-0.05em]">{{ post.titulo }}</h1>
+        <p class="m-0 text-[clamp(19px,1.6vw,23px)] leading-relaxed text-[#dcdcd5]">{{ post.resumen }}</p>
+        <span class="text-sm text-mute">{% trans "Por" %} {{ post.autor }}</span>
+    </header>
+    {% if post.imagen_portada %}
+    <img src="{{ post.imagen_portada|cdn:1600 }}" alt="{{ post.titulo }}" class="mb-14 aspect-[16/9] w-full rounded-[28px] object-cover">
+    {% endif %}
+    <div class="p-article">{{ post.contenido|linebreaks }}</div>
+</article>
 
-    <article class="max-w-[800px] mx-auto relative z-10">
-        <a href="{% url 'blog' %}" class="inline-flex items-center gap-2 text-gray-500 hover:text-cyan-400 transition-all duration-300 mb-12 font-mono text-sm group">
-            <span class="text-cyan-500 group-hover:translate-x-[-4px] transition-transform duration-300"><i class="fa-solid fa-terminal text-xs"></i></span>
-            <span class="text-cyan-400">..</span>/blog
-            <span class="inline-block w-2 h-4 bg-cyan-500/50 animate-pulse ml-1"></span>
+{% if posts_recientes %}
+<section class="mx-auto max-w-site px-5 pb-12 md:px-14">
+    <span class="p-label mb-6 border-t border-white/[.08] pt-6 text-mute">{% trans "Sigue leyendo" %}</span>
+    <div class="grid gap-4 md:grid-cols-2">
+        {% for r in posts_recientes %}
+        <a href="{{ r.get_absolute_url }}" class="flex flex-col gap-3 rounded-3xl border border-white/[.08] bg-white/[.025] p-7 text-bone no-underline hover:border-acid/40 hover:text-bone">
+            <span class="font-mono text-xs text-mute">{{ r.categoria.nombre }} · {{ r.tiempo_lectura }} min</span>
+            <span class="text-2xl font-semibold leading-tight tracking-[-0.03em]">{{ r.titulo }}</span>
         </a>
+        {% endfor %}
+    </div>
+</section>
+{% endif %}
 
-        <header class="mb-16 text-center">
-            {% if post.imagen_portada %}
-                <div class="w-full h-[300px] md:h-[450px] mx-auto rounded-[3rem] border border-white/10 overflow-hidden mb-12 relative shadow-2xl">
-                    <img src="{{ post.imagen_portada.url }}" alt="{{ post.titulo }}" class="w-full h-full object-cover opacity-80">
-                    <div class="absolute inset-0 bg-gradient-to-t from-[#05080a] via-transparent to-transparent"></div>
-                </div>
-            {% endif %}
-            <div class="flex items-center justify-center gap-3 mb-6">
-                <span class="px-3 py-1 bg-{{ post.color_tema }}-500/10 text-{{ post.color_tema }}-400 text-xs font-bold uppercase tracking-wider rounded-full border border-{{ post.color_tema }}-500/20">
-                    {{ post.categoria.nombre }}
-                </span>
-                <span class="text-gray-500 text-sm font-mono">{{ post.fecha_publicacion|date:"d M Y" }}</span>
-            </div>
-            <h1 class="text-4xl md:text-5xl lg:text-6xl font-extrabold text-white mb-8 tracking-tight leading-tight">{{ post.titulo }}</h1>
-            <div class="flex items-center justify-center gap-4 py-6 border-y border-white/5">
-                <div class="w-12 h-12 rounded-full bg-gray-800 border border-gray-700 flex items-center justify-center text-cyan-500 text-lg">
-                    <i class="fa-solid fa-user-astronaut"></i>
-                </div>
-                <div class="text-left">
-                    <p class="text-white font-bold">{{ post.autor }}</p>
-                    <p class="text-gray-500 text-sm">{{ post.tiempo_lectura }} {% trans "min de lectura" %}</p>
-                </div>
-            </div>
-        </header>
-
-        <div class="p-6 md:p-8 rounded-3xl bg-white/5 border border-white/10 text-xl md:text-2xl text-gray-300 font-medium leading-relaxed mb-16 border-l-4 border-l-{{ post.color_tema }}-500">
-            {{ post.resumen }}
-        </div>
-
-        <div class="article-content">
-            {{ post.contenido|linebreaks }}
-        </div>
-
-        <footer class="mt-20 pt-10 border-t border-white/10 text-center">
-            <h3 class="text-2xl font-bold text-white mb-6">{% trans "¿Necesitas ayuda técnica con este tema?" %}</h3>
-            <a href="{% url 'contacto' %}" class="inline-block bg-cyan-600 hover:bg-cyan-500 text-black font-bold py-4 px-10 rounded-2xl transition shadow-[0_0_20px_rgba(34,211,238,0.2)] hover:shadow-[0_0_30px_rgba(34,211,238,0.4)]">
-                {% trans "Contactar a un Ingeniero" %}
-            </a>
-        </footer>
-    </article>
-</main>
+{% trans "¿Necesitas ayuda técnica con este tema?" as t %}{% trans "Contactar a un Ingeniero" as b %}
+{% include 'core/partials/_cierre.html' with titulo=t boton=b %}
 {% endblock %}

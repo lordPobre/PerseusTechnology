@@ -1,0 +1,94 @@
+{% extends 'core/base.html' %}
+{% load static i18n perseus %}
+{% block title %}{{ d.nombre }} | Perseus Technology{% endblock %}
+{% block meta_description %}{{ d.sub }}{% endblock %}
+
+{% block content %}
+<section class="relative overflow-hidden border-b border-white/[.07]">
+    <perseus-field></perseus-field>
+    <div class="pointer-events-none absolute right-[-10%] top-[-20%] h-[800px] w-[900px]" style="background:radial-gradient(closest-side, rgba(198,255,61,.09), transparent)"></div>
+    <div class="relative mx-auto max-w-site px-5 pb-[clamp(56px,7vw,96px)] pt-5 md:px-14">
+        <nav class="mb-[clamp(40px,6vw,80px)] flex flex-wrap gap-2" aria-label="{% trans 'Divisiones' %}">
+            {% for k, v in divisiones.items %}
+            <a href="{% url v.url %}" class="rounded-full px-4 py-2.5 text-sm font-medium no-underline {% if k == clave %}bg-bone text-ink hover:text-ink{% else %}border border-white/[.14] text-[#cfcfc8] hover:border-white/30 hover:text-bone{% endif %}">{{ v.n }} {{ v.nombre }}</a>
+            {% endfor %}
+        </nav>
+        <div class="grid items-center gap-[clamp(40px,5vw,72px)] xl:grid-cols-[minmax(0,.9fr)_minmax(0,1.1fr)]">
+            <div class="flex min-w-0 flex-col gap-7">
+                <span class="p-label text-acid">{{ d.n }} · {{ d.nombre }}</span>
+                <h1 class="m-0 text-[clamp(44px,5.8vw,100px)] font-semibold leading-[.92] tracking-[-0.055em]">{{ d.h1 }} <span class="text-acid">{{ d.h1_acento }}</span></h1>
+                <p class="m-0 max-w-[48ch] text-[clamp(17px,1.3vw,20px)] leading-relaxed text-body">{{ d.sub }}</p>
+                <div class="flex flex-wrap gap-3">
+                    <a href="{% url 'contacto' %}?asunto={{ d.nombre|urlencode }}" class="p-btn p-btn-lg">{{ d.cta }}<span class="p-btn-dot"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></span></a>
+                    {% if proyectos %}<a href="#casos" class="p-btn-ghost">{% trans "Ver casos" %}</a>{% endif %}
+                </div>
+                <div class="flex flex-col gap-3.5 border-t border-white/[.08] pt-6">
+                    <span class="p-label text-faint">Stack</span>
+                    <div class="flex flex-wrap items-center gap-7">
+                        {% for nombre, src in d.stack %}<img src="{{ src }}" alt="{{ nombre }}" title="{{ nombre }}" loading="lazy" class="h-7 w-auto opacity-70" style="filter:brightness(0) invert(1)">{% endfor %}
+                    </div>
+                </div>
+            </div>
+            <div class="flex min-w-0 flex-col gap-3">
+                <span class="flex items-center gap-2.5 font-mono text-xs text-mute"><span class="rounded-full bg-acid px-2 py-0.5 font-medium text-ink">{% trans "en vivo" %}</span>{{ d.demo_label }}</span>
+                <div class="relative {% if d.demo == 'perseus-code' %}h-[760px]{% else %}h-[600px]{% endif %} xl:h-[580px]">
+                    {% if d.demo == 'perseus-code' %}<perseus-code></perseus-code>{% elif d.demo == 'perseus-dash' %}<perseus-dash></perseus-dash>{% else %}<perseus-infra></perseus-infra>{% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="mx-auto max-w-site px-5 pb-[clamp(72px,9vw,128px)] md:px-14">
+    <div class="mb-8 flex flex-wrap items-end justify-between gap-6 pt-[clamp(72px,9vw,128px)]">
+        <h2 class="p-h2 max-w-[14ch]">{{ d.caps_titulo }}</h2>
+        <p class="m-0 max-w-[44ch] text-[17px] leading-relaxed text-body">{{ d.caps_intro }}</p>
+    </div>
+    <div class="grid gap-4" style="grid-template-columns:repeat(auto-fit,minmax(min(100%,260px),1fr))">
+        {% for c in d.caps %}
+        {% if c.2 %}<a href="{% url c.2 %}" class="p-card !min-h-[260px] !gap-10" data-spot>{% else %}<div class="p-card !min-h-[260px] !gap-10">{% endif %}
+            <span class="font-mono text-xs text-acid">{{ forloop.counter|stringformat:"02d" }}</span>
+            <div class="flex flex-col gap-3">
+                <h3 class="m-0 text-[22px] font-semibold leading-tight tracking-[-0.02em]">{{ c.0 }}</h3>
+                <p class="m-0 text-[15px] leading-relaxed text-[#a3a39c]">{{ c.1 }}</p>
+                {% if c.2 %}<span class="text-sm font-medium text-acid">{% trans "Ver producto" %} →</span>{% endif %}
+            </div>
+        {% if c.2 %}</a>{% else %}</div>{% endif %}
+        {% endfor %}
+    </div>
+</section>
+
+{% if proyectos %}
+<section id="casos" class="mx-auto max-w-site px-5 pb-[clamp(72px,9vw,128px)] md:px-14">
+    <h2 class="p-h2 mb-8">{% trans "Plataformas que ya operan." %}</h2>
+    <div class="grid gap-4" style="grid-template-columns:repeat(auto-fit,minmax(min(100%,480px),1fr))">
+        {% for p in proyectos %}
+        <a href="{{ p.get_absolute_url }}" class="group flex flex-col overflow-hidden rounded-[28px] border border-white/[.08] bg-white/[.025] text-bone no-underline hover:border-acid/40 hover:text-bone">
+            <div class="aspect-[16/10] overflow-hidden"><img src="{{ p.imagen|cdn:1200 }}" alt="{{ p.nombre }}" loading="lazy" class="h-full w-full object-cover object-top transition-transform duration-700 group-hover:scale-[1.03]"></div>
+            <div class="flex items-start justify-between gap-4 px-7 pb-7 pt-6">
+                <div class="flex flex-col gap-1.5"><span class="text-2xl font-semibold tracking-[-0.03em]">{{ p.nombre }}</span><span class="text-[15px] text-body">{{ p.descripcion_corta }}</span></div>
+                <span class="pt-1.5 font-mono text-xs text-acid">{{ p.lista_etiquetas|first }}</span>
+            </div>
+        </a>
+        {% endfor %}
+    </div>
+</section>
+{% endif %}
+
+{% if d.precio %}
+<section class="mx-auto max-w-site px-5 pb-6 md:px-14">
+    <div class="flex flex-wrap items-center justify-between gap-8 rounded-[28px] bg-bone p-[clamp(28px,3vw,44px)] text-ink">
+        <div><span class="p-label text-acid-deep">{{ d.precio.etiqueta }}</span><div class="mt-1.5 text-[clamp(40px,4.4vw,56px)] font-semibold tracking-[-0.05em]">{{ d.precio.monto }} <span class="text-xl text-[#5a5a55]">{{ d.precio.unidad }}</span></div></div>
+        <p class="m-0 max-w-[44ch] text-[15px] leading-relaxed text-[#3d3d39]">{{ d.precio.nota }}</p>
+        <a href="{% url 'precios' %}" class="whitespace-nowrap rounded-full bg-ink px-6 py-4 font-semibold text-acid no-underline hover:text-acid">{% trans "Ver todos los precios" %}</a>
+    </div>
+</section>
+{% endif %}
+
+<div class="pt-[clamp(48px,6vw,80px)]">{% include 'core/partials/_cierre.html' with titulo=d.cierre boton=d.cta asunto=d.nombre %}</div>
+{% endblock %}
+
+{% block extra_js %}
+<script src="{% static 'core/js/perseus-live.js' %}" defer></script>
+<script src="{% static 'core/js/home.js' %}" defer></script>
+{% endblock %}

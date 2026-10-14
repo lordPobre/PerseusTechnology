@@ -1,0 +1,27 @@
+{% load i18n perseus %}
+{# Carrusel de logos. Desde el admin (Tecnologia); si aún no hay, usa los logos por defecto. #}
+<section class="p-marquee" aria-label="{% trans 'Tecnologías' %}">
+  <div class="p-marquee-track">
+    {% if tecnologias %}
+      {% for t in tecnologias %}<img src="{{ t.logo|cdn:200 }}" alt="{{ t.nombre }}" title="{{ t.nombre }}" loading="lazy">{% endfor %}
+      {% for t in tecnologias %}<img src="{{ t.logo|cdn:200 }}" alt="" aria-hidden="true" loading="lazy">{% endfor %}
+    {% else %}
+      {% with d="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/" %}
+      {% for r in "x,y"|make_list %}{% if r != "," %}
+      <img src="{{ d }}python/python-original.svg" alt="{% if r == 'x' %}Python{% endif %}" loading="lazy">
+      <img src="{{ d }}django/django-plain.svg" alt="{% if r == 'x' %}Django{% endif %}" loading="lazy">
+      <img src="{{ d }}nextjs/nextjs-original.svg" alt="{% if r == 'x' %}Next.js{% endif %}" loading="lazy">
+      <img src="{{ d }}react/react-original.svg" alt="{% if r == 'x' %}React{% endif %}" loading="lazy">
+      <img src="{{ d }}postgresql/postgresql-original.svg" alt="{% if r == 'x' %}PostgreSQL{% endif %}" loading="lazy">
+      <img src="{{ d }}docker/docker-original.svg" alt="{% if r == 'x' %}Docker{% endif %}" loading="lazy">
+      <img src="{{ d }}amazonwebservices/amazonwebservices-original-wordmark.svg" alt="{% if r == 'x' %}AWS{% endif %}" loading="lazy">
+      <img src="{{ d }}azure/azure-original.svg" alt="{% if r == 'x' %}Azure{% endif %}" loading="lazy">
+      <img src="{{ d }}tailwindcss/tailwindcss-original.svg" alt="{% if r == 'x' %}Tailwind CSS{% endif %}" loading="lazy">
+      <img src="{{ d }}javascript/javascript-original.svg" alt="{% if r == 'x' %}JavaScript{% endif %}" loading="lazy">
+      <img src="{{ d }}git/git-original.svg" alt="{% if r == 'x' %}Git{% endif %}" loading="lazy">
+      <img src="{{ d }}linux/linux-original.svg" alt="{% if r == 'x' %}Linux{% endif %}" loading="lazy">
+      {% endif %}{% endfor %}
+      {% endwith %}
+    {% endif %}
+  </div>
+</section>

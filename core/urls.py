@@ -1,14 +1,12 @@
 from django.urls import path
-from .views import SentinelView
+from django.views.generic import RedirectView
 from . import views
 
 urlpatterns = [
     path('', views.home, name='home'),
     path('desarrollo-web/', views.pagina_web, name='web'),
-    path('marcacion/', views.pagina_marcacion, name='marcacion'),
     path('apps/', views.apps_corporativas, name='apps'),
-    path('apps/gym/', views.gym_app, name='gym_app'),
-    path('apps/spendbox/', views.spendbox_app, name='spendbox_app'),
+    path('apps/fintora/', views.fintora, name='fintora'),
     path('consultoria/', views.pagina_consultoria, name='consultoria'),
     path('precios/', views.pagina_precios, name='precios'),
     path('nosotros/', views.nosotros, name='nosotros'),
@@ -16,5 +14,10 @@ urlpatterns = [
     path('ayuda/', views.pagina_ayuda, name='ayuda'),
     path('blog/', views.pagina_blog, name='blog'),
     path('blog/<slug:slug>/', views.post_detail, name='post_detail'),
+    path('casos/<slug:slug>/', views.proyecto_detail, name='proyecto_detail'),
     path('privacidad/', views.privacidad, name='privacidad'),
+    # URLs antiguas de productos retirados: redirección permanente para no perder SEO
+    path('marcacion/', RedirectView.as_view(pattern_name='apps', permanent=True)),
+    path('apps/gym/', RedirectView.as_view(pattern_name='apps', permanent=True)),
+    path('apps/spendbox/', RedirectView.as_view(pattern_name='apps', permanent=True)),
 ]

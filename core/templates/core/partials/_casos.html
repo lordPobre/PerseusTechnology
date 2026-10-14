@@ -1,0 +1,21 @@
+{% load i18n perseus %}
+{# Lista "Trabajo en producción". Cada fila sale del admin (Proyecto). #}
+<div class="p-casos flex flex-col">
+  {% for p in proyectos %}
+  <a class="p-caso" href="{% if p.url_externa %}{{ p.url_externa }}{% else %}{{ p.get_absolute_url }}{% endif %}"
+     {% if p.url_externa and p.nueva_pestana %}target="_blank" rel="noopener noreferrer"{% endif %}
+     {% if p.imagen %}data-preview="{{ p.imagen|cdn:700 }}"{% endif %}>
+    <span class="flex items-baseline gap-4">
+      <span class="font-mono text-xs text-[#5a5a55]">{{ forloop.counter|stringformat:"02d" }}</span>
+      <span class="text-[clamp(30px,3.6vw,60px)] font-semibold leading-none tracking-[-0.05em]">{{ p.nombre }}</span>
+    </span>
+    <span class="max-w-[46ch] text-[15.5px] leading-normal text-[#3d3d39]">{{ p.descripcion_corta }}</span>
+    <span class="flex items-center gap-2 lg:justify-end">
+      {% for e in p.lista_etiquetas %}<span class="whitespace-nowrap rounded-full border border-ink/[.16] px-3 py-1.5 text-[12.5px]">{{ e }}</span>{% endfor %}
+      <span class="p-caso-arrow ml-auto lg:ml-0"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7"/><path d="M7 7h10v10"/></svg></span>
+    </span>
+  </a>
+  {% empty %}
+  <p class="py-10 text-[#5a5a55]">{% trans "Pronto publicaremos nuevos casos." %}</p>
+  {% endfor %}
+</div>

@@ -1,97 +1,43 @@
 {% extends 'core/base.html' %}
-{% load static i18n %}
-{% block meta_description %}
-    Descripción de la página...
-{% endblock meta_description %}
+{% load i18n %}
 {% block title %}{% trans "Centro de Ayuda" %} | Perseus Technology{% endblock %}
 
-{% block body_class %}bg-white text-gray-900 antialiased selection:bg-emerald-200 selection:text-emerald-900{% endblock %}
-
 {% block content %}
-<header class="pt-40 pb-20 px-6 bg-gradient-to-b from-gray-50 to-white">
-    <div class="max-w-3xl mx-auto text-center">
-        <h1 class="text-4xl md:text-6xl font-extrabold tracking-tight mb-6 text-gray-900">{% trans "Hola, ¿cómo podemos ayudarte?" %}</h1>
-        <div class="relative mt-10 max-w-2xl mx-auto group">
-            <div class="absolute inset-y-0 left-0 pl-6 flex items-center pointer-events-none text-gray-400 group-focus-within:text-emerald-500 transition-colors">
-                <i class="fa-solid fa-magnifying-glass text-xl"></i>
-            </div>
-            <input type="text" placeholder="{% trans 'Busca artículos, guías o soluciones...' %}" class="w-full pl-14 pr-6 py-5 rounded-full border border-gray-200 bg-white shadow-lg shadow-gray-200/50 focus:outline-none focus:ring-4 focus:ring-emerald-500/10 focus:border-emerald-500 transition-all font-medium text-lg placeholder-gray-400">
-            <button class="absolute inset-y-2 right-2 bg-gray-900 hover:bg-black text-white px-6 rounded-full font-bold transition">{% trans "Buscar" %}</button>
-        </div>
-        <div class="mt-6 flex flex-wrap justify-center gap-3 text-sm text-gray-500 font-medium">
-            <span>{% trans "Búsquedas comunes:" %}</span>
-            <a href="#" class="text-emerald-600 hover:underline">{% trans "Configurar Huella" %}</a>
-            <a href="#" class="text-emerald-600 hover:underline">{% trans "Certificado DT" %}</a>
-            <a href="#" class="text-emerald-600 hover:underline">{% trans "Cambio de Dominio" %}</a>
-        </div>
-    </div>
-</header>
-
-<section class="py-12 px-6">
-    <div class="max-w-[1000px] mx-auto">
-        <h2 class="text-2xl font-bold mb-8 text-gray-900">{% trans "Explorar por producto" %}</h2>
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-            <a href="#" class="group p-8 rounded-3xl border border-gray-100 hover:border-emerald-200 hover:shadow-xl hover:shadow-emerald-500/5 transition-all duration-300 bg-white">
-                <div class="w-12 h-12 rounded-xl bg-blue-50 text-blue-600 flex items-center justify-center text-xl mb-6 group-hover:scale-110 transition"><i class="fa-solid fa-fingerprint"></i></div>
-                <h3 class="text-lg font-bold text-gray-900 mb-2">{% trans "Marcación Digital" %}</h3>
-                <p class="text-gray-500 text-sm leading-relaxed">{% trans "Guías de enrolamiento, biometría, app móvil y cumplimiento Dirección del Trabajo." %}</p>
-            </a>
-            <a href="#" class="group p-8 rounded-3xl border border-gray-100 hover:border-emerald-200 hover:shadow-xl hover:shadow-emerald-500/5 transition-all duration-300 bg-white">
-                <div class="w-12 h-12 rounded-xl bg-emerald-50 text-emerald-600 flex items-center justify-center text-xl mb-6 group-hover:scale-110 transition"><i class="fa-solid fa-laptop-code"></i></div>
-                <h3 class="text-lg font-bold text-gray-900 mb-2">{% trans "Desarrollo Web" %}</h3>
-                <p class="text-gray-500 text-sm leading-relaxed">{% trans "Manual de administración, cambios de contenido, correos corporativos y analíticas." %}</p>
-            </a>
-            <a href="#" class="group p-8 rounded-3xl border border-gray-100 hover:border-emerald-200 hover:shadow-xl hover:shadow-emerald-500/5 transition-all duration-300 bg-white">
-                <div class="w-12 h-12 rounded-xl bg-purple-50 text-purple-600 flex items-center justify-center text-xl mb-6 group-hover:scale-110 transition"><i class="fa-solid fa-file-invoice"></i></div>
-                <h3 class="text-lg font-bold text-gray-900 mb-2">{% trans "Facturación y Planes" %}</h3>
-                <p class="text-gray-500 text-sm leading-relaxed">{% trans "Actualización de métodos de pago, descarga de facturas y cambios de suscripción." %}</p>
-            </a>
-        </div>
+<div x-data="{ q: '', open: null, match(t) { return !this.q || t.toLowerCase().includes(this.q.toLowerCase()) } }">
+<section class="mx-auto flex max-w-site flex-col gap-8 px-5 pb-12 pt-[clamp(56px,8vw,112px)] md:px-14">
+    <h1 class="m-0 max-w-[14ch] text-[clamp(48px,7vw,104px)] font-semibold leading-[.92] tracking-[-0.055em]">{% trans "Hola, ¿cómo podemos ayudarte?" %}</h1>
+    <label class="relative block max-w-[720px]">
+        <span class="sr-only">{% trans "Buscar" %}</span>
+        <svg class="pointer-events-none absolute left-6 top-1/2 -translate-y-1/2 text-mute" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+        <input type="search" x-model="q" placeholder="{% trans 'Busca artículos, guías o soluciones...' %}" class="w-full rounded-full border border-white/[.14] bg-white/[.04] py-5 pl-14 pr-6 text-lg text-bone outline-none focus:border-acid">
+    </label>
+    <div class="flex flex-wrap items-center gap-2 text-sm text-mute">
+        <span>{% trans "Búsquedas comunes:" %}</span>
+        <button type="button" class="p-chip cursor-pointer border-0" @click="q = '{% trans "sitio web" %}'">{% trans "Cambio de Dominio" %}</button>
     </div>
 </section>
 
-<section class="py-16 px-6 bg-gray-50 border-y border-gray-100">
-    <div class="max-w-3xl mx-auto">
-        <h2 class="text-2xl font-bold mb-8 text-gray-900 text-center">{% trans "Artículos Populares" %}</h2>
-        <div x-data="{ activeAccordion: null }" class="space-y-4">
-            <div class="bg-white border border-gray-200 rounded-2xl overflow-hidden transition-all duration-300">
-                <button @click="activeAccordion = activeAccordion === 1 ? null : 1" class="w-full px-6 py-5 text-left flex justify-between items-center focus:outline-none hover:bg-gray-50 transition">
-                    <span class="font-bold text-gray-900">{% trans "¿Cómo enrolo la huella de un nuevo trabajador?" %}</span>
-                    <i class="fa-solid fa-chevron-down text-gray-400 transition-transform duration-300" :class="activeAccordion === 1 ? 'rotate-180 text-emerald-500' : ''"></i>
-                </button>
-                <div x-show="activeAccordion === 1" x-collapse>
-                    <div class="px-6 pb-6 text-gray-600 text-sm leading-relaxed">{% trans "Para enrolar a un nuevo trabajador, dirígete al menú Colaboradores..." %}</div>
-                </div>
-            </div>
-            <div class="bg-white border border-gray-200 rounded-2xl overflow-hidden transition-all duration-300">
-                <button @click="activeAccordion = activeAccordion === 2 ? null : 2" class="w-full px-6 py-5 text-left flex justify-between items-center focus:outline-none hover:bg-gray-50 transition">
-                    <span class="font-bold text-gray-900">{% trans "¿El sistema cumple con la normativa de la DT?" %}</span>
-                    <i class="fa-solid fa-chevron-down text-gray-400 transition-transform duration-300" :class="activeAccordion === 2 ? 'rotate-180 text-emerald-500' : ''"></i>
-                </button>
-                <div x-show="activeAccordion === 2" x-collapse>
-                    <div class="px-6 pb-6 text-gray-600 text-sm leading-relaxed">{% trans "Sí, nuestra plataforma cumple al 100% con los dictámenes de la DT..." %}</div>
-                </div>
-            </div>
-            <div class="bg-white border border-gray-200 rounded-2xl overflow-hidden transition-all duration-300">
-                <button @click="activeAccordion = activeAccordion === 3 ? null : 3" class="w-full px-6 py-5 text-left flex justify-between items-center focus:outline-none hover:bg-gray-50 transition">
-                    <span class="font-bold text-gray-900">{% trans "¿Cómo edito los textos de mi sitio web?" %}</span>
-                    <i class="fa-solid fa-chevron-down text-gray-400 transition-transform duration-300" :class="activeAccordion === 3 ? 'rotate-180 text-emerald-500' : ''"></i>
-                </button>
-                <div x-show="activeAccordion === 3" x-collapse>
-                    <div class="px-6 pb-6 text-gray-600 text-sm leading-relaxed">{% trans "Puedes ingresar al panel de administración añadiendo /admin al final de la URL..." %}</div>
-                </div>
-            </div>
-        </div>
+<section class="mx-auto max-w-site px-5 pb-12 md:px-14" x-show="!q">
+    <span class="p-label mb-4 border-b border-white/[.08] pb-4 text-mute">{% trans "Explorar por producto" %}</span>
+    <div class="grid gap-4 md:grid-cols-3">
+        <a href="{% url 'fintora' %}" class="flex flex-col gap-3 rounded-3xl border border-white/[.08] bg-white/[.025] p-7 text-bone no-underline hover:border-acid/40 hover:text-bone"><span class="font-mono text-xs text-acid">01</span><span class="mt-6 text-xl font-semibold tracking-[-0.02em]">Fintora</span><span class="text-sm leading-relaxed text-body">{% trans "Flujo de caja personal y empresarial bajo control." %}</span></a>
+        <a href="{% url 'web' %}" class="flex flex-col gap-3 rounded-3xl border border-white/[.08] bg-white/[.025] p-7 text-bone no-underline hover:border-acid/40 hover:text-bone"><span class="font-mono text-xs text-acid">02</span><span class="mt-6 text-xl font-semibold tracking-[-0.02em]">{% trans "Desarrollo Web" %}</span><span class="text-sm leading-relaxed text-body">{% trans "Manual de administración, cambios de contenido, correos corporativos y analíticas." %}</span></a>
+        <a href="{% url 'precios' %}" class="flex flex-col gap-3 rounded-3xl border border-white/[.08] bg-white/[.025] p-7 text-bone no-underline hover:border-acid/40 hover:text-bone"><span class="font-mono text-xs text-acid">03</span><span class="mt-6 text-xl font-semibold tracking-[-0.02em]">{% trans "Facturación y Planes" %}</span><span class="text-sm leading-relaxed text-body">{% trans "Actualización de métodos de pago, descarga de facturas y cambios de suscripción." %}</span></a>
     </div>
 </section>
 
-<section class="py-20 px-6">
-    <div class="max-w-4xl mx-auto bg-gray-900 rounded-[3rem] p-12 text-center text-white relative overflow-hidden">
-        <div class="absolute top-0 right-0 w-64 h-64 bg-emerald-500/20 blur-[80px] rounded-full pointer-events-none"></div>
-        <div class="w-16 h-16 bg-white/10 rounded-full flex items-center justify-center text-2xl mx-auto mb-6 backdrop-blur-sm border border-white/20"><i class="fa-solid fa-headset"></i></div>
-        <h2 class="text-3xl font-bold mb-4">{% trans "¿Aún no encuentras la solución?" %}</h2>
-        <p class="text-gray-400 mb-8 max-w-xl mx-auto">{% trans "Nuestro equipo de soporte técnico nivel 2 está disponible para ayudarte a resolver cualquier incidencia técnica con tus plataformas." %}</p>
-        <a href="{% url 'home' %}#contacto" class="inline-block bg-emerald-500 hover:bg-emerald-400 text-white font-bold py-4 px-8 rounded-full transition shadow-lg shadow-emerald-500/25">{% trans "Abrir Ticket de Soporte" %}</a>
+<section class="mx-auto max-w-[920px] px-5 pb-16">
+    <span class="p-label mb-2 text-mute">{% trans "Artículos Populares" %}</span>
+    <div class="border-t border-white/[.08]">
+        {% trans "¿Cómo edito los textos de mi sitio web?" as q3 %}{% trans "Puedes ingresar al panel de administración añadiendo /admin al final de la URL..." as r3 %}
+        <div class="border-b border-white/[.08]" x-show="match('{{ q3|escapejs }} {{ r3|escapejs }}')">
+            <button type="button" @click="open = open === 3 ? null : 3" class="flex w-full items-center justify-between gap-6 border-0 bg-transparent py-6 text-left text-lg font-medium text-bone" :aria-expanded="open === 3">{{ q3 }}<span class="text-acid transition-transform" :class="open === 3 && 'rotate-45'">+</span></button>
+            <div x-show="open === 3" x-transition.opacity class="pb-6 leading-relaxed text-body">{{ r3 }}</div>
+        </div>
     </div>
 </section>
+</div>
+
+{% trans "¿Aún no encuentras la solución?" as t %}{% trans "Abrir ticket de soporte" as b %}
+{% include 'core/partials/_cierre.html' with titulo=t boton=b asunto="Soporte" %}
 {% endblock %}

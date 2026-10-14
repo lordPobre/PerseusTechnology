@@ -1,85 +1,44 @@
 {% extends 'core/base.html' %}
-{% load static i18n %}
-{% block meta_description %}
-    Descripción de la página...
-{% endblock meta_description %}
+{% load i18n perseus %}
 {% block title %}{% trans "Nosotros" %} | Perseus Technology{% endblock %}
 
-{% block body_class %}bg-[#0a0f1a] text-white antialiased selection:bg-emerald-500/30 selection:text-emerald-200{% endblock %}
-
-{% block extra_css %}
-<style>
-    .cyber-glass-card { background: rgba(15,20,25,0.6); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px); border: 1px solid rgba(16,185,129,0.15); box-shadow: 0 4px 30px rgba(0,0,0,0.1); }
-</style>
-{% endblock %}
-
 {% block content %}
-<div id="vanta-net-bg" class="relative min-h-screen bg-[#0a0f1a] overflow-hidden">
-    <header class="pt-48 pb-20 px-6 relative z-10">
-        <div class="max-w-4xl mx-auto text-center">
-            <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 text-xs font-mono uppercase tracking-widest mb-8 backdrop-blur-md">
-                <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span> {% trans "Nuestro ADN" %}
-            </div>
-            <h1 class="text-5xl md:text-7xl font-extrabold tracking-tight mb-8 leading-[1.1] text-white">
-                {% trans "Forjando el futuro de la" %} <br>
-                <span class="text-transparent bg-clip-text bg-gradient-to-r from-emerald-400 to-cyan-400 drop-shadow-sm">{% trans "ingeniería digital." %}</span>
-            </h1>
+<section class="mx-auto flex max-w-site flex-col gap-6 px-5 pb-16 pt-[clamp(56px,8vw,112px)] md:px-14">
+    <span class="p-label text-acid">{% trans "Nuestro ADN" %}</span>
+    <h1 class="m-0 max-w-[12ch] text-[clamp(48px,7.6vw,120px)] font-semibold leading-[.9] tracking-[-0.06em]">{% trans "Forjando el futuro de la" %} <span class="text-acid">{% trans "ingeniería digital." %}</span></h1>
+</section>
+
+<section class="mx-auto grid max-w-site items-start gap-12 px-5 pb-12 md:px-14 lg:grid-cols-[420px_1fr]">
+    {% imagen_sitio 'fundador' 900 as foto %}
+    {% if foto %}
+    <img src="{{ foto }}" alt="Carlos López Figueroa" class="aspect-[4/5] w-full rounded-[28px] object-cover grayscale">
+    {% else %}
+    <div class="flex aspect-[4/5] items-end rounded-[28px] border border-dashed border-white/20 p-6 font-mono text-xs text-faint">{% trans "Sube la foto en Admin → Imágenes del sitio → fundador" %}</div>
+    {% endif %}
+    <div class="flex flex-col gap-6 pt-2">
+        <div>
+            <div class="text-[32px] font-semibold tracking-[-0.03em]">Carlos López Figueroa</div>
+            <div class="p-label mt-1.5 text-acid">{% trans "Fundador & CEO" %}</div>
         </div>
-    </header>
+        <h2 class="m-0 max-w-[18ch] text-[clamp(32px,3.2vw,48px)] font-semibold leading-none tracking-[-0.04em]">{% trans "Del Hardware a la Arquitectura Escalable" %}</h2>
+        <p class="m-0 max-w-[56ch] text-lg leading-relaxed text-body">{% trans "Mi fascinación por la tecnología comenzó en las bases más profundas..." %}</p>
+        <p class="m-0 max-w-[56ch] text-lg leading-relaxed text-body">{% blocktrans %}Con esa filosofía nació <b>Perseus Technology</b>. Evolucioné hacia el desarrollo de software Full-Stack dominando ecosistemas como <b>Python, Django y arquitecturas modernas en React/Next.js</b>.{% endblocktrans %}</p>
+        <p class="m-0 max-w-[56ch] text-lg leading-relaxed text-body">{% trans "Perseus es el resultado de unir la precisión de la ingeniería de servidores con el diseño de software de élite." %}</p>
+    </div>
+</section>
 
-    <section class="py-12 px-6 relative z-10">
-        <div class="max-w-[1000px] mx-auto">
-            <div class="cyber-glass-card rounded-[2.5rem] p-8 md:p-14 mb-8">
-                <div class="grid grid-cols-1 md:grid-cols-12 gap-12 items-center">
-                    <div class="md:col-span-4 flex flex-col items-center text-center">
-                        <div class="w-40 h-40 rounded-full bg-gradient-to-br from-emerald-500/20 to-blue-500/20 border border-emerald-500/30 flex items-center justify-center mb-6 shadow-[0_0_40px_rgba(16,185,129,0.15)] relative overflow-hidden">
-                            <i class="fa-solid fa-user-tie text-5xl text-emerald-400 relative z-10"></i>
-                        </div>
-                        <h2 class="text-2xl font-bold text-white">Carlos López Figueroa</h2>
-                        <p class="text-emerald-400 text-sm font-mono mt-1 uppercase tracking-widest">{% trans "Fundador & CEO" %}</p>
-                    </div>
-                    <div class="md:col-span-8">
-                        <h3 class="text-3xl font-bold text-white mb-6">{% trans "Del Hardware a la Arquitectura Escalable" %}</h3>
-                        <div class="space-y-4 text-gray-400 leading-relaxed text-lg">
-                            <p>{% trans "Mi fascinación por la tecnología comenzó en las bases más profundas..." %}</p>
-                            <p>{% blocktrans %}Con esa filosofía nació <b>Perseus Technology</b>. Evolucioné hacia el desarrollo de software Full-Stack dominando ecosistemas como <b>Python, Django y arquitecturas modernas en React/Next.js</b>.{% endblocktrans %}</p>
-                            <p>{% trans "Perseus es el resultado de unir la precisión de la ingeniería de servidores con el diseño de software de élite." %}</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
+<section class="mx-auto grid max-w-site gap-4 px-5 pb-[clamp(64px,8vw,112px)] md:grid-cols-2 md:px-14">
+    <div class="flex min-h-[260px] flex-col gap-4 rounded-[28px] bg-bone p-9 text-ink">
+        <span class="font-mono text-xs text-acid-deep">01</span>
+        <h3 class="m-0 mt-auto text-[32px] font-semibold tracking-[-0.04em]">{% trans "Nuestra Visión" %}</h3>
+        <p class="m-0 text-base leading-relaxed text-[#3d3d39]">{% trans "Ser la columna vertebral tecnológica de las empresas en crecimiento..." %}</p>
+    </div>
+    <div class="flex min-h-[260px] flex-col gap-4 rounded-[28px] border border-white/[.08] bg-white/[.025] p-9">
+        <span class="font-mono text-xs text-acid">02</span>
+        <h3 class="m-0 mt-auto text-[32px] font-semibold tracking-[-0.04em]">{% trans "Compromiso Inquebrantable" %}</h3>
+        <p class="m-0 text-base leading-relaxed text-body">{% blocktrans %}Mi promesa como fundador es clara: <b>tu éxito es nuestro éxito</b>. No entregamos código para luego desaparecer. Nos convertimos en tu brazo armado tecnológico.{% endblocktrans %}</p>
+    </div>
+</section>
 
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-                <div class="cyber-glass-card rounded-[2.5rem] p-10 flex flex-col relative overflow-hidden group">
-                    <div class="absolute top-0 right-0 w-32 h-32 bg-cyan-500/10 blur-[50px] group-hover:bg-cyan-500/20 transition-all duration-500"></div>
-                    <div class="w-14 h-14 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center text-cyan-400 text-2xl mb-8">
-                        <i class="fa-solid fa-eye"></i>
-                    </div>
-                    <h3 class="text-2xl font-bold text-white mb-4">{% trans "Nuestra Visión" %}</h3>
-                    <p class="text-gray-400 leading-relaxed">{% trans "Ser la columna vertebral tecnológica de las empresas en crecimiento..." %}</p>
-                </div>
-
-                <div class="cyber-glass-card rounded-[2.5rem] p-10 flex flex-col relative overflow-hidden group">
-                    <div class="absolute top-0 right-0 w-32 h-32 bg-emerald-500/10 blur-[50px] group-hover:bg-emerald-500/20 transition-all duration-500"></div>
-                    <div class="w-14 h-14 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center text-emerald-400 text-2xl mb-8">
-                        <i class="fa-solid fa-handshake-angle"></i>
-                    </div>
-                    <h3 class="text-2xl font-bold text-white mb-4">{% trans "Compromiso Inquebrantable" %}</h3>
-                    <p class="text-gray-400 leading-relaxed">{% blocktrans %}Mi promesa como fundador es clara: <b>tu éxito es nuestro éxito</b>. No entregamos código para luego desaparecer. Nos convertimos en tu brazo armado tecnológico.{% endblocktrans %}</p>
-                </div>
-            </div>
-        </div>
-    </section>
-    <div class="absolute bottom-0 left-0 w-full h-32 bg-gradient-to-t from-[#0a0f1a] to-transparent z-0 pointer-events-none"></div>
-</div>
-{% endblock %}
-
-{% block extra_js %}
-<script defer src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r134/three.min.js"></script>
-<script defer src="https://cdn.jsdelivr.net/npm/vanta@latest/dist/vanta.net.min.js"></script>
-<script>
-    document.addEventListener('DOMContentLoaded', function() {
-        VANTA.NET({ el: "#vanta-net-bg", mouseControls: true, touchControls: true, gyroControls: false, minHeight: 200, minWidth: 200, scale: 1, scaleMobile: 1, color: 0x10b981, backgroundColor: 0x0a0f1a, points: 10, maxDistance: 22, spacing: 18 });
-    });
-</script>
+{% include 'core/partials/_cierre.html' %}
 {% endblock %}

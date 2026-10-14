@@ -1,0 +1,11 @@
+{% load i18n %}
+{# Cierre de página. Uso: {% include 'core/partials/_cierre.html' with titulo=... boton=... %} #}
+<section class="mx-auto max-w-site px-5 pb-[clamp(64px,8vw,112px)] md:px-14">
+    <div class="relative flex flex-wrap items-end justify-between gap-8 overflow-hidden rounded-[32px] bg-acid p-[clamp(28px,4vw,56px)] text-ink">
+        <h2 class="m-0 max-w-[14ch] text-[clamp(40px,5.6vw,96px)] font-semibold leading-[.92] tracking-[-0.055em]">{{ titulo|default:_("¿Tienes un proyecto en mente?") }}</h2>
+        <a href="{% url 'contacto' %}{% if asunto %}?asunto={{ asunto|urlencode }}{% endif %}" class="inline-flex items-center gap-3.5 whitespace-nowrap rounded-full bg-ink py-2 pl-6 pr-2 text-base font-semibold text-acid no-underline hover:text-acid">
+            {{ boton|default:_("Hablemos") }}
+            <span class="flex h-10 w-10 items-center justify-center rounded-full bg-acid text-ink"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></span>
+        </a>
+    </div>
+</section>
