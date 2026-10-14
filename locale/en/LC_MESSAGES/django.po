@@ -608,8 +608,8 @@ msgstr "Free cloud software for your personal finances."
 msgid "Cómo funciona"
 msgstr "How it works"
 
-msgid "Vista de ejemplo con datos simulados. Recorre el gráfico."
-msgstr "Sample view with simulated data. Explore the chart."
+msgid "Vista de ejemplo con datos simulados. Toca una categoría."
+msgstr "Sample view with simulated data. Tap a category."
 
 msgid "Todo tu dinero en un solo panel."
 msgstr "All your money in one dashboard."

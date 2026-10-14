@@ -3,7 +3,7 @@ from django.utils.translation import gettext_lazy as _
 
 FINTORA_URL = 'https://www.fintora.cl'
 # Correo para solicitudes de privacidad (derechos ARCO). CÁMBIALO por uno que exista y revises.
-PRIVACIDAD_EMAIL = 'soporte@perseustechnology.dev'
+PRIVACIDAD_EMAIL = 'privacidad@perseustechnology.dev'
 _DEV = 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/'
 
 

@@ -37,6 +37,7 @@
 {% endblock %}
 
 {% block content %}
+{% get_current_language as LANGUAGE_CODE %}
 <section class="relative overflow-hidden border-b border-white/[.07]">
     <perseus-field></perseus-field>
     <div class="pointer-events-none absolute right-[-10%] top-[-20%] h-[800px] w-[900px]" style="background:radial-gradient(closest-side, rgba(198,255,61,.1), transparent)"></div>
@@ -53,8 +54,8 @@
             </div>
         </div>
         <div class="flex min-w-0 flex-col gap-3">
-            <span class="flex items-center gap-2.5 font-mono text-xs text-mute"><span class="rounded-full bg-acid px-2 py-0.5 font-medium text-ink">{% trans "en vivo" %}</span>{% trans "Vista de ejemplo con datos simulados. Recorre el gráfico." %}</span>
-            <div class="relative h-[600px] xl:h-[560px]"><perseus-dash></perseus-dash></div>
+            <span class="flex items-center gap-2.5 font-mono text-xs text-mute"><span class="rounded-full bg-acid px-2 py-0.5 font-medium text-ink">{% trans "en vivo" %}</span>{% trans "Vista de ejemplo con datos simulados. Toca una categoría." %}</span>
+            <div class="relative min-h-[640px] xl:h-[600px]"><fintora-orb lang="{{ LANGUAGE_CODE|default:'es' }}"></fintora-orb></div>
         </div>
     </div>
 </section>
@@ -123,5 +124,6 @@
 
 {% block extra_js %}
 <script src="{% static 'core/js/perseus-live.js' %}" defer></script>
+<script src="{% static 'core/js/fintora-orb.js' %}" defer></script>
 <script src="{% static 'core/js/home.js' %}" defer></script>
 {% endblock %}

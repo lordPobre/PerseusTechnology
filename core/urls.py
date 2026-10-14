@@ -16,4 +16,8 @@ urlpatterns = [
     path('blog/<slug:slug>/', views.post_detail, name='post_detail'),
     path('casos/<slug:slug>/', views.proyecto_detail, name='proyecto_detail'),
     path('privacidad/', views.privacidad, name='privacidad'),
+    # URLs antiguas de productos retirados: redirección permanente para no perder SEO
+    path('marcacion/', RedirectView.as_view(pattern_name='apps', permanent=True)),
+    path('apps/gym/', RedirectView.as_view(pattern_name='apps', permanent=True)),
+    path('apps/spendbox/', RedirectView.as_view(pattern_name='apps', permanent=True)),
 ]

@@ -57,28 +57,17 @@ _TW_CACHE = {}
 
 @register.simple_tag
 def tailwind():
-    """Usa core/css/tailwind.css si ya fue compilado; si no, carga Tailwind desde el CDN (solo para desarrollo)."""
+    """Carga core/css/tailwind.css (compilado). El CDN de Tailwind solo se usa si el archivo no existe
+    y DEBUG está activo: el CDN aplica los estilos con JavaScript después de pintar la página,
+    y eso hace que en cada cambio de página se vea un instante sin estilos."""
+    import os
     from django.conf import settings
     from django.contrib.staticfiles import finders
-    from django.contrib.staticfiles.storage import staticfiles_storage
     from django.utils.safestring import mark_safe
     ruta = 'core/css/tailwind.css'
-    if 'ok' not in _TW_CACHE or settings.DEBUG:
-        _TW_CACHE['ok'] = False
-        try:
-            local = finders.find(ruta)
-            if local:
-                with open(local, 'rb') as f:
-                    css = f.read()
-            elif staticfiles_storage.exists(ruta):
-                with staticfiles_storage.open(ruta) as f:
-                    css = f.read()
-            else:
-                css = b''
-            # Solo se usa si es Tailwind 3 y trae los colores de Perseus; si no, se vuelve al CDN.
-            _TW_CACHE['ok'] = b'.bg-ink' in css and b'tailwindcss v4' not in css[:300]
-        except Exception:
-            _TW_CACHE['ok'] = False
-    if _TW_CACHE['ok']:
+    if 'ok' not in _TW_CACHE:
+        local = os.path.join(settings.BASE_DIR, 'core', 'static', 'core', 'css', 'tailwind.css')
+        _TW_CACHE['ok'] = os.path.exists(local) or bool(finders.find(ruta))
+    if _TW_CACHE['ok'] or not settings.DEBUG:
         return mark_safe('<link rel="stylesheet" href="%s">' % static(ruta))
     return mark_safe('<script src="https://cdn.tailwindcss.com"></script><script>tailwind.config=%s</script>' % _TW_THEME)
