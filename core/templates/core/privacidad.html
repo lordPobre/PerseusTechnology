@@ -1,29 +1,109 @@
 {% extends 'core/base.html' %}
 {% load i18n %}
-{% block title %}{% trans "Privacidad y Seguridad" %} | Perseus Technology{% endblock %}
+{% block title %}{% trans "Política de privacidad" %} | Perseus Technology{% endblock %}
+{% block meta_description %}{% trans "Cómo Perseus Technology recopila, usa y protege los datos personales que recibe a través de su sitio web y en los proyectos que desarrolla." %}{% endblock %}
 
 {% block content %}
-<article class="mx-auto max-w-[920px] px-5 pb-[clamp(64px,8vw,112px)] pt-[clamp(56px,8vw,112px)]">
-    <span class="p-label mb-6 text-acid">{% trans "Documento de Confidencialidad" %}</span>
-    <h1 class="m-0 text-[clamp(44px,6vw,88px)] font-semibold leading-[.92] tracking-[-0.055em]">{% trans "Política de Privacidad y" %} <span class="text-acid">{% trans "Tratamiento de Datos." %}</span></h1>
-    <p class="mb-16 mt-6 text-lg leading-relaxed text-body">{% trans "Última actualización: Abril 2026. En Perseus Technology, la seguridad de la información no es solo una característica, es nuestra base operativa." %}</p>
+<section class="mx-auto max-w-site px-5 pb-12 pt-[clamp(56px,8vw,112px)] md:px-14">
+    <span class="p-label mb-6 text-acid">{% trans "Privacidad" %}</span>
+    <h1 class="m-0 max-w-[14ch] text-[clamp(44px,6vw,96px)] font-semibold leading-[.92] tracking-[-0.055em]">{% trans "Política de privacidad" %}</h1>
+    <p class="mb-0 mt-6 max-w-[60ch] text-lg leading-relaxed text-body">{% trans "Explicamos qué datos recibimos a través de este sitio, para qué los usamos, con quién los compartimos y cómo puedes ejercer tus derechos." %}</p>
+    <p class="mb-0 mt-4 font-mono text-xs text-mute">{% trans "Última actualización: octubre de 2026" %}</p>
+</section>
 
-    <div class="flex flex-col border-t border-white/[.08] [&_b]:font-semibold [&_b]:text-bone">
-        <section class="grid gap-4 border-b border-white/[.08] py-10 md:grid-cols-[80px_1fr]">
+<div class="mx-auto grid max-w-site gap-12 px-5 pb-[clamp(64px,8vw,112px)] md:px-14 lg:grid-cols-[240px_minmax(0,1fr)]">
+    <nav class="hidden lg:block" aria-label="{% trans 'Índice' %}">
+        <ol class="sticky top-24 m-0 flex list-none flex-col gap-1 border-l border-white/[.08] p-0 text-sm">
+            <li><a href="#responsable" class="block py-1.5 pl-4 text-body no-underline hover:text-acid">{% trans "Quiénes somos" %}</a></li>
+            <li><a href="#datos" class="block py-1.5 pl-4 text-body no-underline hover:text-acid">{% trans "Qué datos recibimos" %}</a></li>
+            <li><a href="#uso" class="block py-1.5 pl-4 text-body no-underline hover:text-acid">{% trans "Para qué los usamos" %}</a></li>
+            <li><a href="#terceros" class="block py-1.5 pl-4 text-body no-underline hover:text-acid">{% trans "Con quién los compartimos" %}</a></li>
+            <li><a href="#cookies" class="block py-1.5 pl-4 text-body no-underline hover:text-acid">{% trans "Cookies y analítica" %}</a></li>
+            <li><a href="#clientes" class="block py-1.5 pl-4 text-body no-underline hover:text-acid">{% trans "Datos de nuestros clientes" %}</a></li>
+            <li><a href="#seguridad" class="block py-1.5 pl-4 text-body no-underline hover:text-acid">{% trans "Seguridad y conservación" %}</a></li>
+            <li><a href="#derechos" class="block py-1.5 pl-4 text-body no-underline hover:text-acid">{% trans "Tus derechos" %}</a></li>
+            <li><a href="#cambios" class="block py-1.5 pl-4 text-body no-underline hover:text-acid">{% trans "Cambios a esta política" %}</a></li>
+        </ol>
+    </nav>
+
+    <article class="flex max-w-[760px] flex-col border-t border-white/[.08] [&_li]:leading-relaxed [&_p]:leading-relaxed">
+        <section id="responsable" class="scroll-mt-24 border-b border-white/[.08] py-10">
             <span class="font-mono text-xs text-acid">01</span>
-            <div><h2 class="m-0 mb-4 text-[28px] font-semibold tracking-[-0.03em]">{% trans "Cumplimiento Normativo (Ley 19.628)" %}</h2>
-            <p class="m-0 leading-relaxed text-body">{% blocktrans %}El tratamiento de datos personales realizado por Perseus Technology se rige estrictamente por la <b class="text-white">Ley 19.628</b> sobre Protección de la Vida Privada en Chile.{% endblocktrans %}</p></div>
+            <h2 class="mb-4 mt-3 text-[28px] font-semibold tracking-[-0.03em]">{% trans "Quiénes somos" %}</h2>
+            <p class="m-0 text-body">{% trans "Perseus Technology es una empresa de ingeniería de software con base en Santiago, Chile. Somos responsables de los datos personales que recibimos a través de perseustechnology.dev." %}</p>
         </section>
-        <section class="grid gap-4 border-b border-white/[.08] py-10 md:grid-cols-[80px_1fr]">
+
+        <section id="datos" class="scroll-mt-24 border-b border-white/[.08] py-10">
             <span class="font-mono text-xs text-acid">02</span>
-            <div><h2 class="m-0 mb-4 text-[28px] font-semibold tracking-[-0.03em]">{% trans "Estándares de Seguridad" %}</h2>
-            <p class="m-0 leading-relaxed text-body">{% blocktrans %}Nuestra infraestructura está alineada con los controles de la norma <b class="text-white">ISO 27001</b>. Implementamos auditorías constantes para garantizar la confidencialidad.{% endblocktrans %}</p></div>
+            <h2 class="mb-4 mt-3 text-[28px] font-semibold tracking-[-0.03em]">{% trans "Qué datos recibimos" %}</h2>
+            <ul class="m-0 flex list-none flex-col gap-3 p-0 text-body">
+                <li class="flex gap-3"><span class="text-acid">→</span><span><b class="font-semibold text-bone">{% trans "Formulario de contacto y cotizador:" %}</b> {% trans "nombre, correo, empresa (si la indicas) y el contenido de tu mensaje." %}</span></li>
+                <li class="flex gap-3"><span class="text-acid">→</span><span><b class="font-semibold text-bone">{% trans "Navegación:" %}</b> {% trans "datos técnicos y estadísticos como páginas visitadas, tipo de dispositivo y ubicación aproximada, recogidos mediante Google Analytics." %}</span></li>
+            </ul>
+            <p class="mb-0 mt-4 text-body">{% trans "No pedimos datos sensibles ni datos bancarios a través de este sitio." %}</p>
         </section>
-        <section class="grid gap-4 border-b border-white/[.08] py-10 md:grid-cols-[80px_1fr]">
+
+        <section id="uso" class="scroll-mt-24 border-b border-white/[.08] py-10">
             <span class="font-mono text-xs text-acid">03</span>
-            <div><h2 class="m-0 mb-4 text-[28px] font-semibold tracking-[-0.03em]">{% trans "Derechos del Titular (ARCO)" %}</h2>
-            <p class="m-0 leading-relaxed text-body">{% blocktrans %}Usted podrá ejercer en cualquier momento sus derechos de <b class="text-white">Acceso, Rectificación, Cancelación y Oposición</b> enviando una solicitud a <u class="text-emerald-400">privacidad@vcchile.cl</u>.{% endblocktrans %}</p></div>
+            <h2 class="mb-4 mt-3 text-[28px] font-semibold tracking-[-0.03em]">{% trans "Para qué los usamos" %}</h2>
+            <ul class="m-0 flex list-none flex-col gap-3 p-0 text-body">
+                <li class="flex gap-3"><span class="text-acid">→</span><span>{% trans "Responder tu solicitud y enviarte una confirmación por correo." %}</span></li>
+                <li class="flex gap-3"><span class="text-acid">→</span><span>{% trans "Preparar una cotización o propuesta técnica." %}</span></li>
+                <li class="flex gap-3"><span class="text-acid">→</span><span>{% trans "Entender cómo se usa el sitio para mejorarlo." %}</span></li>
+            </ul>
+            <p class="mb-0 mt-4 text-body">{% trans "Usamos tus datos de contacto porque tú nos los entregas al enviar el formulario. No los vendemos ni los usamos para enviarte publicidad sin tu autorización." %}</p>
         </section>
-    </div>
-</article>
+
+        <section id="terceros" class="scroll-mt-24 border-b border-white/[.08] py-10">
+            <span class="font-mono text-xs text-acid">04</span>
+            <h2 class="mb-4 mt-3 text-[28px] font-semibold tracking-[-0.03em]">{% trans "Con quién los compartimos" %}</h2>
+            <p class="mb-4 mt-0 text-body">{% trans "Solo con proveedores que necesitamos para operar el sitio, bajo sus propias condiciones de seguridad:" %}</p>
+            <ul class="m-0 flex list-none flex-col gap-3 p-0 text-body">
+                <li class="flex gap-3"><span class="text-acid">→</span><span>{% trans "Proveedor de correo electrónico, para recibir y responder tus mensajes." %}</span></li>
+                <li class="flex gap-3"><span class="text-acid">→</span><span>{% trans "Proveedor de hosting y base de datos, donde funciona el sitio." %}</span></li>
+                <li class="flex gap-3"><span class="text-acid">→</span><span>{% trans "Google Analytics, para las estadísticas de visitas." %}</span></li>
+            </ul>
+            <p class="mb-0 mt-4 text-body">{% trans "Algunos de estos proveedores pueden almacenar datos fuera de Chile. También podríamos entregar datos si una autoridad competente lo exige conforme a la ley." %}</p>
+        </section>
+
+        <section id="cookies" class="scroll-mt-24 border-b border-white/[.08] py-10">
+            <span class="font-mono text-xs text-acid">05</span>
+            <h2 class="mb-4 mt-3 text-[28px] font-semibold tracking-[-0.03em]">{% trans "Cookies y analítica" %}</h2>
+            <p class="m-0 text-body">{% trans "El sitio usa cookies técnicas para recordar tu idioma y proteger los formularios, y cookies de Google Analytics para medir visitas. Puedes bloquear o borrar las cookies desde la configuración de tu navegador; el sitio seguirá funcionando." %}</p>
+        </section>
+
+        <section id="clientes" class="scroll-mt-24 border-b border-white/[.08] py-10">
+            <span class="font-mono text-xs text-acid">06</span>
+            <h2 class="mb-4 mt-3 text-[28px] font-semibold tracking-[-0.03em]">{% trans "Datos de nuestros clientes" %}</h2>
+            <p class="m-0 text-body">{% trans "Cuando desarrollamos o administramos sistemas para una empresa, tratamos sus datos solo siguiendo sus instrucciones y para prestar el servicio contratado. Firmamos acuerdos de confidencialidad (NDA) desde la primera reunión." %}</p>
+            <p class="mb-0 mt-4 text-body">{% trans "Fintora, nuestra app de flujo de caja, tiene su propia política de privacidad publicada en fintora.cl." %}</p>
+        </section>
+
+        <section id="seguridad" class="scroll-mt-24 border-b border-white/[.08] py-10">
+            <span class="font-mono text-xs text-acid">07</span>
+            <h2 class="mb-4 mt-3 text-[28px] font-semibold tracking-[-0.03em]">{% trans "Seguridad y conservación" %}</h2>
+            <p class="m-0 text-body">{% trans "Aplicamos medidas técnicas y organizativas alineadas con la norma ISO 27001: conexión cifrada (HTTPS), control de accesos por persona y respaldos periódicos." %}</p>
+            <p class="mb-0 mt-4 text-body">{% trans "Conservamos los mensajes de contacto mientras sean necesarios para responder y dar seguimiento a tu solicitud, y luego los eliminamos." %}</p>
+        </section>
+
+        <section id="derechos" class="scroll-mt-24 border-b border-white/[.08] py-10">
+            <span class="font-mono text-xs text-acid">08</span>
+            <h2 class="mb-4 mt-3 text-[28px] font-semibold tracking-[-0.03em]">{% trans "Tus derechos" %}</h2>
+            <p class="m-0 text-body">{% trans "Conforme a la Ley 19.628 sobre protección de la vida privada, y a la Ley 21.719 cuando entre en vigencia, puedes pedir acceso a tus datos, su rectificación, su eliminación u oponerte a su uso." %}</p>
+            <div class="mt-6 flex flex-wrap items-center justify-between gap-4 rounded-3xl bg-bone p-6 text-ink">
+                <div class="flex flex-col gap-1">
+                    <span class="text-sm text-[#5a5a55]">{% trans "Escríbenos a" %}</span>
+                    <a href="mailto:{{ privacidad_email }}" class="text-xl font-semibold tracking-[-0.02em] text-ink no-underline hover:text-ink">{{ privacidad_email }}</a>
+                </div>
+                <span class="max-w-[30ch] text-sm text-[#3d3d39]">{% trans "Respondemos dentro de los plazos que establece la ley." %}</span>
+            </div>
+        </section>
+
+        <section id="cambios" class="scroll-mt-24 py-10">
+            <span class="font-mono text-xs text-acid">09</span>
+            <h2 class="mb-4 mt-3 text-[28px] font-semibold tracking-[-0.03em]">{% trans "Cambios a esta política" %}</h2>
+            <p class="m-0 text-body">{% trans "Si cambiamos esta política, publicaremos la nueva versión en esta página con su fecha de actualización." %}</p>
+        </section>
+    </article>
+</div>
 {% endblock %}

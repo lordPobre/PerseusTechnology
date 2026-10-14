@@ -892,3 +892,120 @@ msgstr "Request received! We sent you a confirmation email. We'll reply within 2
 
 msgid "Hubo un error al procesar la solicitud. Por favor, intenta de nuevo o escríbenos por WhatsApp."
 msgstr "There was an error processing your request. Please try again or message us on WhatsApp."
+
+msgid "Borrador: solo lo ve el equipo."
+msgstr "Draft: only visible to the team."
+
+msgid "Política de privacidad"
+msgstr "Privacy policy"
+
+msgid "Cómo Perseus Technology recopila, usa y protege los datos personales que recibe a través de su sitio web y en los proyectos que desarrolla."
+msgstr "How Perseus Technology collects, uses and protects the personal data it receives through its website and in the projects it builds."
+
+msgid "Explicamos qué datos recibimos a través de este sitio, para qué los usamos, con quién los compartimos y cómo puedes ejercer tus derechos."
+msgstr "What data we receive through this site, what we use it for, who we share it with and how you can exercise your rights."
+
+msgid "Última actualización: octubre de 2026"
+msgstr "Last updated: October 2026"
+
+msgid "Índice"
+msgstr "Contents"
+
+msgid "Quiénes somos"
+msgstr "Who we are"
+
+msgid "Qué datos recibimos"
+msgstr "What data we receive"
+
+msgid "Para qué los usamos"
+msgstr "What we use it for"
+
+msgid "Con quién los compartimos"
+msgstr "Who we share it with"
+
+msgid "Cookies y analítica"
+msgstr "Cookies and analytics"
+
+msgid "Datos de nuestros clientes"
+msgstr "Our clients' data"
+
+msgid "Seguridad y conservación"
+msgstr "Security and retention"
+
+msgid "Tus derechos"
+msgstr "Your rights"
+
+msgid "Cambios a esta política"
+msgstr "Changes to this policy"
+
+msgid "Perseus Technology es una empresa de ingeniería de software con base en Santiago, Chile. Somos responsables de los datos personales que recibimos a través de perseustechnology.dev."
+msgstr "Perseus Technology is a software engineering company based in Santiago, Chile. We are responsible for the personal data we receive through perseustechnology.dev."
+
+msgid "Formulario de contacto y cotizador:"
+msgstr "Contact form and quote builder:"
+
+msgid "nombre, correo, empresa (si la indicas) y el contenido de tu mensaje."
+msgstr "name, email, company (if you provide it) and the content of your message."
+
+msgid "Navegación:"
+msgstr "Browsing:"
+
+msgid "datos técnicos y estadísticos como páginas visitadas, tipo de dispositivo y ubicación aproximada, recogidos mediante Google Analytics."
+msgstr "technical and statistical data such as pages visited, device type and approximate location, collected with Google Analytics."
+
+msgid "No pedimos datos sensibles ni datos bancarios a través de este sitio."
+msgstr "We do not ask for sensitive or banking data through this site."
+
+msgid "Responder tu solicitud y enviarte una confirmación por correo."
+msgstr "Reply to your request and send you an email confirmation."
+
+msgid "Preparar una cotización o propuesta técnica."
+msgstr "Prepare a quote or technical proposal."
+
+msgid "Entender cómo se usa el sitio para mejorarlo."
+msgstr "Understand how the site is used in order to improve it."
+
+msgid "Usamos tus datos de contacto porque tú nos los entregas al enviar el formulario. No los vendemos ni los usamos para enviarte publicidad sin tu autorización."
+msgstr "We use your contact details because you give them to us when you send the form. We don't sell them or use them to send you advertising without your permission."
+
+msgid "Solo con proveedores que necesitamos para operar el sitio, bajo sus propias condiciones de seguridad:"
+msgstr "Only with providers we need to run the site, under their own security terms:"
+
+msgid "Proveedor de correo electrónico, para recibir y responder tus mensajes."
+msgstr "Email provider, to receive and reply to your messages."
+
+msgid "Proveedor de hosting y base de datos, donde funciona el sitio."
+msgstr "Hosting and database provider, where the site runs."
+
+msgid "Google Analytics, para las estadísticas de visitas."
+msgstr "Google Analytics, for visit statistics."
+
+msgid "Algunos de estos proveedores pueden almacenar datos fuera de Chile. También podríamos entregar datos si una autoridad competente lo exige conforme a la ley."
+msgstr "Some of these providers may store data outside Chile. We may also disclose data if a competent authority requires it under the law."
+
+msgid "El sitio usa cookies técnicas para recordar tu idioma y proteger los formularios, y cookies de Google Analytics para medir visitas. Puedes bloquear o borrar las cookies desde la configuración de tu navegador; el sitio seguirá funcionando."
+msgstr "The site uses technical cookies to remember your language and protect forms, and Google Analytics cookies to measure visits. You can block or delete cookies in your browser settings; the site will keep working."
+
+msgid "Cuando desarrollamos o administramos sistemas para una empresa, tratamos sus datos solo siguiendo sus instrucciones y para prestar el servicio contratado. Firmamos acuerdos de confidencialidad (NDA) desde la primera reunión."
+msgstr "When we build or manage systems for a company, we process its data only on its instructions and to provide the contracted service. We sign non-disclosure agreements (NDA) from the first meeting."
+
+msgid "Fintora, nuestra app de flujo de caja, tiene su propia política de privacidad publicada en fintora.cl."
+msgstr "Fintora, our cash flow app, has its own privacy policy published at fintora.cl."
+
+msgid "Aplicamos medidas técnicas y organizativas alineadas con la norma ISO 27001: conexión cifrada (HTTPS), control de accesos por persona y respaldos periódicos."
+msgstr "We apply technical and organizational measures aligned with ISO 27001: encrypted connections (HTTPS), per-person access control and regular backups."
+
+msgid "Conservamos los mensajes de contacto mientras sean necesarios para responder y dar seguimiento a tu solicitud, y luego los eliminamos."
+msgstr "We keep contact messages for as long as needed to reply to and follow up on your request, and then delete them."
+
+msgid "Conforme a la Ley 19.628 sobre protección de la vida privada, y a la Ley 21.719 cuando entre en vigencia, puedes pedir acceso a tus datos, su rectificación, su eliminación u oponerte a su uso."
+msgstr "Under Chile's Law 19.628 on the protection of private life, and Law 21.719 once it takes effect, you can request access to your data, its correction or deletion, or object to its use."
+
+msgid "Escríbenos a"
+msgstr "Write to us at"
+
+msgid "Respondemos dentro de los plazos que establece la ley."
+msgstr "We reply within the time limits set by law."
+
+msgid "Si cambiamos esta política, publicaremos la nueva versión en esta página con su fecha de actualización."
+msgstr "If we change this policy, we will publish the new version on this page with its update date."

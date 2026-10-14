@@ -55,7 +55,8 @@
     {% if post.imagen_portada %}
     <img src="{{ post.imagen_portada|cdn:1600 }}" alt="{{ post.titulo }}" class="mb-14 aspect-[16/9] w-full rounded-[28px] object-cover">
     {% endif %}
-    <div class="p-article">{{ post.contenido|linebreaks }}</div>
+    {% if not post.publicado %}<p class="mb-8 rounded-2xl border border-acid/40 bg-acid/10 px-5 py-3 font-mono text-xs text-acid">{% trans "Borrador: solo lo ve el equipo." %}</p>{% endif %}
+    <div class="p-article">{% if '<p>' in post.contenido %}{{ post.contenido|safe }}{% else %}{{ post.contenido|linebreaks }}{% endif %}</div>
 </article>
 
 {% if posts_recientes %}

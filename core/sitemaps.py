@@ -23,7 +23,7 @@ class BlogSitemap(Sitemap):
     priority = 1.0
 
     def items(self):
-        return Post.objects.all()
+        return Post.objects.filter(publicado=True)
 
 
 class ProyectoSitemap(Sitemap):

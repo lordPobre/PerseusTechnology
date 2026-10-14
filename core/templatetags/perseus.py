@@ -48,3 +48,25 @@ def ruta_idioma(context, idioma):
     if request is None:
         return '/'
     return translate_url(request.get_full_path(), idioma)
+
+
+_TW_THEME = """{theme:{extend:{colors:{ink:'#0a0a0a',bone:'#f5f5f0',paper:'#e9e9e2',acid:{DEFAULT:'#c6ff3d',soft:'#d8ff74',deep:'#4d6b00'},mute:'#8a8a84',body:'#b4b4ad',faint:'#6f6f69'},fontFamily:{sans:['Geist','system-ui','sans-serif'],mono:['"Geist Mono"','monospace']},maxWidth:{site:'1440px'}}}}"""
+_TW_CACHE = {}
+
+
+@register.simple_tag
+def tailwind():
+    """Usa core/css/tailwind.css si ya fue compilado; si no, carga Tailwind desde el CDN (solo para desarrollo)."""
+    from django.conf import settings
+    from django.contrib.staticfiles import finders
+    from django.contrib.staticfiles.storage import staticfiles_storage
+    from django.utils.safestring import mark_safe
+    ruta = 'core/css/tailwind.css'
+    if 'ok' not in _TW_CACHE or settings.DEBUG:
+        try:
+            _TW_CACHE['ok'] = bool(finders.find(ruta)) or staticfiles_storage.exists(ruta)
+        except Exception:
+            _TW_CACHE['ok'] = False
+    if _TW_CACHE['ok']:
+        return mark_safe('<link rel="stylesheet" href="%s">' % static(ruta))
+    return mark_safe('<script src="https://cdn.tailwindcss.com"></script><script>tailwind.config=%s</script>' % _TW_THEME)

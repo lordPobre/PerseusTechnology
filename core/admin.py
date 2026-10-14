@@ -14,11 +14,12 @@ class CategoriaAdmin(admin.ModelAdmin):
 
 @admin.register(Post)
 class PostAdmin(admin.ModelAdmin):
-    list_display = ('miniatura', 'titulo', 'categoria', 'fecha_publicacion', 'destacado')
+    list_display = ('miniatura', 'titulo', 'categoria', 'fecha_publicacion', 'publicado', 'destacado')
     list_display_links = ('titulo',)
-    list_editable = ('destacado',)
+    list_editable = ('publicado', 'destacado')
+    search_fields = ('titulo', 'resumen')
     prepopulated_fields = {'slug': ('titulo',)}
-    list_filter = ('categoria', 'destacado')
+    list_filter = ('publicado', 'categoria', 'destacado')
     exclude = ('color_tema',)
 
     @admin.display(description='')
@@ -65,7 +66,7 @@ class ImagenInline(admin.TabularInline):
 
 @admin.register(Proyecto)
 class ProyectoAdmin(admin.ModelAdmin):
-    list_display = ('miniatura', 'nombre', 'tipo', 'anio', 'orden', 'publicado', 'destacado_home')
+    list_display = ('miniatura', 'nombre', 'tipo', 'anio', 'completo', 'orden', 'publicado', 'destacado_home')
     list_display_links = ('nombre',)
     list_editable = ('orden', 'publicado', 'destacado_home')
     list_filter = ('tipo', 'publicado', 'destacado_home')
@@ -82,6 +83,13 @@ class ProyectoAdmin(admin.ModelAdmin):
     @admin.display(description='')
     def miniatura(self, obj):
         return _thumb(obj.imagen)
+
+    @admin.display(description='Detalle')
+    def completo(self, obj):
+        falta = [n for n, ok in (('desafío', obj.desafio), ('solución', obj.solucion), ('resultados', obj.resultados.exists()), ('stack', obj.tecnologias.exists())) if not ok]
+        if not falta:
+            return format_html('<span style="color:#4d6b00;font-weight:600">✓ completo</span>')
+        return format_html('<span style="color:#b45309">Falta: {}</span>', ', '.join(falta))
 
 
 admin.site.site_header = 'Perseus Technology'

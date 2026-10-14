@@ -26,6 +26,7 @@ class Post(models.Model):
     autor = models.CharField(max_length=100, default='Equipo Perseus')
     tiempo_lectura = models.IntegerField(default=5, help_text="Minutos de lectura")
     destacado = models.BooleanField(default=False)
+    publicado = models.BooleanField(default=True, help_text="Desmárcalo para guardar como borrador.")
     fecha_publicacion = models.DateTimeField(default=timezone.now)
 
     class Meta:
@@ -58,6 +59,7 @@ class ImagenSitio(models.Model):
         ('producto-fintora', 'Producto · Fintora'),
         ('fundador', 'Nosotros · Foto del fundador'),
         ('og', 'Imagen para compartir en redes (1200×630)'),
+        ('hero', 'Home · cristal en celulares (opcional, PNG transparente)'),
     ]
     clave = models.CharField(max_length=40, choices=CLAVES, unique=True)
     imagen = CloudinaryField('imagen')
@@ -106,8 +108,8 @@ class Proyecto(models.Model):
     descripcion_corta = models.CharField(max_length=160, help_text="Línea que se ve en el listado del home")
     etiquetas = models.CharField(max_length=120, blank=True, help_text="Separadas por coma. Ej: E-commerce, Django")
     imagen = CloudinaryField('imagen', help_text="Captura principal (16:10). Se usa en el hover del home y en el detalle")
-    desafio = models.TextField('desafío', blank=True)
-    solucion = models.TextField('solución', blank=True)
+    desafio = models.TextField('desafío', blank=True, help_text="Qué problema tenía el cliente antes del proyecto. 2 a 4 frases. Ej: 'Vendían solo por Instagram y llevaban el stock en una planilla.'")
+    solucion = models.TextField('solución', blank=True, help_text="Qué construimos y cómo. 2 a 4 frases. Ej: 'Tienda en Django con catálogo autoadministrable, stock en línea y pago con tarjeta.'")
     tecnologias = models.ManyToManyField(Tecnologia, blank=True, related_name='proyectos')
     url_externa = models.URLField('sitio en vivo', blank=True)
     nueva_pestana = models.BooleanField('abrir en pestaña nueva', default=True)
@@ -130,7 +132,7 @@ class Proyecto(models.Model):
 
 
 class ProyectoResultado(models.Model):
-    """Cifras del detalle del caso. Ej: valor='-40%', etiqueta='tiempo de carga'."""
+    """Cifras del detalle del caso. Usa solo datos que puedas respaldar. Ej: valor='1,2 s', etiqueta='tiempo de carga'."""
     proyecto = models.ForeignKey(Proyecto, on_delete=models.CASCADE, related_name='resultados')
     valor = models.CharField(max_length=20)
     etiqueta = models.CharField(max_length=80)

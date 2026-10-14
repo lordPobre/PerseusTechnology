@@ -6,7 +6,7 @@ from django.utils.html import strip_tags
 from django.conf import settings
 from django.utils.translation import gettext as _
 from .models import Post, Categoria, Proyecto, Tecnologia
-from .contenido import DIVISIONES, PRODUCTOS, COTIZADOR
+from .contenido import DIVISIONES, PRODUCTOS, COTIZADOR, PRIVACIDAD_EMAIL
 
 
 def _proyectos():
@@ -58,8 +58,9 @@ def pagina_ayuda(request):
 
 
 def pagina_blog(request):
-    post_destacado = Post.objects.filter(destacado=True).first()
-    posts = Post.objects.exclude(id=post_destacado.id) if post_destacado else Post.objects.all()
+    publicados = Post.objects.filter(publicado=True)
+    post_destacado = publicados.filter(destacado=True).first()
+    posts = publicados.exclude(id=post_destacado.id) if post_destacado else publicados
     return render(request, 'core/blog.html', {
         'post_destacado': post_destacado,
         'posts': posts.select_related('categoria'),
@@ -68,8 +69,11 @@ def pagina_blog(request):
 
 
 def post_detail(request, slug):
-    post = get_object_or_404(Post.objects.select_related('categoria'), slug=slug)
-    return render(request, 'core/post_detail.html', {'post': post, 'posts_recientes': Post.objects.exclude(id=post.id)[:2]})
+    qs = Post.objects.select_related('categoria')
+    if not request.user.is_staff:
+        qs = qs.filter(publicado=True)  # el equipo puede previsualizar borradores
+    post = get_object_or_404(qs, slug=slug)
+    return render(request, 'core/post_detail.html', {'post': post, 'posts_recientes': Post.objects.filter(publicado=True).exclude(id=post.id)[:2]})
 
 
 def proyecto_detail(request, slug):
@@ -79,7 +83,7 @@ def proyecto_detail(request, slug):
 
 
 def privacidad(request):
-    return render(request, 'core/privacidad.html')
+    return render(request, 'core/privacidad.html', {'privacidad_email': PRIVACIDAD_EMAIL})
 
 
 def nosotros(request):

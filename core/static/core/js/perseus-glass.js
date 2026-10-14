@@ -31,9 +31,44 @@
       this._host = document.createElement('div');
       this._host.style.cssText = 'position:absolute;inset:0;';
       this.appendChild(this._host);
+      if (this._useLite()) { this._renderLite(); return; }
       load().then((lib) => { if (this._alive) { this._lib = lib; this._setup(); } }).catch((e) => console.warn('perseus-glass', e));
     }
     disconnectedCallback() { this._alive = false; this._teardown(); }
+
+    // lite="auto" (por defecto): sin 3D en celulares modestos, con ahorro de datos o movimiento reducido.
+    // lite="on" fuerza la versión liviana; lite="off" fuerza el 3D. poster="url" usa una imagen en vez del dibujo CSS.
+    _useLite() {
+      const mode = this.getAttribute('lite') || 'auto';
+      if (mode === 'on') return true;
+      if (mode === 'off') return false;
+      const mq = (q) => window.matchMedia && window.matchMedia(q).matches;
+      const c = navigator.connection || {};
+      const weak = (navigator.hardwareConcurrency || 8) <= 4 || (navigator.deviceMemory || 8) <= 4 || !!c.saveData || /2g/.test(c.effectiveType || '');
+      let gl = true;
+      try { const cv = document.createElement('canvas'); gl = !!(cv.getContext('webgl2') || cv.getContext('webgl')); } catch (e) { gl = false; }
+      return !gl || mq('(prefers-reduced-motion: reduce)') || (mq('(max-width: 767px)') && weak);
+    }
+
+    _renderLite() {
+      this.style.cursor = 'default';
+      const a = this.getAttribute('accent') || '#c6ff3d', poster = this.getAttribute('poster');
+      if (!document.getElementById('pg-lite-kf')) {
+        const s = document.createElement('style'); s.id = 'pg-lite-kf';
+        s.textContent = '@keyframes pgSpin{to{transform:translate(-50%,-50%) rotateX(72deg) rotateZ(360deg)}}@keyframes pgSpin2{to{transform:translate(-50%,-50%) rotateX(64deg) rotateY(18deg) rotateZ(-360deg)}}@keyframes pgFloat{50%{transform:translate(-50%,-53%)}}@media (prefers-reduced-motion:reduce){.pg-anim{animation:none!important}}';
+        document.head.appendChild(s);
+      }
+      if (poster) { this._host.innerHTML = '<img src="' + poster + '" alt="" style="position:absolute;inset:0;width:100%;height:100%;object-fit:contain">'; return; }
+      const ring = (size, op, anim, w) => '<div class="pg-anim" style="position:absolute;left:50%;top:50%;width:' + size + ';aspect-ratio:1;border-radius:50%;border:' + w + 'px solid ' + a + ';opacity:' + op + ';transform:translate(-50%,-50%) rotateX(72deg);animation:' + anim + '"></div>';
+      this._host.innerHTML =
+        '<div style="position:absolute;inset:0;perspective:900px;overflow:hidden">' +
+        '<div style="position:absolute;left:50%;top:50%;width:min(90%,620px);aspect-ratio:1;transform:translate(-50%,-50%);border-radius:50%;background:radial-gradient(closest-side,' + a + '40,transparent 70%)"></div>' +
+        ring('min(78%,520px)', 0.85, 'pgSpin 18s linear infinite', 1.5) +
+        ring('min(92%,610px)', 0.3, 'pgSpin2 26s linear infinite', 1) +
+        '<div class="pg-anim" style="position:absolute;left:50%;top:50%;width:min(42%,280px);aspect-ratio:1/1.12;transform:translate(-50%,-50%);animation:pgFloat 6s ease-in-out infinite;clip-path:polygon(50% 0,100% 25%,100% 75%,50% 100%,0 75%,0 25%);background:linear-gradient(135deg,rgba(255,255,255,.55) 0%,rgba(255,255,255,.12) 38%,rgba(255,255,255,.04) 50%,rgba(255,255,255,.22) 62%,rgba(255,255,255,.5) 100%),conic-gradient(from 210deg at 50% 50%,rgba(255,255,255,.35),rgba(255,255,255,.05),rgba(255,255,255,.3),rgba(255,255,255,.08),rgba(255,255,255,.35));box-shadow:inset 0 0 40px rgba(255,255,255,.25)">' +
+        '<div style="position:absolute;left:50%;top:50%;width:30%;aspect-ratio:1;transform:translate(-50%,-50%);border-radius:50%;background:' + a + ';box-shadow:0 0 60px ' + a + '"></div></div>' +
+        '</div>';
+    }
     attributeChangedCallback(n) {
       if (!this._r) return;
       if (n === 'variant' || n === 'accent') this._build();
