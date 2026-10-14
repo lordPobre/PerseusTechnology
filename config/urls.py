@@ -15,7 +15,7 @@ sitemaps = {
 ROBOTS = """User-agent: *
 Disallow: /i18n/
 
-Sitemap: https://www.perseustechnology.dev/sitemap.xml
+Sitemap: https://perseustechnology.dev/sitemap.xml
 """
 
 

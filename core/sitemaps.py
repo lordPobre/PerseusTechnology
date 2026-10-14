@@ -2,7 +2,7 @@ from django.contrib.sitemaps import Sitemap
 from django.urls import reverse
 from .models import Post, Proyecto
 
-DOMINIO = 'www.perseustechnology.dev'
+DOMINIO = 'perseustechnology.dev'
 
 
 class BaseSitemap(Sitemap):

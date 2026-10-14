@@ -10,7 +10,7 @@
       "name": "{{ d.nombre|escapejs }}",
       "description": "{{ d.sub|escapejs }}",
       "areaServed": { "@type": "Country", "name": "Chile" },
-      "provider": { "@type": "Organization", "name": "Perseus Technology", "url": "https://www.perseustechnology.dev/" }{% if d.precio %},
+      "provider": { "@type": "Organization", "name": "Perseus Technology", "url": "https://perseustechnology.dev/" }{% if d.precio %},
       "offers": { "@type": "Offer", "priceCurrency": "CLP", "price": "{{ d.precio.monto|cut:'$'|cut:'.' }}", "description": "{{ d.precio.etiqueta|escapejs }}" }{% endif %}
     },
     {
