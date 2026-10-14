@@ -44,7 +44,7 @@
       if (mode === 'off') return false;
       const mq = (q) => window.matchMedia && window.matchMedia(q).matches;
       const c = navigator.connection || {};
-      const weak = (navigator.hardwareConcurrency || 8) <= 4 || (navigator.deviceMemory || 8) <= 4 || !!c.saveData || /2g/.test(c.effectiveType || '');
+      const weak = (navigator.deviceMemory || 8) <= 2 || !!c.saveData || /2g/.test(c.effectiveType || '');
       let gl = true;
       try { const cv = document.createElement('canvas'); gl = !!(cv.getContext('webgl2') || cv.getContext('webgl')); } catch (e) { gl = false; }
       return !gl || mq('(prefers-reduced-motion: reduce)') || (mq('(max-width: 767px)') && weak);
@@ -52,7 +52,9 @@
 
     _renderLite() {
       this.style.cursor = 'default';
-      const a = this.getAttribute('accent') || '#c6ff3d', poster = this.getAttribute('poster');
+      const a = this.getAttribute('accent') || '#c6ff3d';
+      let poster = (this.getAttribute('poster') || '').trim();
+      if (!/^(https?:)?\/\//.test(poster) && poster.charAt(0) !== '/') poster = '';
       if (!document.getElementById('pg-lite-kf')) {
         const s = document.createElement('style'); s.id = 'pg-lite-kf';
         s.textContent = '@keyframes pgSpin{to{transform:translate(-50%,-50%) rotateX(72deg) rotateZ(360deg)}}@keyframes pgSpin2{to{transform:translate(-50%,-50%) rotateX(64deg) rotateY(18deg) rotateZ(-360deg)}}@keyframes pgFloat{50%{transform:translate(-50%,-53%)}}@media (prefers-reduced-motion:reduce){.pg-anim{animation:none!important}}';

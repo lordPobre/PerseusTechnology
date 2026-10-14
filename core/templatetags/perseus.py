@@ -37,6 +37,7 @@ def imagen_sitio(clave, width=1600, fallback=''):
     img = mapa.get(clave)
     if img:
         return _url(img, width)
+    return static(fallback) if fallback else ''
 
 
 @register.simple_tag(takes_context=True)
@@ -63,8 +64,19 @@ def tailwind():
     from django.utils.safestring import mark_safe
     ruta = 'core/css/tailwind.css'
     if 'ok' not in _TW_CACHE or settings.DEBUG:
+        _TW_CACHE['ok'] = False
         try:
-            _TW_CACHE['ok'] = bool(finders.find(ruta)) or staticfiles_storage.exists(ruta)
+            local = finders.find(ruta)
+            if local:
+                with open(local, 'rb') as f:
+                    css = f.read()
+            elif staticfiles_storage.exists(ruta):
+                with staticfiles_storage.open(ruta) as f:
+                    css = f.read()
+            else:
+                css = b''
+            # Solo se usa si es Tailwind 3 y trae los colores de Perseus; si no, se vuelve al CDN.
+            _TW_CACHE['ok'] = b'.bg-ink' in css and b'tailwindcss v4' not in css[:300]
         except Exception:
             _TW_CACHE['ok'] = False
     if _TW_CACHE['ok']:
