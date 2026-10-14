@@ -1,0 +1,9 @@
+{# Logo animado 2a · Órbita. El color del cristal sale de currentColor (text-bone). #}
+<svg class="{{ clase|default:'h-7 w-7' }}" viewBox="0 0 64 64" fill="none" aria-hidden="true" data-anim>
+  <g><animateTransform attributeName="transform" type="rotate" values="-18 32 34;-8 32 34;-18 32 34" dur="8s" repeatCount="indefinite"/><path d="M2 34 A30 8.5 0 0 1 62 34" stroke="#c6ff3d" stroke-width="3" opacity=".35"/></g>
+  <path d="M32 6 L54.5 19 L54.5 45 L32 58 L9.5 45 L9.5 19 Z" stroke="currentColor" stroke-width="4" stroke-linejoin="round"/>
+  <path d="M9.5 19 L54.5 19 L32 58 Z" stroke="currentColor" stroke-width="2.6" stroke-linejoin="round" opacity=".55"><animate attributeName="opacity" values=".35;.75;.35" dur="4s" repeatCount="indefinite"/></path>
+  <circle cx="32" cy="32" r="6" fill="#c6ff3d"><animate attributeName="r" values="5.4;7;5.4" dur="3s" repeatCount="indefinite"/></circle>
+  <g><animateTransform attributeName="transform" type="rotate" values="-18 32 34;-8 32 34;-18 32 34" dur="8s" repeatCount="indefinite"/><path d="M62 34 A30 8.5 0 0 1 2 34" stroke="#c6ff3d" stroke-width="3"/>
+    <circle r="3" fill="currentColor"><animateMotion path="M2 34 A30 8.5 0 1 1 62 34 A30 8.5 0 1 1 2 34" dur="6s" repeatCount="indefinite"/><animate attributeName="opacity" values=".3;.3;1;1;.3" keyTimes="0;0.45;0.55;0.95;1" dur="6s" repeatCount="indefinite"/></circle></g>
+</svg>

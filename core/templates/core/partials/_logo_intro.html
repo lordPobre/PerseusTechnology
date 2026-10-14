@@ -1,0 +1,13 @@
+{# Intro 2b · Ensamble. Solo la primera visita de la sesión; se omite con "reducir movimiento" y sin JavaScript. #}
+<div id="p-intro" class="p-intro" aria-hidden="true">
+  <div class="p-intro-lockup">
+    <svg width="88" height="88" viewBox="0 0 64 64" fill="none" data-anim>
+      <path d="M32 6 L54.5 19 L54.5 45 L32 58 L9.5 45 L9.5 19 Z" stroke="#f5f5f0" stroke-width="3.2" stroke-linejoin="round" stroke-dasharray="157" stroke-dashoffset="157"><animate attributeName="stroke-dashoffset" from="157" to="0" begin="0.05s" dur="0.6s" fill="freeze"/></path>
+      <path d="M9.5 19 L54.5 19 L32 58 Z" stroke="#f5f5f0" stroke-width="2.2" stroke-linejoin="round" opacity="0"><animate attributeName="opacity" from="0" to=".55" begin="0.5s" dur="0.35s" fill="freeze"/></path>
+      <ellipse cx="32" cy="34" rx="30" ry="8.5" transform="rotate(-18 32 34)" stroke="#c6ff3d" stroke-width="2.6" stroke-dasharray="140" stroke-dashoffset="140"><animate attributeName="stroke-dashoffset" from="140" to="0" begin="0.7s" dur="0.45s" fill="freeze"/></ellipse>
+      <circle cx="32" cy="32" r="0" fill="#c6ff3d"><animate attributeName="r" values="0;8;5.5" keyTimes="0;0.6;1" begin="1.05s" dur="0.3s" fill="freeze"/></circle>
+    </svg>
+    <span class="p-intro-word">perseus</span>
+  </div>
+</div>
+<script>(function(){var el=document.getElementById('p-intro');try{if(sessionStorage.getItem('p-intro')||matchMedia('(prefers-reduced-motion: reduce)').matches){el.remove();return}sessionStorage.setItem('p-intro','1')}catch(e){el.remove();return}var s=el.querySelector('svg');if(s.setCurrentTime)s.setCurrentTime(0);el.classList.add('on');setTimeout(function(){el.classList.add('out');setTimeout(function(){el.remove()},450)},1750)})();</script>

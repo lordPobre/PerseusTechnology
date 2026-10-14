@@ -276,7 +276,7 @@
       this.f.asunto.value = this.quoteSubject || Array.from(s.needs).join(', ') || t.general;
       this.f.mensaje.value = head + '\n\n' + s.msg.trim();
       const a = this.form.getAttribute('action');
-      if (a && a !== '#') { this.nextBtn.style.opacity = '.6'; this.nextBtn.firstChild.textContent = t.sending; this.form.submit(); return; }
+      if (a && a !== '#') { if (window.perseusLoading) window.perseusLoading(this.nextBtn, t.sending); else { this.nextBtn.style.opacity = '.6'; this.nextBtn.firstChild.textContent = t.sending; } this.form.submit(); return; }
       s.done = true; this.render();
     }
     render() {
