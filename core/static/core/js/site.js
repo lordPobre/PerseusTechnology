@@ -16,18 +16,38 @@
     });
   }
 
-  // Navegadores sin View Transitions entre documentos: fundido simple al salir.
-  if (!RM && !('onpagereveal' in window)) {
-    document.addEventListener('click', (e) => {
-      const a = e.target.closest('a');
-      if (!a || e.defaultPrevented || e.button !== 0 || e.metaKey || e.ctrlKey || e.shiftKey || a.target === '_blank' || a.hasAttribute('download')) return;
-      const url = new URL(a.href, location.href);
-      if (url.origin !== location.origin || (url.pathname === location.pathname && url.hash)) return;
-      e.preventDefault();
-      document.documentElement.classList.add('p-leaving');
-      setTimeout(() => { location.href = a.href; }, 220);
-    });
-    window.addEventListener('pageshow', () => document.documentElement.classList.remove('p-leaving'));
+  // Cambio de página: la página actual sigue visible hasta que llega la nueva (antes se borraba
+  // al hacer clic y quedaba la pantalla negra mientras respondía el servidor). Una barra arriba indica la carga.
+  const bar = document.createElement('div');
+  bar.className = 'p-navbar';
+  bar.setAttribute('aria-hidden', 'true');
+  document.body.appendChild(bar);
+  document.addEventListener('click', (e) => {
+    const a = e.target.closest('a');
+    if (!a || e.defaultPrevented || e.button !== 0 || e.metaKey || e.ctrlKey || e.shiftKey || e.altKey || a.target === '_blank' || a.hasAttribute('download')) return;
+    const url = new URL(a.href, location.href);
+    if (url.origin !== location.origin || (url.pathname === location.pathname && url.search === location.search)) return;
+    bar.classList.remove('on'); void bar.offsetWidth; bar.classList.add('on');
+  });
+  window.addEventListener('pageshow', () => bar.classList.remove('on'));
+
+  // Precarga la página al pasar el mouse o tocar un enlace interno (Firefox y Safari; Chrome usa speculationrules).
+  const conn = navigator.connection || {};
+  if (!conn.saveData) {
+    const hechas = new Set();
+    const precargar = (e) => {
+      const a = e.target.closest && e.target.closest('a');
+      if (!a || a.target === '_blank' || a.hasAttribute('download')) return;
+      const u = new URL(a.href, location.href);
+      u.hash = '';
+      if (u.origin !== location.origin || u.pathname === location.pathname || hechas.has(u.href) || u.pathname.indexOf('/i18n/') === 0) return;
+      hechas.add(u.href);
+      const l = document.createElement('link');
+      l.rel = 'prefetch'; l.href = u.href;
+      document.head.appendChild(l);
+    };
+    document.addEventListener('mouseover', precargar, { passive: true });
+    document.addEventListener('touchstart', precargar, { passive: true });
   }
 
   // Logo animado: con "reducir movimiento" se congela en su estado final.
