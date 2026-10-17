@@ -55,6 +55,39 @@ _TW_THEME = """{theme:{extend:{colors:{ink:'#0a0a0a',bone:'#f5f5f0',paper:'#e9e9
 _TW_CACHE = {}
 
 
+_CSS_CACHE = {}
+
+
+def _leer_static(ruta):
+    """Contenido de un archivo estático (en producción queda en memoria)."""
+    import os
+    from django.conf import settings
+    from django.contrib.staticfiles import finders
+    if not settings.DEBUG and ruta in _CSS_CACHE:
+        return _CSS_CACHE[ruta]
+    archivo = finders.find(ruta)
+    if not archivo and getattr(settings, 'STATIC_ROOT', None):
+        p = os.path.join(settings.STATIC_ROOT, ruta)
+        archivo = p if os.path.exists(p) else None
+    contenido = None
+    if archivo:
+        with open(archivo, encoding='utf-8') as f:
+            contenido = f.read()
+    _CSS_CACHE[ruta] = contenido
+    return contenido
+
+
+@register.simple_tag
+def css_inline(ruta):
+    """Inserta el CSS dentro del HTML en vez de un <link>: el navegador pinta sin esperar
+    otra descarga (PageSpeed: 'solicitudes que bloquean la renderización')."""
+    from django.utils.safestring import mark_safe
+    contenido = _leer_static(ruta)
+    if contenido is None:
+        return mark_safe('<link rel="stylesheet" href="%s">' % static(ruta))
+    return mark_safe('<style>%s</style>' % contenido.replace('</style', '<\\/style'))
+
+
 @register.simple_tag
 def tailwind():
     """Carga core/css/tailwind.css (compilado). El CDN de Tailwind solo se usa si el archivo no existe
@@ -69,5 +102,5 @@ def tailwind():
         local = os.path.join(settings.BASE_DIR, 'core', 'static', 'core', 'css', 'tailwind.css')
         _TW_CACHE['ok'] = os.path.exists(local) or bool(finders.find(ruta))
     if _TW_CACHE['ok'] or not settings.DEBUG:
-        return mark_safe('<link rel="stylesheet" href="%s">' % static(ruta))
+        return css_inline(ruta)
     return mark_safe('<script src="https://cdn.tailwindcss.com"></script><script>tailwind.config=%s</script>' % _TW_THEME)

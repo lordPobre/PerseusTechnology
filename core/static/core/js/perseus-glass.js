@@ -31,10 +31,24 @@
       this._host = document.createElement('div');
       this._host.style.cssText = 'position:absolute;inset:0;';
       this.appendChild(this._host);
-      if (this._useLite()) { this._renderLite(); return; }
-      load().then((lib) => { if (this._alive) { this._lib = lib; this._setup(); } }).catch((e) => console.warn('perseus-glass', e));
+      if (this._useLite()) { this._renderLite(true); return; }
+      // Rendimiento: primero se pinta el cristal CSS estático y three.js (~600 KB) se descarga
+      // recién con la primera interacción (mover el mouse, tocar, hacer scroll o usar el teclado).
+      this._renderLite(false);
+      // Solo gestos reales: un 'scroll' programático (bots, restauración de posición) ya no dispara la carga.
+      const evs = ['pointermove', 'pointerdown', 'touchstart', 'wheel', 'keydown'];
+      const off = () => evs.forEach((e) => window.removeEventListener(e, go, true));
+      const idle = window.requestIdleCallback || ((f) => setTimeout(f, 120));
+      const go = () => {
+        off();
+        if (!this._alive || this._started) return;
+        this._started = true;
+        load().then((lib) => { if (this._alive) { this._lib = lib; idle(() => { if (this._alive) this._setup(); }, { timeout: 800 }); } }).catch((e) => console.warn('perseus-glass', e));
+      };
+      evs.forEach((e) => window.addEventListener(e, go, { passive: true, capture: true }));
+      this._offStart = off;
     }
-    disconnectedCallback() { this._alive = false; this._teardown(); }
+    disconnectedCallback() { this._alive = false; if (this._offStart) this._offStart(); this._teardown(); }
 
     // lite="auto" (por defecto): sin 3D en celulares modestos, con ahorro de datos o movimiento reducido.
     // lite="on" fuerza la versión liviana; lite="off" fuerza el 3D. poster="url" usa una imagen en vez del dibujo CSS.
@@ -46,11 +60,21 @@
       const c = navigator.connection || {};
       const weak = (navigator.deviceMemory || 8) <= 2 || !!c.saveData || /2g/.test(c.effectiveType || '');
       let gl = true;
-      try { const cv = document.createElement('canvas'); gl = !!(cv.getContext('webgl2') || cv.getContext('webgl')); } catch (e) { gl = false; }
-      return !gl || mq('(prefers-reduced-motion: reduce)') || (mq('(max-width: 767px)') && weak);
+      let soft = false;
+      try {
+        const cv = document.createElement('canvas');
+        const ctx = cv.getContext('webgl2') || cv.getContext('webgl');
+        gl = !!ctx;
+        // Sin GPU real (SwiftShader, llvmpipe…) el vidrio con refracción se calcula en la CPU y congela la página.
+        const info = ctx && ctx.getExtension('WEBGL_debug_renderer_info');
+        const name = info ? String(ctx.getParameter(info.UNMASKED_RENDERER_WEBGL)) : '';
+        soft = /swiftshader|llvmpipe|softpipe|software|basic render/i.test(name);
+        const lose = ctx && ctx.getExtension('WEBGL_lose_context'); if (lose) lose.loseContext();
+      } catch (e) { gl = false; }
+      return !gl || soft || mq('(prefers-reduced-motion: reduce)') || (mq('(max-width: 767px)') && weak);
     }
 
-    _renderLite() {
+    _renderLite(animated) {
       this.style.cursor = 'default';
       const a = this.getAttribute('accent') || '#c6ff3d';
       let poster = (this.getAttribute('poster') || '').trim();
@@ -60,14 +84,18 @@
         s.textContent = '@keyframes pgSpin{to{transform:translate(-50%,-50%) rotateX(72deg) rotateZ(360deg)}}@keyframes pgSpin2{to{transform:translate(-50%,-50%) rotateX(64deg) rotateY(18deg) rotateZ(-360deg)}}@keyframes pgFloat{50%{transform:translate(-50%,-53%)}}@media (prefers-reduced-motion:reduce){.pg-anim{animation:none!important}}';
         document.head.appendChild(s);
       }
-      if (poster) { this._host.innerHTML = '<img src="' + poster + '" alt="" style="position:absolute;inset:0;width:100%;height:100%;object-fit:contain">'; return; }
-      const ring = (size, op, anim, w) => '<div class="pg-anim" style="position:absolute;left:50%;top:50%;width:' + size + ';aspect-ratio:1;border-radius:50%;border:' + w + 'px solid ' + a + ';opacity:' + op + ';transform:translate(-50%,-50%) rotateX(72deg);animation:' + anim + '"></div>';
-      this._host.innerHTML =
+      this._liteEl = document.createElement('div');
+      this._liteEl.style.cssText = 'position:absolute;inset:0;transition:opacity .6s ease';
+      this._host.appendChild(this._liteEl);
+      if (poster) { this._liteEl.innerHTML = '<img src="' + poster + '" alt="" width="1200" height="1200" fetchpriority="high" style="position:absolute;inset:0;width:100%;height:100%;object-fit:contain">'; return; }
+      const an = (v) => (animated ? v : 'none');
+      const ring = (size, op, anim, w) => '<div class="pg-anim" style="position:absolute;left:50%;top:50%;width:' + size + ';aspect-ratio:1;border-radius:50%;border:' + w + 'px solid ' + a + ';opacity:' + op + ';transform:translate(-50%,-50%) rotateX(72deg);animation:' + an(anim) + '"></div>';
+      this._liteEl.innerHTML =
         '<div style="position:absolute;inset:0;perspective:900px;overflow:hidden">' +
         '<div style="position:absolute;left:50%;top:50%;width:min(90%,620px);aspect-ratio:1;transform:translate(-50%,-50%);border-radius:50%;background:radial-gradient(closest-side,' + a + '40,transparent 70%)"></div>' +
         ring('min(78%,520px)', 0.85, 'pgSpin 18s linear infinite', 1.5) +
         ring('min(92%,610px)', 0.3, 'pgSpin2 26s linear infinite', 1) +
-        '<div class="pg-anim" style="position:absolute;left:50%;top:50%;width:min(42%,280px);aspect-ratio:1/1.12;transform:translate(-50%,-50%);animation:pgFloat 6s ease-in-out infinite;clip-path:polygon(50% 0,100% 25%,100% 75%,50% 100%,0 75%,0 25%);background:linear-gradient(135deg,rgba(255,255,255,.55) 0%,rgba(255,255,255,.12) 38%,rgba(255,255,255,.04) 50%,rgba(255,255,255,.22) 62%,rgba(255,255,255,.5) 100%),conic-gradient(from 210deg at 50% 50%,rgba(255,255,255,.35),rgba(255,255,255,.05),rgba(255,255,255,.3),rgba(255,255,255,.08),rgba(255,255,255,.35));box-shadow:inset 0 0 40px rgba(255,255,255,.25)">' +
+        '<div class="pg-anim" style="position:absolute;left:50%;top:50%;width:min(42%,280px);aspect-ratio:1/1.12;transform:translate(-50%,-50%);animation:' + an('pgFloat 6s ease-in-out infinite') + ';clip-path:polygon(50% 0,100% 25%,100% 75%,50% 100%,0 75%,0 25%);background:linear-gradient(135deg,rgba(255,255,255,.55) 0%,rgba(255,255,255,.12) 38%,rgba(255,255,255,.04) 50%,rgba(255,255,255,.22) 62%,rgba(255,255,255,.5) 100%),conic-gradient(from 210deg at 50% 50%,rgba(255,255,255,.35),rgba(255,255,255,.05),rgba(255,255,255,.3),rgba(255,255,255,.08),rgba(255,255,255,.35));box-shadow:inset 0 0 40px rgba(255,255,255,.25)">' +
         '<div style="position:absolute;left:50%;top:50%;width:30%;aspect-ratio:1;transform:translate(-50%,-50%);border-radius:50%;background:' + a + ';box-shadow:0 0 60px ' + a + '"></div></div>' +
         '</div>';
     }
@@ -80,12 +108,16 @@
 
     _setup() {
       const { T, RE } = this._lib;
-      const r = this._r = new T.WebGLRenderer({ antialias: true, alpha: true });
-      r.setPixelRatio(Math.min(window.devicePixelRatio || 1, 2));
+      const coarse = window.matchMedia && window.matchMedia('(pointer: coarse)').matches;
+      const dpr = Math.min(window.devicePixelRatio || 1, coarse ? 1.25 : 1.5);
+      this._minDt = coarse ? 1 / 31 : 0; // 30 fps en celulares y tablets
+      const r = this._r = new T.WebGLRenderer({ antialias: dpr < 1.5, alpha: true, powerPreference: 'high-performance' });
+      r.setPixelRatio(dpr);
       r.setClearColor(0x000000, 0);
       r.toneMapping = T.ACESFilmicToneMapping;
       r.toneMappingExposure = 1.05;
-      r.domElement.style.cssText = 'display:block;width:100%;height:100%;';
+      r.domElement.style.cssText = 'position:absolute;inset:0;display:block;width:100%;height:100%;opacity:0;transition:opacity .6s ease;';
+      this.style.cursor = 'grab';
       this._host.appendChild(r.domElement);
       this._scene = new T.Scene();
       this._cam = new T.PerspectiveCamera(32, 1, 0.1, 100);
@@ -124,12 +156,21 @@
       this._resize();
       this._clock = new T.Clock();
       this._tickB = () => this._tick();
-      this._raf = requestAnimationFrame(this._tickB);
+      // Solo dibuja cuando el hero está en pantalla y la pestaña está visible.
+      this._vis = true;
+      const run = () => { cancelAnimationFrame(this._raf); if (this._vis && !document.hidden) this._raf = requestAnimationFrame(this._tickB); };
+      this._io = new IntersectionObserver((es) => { this._vis = es[0].isIntersecting; run(); });
+      this._io.observe(this);
+      this._onVis = run;
+      document.addEventListener('visibilitychange', run);
+      run();
     }
 
     _teardown() {
       cancelAnimationFrame(this._raf);
       if (this._ro) this._ro.disconnect();
+      if (this._io) this._io.disconnect();
+      if (this._onVis) document.removeEventListener('visibilitychange', this._onVis);
       if (this._onWinMove) {
         window.removeEventListener('pointermove', this._onWinMove);
         window.removeEventListener('pointerup', this._onUp);
@@ -198,8 +239,8 @@
         this._core = core;
         const ringMat = new T.MeshBasicMaterial({ color: accent, transparent: true, opacity: 0.85 });
         const ringMat2 = new T.MeshBasicMaterial({ color: 0xf5f5f0, transparent: true, opacity: 0.35 });
-        const r1 = new T.Mesh(new T.TorusGeometry(2.55, 0.012, 8, 200), ringMat); r1.rotation.x = 1.25;
-        const r2 = new T.Mesh(new T.TorusGeometry(2.95, 0.008, 8, 200), ringMat2); r2.rotation.set(1.6, 0.5, 0);
+        const r1 = new T.Mesh(new T.TorusGeometry(2.55, 0.012, 6, 128), ringMat); r1.rotation.x = 1.25;
+        const r2 = new T.Mesh(new T.TorusGeometry(2.95, 0.008, 6, 128), ringMat2); r2.rotation.set(1.6, 0.5, 0);
         root.add(r1, r2);
         this._rings = [r1, r2];
         const N = 260, pos = new Float32Array(N * 3);
@@ -260,12 +301,12 @@
     }
 
     _tick() {
+      if (!this._vis || document.hidden) return;
       this._raf = requestAnimationFrame(this._tickB);
       if (!this._r || !this._root) return;
-      this._f = (this._f || 0) + 1;
-      if (this._f % 20 === 1) { const b = this.getBoundingClientRect(); this._vis = b.bottom > 0 && b.top < window.innerHeight && b.width > 0; }
-      if (!this._vis) return;
       const t = this._clock.getElapsedTime();
+      if (this._minDt && t - (this._lastT || 0) < this._minDt) return;
+      this._lastT = t;
       if (!this._drag) { this._yaw += this._vy; this._pitch = clamp(this._pitch + this._vp, -0.7, 0.7); this._vy *= 0.94; this._vp *= 0.9; this._pitch *= 0.985; }
       this._px += (this._tx - this._px) * 0.05; this._py += (this._ty - this._py) * 0.05;
       const br = this._baseRot;
@@ -291,7 +332,39 @@
       }
       this._haloS.material.opacity = (this._variant === 'crystal' ? 0.3 : 0.24) + Math.sin(t * 1.4) * 0.04;
       this._r.render(this._scene, this._cam);
+      if (this._watch()) return;
+      if (!this._shown) {
+        this._shown = true;
+        this._r.domElement.style.opacity = '1';
+        if (this._liteEl) { this._liteEl.style.opacity = '0'; const el = this._liteEl; setTimeout(() => el.remove(), 700); this._liteEl = null; }
+      }
     }
   }
+  // Calidad adaptable: si el equipo no sostiene ~20 fps, baja la resolución; si aún así no puede,
+  // vuelve al cristal CSS animado. En equipos capaces no cambia nada.
+  PerseusGlass.prototype._watch = function () {
+    const now = performance.now();
+    const p = this._perf || (this._perf = { n: 0, sum: 0, last: now, step: 0 });
+    const dt = now - p.last; p.last = now;
+    if (this._drag || document.hidden) return false;
+    p.n++;
+    if (p.n <= 12) return false; // compilación de shaders
+    p.sum += dt;
+    if (p.n < 52) return false;
+    const avg = p.sum / 40;
+    p.n = 0; p.sum = 0;
+    if (avg < 50) { if (p.step === 0) p.step = -1; return false; }
+    if (p.step === 0) { p.step = 1; this._r.setPixelRatio(1); this._resize(); return false; }
+    if (p.step === 1) { this._fallback(); return true; }
+    return false;
+  };
+  PerseusGlass.prototype._fallback = function () {
+    this._teardown();
+    this._host = document.createElement('div');
+    this._host.style.cssText = 'position:absolute;inset:0;';
+    this.appendChild(this._host);
+    this._liteEl = null;
+    this._renderLite(true);
+  };
   customElements.define('perseus-glass', PerseusGlass);
 })();
