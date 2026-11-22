@@ -1,5 +1,5 @@
 {% extends 'core/base.html' %}
-{% load static i18n %}
+{% load static i18n perseus %}
 {% block title %}{% trans "Contacto" %} | Perseus Technology{% endblock %}
 {% block meta_description %}{% trans "Cuéntanos qué quieres resolver. Un ingeniero responde con una evaluación técnica inicial en menos de 24 horas." %}{% endblock %}
 
@@ -18,10 +18,12 @@
         </div>
 
         <div class="min-w-0 lg:col-span-1">
-            <perseus-contact action="{% url 'contacto' %}" csrf="{{ csrf_token }}" asunto="{{ asunto_inicial }}" mensaje="{{ request.GET.mensaje }}" lang="{{ LANGUAGE_CODE }}"></perseus-contact>
+            <perseus-contact action="{% url 'contacto' %}" csrf="{{ csrf_token }}" ts="{% sello_formulario %}" asunto="{{ asunto_inicial }}" mensaje="{{ request.GET.mensaje }}" lang="{{ LANGUAGE_CODE }}"></perseus-contact>
             <noscript>
-                <form method="post" action="{% url 'contacto' %}" class="flex flex-col gap-5 rounded-[28px] border border-white/10 p-8">
+                <form method="post" action="{% url 'contacto' %}" class="relative flex flex-col gap-5 rounded-[28px] border border-white/10 p-8">
                     {% csrf_token %}
+                    <div aria-hidden="true" style="position:absolute;left:-10000px;top:auto;width:1px;height:1px;overflow:hidden"><label>No completar este campo<input type="text" name="website" value="" tabindex="-1" autocomplete="off"></label></div>
+                    <input type="hidden" name="ts" value="{% sello_formulario %}">
                     <input type="hidden" name="asunto" value="{{ asunto_inicial|default:'Consulta general' }}">
                     <input name="nombre" required placeholder="{% trans 'Tu nombre' %}" class="p-input">
                     <input name="email" type="email" required placeholder="tu@empresa.cl" class="p-input">

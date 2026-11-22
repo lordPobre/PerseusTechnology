@@ -1009,3 +1009,16 @@ msgstr "We reply within the time limits set by law."
 
 msgid "Si cambiamos esta política, publicaremos la nueva versión en esta página con su fecha de actualización."
 msgstr "If we change this policy, we will publish the new version on this page with its update date."
+
+# Formulario de contacto: validación y anti-bots
+msgid "¡Solicitud recibida! Te responderemos en menos de 24 horas."
+msgstr "Request received! We'll reply within 24 hours."
+
+msgid "El formulario expiró. Recarga la página e inténtalo de nuevo."
+msgstr "The form expired. Reload the page and try again."
+
+msgid "Revisa los datos del formulario: hay un campo inválido."
+msgstr "Please check the form: one of the fields is invalid."
+
+msgid "Recibimos varias solicitudes seguidas. Espera unos minutos o escríbenos por WhatsApp."
+msgstr "We received several requests in a row. Please wait a few minutes or message us on WhatsApp."

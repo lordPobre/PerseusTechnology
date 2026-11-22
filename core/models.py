@@ -40,10 +40,17 @@ class Post(models.Model):
 
 
 class Contacto(models.Model):
+    """Solicitudes del formulario de contacto. Se guardan antes de enviar el correo."""
     nombre = models.CharField(max_length=100)
     email = models.EmailField()
+    asunto = models.CharField(max_length=150, blank=True)
     mensaje = models.TextField()
     fecha = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        ordering = ['-fecha']
+        verbose_name = 'solicitud de contacto'
+        verbose_name_plural = 'solicitudes de contacto'
 
     def __str__(self):
         return f"Mensaje de {self.nombre}"

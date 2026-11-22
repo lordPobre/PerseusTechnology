@@ -46,7 +46,7 @@
                 <div class="flex flex-col gap-3.5 border-t border-white/[.08] pt-6">
                     <span class="p-label text-faint">Stack</span>
                     <div class="flex flex-wrap items-center gap-7">
-                        {% for nombre, src in d.stack %}<img src="{{ src }}" alt="{{ nombre }}" title="{{ nombre }}" loading="lazy" class="h-7 w-auto opacity-70" style="filter:brightness(0) invert(1)">{% endfor %}
+                        {% for nombre, src in d.stack %}<img src="{% static src %}" alt="{{ nombre }}" title="{{ nombre }}" loading="lazy" class="h-7 w-auto opacity-70" style="filter:brightness(0) invert(1)">{% endfor %}
                     </div>
                 </div>
             </div>

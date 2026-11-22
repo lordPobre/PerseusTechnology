@@ -1,6 +1,6 @@
 // perseus-forms.js · Cotizador y formulario de contacto en pasos. Sin dependencias.
 // <perseus-quote contact="/contacto/">  config opcional: <script type="application/json"> dentro del elemento
-// <perseus-contact action="/contacto/" csrf="..." asunto="" mensaje="">  envía nombre, email, asunto, mensaje
+// <perseus-contact action="/contacto/" csrf="..." ts="..." asunto="" mensaje="">  envía nombre, email, asunto, mensaje, ts, website
 (function () {
   if (customElements.get('perseus-quote')) return;
   const ACID = '#c6ff3d', BONE = '#f5f5f0', MUTE = '#8a8a84', BODY = '#b4b4ad';
@@ -225,6 +225,7 @@
       this.form.action = this.getAttribute('action') || '#';
       const hid = (n, v) => { const i = h('input'); i.type = 'hidden'; i.name = n; if (v != null) i.value = v; this.form.appendChild(i); return i; };
       if (this.getAttribute('csrf')) hid('csrfmiddlewaretoken', this.getAttribute('csrf'));
+      hid('ts', this.getAttribute('ts') || ''); hid('website', '');  // anti-bots: sello de tiempo y honeypot
       this.f = { nombre: hid('nombre'), email: hid('email'), asunto: hid('asunto'), mensaje: hid('mensaje') };
       root.append(this.card, this.aside, this.form);
       this.appendChild(root);

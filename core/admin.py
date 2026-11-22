@@ -29,8 +29,14 @@ class PostAdmin(admin.ModelAdmin):
 
 @admin.register(Contacto)
 class ContactoAdmin(admin.ModelAdmin):
-    list_display = ('nombre', 'email', 'fecha')
-    readonly_fields = ('nombre', 'email', 'mensaje', 'fecha')
+    list_display = ('fecha', 'nombre', 'email', 'asunto')
+    list_display_links = ('nombre',)
+    search_fields = ('nombre', 'email', 'asunto', 'mensaje')
+    date_hierarchy = 'fecha'
+    readonly_fields = ('nombre', 'email', 'asunto', 'mensaje', 'fecha')
+
+    def has_add_permission(self, request):
+        return False  # las solicitudes solo llegan desde el formulario del sitio
 
 
 @admin.register(ImagenSitio)

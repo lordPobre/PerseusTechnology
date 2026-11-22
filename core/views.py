@@ -1,12 +1,26 @@
-from django.shortcuts import render, get_object_or_404, redirect
-from django.core.mail import EmailMultiAlternatives
-from django.contrib import messages
-from django.template.loader import render_to_string
-from django.utils.html import strip_tags
+import logging
+
 from django.conf import settings
+from django.contrib import messages
+from django.core.mail import EmailMultiAlternatives
+from django.shortcuts import render, get_object_or_404, redirect
+from django.template.loader import render_to_string
+from django.urls import reverse
+from django.utils.html import strip_tags
+from django.utils.http import url_has_allowed_host_and_scheme
 from django.utils.translation import gettext as _
-from .models import Post, Categoria, Proyecto, Tecnologia
+from django.views.decorators.http import require_http_methods
+
 from .contenido import DIVISIONES, PRODUCTOS, COTIZADOR, PRIVACIDAD_EMAIL
+from .forms import ContactoForm
+from .models import Post, Categoria, Proyecto, Tecnologia, Contacto
+from .seguridad import ip_cliente, supera_limite
+
+logger = logging.getLogger('core.contacto')
+
+# Límites del formulario de contacto: (nombre, máximo, ventana en segundos)
+LIMITES_IP = (('ip-10min', 3, 600), ('ip-dia', 10, 86400))
+LIMITE_CORREO = ('correo-dia', 2, 86400)  # confirmaciones al mismo destinatario por día
 
 
 def _proyectos():
@@ -90,33 +104,82 @@ def nosotros(request):
     return render(request, 'core/nosotros.html')
 
 
+def _volver(request):
+    """Vuelve a la página del formulario solo si es de este mismo sitio."""
+    ref = request.META.get('HTTP_REFERER', '')
+    if ref and url_has_allowed_host_and_scheme(ref, allowed_hosts={request.get_host()}, require_https=request.is_secure()):
+        return ref
+    return reverse('contacto')
+
+
+def _enviar_correos(lead):
+    """Aviso interno + confirmación al cliente. Devuelve True si salieron ambos."""
+    remitente = settings.DEFAULT_FROM_EMAIL
+    buzon = settings.EMAIL_HOST_USER
+    contexto = {'nombre': lead.nombre, 'email': lead.email, 'asunto': lead.asunto, 'mensaje': lead.mensaje}
+
+    html_admin = render_to_string('core/email_contacto.html', contexto)
+    msg_admin = EmailMultiAlternatives(
+        f"Nuevo Requerimiento Perseus: {lead.asunto.capitalize()} - {lead.nombre}",
+        strip_tags(html_admin), remitente, [buzon], reply_to=[lead.email],
+    )
+    msg_admin.attach_alternative(html_admin, 'text/html')
+
+    html_cliente = render_to_string('core/email_cliente.html', contexto)
+    msg_cliente = EmailMultiAlternatives(
+        'Hemos recibido tu solicitud - Perseus Technology',
+        strip_tags(html_cliente), remitente, [lead.email],
+    )
+    msg_cliente.attach_alternative(html_cliente, 'text/html')
+
+    try:
+        msg_admin.send()
+        msg_cliente.send()
+        return True
+    except Exception:
+        logger.exception('Error enviando correos del contacto #%s', lead.pk)
+        return False
+
+
+@require_http_methods(['GET', 'POST'])
 def contacto(request):
-    if request.method == 'POST':
-        nombre = request.POST.get('nombre', '')
-        email = request.POST.get('email', '')
-        asunto = request.POST.get('asunto') or 'Consulta general'
-        mensaje = request.POST.get('mensaje', '')
-        context = {'nombre': nombre, 'email': email, 'asunto': asunto, 'mensaje': mensaje}
+    if request.method != 'POST':
+        return render(request, 'core/contacto.html', {'asunto_inicial': request.GET.get('asunto', '')})
 
-        correo_remitente = settings.EMAIL_HOST_USER
-        remitente_con_nombre = f"Perseus Technology <{correo_remitente}>"
+    volver = _volver(request)
+    form = ContactoForm(request.POST)
 
-        html_admin = render_to_string('core/email_contacto.html', context)
-        msg_admin = EmailMultiAlternatives(f"Nuevo Requerimiento Perseus: {asunto.capitalize()} - {nombre}", strip_tags(html_admin), remitente_con_nombre, [correo_remitente])
-        msg_admin.attach_alternative(html_admin, "text/html")
+    estado = form.estado_bot()
+    if estado == 'bot':
+        # Al bot se le muestra "éxito" para que no ajuste su script; no se guarda ni se envía nada.
+        logger.info('Contacto descartado (honeypot o envío demasiado rápido) ip=%s', ip_cliente(request))
+        messages.success(request, _('¡Solicitud recibida! Te responderemos en menos de 24 horas.'))
+        return redirect(volver)
+    if estado != 'ok':
+        messages.error(request, _('El formulario expiró. Recarga la página e inténtalo de nuevo.'))
+        return redirect(volver)
 
-        html_cliente = render_to_string('core/email_cliente.html', context)
-        msg_cliente = EmailMultiAlternatives("Hemos recibido tu solicitud - Perseus Technology", strip_tags(html_cliente), remitente_con_nombre, [email])
-        msg_cliente.attach_alternative(html_cliente, "text/html")
+    if not form.is_valid():
+        messages.error(request, _('Revisa los datos del formulario: hay un campo inválido.'))
+        return redirect(volver)
 
-        try:
-            msg_admin.send()
-            msg_cliente.send()
-            messages.success(request, _('¡Solicitud recibida! Te enviamos un correo de confirmación. Te responderemos en menos de 24 horas.'))
-        except Exception as e:
-            messages.error(request, _('Hubo un error al procesar la solicitud. Por favor, intenta de nuevo o escríbenos por WhatsApp.'))
-            print(f"Error enviando correo: {e}")
+    datos = form.cleaned_data
+    ip = ip_cliente(request)
+    limitado = any(supera_limite(f'{n}:{ip}', maximo, ventana) for n, maximo, ventana in LIMITES_IP)
+    if not limitado:
+        n, maximo, ventana = LIMITE_CORREO
+        limitado = supera_limite(f"{n}:{datos['email'].lower()}", maximo, ventana)
+    if limitado:
+        logger.warning('Contacto bloqueado por límite de envíos ip=%s', ip)
+        messages.error(request, _('Recibimos varias solicitudes seguidas. Espera unos minutos o escríbenos por WhatsApp.'))
+        return redirect(volver)
 
-        return redirect(request.META.get('HTTP_REFERER', 'contacto'))
-
-    return render(request, 'core/contacto.html', {'asunto_inicial': request.GET.get('asunto', '')})
+    # Primero se guarda: si el correo falla, el contacto queda en el admin y no se pierde.
+    lead = Contacto.objects.create(
+        nombre=datos['nombre'], email=datos['email'], asunto=datos['asunto'], mensaje=datos['mensaje'],
+    )
+    if _enviar_correos(lead):
+        messages.success(request, _('¡Solicitud recibida! Te enviamos un correo de confirmación. Te responderemos en menos de 24 horas.'))
+    else:
+        messages.success(request, _('¡Solicitud recibida! Te responderemos en menos de 24 horas.'))
+    return redirect(volver)

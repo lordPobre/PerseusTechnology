@@ -1,0 +1,59 @@
+# CI de Perseus Technology: corre en cada push y pull request.
+# El deploy lo sigue haciendo la plataforma (Vercel/Railway) desde GitHub; este workflow es la
+# compuerta previa. Para que bloquee de verdad: Settings > Branches > regla para "main" >
+# "Require status checks to pass" y marca "ci". Railway además puede esperar a que pase
+# ("Wait for CI" en el servicio).
+name: ci
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  ci:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    env:
+      DEBUG: "False"
+      SECRET_KEY: ci-solo-pruebas-${{ github.run_id }}-${{ github.run_attempt }}-no-es-un-secreto-real-0123456789
+      SECURE_SSL_REDIRECT: "True"
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+
+      - name: Instalar dependencias
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt pip-audit
+
+      - name: Configuración de producción (falla con cualquier advertencia de seguridad)
+        run: python manage.py check --deploy --fail-level WARNING
+
+      - name: Migraciones al día
+        run: python manage.py makemigrations --check --dry-run
+
+      - name: Traducciones compilan
+        run: |
+          sudo apt-get install -y -qq gettext > /dev/null
+          msgfmt --check -o /dev/null locale/en/LC_MESSAGES/django.po
+
+      - name: Archivos estáticos (falla si una plantilla apunta a un archivo que no existe)
+        run: python manage.py collectstatic --noinput -v0
+
+      - name: Pruebas
+        run: python manage.py test -v2
+
+      - name: Vulnerabilidades conocidas en dependencias
+        run: pip-audit -r requirements.txt

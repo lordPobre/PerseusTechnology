@@ -4,11 +4,13 @@ from django.utils.translation import gettext_lazy as _
 FINTORA_URL = 'https://www.fintora.cl'
 # Correo para solicitudes de privacidad (derechos ARCO). CÁMBIALO por uno que exista y revises.
 PRIVACIDAD_EMAIL = 'privacidad@perseustechnology.dev'
-_DEV = 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/'
+# Logos del stack: archivos locales en core/static/core/img/tech/ (antes devicon@latest desde
+# jsDelivr: un tercero que podía cambiar los archivos sin aviso). La plantilla aplica {% static %}.
+_TECH_LOCAL = {'amazonwebservices': 'aws'}
 
 
 def _stack(*items):
-    return [(n, _DEV + p + '.svg') for n, p in items]
+    return [(n, 'core/img/tech/%s.svg' % _TECH_LOCAL.get(p.split('/')[0], p.split('/')[0])) for n, p in items]
 
 DIVISIONES = {
     'web': {

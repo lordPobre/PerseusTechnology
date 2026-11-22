@@ -57,6 +57,22 @@ textarea.p-input { min-height: 96px; padding: 8px 0; resize: vertical; }
 .p-card { position: relative; display: flex; flex-direction: column; justify-content: space-between; gap: 48px; min-height: 420px; padding: 32px; border-radius: 28px; border: 1px solid rgba(255,255,255,.08); background: radial-gradient(520px circle at var(--x, -999px) var(--y, -999px), rgba(198,255,61,.13), rgba(255,255,255,.025) 60%); color: var(--bone); text-decoration: none; overflow: hidden; }
 .p-card:hover { border-color: rgba(198,255,61,.35); color: var(--bone); }
 
+/* Las tres divisiones del home: 1 columna en celular, 2 (la tercera a lo ancho) en tablet y 3 lado a lado en
+   escritorio. Los títulos quedan a la misma altura y el enlace "Ver ..." siempre al fondo de la tarjeta. */
+.p-svc-grid { display: grid; gap: 16px; grid-template-columns: minmax(0, 1fr); }
+.p-svc { justify-content: flex-start; }
+.p-svc > div:last-child { flex: 1; }
+.p-svc > div:last-child > :last-child { margin-top: auto; padding-top: 8px; }
+@media (min-width: 768px) {
+  .p-svc-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .p-svc-grid > :last-child { grid-column: 1 / -1; min-height: 0; } /* a lo ancho no necesita tanto alto */
+}
+@media (min-width: 1180px) {
+  .p-svc-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  .p-svc-grid > :last-child { grid-column: auto; min-height: 420px; }
+  .p-svc h3 { min-height: 2em; font-size: clamp(28px, 2.3vw, 36px); }
+}
+
 /* Proceso */
 .p-fill { position: absolute; inset: 0; background: var(--ink); transform-origin: left; animation: pFill 6s linear forwards; }
 @keyframes pFill { from { transform: scaleX(0); } to { transform: scaleX(1); } }

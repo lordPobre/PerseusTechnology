@@ -37,7 +37,21 @@ def imagen_sitio(clave, width=1600, fallback=''):
     img = mapa.get(clave)
     if img:
         return _url(img, width)
-    return static(fallback) if fallback else ''
+    if not fallback:
+        return ''
+    try:
+        return static(fallback)
+    except ValueError:
+        # Con el manifest de WhiteNoise, un archivo inexistente lanza ValueError y tiraría
+        # la página completa con error 500. Mejor sin imagen que sin página.
+        return ''
+
+
+@register.simple_tag
+def sello_formulario():
+    """Valor del campo oculto `ts` (anti-bots) de los formularios de contacto."""
+    from core.seguridad import sello_tiempo
+    return sello_tiempo()
 
 
 @register.simple_tag(takes_context=True)
