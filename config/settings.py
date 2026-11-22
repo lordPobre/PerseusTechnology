@@ -178,6 +178,18 @@ STORAGES = {
     },
 }
 
+# Caché de los estáticos en el CDN. Vercel no guarda en su CDN una respuesta de función que solo trae
+# "max-age" (lo que envía WhiteNoise): sin esto, cada fuente, JS o imagen de cada visita (y de cada bot)
+# despertaba a Django y gastaba CPU del plan. CDN-Cache-Control lo respetan Vercel y Cloudflare.
+def _cabeceras_cdn(headers, path, url):
+    if 'immutable' in headers.get('Cache-Control', ''):   # nombre con hash: nunca cambia
+        headers['CDN-Cache-Control'] = 'public, max-age=31536000, immutable'
+    else:
+        headers['CDN-Cache-Control'] = 'public, max-age=3600'
+
+
+WHITENOISE_ADD_HEADERS_FUNCTION = _cabeceras_cdn
+
 # --- Correo -------------------------------------------------------------------
 EMAIL_BACKEND = os.getenv('EMAIL_BACKEND', 'django.core.mail.backends.smtp.EmailBackend')
 EMAIL_HOST = 'smtppro.zoho.com'

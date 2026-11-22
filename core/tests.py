@@ -114,6 +114,14 @@ class PaginasTests(TestCase):
         self.assertIn('name="ts"', html)
         self.assertIn(' ts="', self.client.get(reverse('contacto'), secure=True).content.decode())
 
+    def test_estaticos_y_robots_se_guardan_en_el_cdn(self):
+        from django.templatetags.static import static
+        r = self.client.get(static('core/js/site.js'), secure=True)
+        self.assertEqual(r.status_code, 200)
+        self.assertIn('max-age', r.get('CDN-Cache-Control', ''))
+        self.assertIn('s-maxage', self.client.get('/robots.txt', secure=True)['Cache-Control'])
+        self.assertIn('s-maxage', self.client.get('/sitemap.xml', secure=True)['Cache-Control'])
+
     def test_cabeceras_de_seguridad(self):
         r = self.client.get(reverse('home'), secure=True)
         self.assertEqual(r['X-Frame-Options'], 'DENY')

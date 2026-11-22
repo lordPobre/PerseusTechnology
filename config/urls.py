@@ -20,7 +20,7 @@ Sitemap: https://perseustechnology.dev/sitemap.xml
 """
 
 
-@cache_control(max_age=86400, public=True)
+@cache_control(max_age=86400, s_maxage=86400, public=True)
 def robots_txt(request):
     # Sin plantilla: no depende de que exista un archivo en templates/
     return HttpResponse(ROBOTS, content_type='text/plain; charset=utf-8')
@@ -28,7 +28,8 @@ def robots_txt(request):
 
 urlpatterns = [
     path(settings.ADMIN_URL, admin.site.urls),
-    path('sitemap.xml', sitemap, {'sitemaps': sitemaps}, name='django.contrib.sitemaps.views.sitemap'),
+    # s_maxage: el CDN responde a los bots sin despertar a Django (1 hora)
+    path('sitemap.xml', cache_control(max_age=3600, s_maxage=3600, public=True)(sitemap), {'sitemaps': sitemaps}, name='django.contrib.sitemaps.views.sitemap'),
     path('robots.txt', robots_txt),
     path('i18n/', include('django.conf.urls.i18n')),
 ]
