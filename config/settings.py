@@ -165,8 +165,17 @@ CLOUDINARY_STORAGE = {
 STATIC_URL = '/static/'
 STATIC_ROOT = BASE_DIR / 'staticfiles'
 
-# Django 5.1+ ignora STATICFILES_STORAGE y DEFAULT_FILE_STORAGE: con Django 6 la compresión
-# y los nombres con hash de WhiteNoise no estaban activos. STORAGES es la forma actual.
+# Estáticos con hash (CompressedManifestStaticFilesStorage) solo si existe el manifiesto que genera
+# collectstatic. En Vercel, con la configuración "builds" de vercel.json, la función de Python no
+# incluye la carpeta staticfiles: exigir el manifiesto ahí daría error 500 en todas las páginas
+# ("Missing staticfiles manifest entry"). Sin manifiesto, WhiteNoise sirve los archivos directo
+# desde las carpetas static/ de las apps, sin hash.
+# collectstatic siempre usa la versión con hash: es la que genera el manifiesto y detecta archivos faltantes.
+ESTATICOS_CON_HASH = not DEBUG and ('collectstatic' in sys.argv or (STATIC_ROOT / 'staticfiles.json').exists())
+if not ESTATICOS_CON_HASH:
+    WHITENOISE_USE_FINDERS = True
+
+# Django 5.1+ ignora STATICFILES_STORAGE y DEFAULT_FILE_STORAGE: STORAGES es la forma actual.
 STORAGES = {
     'default': {
         'BACKEND': 'cloudinary_storage.storage.MediaCloudinaryStorage'
@@ -174,7 +183,7 @@ STORAGES = {
     },
     'staticfiles': {
         'BACKEND': 'whitenoise.storage.CompressedManifestStaticFilesStorage'
-        if not DEBUG else 'django.contrib.staticfiles.storage.StaticFilesStorage',
+        if ESTATICOS_CON_HASH else 'django.contrib.staticfiles.storage.StaticFilesStorage',
     },
 }
 
